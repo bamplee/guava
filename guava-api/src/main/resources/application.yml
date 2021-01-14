@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+#    use-new-id-generator-mappings: false # 어노테이션으로 변경
+
+app:
+  kakao:
+    apiKey: '{cipher}77eb764e11e7634f55785178b1d6f34dd7bc82622cca0f0974010445e7c9826d0885ace28eb65abb1cf21e45ae84850d24d2f17729a2e6f06783f8186434cf75'
+    jsKey: '{cipher}c1f23fde24778c25acc5f98c5b0e086a73b75cd4a55f724aeef0643303fd64934a483898b2a0913d8dd42fba53763f2e4af6b90561b98550fbec7fb8132e4df4'
+  jwt:
+    secretKey: '{cipher}dd0f64b361c6a1bd7078bbc53da2d45c68e7c0001bf9c2e61e654e37a2a252d5572805c36e58a148affb67362ffe82b7'
+  naver:
+    auth:
+      clientId: '{cipher}9fc8761e34bba73bba7a438e3a6d5bf19c328d0b1e58c956a93e4534011574403e918f98f57bca00ab99777c095042f2'
+      cliSecret: '{cipher}aa823b0b5096727e2d395f18d39a44df2398eb1340dcd3f3b830a7aed3a16a81'
+  ui:
+    url: http://localhost:3000
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 10000
+        loggerLevel: basic
+
+ribbon:
+  eureka:
+    enabled: false
+  IsSecure: true
+
+naver-lambda-client:
+  ribbon:
+    listOfServers: xak9xzj7k3.apigw.ntruss.com/land/v1/jJu1JRRkIE,xc41o1t33e.apigw.ntruss.com/land/v1/kVBDqJGZif
+    IsSecure: true
+
+datago:
+  api:
+    key: '{cipher}b31ddca641780873edaf4b22641c819f62c6fae56100181335a7fc5e06a7003fa9ec54a95d181bb370cc0a95d3dd458de8ae3a96b38e70f9fb185da62615f5e68bc25947ea4d7bcfc577f3ae915b3710f1fd8a05d834c49a5639d4c80f618bb524bf9e89ea6d1728c4d13aec311be191'
+
+news:
+  api:
+    key: '{cipher}b87a12cf282b7cd1a005d9cf8d5d24f0c343eaf63ce8e64a826ffebe82d7b7c63e7de941dfb0298ec28206860c3533b562b810ab550738ff8b12bb2f573408ad'
+

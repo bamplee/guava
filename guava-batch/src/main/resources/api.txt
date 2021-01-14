@@ -1,0 +1,113 @@
+메인 화면:
+1. get activities
+  - search value랑 함께 호출 시 필터 된 activities 반환. 없으면 모든 activities 반환
+  - paging이나 반환되는 리스트를 어떻게 limit할지는 의논 필요
+  - activity 객체마다 id 필요 (2번 API 호출시 사용)
+
+  [
+    {
+      id;
+      company: string;
+      percentageDelta: string;
+      date: string;
+    }
+  ]
+
+=========================================================================
+    # 메인화면
+    # 1. 검색화면 여부
+    # 2. 페이징은 사이즈/페이지/정렬방식/등락률조건/셔플
+    # 디테일화면
+=========================================================================
+
+Detail 화면:
+2. get activity
+  - (1)에서 받은 id 값으로 호출
+  - 한꺼번에 1개월, 3개월, 1년 정보를 받을지 따로따로 받을지는 의논 필요
+
+  {
+    currentPriceInfo: {
+      price: number;
+      percentageDelta: number;
+      pointDelta: number;
+    },
+    // 그래프를 그릴 때 사용될 가격 리스트. 1m3m1y에 따라 리스트에 몇개 반환이 필요한지는 의논 필요.
+    // asc 날짜순
+    prices: [
+      {
+        price: number;
+        date: string;
+      },
+      ...
+    ],
+    // article리스팅들을 그릴때 사용. 1일 단위로 움직이기 때문 price객체의 date로 매핑하면 될 거 같음.
+    // 특별히 따로 article 이랑 price를 묶어줄 id가 필요한지는 의논 필요
+    articles: [
+      {
+        relatedPriceInfo: {
+          price: number;
+          percentageDelta: number;
+          pointDelta: number;
+        }
+        date: string;
+        source: string;
+        title: string;
+        url: string;
+      },
+      ...
+    ]
+  }
+
+### 메인화면
+1. 종목검색 화면 유무?
+2. 프론트 노출용 state 를 두고 운영?
+
+```
+GET /api/v1/activities
+
+name        |   type    |   description
+page        |   number  |
+per_page    |   number  |   100
+state       |   string  |   open/closed/all
+sort        |   string  |   col1:asc,col2:desc ...  *DEFAULT: shuffle?
+
+=> 200 OK
+[{
+    activityId: number;
+    activityName: number;
+    percentageDelta: string;
+    date: string;
+}, ...]
+```
+
+---
+### 상세화면
+1. currentPriceInfo, prices, articles 세 모델이 각각 API 호출 후 조합인지?
+    ㄴ 단일 모델로 내리면 어떨지.. date 기준으로 since~오늘까지 (단순 건의라 의견주세여)
+
+```
+GET /api/v1/activities/:activityId/articles
+
+name        |   type    |   description
+page        |   number  |
+per_page    |   number  |   100
+since       |   string  |   YYYY-MM-DD
+sort        |   string  |   col1:asc,col2:desc ...
+
+=> 200 OK
+[{
+    date: string;
+    price: number;
+    changePrice: number;
+    percentageDelta: number;
+    pointDelta: number;
+    companyId: number;
+    companyName: string;
+    article: {
+        source: string;
+        title: string;
+        url: string;
+    }
+}, ...]
+```
+---

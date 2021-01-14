@@ -1,0 +1,1229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../prize-api/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/PrizeApiApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/CardinalDirection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GeometryUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaChartService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaChartServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaMarketService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaMarketServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaMatchService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaMatchServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaSearchService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaSearchServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaSummaryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaSummaryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaTradeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/GuavaUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/NaverLoginService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/NaverLoginServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/PdfService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/PdfServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/PlaceService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/PlaceServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/PrizeAccountService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/PrizeAccountServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/RegionType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/StockService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/StockServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/TradeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/TradeServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/ArticleDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/CompanyActivityDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/CompanyDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/DailyActivityDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/GwanboDataModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/GwanboType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/GwanboUserModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/Location.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/PdfResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/PriceInfoDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/PrizeAccountDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/TradeDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/application/dto/TradeStatsDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/JwtService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/SimpleAccessDeniedHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/SimpleAuthenticationEntryPoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/SimpleAuthenticationFailureHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/SimpleAuthenticationSuccessHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/SimpleLoginUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/SimpleTokenFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/SimpleUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/controller/AuthNaverLoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/auth/controller/AuthRedirectController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/AvokadoKakaoClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/DataGoStockClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/GoogleNewsClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/InfoStockClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/NaverArticleClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/NaverLoginClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/NaverOpenApiClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/NaverStockClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/NewsApiClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/PrizeLambdaClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/YhNewsClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/request/GoogleNewsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/request/NikeDealDetailRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/request/NikeDealDrawRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/request/NikeDealLoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/request/StockxProductSummaryRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/AvokadoKakaoAddressResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/DataGoStockResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/GoogleNewsResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/KakaoSearchResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NaverArticleResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NaverLoginResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NaverOpenApiResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NaverStockOverallResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NaverStockResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NaverStockSearchResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NewsApiResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NikeDealDetailResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NikeDealLoginResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/NikeDealSummaryResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/StockxProductSummaryResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/datatool/response/YhNewsResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/entity/PrizeAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/entity/PrizeUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/entity/constants/BrandEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/entity/constants/DealTypeEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/entity/constants/SellerEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/entity/constants/UserTypeEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/AggregateCount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/Apartment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/ApartmentMatchTable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/AptArea.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/AptInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/AptRentDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/AptTemp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/AptTicketDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/AptTradeDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/AreaType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/BaseEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/BuildingType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/MainStats.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/MonthType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/OpenApiRentInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/OpenApiTicketInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/OpenApiTradeInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/Region.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/RegionStats.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/RegionTemp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/RegionType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/Rent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/RentRank.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/Ticket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/TicketRank.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/Trade.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/TradeArticle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/TradeItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/TradeRanks.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/TradeRanksType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/TradeStats.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/domain/oboo/TradeType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/HgnnConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/HgnnApiClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/HgnnLambdaClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/HgnnLambdaRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/HgnnRegionResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/NaverLambdaClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/NaverLambdaRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/NaverLambdaResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/NaverLambdaTestResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/NaverLandClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/NaverLandResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/feign/NaverPcLandResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/Building.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/BuildingMapping.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/BuildingMappingRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/BuildingRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/BuildingType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/GuavaBuildingAreaRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/GuavaBuildingFailInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/GuavaBuildingFailInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnApt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnAptRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnArea.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnAreaRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnBaseInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnBaseInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnPhoto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnPhotoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnRegion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/HgnnRegionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/KaptInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/KaptInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/OpenApiRentBuilding.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/OpenApiRentBuildingRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/OpenApiTradeBuilding.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/repository/OpenApiTradeBuildingRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/GuavaHgnnBaseInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/GuavaHgnnBuilding.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/GuavaHgnnPhoto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/GuavaHgnnRegion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/GuavaHgnnResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/GuavaHgnnResultResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/GuavaMatchJobService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/GuavaMatchJobServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/HgnnService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/HgnnServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/hgnn/service/RegionTempSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaBuilding.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaBuildingArea.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaBuildingRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaMappingInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaMappingInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaMatchTemp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaMatchTempRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaRegion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaRegionPrice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaRegionPriceRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaRegionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaRegionStats.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/GuavaRegionStatsRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/PrizeAccountRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/PrizeUserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/ApartmentMatchTableRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/ApartmentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/AptAreaRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/AptInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/AptTempRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/MainStatsRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/OpenApiRentInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/OpenApiSpecs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/OpenApiTicketInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/OpenApiTradeInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/RegionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/RegionStatsRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/RegionTempRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/RentRankRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/RentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/TicketRankRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/TicketRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/TradeArticleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/TradeItemRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/TradeRanksRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/TradeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/TradeStatsRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/UnmappingTradeList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/infrastructure/persistence/jpa/repository/oboo/UnmappingTradeListRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/GuavaChartController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/GuavaController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/GuavaMarketController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/GuavaMatchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/GuavaSearchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/MoneyConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/ObooController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/PrizeAccountRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/PrizeApiController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/PrizeScheduleRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/StockController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/request/PrizeAccountRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/request/PrizeScheduleRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/AreaResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/GuavaBuildingDetailResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/GuavaChartResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/GuavaMatchResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/GuavaRegionDetailResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/GuavaSearchResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/GuavaSummaryResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/GuavaTradeResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/java/im/prize/api/interfaces/response/PlaceSummaryResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/resources/202011.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/resources/application-dev.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/resources/application-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/main/resources/test.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/PrizeApiApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/application/PdfServiceImplTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/application/PlaceServiceImplTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/datatool/DataGoStockClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/datatool/GoogleNewsClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/datatool/NaverArticleClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/datatool/NaverStockClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/datatool/NewsApiClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/hgnn/service/HgnnServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/interfaces/GuavaControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/guava/api/interfaces/StockControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/PrizeApiApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/application/PdfServiceImplTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/application/PlaceServiceImplTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/datatool/DataGoStockClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/datatool/GoogleNewsClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/datatool/NaverArticleClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/datatool/NaverStockClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/datatool/NewsApiClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/hgnn/service/HgnnServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/interfaces/GuavaControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-api/src/test/java/im/prize/api/interfaces/StockControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/.idea/prize-lambda.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/serverless.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/src/nike/detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/src/nike/draw.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/src/nike/list.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/src/nike/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-lambda/src/stockx/detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/.idea/avokado-ui.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/craco.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/guava.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/images/down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/images/guava.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/images/ic-24-currentlocation.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/images/pin-off@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/images/pin-on@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/public/thumb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/App.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/common/GuavaAreaFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/common/GuavaAreaTypeFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/common/GuavaIntro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/common/guavaAreaFilter.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/common/guavaAreaTypeFilter.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/common/guavaIntro.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/constant/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/datatool/api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/datatool/state.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaBuildingInfo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaChart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaDetailPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaLoading.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaLoading.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaMarketChart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaSearchPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaSpaceLine.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/GuavaTradeOption.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/guavaChart.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/guavaDetailPage.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/guavaRegionInfo.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/guavaSpaceLine.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/detail/guavaTradeOption.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/header/GuavaHeader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/header/GuavaIntroHeader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/header/GuavaRegionSelector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/header/GuavaSearch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/header/GuavaSearchHeader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/header/guavaHeader.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/header/guavaRegionSelector.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/map/GuavaMap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/map/GuavaMapFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/map/GuavaMapLabel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/map/GuavaMapPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/map/GuavaMatch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/map/guavaMap.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/map/guavaMapFilter.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/map/guavaMapLabel.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/GuavaTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/col/GuavaMarketCol.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/col/GuavaRegionMarketCol.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/col/GuavaRegionTradeCol.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/col/GuavaTradeCol.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/guavaTable.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/row/GuavaMarketRow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/row/GuavaRegionMarketRow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/row/GuavaRegionTradeRow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/components/table/row/GuavaTradeRow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/src/setupProxy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../prize-ui/yarn.lock" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/node_modules/" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearch.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="60" column="66" lean-forward="true" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>평형</find>
+      <find>filter</find>
+      <find>월세</find>
+      <find>childs</find>
+      <find>.title</find>
+      <find>.center</find>
+      <find>2E92FC</find>
+      <find>전체선택</find>
+      <find>.all</find>
+      <find>modal_</find>
+      <find>modal_c</find>
+      <find>modal-container</find>
+      <find>all</find>
+      <find>.logo</find>
+      <find>/chart</find>
+      <find>chart</find>
+      <find>/buildings</find>
+      <find>부동산</find>
+      <find>header</find>
+      <find>sidoName</find>
+      <find>handleSearcbBuilding</find>
+      <find>input</find>
+      <find>region.</find>
+      <find>&lt;Tabs</find>
+      <find>tabs</find>
+      <find>t</find>
+      <find>query_container</find>
+      <find>search_result</find>
+      <find>tab</find>
+      <find>ellips</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>startArea</replace>
+      <replace>endArea</replace>
+      <replace>region.type</replace>
+      <replace>YY.MM</replace>
+      <replace>setMarketList</replace>
+      <replace>#4688F1</replace>
+      <replace>#38A254</replace>
+      <replace>#0E7826</replace>
+      <replace>#094E7F</replace>
+      <replace>#0F4C81</replace>
+      <replace>#092F4F</replace>
+      <replace>#AF2832</replace>
+      <replace>#F17065</replace>
+      <replace>#B02832</replace>
+      <replace>m&lt;sup&gt;2&lt;/sup&gt;</replace>
+      <replace>&amp;#13217;</replace>
+      <replace>color: #e5e5e5;</replace>
+      <replace>{trade.area.type}</replace>
+      <replace>#768F73</replace>
+      <replace>#E5D06B</replace>
+      <replace>#245894</replace>
+      <replace>#7B7D69</replace>
+      <replace>#1569BF</replace>
+      <replace>#CF172B</replace>
+      <replace>#D9D9D9</replace>
+      <replace>center.lat</replace>
+      <replace>center.lng</replace>
+      <replace>regionState</replace>
+      <replace>#2E92FC</replace>
+      <replace>㎡</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/src/components/common</dir>
+      <dir>$PROJECT_DIR$/src/components/header</dir>
+      <dir>$PROJECT_DIR$/src/components/detail</dir>
+      <dir>$PROJECT_DIR$/src/components</dir>
+      <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$/src/components/table</dir>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaTable.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaLoading.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaLoading.js" />
+        <option value="$PROJECT_DIR$/src/components/map/guavaMapFilter.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/map/guavaMapLabel.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/common/GuavaAreaFilter.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/components/table/col/GuavaRegionMarketCol.js" />
+        <option value="$PROJECT_DIR$/src/components/table/col/GuavaTradeCol.js" />
+        <option value="$PROJECT_DIR$/src/components/header/guavaSearch.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/table/col/GuavaMarketCol.js" />
+        <option value="$PROJECT_DIR$/src/components/map/GuavaMapFilter.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaRegionInfo.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaSearchPage.js" />
+        <option value="$PROJECT_DIR$/src/components/map/GuavaMapPage.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaInit.js" />
+        <option value="$PROJECT_DIR$/src/components/table/col/GuavaRegionTradeCol.js" />
+        <option value="$PROJECT_DIR$/src/components/App.js" />
+        <option value="$PROJECT_DIR$/src/components/map/GuavaMap.js" />
+        <option value="$PROJECT_DIR$/src/setupProxy.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/guavaRegionInfo.module.scss" />
+        <option value="$PROJECT_DIR$/craco.config.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/guavaChart.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaBuildingInfo.js" />
+        <option value="$PROJECT_DIR$/src/components/table/row/GuavaMarketRow.js" />
+        <option value="$PROJECT_DIR$/src/components/table/row/GuavaRegionMarketRow.js" />
+        <option value="$PROJECT_DIR$/src/components/table/row/GuavaRegionTradeRow.js" />
+        <option value="$PROJECT_DIR$/src/components/table/row/GuavaTradeRow.js" />
+        <option value="$PROJECT_DIR$/src/components/table/GuavaTable.js" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaIntroHeader.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaChart.js" />
+        <option value="$PROJECT_DIR$/src/components/map/guavaMap.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaDetailPage.js" />
+        <option value="$PROJECT_DIR$/src/components/table/guavaTable.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/detail/guavaTradeOption.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaTradeOption.js" />
+        <option value="$PROJECT_DIR$/src/components/map/GuavaMapLabel.js" />
+        <option value="$PROJECT_DIR$/src/components/common/GuavaIntro.js" />
+        <option value="$PROJECT_DIR$/src/components/App.less" />
+        <option value="$PROJECT_DIR$/src/components/common/GuavaAreaTypeFilter.js" />
+        <option value="$PROJECT_DIR$/src/components/common/guavaAreaTypeFilter.scss" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaHeader.js" />
+        <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/datatool/api.js" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaSearch.js" />
+        <option value="$PROJECT_DIR$/src/components/datatool/state.js" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaRegionSelector.js" />
+        <option value="$PROJECT_DIR$/src/components/header/guavaRegionSelector.module.scss" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="720" />
+    <option name="width" value="720" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="constant" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="datatool" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="detail" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="header" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="table" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="table" type="462c0819:PsiDirectoryNode" />
+              <item name="row" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editorconfig.notification" value="View&#10;" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/table/row" />
+      <recent name="$PROJECT_DIR$/src/components/table/col" />
+      <recent name="$PROJECT_DIR$/src/components/table" />
+      <recent name="$PROJECT_DIR$/src/components/map" />
+      <recent name="$PROJECT_DIR$/public/images" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/map" />
+      <recent name="$PROJECT_DIR$/src/components/header" />
+      <recent name="$PROJECT_DIR$/src/components/detail" />
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/src/components/feed" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="" />
+      <created>1591375264855</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591375264855</updated>
+      <workItem from="1591375266074" duration="5298000" />
+      <workItem from="1591411574725" duration="9000" />
+      <workItem from="1591411950788" duration="26566000" />
+      <workItem from="1591501850083" duration="120000" />
+      <workItem from="1591502332694" duration="24904000" />
+      <workItem from="1591611891277" duration="825000" />
+      <workItem from="1591667906506" duration="1810000" />
+      <workItem from="1591751046764" duration="541000" />
+      <workItem from="1591769511422" duration="12760000" />
+      <workItem from="1591838159104" duration="801000" />
+      <workItem from="1591886585141" duration="1433000" />
+      <workItem from="1591968032842" duration="11715000" />
+      <workItem from="1592067247515" duration="1648000" />
+      <workItem from="1592107828012" duration="12490000" />
+      <workItem from="1592124135806" duration="8179000" />
+      <workItem from="1592229104259" duration="1428000" />
+      <workItem from="1592311228775" duration="2241000" />
+      <workItem from="1592366973229" duration="1538000" />
+      <workItem from="1592484247374" duration="11436000" />
+      <workItem from="1592580032823" duration="18297000" />
+      <workItem from="1592663963850" duration="127000" />
+      <workItem from="1592666089543" duration="4902000" />
+      <workItem from="1592704272051" duration="40990000" />
+      <workItem from="1593005040206" duration="2909000" />
+      <workItem from="1593134793900" duration="539000" />
+      <workItem from="1593180403831" duration="3221000" />
+      <workItem from="1593269111410" duration="11047000" />
+      <workItem from="1593685536294" duration="23786000" />
+      <workItem from="1593876490357" duration="2213000" />
+      <workItem from="1593909371625" duration="13192000" />
+      <workItem from="1594008010083" duration="578000" />
+      <workItem from="1594133500031" duration="533000" />
+      <workItem from="1594550837944" duration="4202000" />
+      <workItem from="1594604675768" duration="2621000" />
+      <workItem from="1594623630007" duration="3502000" />
+      <workItem from="1607609189856" duration="1740000" />
+      <workItem from="1607752886156" duration="26055000" />
+      <workItem from="1607822937169" duration="50672000" />
+      <workItem from="1607996376824" duration="4966000" />
+      <workItem from="1608002189911" duration="9019000" />
+      <workItem from="1608033669435" duration="7746000" />
+      <workItem from="1608045236834" duration="41769000" />
+      <workItem from="1608396017127" duration="40990000" />
+      <workItem from="1608686344265" duration="56443000" />
+      <workItem from="1608952149955" duration="22344000" />
+      <workItem from="1609074010907" duration="123136000" />
+      <workItem from="1609468144093" duration="35612000" />
+      <workItem from="1609646596506" duration="33115000" />
+      <workItem from="1609760395531" duration="13061000" />
+      <workItem from="1609813492768" duration="37912000" />
+      <workItem from="1609927535095" duration="27763000" />
+      <workItem from="1610075511268" duration="4769000" />
+      <workItem from="1610114849029" duration="2160000" />
+      <workItem from="1610160458267" duration="36197000" />
+      <workItem from="1610266743840" duration="9351000" />
+      <workItem from="1610369248169" duration="19000" />
+      <workItem from="1610453583075" duration="13387000" />
+      <workItem from="1610502896019" duration="7736000" />
+      <workItem from="1610633450489" duration="623000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="874018000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.65241635" weight="0.23255815" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" sideWeight="0.34758365" side_tool="true" weight="0.23255815" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3270202" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3270202" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.32070708" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.37373737" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/components/common/guavaIntro.module.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/guavaSearch.module.scss" />
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaLoading.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaSpaceLine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMapFilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="25" column="30" lean-forward="true" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMatch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1239">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#17#65#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/col/GuavaMarketCol.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-378">
+          <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/col/GuavaRegionMarketCol.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/col/GuavaTradeCol.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="20" column="28" lean-forward="true" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/col/GuavaRegionTradeCol.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaSearchPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="34" column="11" lean-forward="true" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMapPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="225" column="20" lean-forward="true" selection-start-line="225" selection-start-column="20" selection-end-line="225" selection-end-column="20" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#17#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaInit.js" />
+    <entry file="file://$USER_HOME$/Downloads/건축데이터 민간개방 시스템 다운로드-2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret column="881" lean-forward="true" selection-start-column="881" selection-end-column="881" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/GuavaAreaFilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="53" column="69" selection-start-line="53" selection-start-column="68" selection-end-line="53" selection-end-column="69" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#17#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/craco.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="2" lean-forward="true" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/guavaRegionInfo.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/guavaChart.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaBuildingInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="34" column="8" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/row/GuavaMarketRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/row/GuavaRegionMarketRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/row/GuavaRegionTradeRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/row/GuavaTradeRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaIntroHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="48" column="41" lean-forward="true" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/map/guavaMap.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="73" column="20" lean-forward="true" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/GuavaTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="78" column="13" lean-forward="true" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/constant/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaDetailPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/guavaTable.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="41" column="18" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaTradeOption.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="75" column="25" lean-forward="true" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/guavaTradeOption.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMapLabel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="62" column="29" lean-forward="true" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#17#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/GuavaIntro.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="29" column="66" lean-forward="true" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="66" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#17#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/GuavaAreaTypeFilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/guavaAreaTypeFilter.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="307" column="28" lean-forward="true" selection-start-line="307" selection-start-column="28" selection-end-line="307" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#17#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/guavaHeader.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/datatool/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="132" column="2" selection-start-line="132" selection-start-column="2" selection-end-line="132" selection-end-column="2" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/setupProxy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/datatool/state.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="153" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/guavaRegionSelector.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="61" column="27" lean-forward="true" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaRegionSelector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="132" column="57" lean-forward="true" selection-start-line="132" selection-start-column="57" selection-end-line="132" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="60" column="66" lean-forward="true" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

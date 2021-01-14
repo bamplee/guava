@@ -1,0 +1,37 @@
+.title_container {
+  background-color: #fff;
+  border-bottom: 1px solid #EEEEEE;
+  padding: 20px;
+
+  .title {
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .txt_bar {
+      margin: 4px 7px 0;
+      display: inline-block;
+      width: 1px;
+      height: 12px;
+      background-color: #e5e5e5;
+      vertical-align: top;
+      text-indent: -9999px;
+    }
+
+    .address {
+      color: #333;
+      font-weight: 400;
+      font-size: 14px;
+    }
+
+    .info {
+      font-size: 12px;
+      font-weight: 300;
+    }
+
+    .info_bold {
+      font-weight: 500;
+    }
+  }
+}

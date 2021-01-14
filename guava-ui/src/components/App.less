@@ -1,0 +1,107 @@
+@import '~antd-mobile/dist/antd-mobile.less';
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
+
+* {
+  font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', sans-serif;
+}
+
+body {
+  height: 100vh;
+  margin: 0 auto;
+  //height: 100%;
+  background-color: #E9E5E0;
+}
+
+.match-custom {
+  color: #F6F2E2;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  bottom: 10px;
+  float: left;
+  background: #2E92FC;
+  border: 1px solid #092F4F;
+  padding: 3px 3px 5px;
+
+  .price {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.customoverlay {
+  cursor: pointer;
+  color: #F6F2E2;
+  text-align: center;
+  width: 40px;
+  position: relative;
+  bottom: 10px;
+  float: left;
+  background: #1B69D9;
+  border: 1px solid #1451A6;
+  padding: 3px 3px 5px;
+  border-radius: 10px;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+
+  .name {
+    font-size: 0.5rem;
+    color: #FFF;
+  }
+
+  .price {
+    font-size: 0.7rem;
+    font-weight: 600;
+    //color: #B4C7D5;
+    //color: #F5DCB5;
+    color: #FFF;
+  }
+
+  .market_price {
+    margin-top: -2px;
+    font-size: 0.7rem;
+    //background-color: #CF172B;
+    border-radius: 10px;
+    //color: #F3B897;
+    color: #FBC298;
+    font-weight: 600;
+  }
+}
+
+.customoverlay:after {
+  content: '';
+  border-top: 15px solid #2371C4;
+  border-bottom: 1px solid transparent;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  position: absolute;
+  margin-left: -10px;
+  left: 50%;
+  bottom: -12px;
+}
+
+.customoverlay:before {
+  content: '';
+  border-top: 12px solid #1451A6;
+  /* border-bottom: 1px solid transparent; */
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  position: absolute;
+  margin-left: -8px;
+  left: 50%;
+  bottom: -12px;
+}
+
+.am-list-content {
+  font-size: 0.8rem !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+
+//.am-modal-header {
+//  border-bottom: 1px solid #D9D9D9;
+//}

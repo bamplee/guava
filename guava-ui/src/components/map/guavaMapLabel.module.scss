@@ -1,0 +1,25 @@
+.region_label {
+  position: fixed;
+  width: 100%;
+  //background-color: red !important;
+  z-index: 9990;
+  text-align: center;
+  top: 52px;
+
+  span {
+    overflow: hidden;
+    display: inline-block;
+    padding: 5px 14px 0;
+    margin: 8px auto 0;
+    height: 19px;
+    border-radius: 13px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #555;
+    opacity: .9;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.16);
+  }
+}

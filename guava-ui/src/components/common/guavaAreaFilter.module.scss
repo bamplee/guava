@@ -1,0 +1,54 @@
+.area_container {
+  padding-top: 50px;
+  touch-action: none;
+
+  .area_range {
+    margin-top: -10px;
+    margin-bottom: 60px;
+  }
+
+  .area_radio {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    a {
+      width: 100px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .area_list {
+    display: flex;
+    padding: 10px;
+    padding-left: 20px;
+    //border-bottom: 1px solid #ebebeb;
+
+    .all {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      font-weight: 400;
+    }
+
+    .area_info {
+      color: #404040;
+      width: 70px;
+
+      div:first-child {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+
+    .area_sub_info {
+      color: #404040;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.filter_container {
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+
+  .filter_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    font-size: 14px;
+    border: 1px solid #2E92FC !important;
+    color: #2E92FC;
+  }
+
+  .active {
+    //border: 1px solid #fff !important;
+    //background-color: #2E92FC;
+    color: #FFF;
+  }
+}

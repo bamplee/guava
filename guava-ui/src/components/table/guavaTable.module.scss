@@ -1,0 +1,139 @@
+.date {
+  padding-top: 20px;
+  background-color: #fff;
+  padding-left: 20px;
+  /* padding-right: 20px; */
+  //padding-top: 20px;
+  padding-bottom: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: baseline;
+
+  .count {
+    font-size: 14px;
+    margin-top: 2px;
+    font-weight: 400;
+    margin-left: 5px;
+  }
+
+  .back_btn {
+    margin-right: 10px;
+  }
+}
+
+.empty_result {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  padding-bottom: 40px;
+  color: #888888;
+}
+
+.list {
+  background-color: #fff;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    //border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #F6F6F6;
+    color: #404040;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    .row {
+      //padding-left: 10px;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      text-align: center;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+
+    .apt_name {
+      min-width: 95px;
+      width: 95px;
+    }
+  }
+
+  .body {
+    .soldout {
+      background-color: #EAEAEA;
+      text-decoration: line-through;
+      text-decoration-color: black;
+    }
+
+    .column {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #949494;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      //padding-bottom: 2px;
+      //padding-left: 15px;
+      //padding-right: 10px;
+      //border-bottom: 1px solid #FFFFFF;
+      width: 100%;
+      font-weight: 400;
+      border-bottom: 1px solid #F6F6F6;
+
+      .high_price {
+        color: #CF172B !important;
+      }
+
+      .row_price {
+        color: #7C848A !important;
+      }
+
+      .minus_price {
+        font-size: 11px;
+        font-weight: 400;
+      }
+
+      .row {
+        //padding-top: 5px;
+        //padding-left: 10px;
+        cursor: default;
+        width: 100%;
+        color: #404040;
+        text-align: center;
+        justify-content: space-between;
+
+        .area_name {
+          font-size: 0.7rem;
+        }
+
+        .area_detail {
+          font-size: 10px;
+          color: #888888;
+        }
+      }
+
+      .apt_name {
+        text-align: left;
+        min-width: 95px;
+        width: 95px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .link {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #1B69D9;
+        text-decoration: underline;
+      }
+
+      .price {
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  batch:
+    job:
+      names: ${job.name:tradeJob}
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+#  datasource:
+#    hikari:
+#      jdbc-url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+#      username: sa
+#      password:
+#      driver-class-name: org.h2.Driver
+
+feign:
+  httpclient:
+    maxConnections: 200
+    maxConnectionsPerRoute: 200
+  client:
+    config:
+      default:
+        connectTimeout: 20000
+        readTimeout: 240000
+        loggerLevel: basic
+
+rent-list-api:
+  api:
+    key: '{cipher}ce349c9ce2bfc709fcfb15c53bd0b4dc21aa187f433f6495259121f0d11baea91f39c9b4def712657ac3fe61b4d62faebf1022741e53f6d2acaa4b09ab719e4b0b42ed4d73056d890617be582d6b822d4b449d32f2bea68aa31455ae8ccc037b8f5a4bd547ce7ea5cf89271a973314df'
+
+naver-lambda-client:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: xak9xzj7k3.apigw.ntruss.com/land/v1/jJu1JRRkIE,xc41o1t33e.apigw.ntruss.com/land/v1/kVBDqJGZif
+
+---
+spring:
+  profiles: mysql
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/spring_batch
+      username:
+      password:
+      driver-class-name: com.mysql.jdbc.Driver

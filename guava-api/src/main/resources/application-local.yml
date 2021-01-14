@@ -1,0 +1,7 @@
+app:
+  ui:
+    url: http://localhost:3000
+  naver:
+    auth:
+      clientId: '{cipher}891676735ca96ade3a2774d4dec6e0d702573905e5ebd95d8a7058aea92d07c382465032c59b0d27f6f349e05d070a6e'
+      cliSecret: '{cipher}b9b59f16943b72683c73db85489448d710d9a78c9bada2767b38f3d88d934028'
