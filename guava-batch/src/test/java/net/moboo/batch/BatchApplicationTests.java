@@ -1,4 +1,4 @@
-package com.moboo.batch;
+package net.moboo.batch;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
