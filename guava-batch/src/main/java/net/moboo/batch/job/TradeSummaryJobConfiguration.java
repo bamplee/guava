@@ -3,7 +3,7 @@ package net.moboo.batch.job;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.moboo.batch.application.service.TradeSummaryService;
-import net.moboo.batch.domain.TradeSummary;
+import net.moboo.batch.wooa.repository.TradeSummary;
 import net.moboo.batch.wooa.repository.BuildingMapping;
 import net.moboo.batch.wooa.repository.BuildingMappingRepository;
 import org.springframework.batch.core.Job;

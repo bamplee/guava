@@ -1,10 +1,12 @@
-package net.moboo.batch.domain;
+package net.moboo.batch.wooa.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.moboo.batch.domain.BaseEntity;
+import net.moboo.batch.domain.TradeType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

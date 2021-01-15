@@ -2,16 +2,17 @@ package net.moboo.batch.application.service;
 
 import com.google.common.collect.Lists;
 import net.moboo.batch.domain.OpenApiTradeInfo;
-import net.moboo.batch.domain.TradeSummary;
+import net.moboo.batch.wooa.repository.TradeSummary;
 import net.moboo.batch.domain.TradeType;
 import net.moboo.batch.hgnn.repository.GuavaBuildingArea;
 import net.moboo.batch.hgnn.repository.GuavaBuildingAreaRepository;
 import net.moboo.batch.infrastructure.jpa.OpenApiTradeInfoRepository;
 import net.moboo.batch.wooa.repository.BuildingMapping;
 import net.moboo.batch.wooa.repository.BuildingMappingRepository;
+import net.moboo.batch.wooa.repository.TradeSummaryRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,14 +22,17 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
     private final OpenApiTradeInfoRepository openApiTradeInfoRepository;
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
     private final BuildingMappingRepository buildingMappingRepository;
+    private final TradeSummaryRepository tradeSummaryRepository;
 
     public TradeSummaryServiceImpl(OpenApiTradeInfoRepository openApiTradeInfoRepository,
                                    GuavaBuildingAreaRepository guavaBuildingAreaRepository,
-                                   BuildingMappingRepository buildingMappingRepository) {
+                                   BuildingMappingRepository buildingMappingRepository,
+                                   TradeSummaryRepository tradeSummaryRepository) {
         this.openApiTradeInfoRepository =
             openApiTradeInfoRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
         this.buildingMappingRepository = buildingMappingRepository;
+        this.tradeSummaryRepository = tradeSummaryRepository;
     }
 
     @Override
@@ -38,7 +42,7 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
 
     @Override
     public List<TradeSummary> write(List<List<TradeSummary>> tradeSummaries) {
-        return null;
+        return tradeSummaryRepository.saveAll(tradeSummaries.stream().flatMap(Collection::stream).collect(Collectors.toList()));
     }
 
     @Override
@@ -90,7 +94,7 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
                 // 가장 유사한 private area 계산
                 if (!optionalGuavaBuildingArea.isPresent()) {
                     GuavaBuildingArea areaByPrivateArea = this.getAreaByPrivateArea(buildingAreas, x.getArea());
-7                    optionalGuavaBuildingArea = Optional.of(areaByPrivateArea);
+                    optionalGuavaBuildingArea = Optional.of(areaByPrivateArea);
                 }
                 if (optionalGuavaBuildingArea.isPresent()) {
                     GuavaBuildingArea guavaBuildingArea = optionalGuavaBuildingArea.get();
