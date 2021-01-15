@@ -15,13 +15,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearch.js">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="60" column="66" lean-forward="true" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="486">
+              <caret line="39" column="17" lean-forward="true" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -30,9 +27,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>평형</find>
-      <find>filter</find>
-      <find>월세</find>
       <find>childs</find>
       <find>.title</find>
       <find>.center</find>
@@ -60,6 +54,9 @@
       <find>search_result</find>
       <find>tab</find>
       <find>ellips</find>
+      <find>hompage</find>
+      <find>home</find>
+      <find>build</find>
     </findStrings>
     <replaceStrings>
       <replace>startArea</replace>
@@ -115,7 +112,6 @@
         <option value="$PROJECT_DIR$/src/components/map/guavaMapFilter.module.scss" />
         <option value="$PROJECT_DIR$/src/components/map/guavaMapLabel.module.scss" />
         <option value="$PROJECT_DIR$/src/components/common/GuavaAreaFilter.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/table/col/GuavaRegionMarketCol.js" />
         <option value="$PROJECT_DIR$/src/components/table/col/GuavaTradeCol.js" />
         <option value="$PROJECT_DIR$/src/components/header/guavaSearch.module.scss" />
@@ -160,6 +156,7 @@
         <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaRegionSelector.js" />
         <option value="$PROJECT_DIR$/src/components/header/guavaRegionSelector.module.scss" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -185,76 +182,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="constant" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="datatool" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="detail" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="header" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="map" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="table" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prize-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prize-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="table" type="462c0819:PsiDirectoryNode" />
-              <item name="row" type="462c0819:PsiDirectoryNode" />
+              <item name="guava-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="guava-ui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -391,17 +320,18 @@
       <workItem from="1610453583075" duration="13387000" />
       <workItem from="1610502896019" duration="7736000" />
       <workItem from="1610633450489" duration="1142000" />
+      <workItem from="1610676716038" duration="646000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="874537000" />
+    <option name="totallyTimeSpent" value="875183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.65241635" weight="0.23255815" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.65241635" visible="true" weight="0.23255815" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.34758365" side_tool="true" weight="0.23255815" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -536,13 +466,6 @@
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#17#65#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -858,11 +781,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearch.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="60" column="66" lean-forward="true" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
+        <state relative-caret-position="389">
+          <caret line="68" column="40" lean-forward="true" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="39" column="17" lean-forward="true" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
         </state>
       </provider>
     </entry>
