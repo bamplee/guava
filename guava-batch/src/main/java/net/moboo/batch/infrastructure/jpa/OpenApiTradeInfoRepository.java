@@ -7,6 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface OpenApiTradeInfoRepository extends JpaRepository<OpenApiTradeInfo, Long> {
+    List<OpenApiTradeInfo> findByDongSigunguCodeAndDongCodeAndLotNumberAndAptName(String dongSigunguCode,
+                                                                                  String dongCode,
+                                                                                  String lotNumber,
+                                                                                  String aptName);
+
     List<OpenApiTradeInfo> findByYearAndMonth(String year, String month);
 
 //    List<OpenApiTradeInfo> findByYearAndDongSigunguCodeOrderByDateDesc(String year, String dongSigunguCode);
