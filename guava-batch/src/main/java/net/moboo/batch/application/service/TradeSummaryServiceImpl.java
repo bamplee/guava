@@ -64,6 +64,7 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
             dongCode,
             buildingMapping.getLotNumber(),
             buildingMapping.getBuildingName());
+//        List<TradeSummary> byBuildingCode = tradeSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode());
         List<GuavaBuildingArea> buildingAreas = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
 
         List<TradeSummary> collect = openApiTradeInfos.stream().map(x -> {

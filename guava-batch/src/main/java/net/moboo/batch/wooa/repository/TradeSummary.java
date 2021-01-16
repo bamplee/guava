@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table(name = "trade_summary_tb")
 public class TradeSummary extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private TradeType type;
     private String name;
