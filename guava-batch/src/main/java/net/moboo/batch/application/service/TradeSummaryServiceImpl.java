@@ -1,6 +1,7 @@
 package net.moboo.batch.application.service;
 
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import net.moboo.batch.domain.OpenApiTradeInfo;
 import net.moboo.batch.wooa.repository.TradeSummary;
 import net.moboo.batch.domain.TradeType;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class TradeSummaryServiceImpl implements TradeSummaryService {
     private final OpenApiTradeInfoRepository openApiTradeInfoRepository;
@@ -69,6 +71,7 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
             String date = x.getYear() + month + day;
 
             TradeSummary.TradeSummaryBuilder tradeSummaryBuilder = TradeSummary.builder()
+                                                                               .id(x.getId())
                                                                                .type(TradeType.TRADE)
                                                                                .name(x.getAptName())
                                                                                .price(Integer.valueOf(x.getPrice()
