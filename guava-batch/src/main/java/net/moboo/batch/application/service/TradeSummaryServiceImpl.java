@@ -112,6 +112,7 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
             }
             return tradeSummaryBuilder.build();
         }).collect(Collectors.toList());
+        log.info("building : {}({}), {}/{}", buildingMapping.getBuildingName(), buildingMapping.getBuildingCode(), collect.size(), openApiTradeInfos.size());
         return collect;
     }
 
