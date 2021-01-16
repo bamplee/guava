@@ -2,6 +2,8 @@ package im.prize.api.application;
 
 import com.google.common.collect.Lists;
 import im.prize.api.domain.oboo.OpenApiTradeInfo;
+import im.prize.api.hgnn.repository.BuildingMapping;
+import im.prize.api.hgnn.repository.BuildingMappingRepository;
 import im.prize.api.hgnn.repository.GuavaBuildingAreaRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuilding;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingArea;
@@ -31,17 +33,21 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     private final GuavaBuildingRepository guavaBuildingRepository;
     private final OpenApiTradeInfoRepository openApiTradeInfoRepository;
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
+    private final BuildingMappingRepository buildingMappingRepository;
+    private final TradeSummaryRepository tradeSummaryRepository;
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     public GuavaTradeServiceImpl(GuavaRegionRepository guavaRegionRepository,
                                  GuavaBuildingRepository guavaBuildingRepository,
                                  OpenApiTradeInfoRepository openApiTradeInfoRepository,
-                                 GuavaBuildingAreaRepository guavaBuildingAreaRepository) {
+                                 GuavaBuildingAreaRepository guavaBuildingAreaRepository,
+                                 BuildingMappingRepository buildingMappingRepository) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
         this.openApiTradeInfoRepository = openApiTradeInfoRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
+        this.buildingMappingRepository = buildingMappingRepository;
     }
 
     @Override
@@ -127,7 +133,8 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     @Override
     public List<GuavaTradeResponse> getBuildingTradeList(String buildingId, Integer page, String areaId, String date) {
         PageRequest pageRequest = PageRequest.of(page, 100);
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findById(Long.valueOf(buildingId));
+        Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
+        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get().getBuildingCode());
         if (!optionalGuavaBuilding.isPresent()) {
             return Lists.newArrayList();
         }
@@ -179,11 +186,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     }
 
     private GuavaTradeResponse transform(OpenApiTradeInfo openApiTradeInfo) {
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(openApiTradeInfo.getBuildingId())
-                                                                               .stream()
-                                                                               .filter(x -> x.getBuildingCode()
-                                                                                             .equals(openApiTradeInfo.getBuildingId()))
-                                                                               .findFirst();
+        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(openApiTradeInfo.getBuildingId());
         LocalDate yyyyMMdd = LocalDate.parse(openApiTradeInfo.getDate(), DATE_TIME_FORMATTER_YYYYMMDD);
 //        String beforeHighPrice = openApiTradeInfoRepository.getMaxPrice(yyyyMMdd.format(DATE_TIME_FORMATTER_YYYYMMDD),
 //                                                                        openApiTradeInfo.getBuildingId(),

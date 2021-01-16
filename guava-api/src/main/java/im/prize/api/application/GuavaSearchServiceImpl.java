@@ -1,6 +1,8 @@
 package im.prize.api.application;
 
 import com.google.common.collect.Lists;
+import im.prize.api.hgnn.repository.BuildingMapping;
+import im.prize.api.hgnn.repository.BuildingMappingRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuilding;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegion;
@@ -24,11 +26,14 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
     private String kakaoMapApiKey;
     private final GuavaRegionRepository guavaRegionRepository;
     private final GuavaBuildingRepository guavaBuildingRepository;
+    private final BuildingMappingRepository buildingMappingRepository;
 
     public GuavaSearchServiceImpl(GuavaRegionRepository guavaRegionRepository,
-                                  GuavaBuildingRepository guavaBuildingRepository) {
+                                  GuavaBuildingRepository guavaBuildingRepository,
+                                  BuildingMappingRepository buildingMappingRepository) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
+        this.buildingMappingRepository = buildingMappingRepository;
     }
 
     @Override
@@ -50,13 +55,15 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
 
     @Override
     public GuavaSearchResponse getBuilding(String buildingCode) {
-        Optional<GuavaBuilding> byBuildingCode = guavaBuildingRepository.findById(Long.valueOf(buildingCode));
-        if (byBuildingCode.isPresent()) {
-            Optional<GuavaRegion> byRegionCode = guavaRegionRepository.findByRegionCode(byBuildingCode.get().getRegionCode());
+//        Optional<GuavaBuilding> byBuildingCode = guavaBuildingRepository.findById(Long.valueOf(buildingCode));
+        Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingCode));
+        if (optionalBuildingMapping.isPresent()) {
+            Optional<GuavaRegion> byRegionCode = guavaRegionRepository.findByRegionCode(optionalBuildingMapping.get().getRegionCode());
             if (byRegionCode.isPresent()) {
                 GuavaRegion guavaRegion = byRegionCode.get();
-                GuavaBuilding guavaBuilding = byBuildingCode.get();
-                return GuavaSearchResponse.transform(guavaRegion, guavaBuilding);
+//                GuavaBuilding guavaBuilding = byBuildingCode.get();
+                BuildingMapping buildingMapping = optionalBuildingMapping.get();
+                return GuavaSearchResponse.transform(guavaRegion, buildingMapping);
             }
         }
         return GuavaSearchResponse.builder().build();

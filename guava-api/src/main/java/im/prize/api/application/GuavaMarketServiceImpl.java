@@ -120,10 +120,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                      .collect(Collectors.toList());
 
         return Stream.concat(progressList.stream(), endList.stream()).peek(openApiTradeInfo -> {
-            Optional<GuavaBuilding> first = guavaBuildingRepository.findByBuildingCode(openApiTradeInfo.getBuildingCode())
-                                                                   .stream()
-                                                                   .filter(x -> x.equals(openApiTradeInfo.getBuildingCode()))
-                                                                   .findFirst();
+            Optional<GuavaBuilding> first = guavaBuildingRepository.findByBuildingCode(openApiTradeInfo.getBuildingCode());
             if (first.isPresent()) {
                 List<GuavaBuildingArea> guavaBuildingAreaList = first.get().getAreaList();
                 GuavaBuildingArea areaBuildingArea = getAreaByPublicArea(guavaBuildingAreaList, openApiTradeInfo.getArea1());
@@ -208,11 +205,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
     }
 
     private GuavaTradeResponse transform(TradeArticle tradeArticle) {
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(tradeArticle.getBuildingCode())
-                                                                               .stream()
-                                                                               .filter(x -> x.getBuildingCode()
-                                                                                             .equals(tradeArticle.getBuildingCode()))
-                                                                               .findFirst();
+        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(tradeArticle.getBuildingCode());
         GuavaBuildingArea areaByPrivateArea = GuavaUtils.getAreaByPrivateArea(optionalGuavaBuilding.get().getAreaList(),
                                                                               String.valueOf(tradeArticle.getArea1()));
         LocalDate yyyyMMdd = LocalDate.parse(tradeArticle.getStartDate(), DATE_TIME_FORMATTER_YYYYMMDD);

@@ -5,6 +5,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 import java.awt.print.Pageable;
 import java.util.List;
@@ -24,8 +25,11 @@ public interface GuavaBuildingRepository extends JpaRepository<GuavaBuilding, Lo
 
     List<GuavaBuilding> findByPointIsNull();
 
-    @Cacheable("findByBuildingCode")
-    List<GuavaBuilding> findByBuildingCode(String buildingCode);
+//    @Cacheable("findByBuildingCode")
+//    List<GuavaBuilding> findByBuildingCode(String buildingCode);
+
+    @Query(value = "SELECT * FROM guava_building t WHERE t.building_code = BINARY(?1)", nativeQuery = true)
+    Optional<GuavaBuilding> findByBuildingCode(String buildingCode);
 
     static Specification<GuavaBuilding> search(String name) {
         return (Specification<GuavaBuilding>) ((root, query, builder) -> {

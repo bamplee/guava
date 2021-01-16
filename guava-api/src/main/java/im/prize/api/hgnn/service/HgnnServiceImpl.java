@@ -372,8 +372,9 @@ public class HgnnServiceImpl implements HgnnService {
                     List<String> buildingIdList = Lists.newArrayList(guavaRegion.getBuildingIdCsv().split(","));
                     GuavaBuilding guavaBuilding = new GuavaBuilding();
                     for (String buildingId : buildingIdList) {
-                        List<GuavaBuilding> byBuildingCode = guavaBuildingRepository.findByBuildingCode(buildingId);
-                        for (GuavaBuilding building : byBuildingCode) {
+                        Optional<GuavaBuilding> byBuildingCode = guavaBuildingRepository.findByBuildingCode(buildingId);
+                        if(byBuildingCode.isPresent()) {
+                            GuavaBuilding building = byBuildingCode.get();
                             if (unmappingTradeList.getAptName().replace("(", "").replace(")", "").equals(building.getName())) {
                                 guavaBuilding = building;
                             }

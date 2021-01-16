@@ -2,6 +2,8 @@ package im.prize.api.application;
 
 import com.google.common.collect.Lists;
 import im.prize.api.domain.oboo.OpenApiTradeInfo;
+import im.prize.api.hgnn.repository.BuildingMapping;
+import im.prize.api.hgnn.repository.BuildingMappingRepository;
 import im.prize.api.hgnn.repository.GuavaBuildingAreaRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuilding;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingArea;
@@ -34,6 +36,7 @@ public class GuavaChartServiceImpl implements GuavaChartService {
     private final TradeArticleRepository tradeArticleRepository;
     private final GuavaRegionStatsRepository guavaRegionStatsRepository;
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
+    private final BuildingMappingRepository buildingMappingRepository;
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -43,7 +46,8 @@ public class GuavaChartServiceImpl implements GuavaChartService {
                                  OpenApiTradeInfoRepository openApiTradeInfoRepository,
                                  TradeArticleRepository tradeArticleRepository,
                                  GuavaRegionStatsRepository guavaRegionStatsRepository,
-                                 GuavaBuildingAreaRepository guavaBuildingAreaRepository) {
+                                 GuavaBuildingAreaRepository guavaBuildingAreaRepository,
+                                 BuildingMappingRepository buildingMappingRepository) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
         this.entityManager = entityManager;
@@ -51,6 +55,7 @@ public class GuavaChartServiceImpl implements GuavaChartService {
         this.tradeArticleRepository = tradeArticleRepository;
         this.guavaRegionStatsRepository = guavaRegionStatsRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
+        this.buildingMappingRepository = buildingMappingRepository;
     }
 
     @Override
@@ -98,7 +103,8 @@ public class GuavaChartServiceImpl implements GuavaChartService {
 
     @Override
     public List<GuavaChartResponse> getChartList(String buildingCode, String areaId, Long sinceYear) {
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findById(Long.valueOf(buildingCode));
+        Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingCode));
+        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get().getBuildingCode());
         List<OpenApiTradeInfo> infos = Lists.newArrayList();
         String baseYear = String.valueOf(YearMonth.now().minusMonths(sinceYear).getYear());
         if (optionalGuavaBuilding.isPresent()) {

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.locationtech.jts.geom.Point;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,4 +29,6 @@ public class BuildingMapping {
     private String kaptCode;
     private String portalId;
     private String buildingCode;
+    private String address;
+    private Point point;
 }

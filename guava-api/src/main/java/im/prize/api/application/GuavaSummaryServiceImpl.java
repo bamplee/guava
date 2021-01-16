@@ -1,9 +1,10 @@
 package im.prize.api.application;
 
-import com.google.common.collect.Lists;
 import im.prize.api.application.dto.Location;
 import im.prize.api.domain.oboo.OpenApiTradeInfo;
 import im.prize.api.domain.oboo.TradeArticle;
+import im.prize.api.hgnn.repository.BuildingMapping;
+import im.prize.api.hgnn.repository.BuildingMappingRepository;
 import im.prize.api.hgnn.repository.GuavaBuildingAreaRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuilding;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingArea;
@@ -16,27 +17,18 @@ import im.prize.api.infrastructure.persistence.jpa.repository.oboo.OpenApiTradeI
 import im.prize.api.infrastructure.persistence.jpa.repository.oboo.TradeArticleRepository;
 import im.prize.api.interfaces.response.AreaResponse;
 import im.prize.api.interfaces.response.GuavaBuildingDetailResponse;
-import im.prize.api.interfaces.response.GuavaChartResponse;
-import im.prize.api.interfaces.response.GuavaSearchResponse;
 import im.prize.api.interfaces.response.GuavaSummaryResponse;
-import im.prize.api.interfaces.response.GuavaTradeResponse;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class GuavaSummaryServiceImpl implements GuavaSummaryService {
@@ -49,6 +41,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
     private final TradeArticleRepository tradeArticleRepository;
     private final GuavaRegionStatsRepository guavaRegionStatsRepository;
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
+    private final BuildingMappingRepository buildingMappingRepository;
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -58,7 +51,8 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                                    OpenApiTradeInfoRepository openApiTradeInfoRepository,
                                    TradeArticleRepository tradeArticleRepository,
                                    GuavaRegionStatsRepository guavaRegionStatsRepository,
-                                   GuavaBuildingAreaRepository guavaBuildingAreaRepository) {
+                                   GuavaBuildingAreaRepository guavaBuildingAreaRepository,
+                                   BuildingMappingRepository buildingMappingRepository) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
         this.entityManager = entityManager;
@@ -66,6 +60,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         this.tradeArticleRepository = tradeArticleRepository;
         this.guavaRegionStatsRepository = guavaRegionStatsRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
+        this.buildingMappingRepository = buildingMappingRepository;
     }
 
     @Override
@@ -80,7 +75,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         if (type == RegionType.BUILDING) {
             return this.getBuildingList(northEastLng, northEastLat, southWestLng, southWestLat)
                        .parallelStream()
-                       .map(guavaBuilding -> transform(guavaBuilding, startArea, endArea))
+                       .map(this::transform)
                        .filter(Optional::isPresent)
                        .map(Optional::get)
                        .collect(Collectors.toList());
@@ -96,7 +91,8 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
 
     @Override
     public GuavaBuildingDetailResponse getBuildingDetail(String buildingId) {
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findById(Long.valueOf(buildingId));
+        Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
+        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get().getBuildingCode());
         if (optionalGuavaBuilding.isPresent()) {
             GuavaBuilding guavaBuilding = optionalGuavaBuilding.get();
 
@@ -285,7 +281,8 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
 //                    guavaRegion.getSigunguCode(),
 //                    baseYear);
 //            } else {
-//                openApiTradeInfoList = openApiTradeInfoRepository.findByDongSigunguCodeAndAreaBetweenAndYearGreaterThanEqualOrderByDateDesc(
+//                openApiTradeInfoList = openApiTradeInfoRepository
+// .findByDongSigunguCodeAndAreaBetweenAndYearGreaterThanEqualOrderByDateDesc(
 //                    guavaRegion.getSigunguCode(),
 //                    Double.valueOf(startArea),
 //                    Double.valueOf(endArea),
@@ -401,7 +398,8 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                 optionalGuavaBuildingArea = this.getArea(areaId);
                 if (optionalGuavaBuildingArea.isPresent()) {
                     infos =
-                        openApiTradeInfoRepository.findByBuildingIdAndAreaAndYearGreaterThanEqualOrderByDateDesc(guavaBuilding.getBuildingCode(),
+                        openApiTradeInfoRepository.findByBuildingIdAndAreaAndYearGreaterThanEqualOrderByDateDesc(guavaBuilding
+                        .getBuildingCode(),
                                                                                                                  optionalGuavaBuildingArea
                                                                                                                      .get()
                                                                                                                      .getPrivateArea(),
@@ -440,12 +438,15 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
 //            beforeMaxPrice = openApiTradeInfoRepository.getMaxPriceByAreahundredthsDecimal(LocalDate.now()
 //                                                                                                    .format(DATE_TIME_FORMATTER_YYYYMMDD),
 //                                                                                           tradeArticle.getBuildingCode(),
-//                                                                                           Math.round(areaByPrivateArea.getPrivateArea() * 100) / 100.0);
+//                                                                                           Math.round(areaByPrivateArea.getPrivateArea
+// () * 100) / 100.0);
 //        }
 //        if (StringUtils.isEmpty(beforeMaxPrice)) {
-//            beforeMaxPrice = openApiTradeInfoRepository.getMaxPriceByAreaTenthsDecimal(LocalDate.now().format(DATE_TIME_FORMATTER_YYYYMMDD),
+//            beforeMaxPrice = openApiTradeInfoRepository.getMaxPriceByAreaTenthsDecimal(LocalDate.now().format
+// (DATE_TIME_FORMATTER_YYYYMMDD),
 //                                                                                       tradeArticle.getBuildingCode(),
-//                                                                                       Math.round(areaByPrivateArea.getPrivateArea() * 100) / 100.0);
+//                                                                                       Math.round(areaByPrivateArea.getPrivateArea() *
+// 100) / 100.0);
 //        }
 //
 //        String articleFeatureDesc = tradeArticle.getArticleFeatureDesc();
@@ -494,7 +495,8 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
 //                                 .isActive(tradeArticle.getEndDate() == null)
 //                                 .isNew(LocalDate.parse(tradeArticle.getArticleConfirmYmd(),
 //                                                        DATE_TIME_FORMATTER_YYYYMMDD).equals(LocalDate.now()))
-//                                 .isHighPrice(StringUtils.isNotEmpty(beforeMaxPrice) && Integer.valueOf(beforeMaxPrice) < tradeArticle.getPrice())
+//                                 .isHighPrice(StringUtils.isNotEmpty(beforeMaxPrice) && Integer.valueOf(beforeMaxPrice) < tradeArticle
+// .getPrice())
 //                                 .build();
 //    }
 
@@ -540,11 +542,24 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         return this.searchGuavaRegion(northEastLng, northEastLat, southWestLng, southWestLat);
     }
 
-    private List<GuavaBuilding> getBuildingList(Double northEastLng,
-                                                Double northEastLat,
-                                                Double southWestLng,
-                                                Double southWestLat) {
+    private List<BuildingMapping> getBuildingList(Double northEastLng,
+                                                  Double northEastLat,
+                                                  Double southWestLng,
+                                                  Double southWestLat) {
         return this.searchGuavaBuilding(northEastLng, northEastLat, southWestLng, southWestLat);
+    }
+
+    public Optional<GuavaSummaryResponse> transform(BuildingMapping buildingMapping) {
+        List<GuavaBuildingArea> byBuildingCode = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
+        return Optional.of(GuavaSummaryResponse.builder()
+                                               .type(RegionType.BUILDING)
+                                               .id(String.valueOf(buildingMapping.getId()))
+                                               .lat(buildingMapping.getPoint().getY())
+                                               .lng(buildingMapping.getPoint().getX())
+//                                               .price(openApiTradeInfo.getSummaryPrice())
+//                                               .marketPrice(marketPrice)
+                                               .name(buildingMapping.getBuildingName())
+                                               .build());
     }
 
     public Optional<GuavaSummaryResponse> transform(GuavaBuilding guavaBuilding, Integer startArea, Integer endArea) {
@@ -677,37 +692,38 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
             , GuavaRegion.class).getResultList();
     }
 
-    private List<GuavaBuilding> searchGuavaBuilding(Double lng1, Double lat1, Double lng2, Double lat2) {
+    private List<BuildingMapping> searchGuavaBuilding(Double lng1, Double lat1, Double lng2, Double lat2) {
         return entityManager.createNativeQuery("SELECT * \n" +
-                                                   "FROM guava_building AS r \n" +
+                                                   "FROM building_mapping_tb AS r \n" +
                                                    "WHERE MBRContains(ST_LINESTRINGFROMTEXT(" + String.format(
             "'LINESTRING(%f %f, %f %f)')",
             lng1,
             lat1,
             lng2,
             lat2) + ", r.point) AND type = 0"
-            , GuavaBuilding.class).getResultList();
+            , BuildingMapping.class).getResultList();
     }
 
-    private List<GuavaRegion> searchGuavaRegion(Double lng, Double lat) {
-        return entityManager.createNativeQuery(
-            "SELECT *, u_st_distance_sphere(POINT(" + lng + ", " + lat + "), point) AS dist FROM guava_region ORDER BY dist, region_code " +
-                "LIMIT 10;"
-            , GuavaRegion.class).getResultList();
-    }
-
-    private List<GuavaRegion> searchGuavaRegion(Double lng, Double lat, Double distance) {
-        // 북동쪽 좌표 구하기
-        Location northEast = GeometryUtils.calculateByDirection(lat, lng, distance, CardinalDirection.NORTHEAST.getBearing());
-
-        // 남서쪽 좌표 구하기
-        Location southWest = GeometryUtils.calculateByDirection(lat, lng, distance, CardinalDirection.SOUTHWEST.getBearing());
-
-        double lng1 = northEast.getLongitude();
-        double lat1 = northEast.getLatitude();
-        double lng2 = southWest.getLongitude();
-        double lat2 = southWest.getLatitude();
-
-        return searchGuavaRegion(lng1, lat1, lng2, lat2);
-    }
+//    private List<GuavaRegion> searchGuavaRegion(Double lng, Double lat) {
+//        return entityManager.createNativeQuery(
+//            "SELECT *, u_st_distance_sphere(POINT(" + lng + ", " + lat + "), point) AS dist FROM guava_region ORDER BY dist,
+// region_code " +
+//                "LIMIT 10;"
+//            , GuavaRegion.class).getResultList();
+//    }
+//
+//    private List<GuavaRegion> searchGuavaRegion(Double lng, Double lat, Double distance) {
+//        // 북동쪽 좌표 구하기
+//        Location northEast = GeometryUtils.calculateByDirection(lat, lng, distance, CardinalDirection.NORTHEAST.getBearing());
+//
+//        // 남서쪽 좌표 구하기
+//        Location southWest = GeometryUtils.calculateByDirection(lat, lng, distance, CardinalDirection.SOUTHWEST.getBearing());
+//
+//        double lng1 = northEast.getLongitude();
+//        double lat1 = northEast.getLatitude();
+//        double lng2 = southWest.getLongitude();
+//        double lat2 = southWest.getLatitude();
+//
+//        return searchGuavaRegion(lng1, lat1, lng2, lat2);
+//    }
 }
