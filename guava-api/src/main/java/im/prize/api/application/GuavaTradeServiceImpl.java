@@ -42,12 +42,14 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                  GuavaBuildingRepository guavaBuildingRepository,
                                  OpenApiTradeInfoRepository openApiTradeInfoRepository,
                                  GuavaBuildingAreaRepository guavaBuildingAreaRepository,
-                                 BuildingMappingRepository buildingMappingRepository) {
+                                 BuildingMappingRepository buildingMappingRepository,
+                                 TradeSummaryRepository tradeSummaryRepository) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
         this.openApiTradeInfoRepository = openApiTradeInfoRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
         this.buildingMappingRepository = buildingMappingRepository;
+        this.tradeSummaryRepository = tradeSummaryRepository;
     }
 
     @Override
@@ -134,55 +136,76 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     public List<GuavaTradeResponse> getBuildingTradeList(String buildingId, Integer page, String areaId, String date) {
         PageRequest pageRequest = PageRequest.of(page, 100);
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get().getBuildingCode());
-        if (!optionalGuavaBuilding.isPresent()) {
-            return Lists.newArrayList();
-        }
-        GuavaBuilding guavaBuilding = optionalGuavaBuilding.get();
-        String buildingCode = guavaBuilding.getBuildingCode();
-        Page<OpenApiTradeInfo> byBuildingIdOrderByDateDesc = Page.empty();
-        Optional<GuavaBuildingArea> optionalArea = Optional.empty();
-        if (StringUtils.isNotEmpty(areaId)) {
-            optionalArea = guavaBuildingAreaRepository.findById(Long.valueOf(areaId));
-            if (optionalArea.isPresent()) {
-                if (StringUtils.isNotEmpty(date)) {
-                    byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdAndAreaAndDateBetweenOrderByDateDesc(
-                        buildingCode,
-                        optionalArea.get()
-                                    .getPrivateArea(),
-                        date + "01",
-                        date + "31",
-                        pageRequest);
-                } else {
-                    byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdAndAreaOrderByDateDesc(buildingCode,
-                                                                                                                    optionalArea.get()
-                                                                                                                                .getPrivateArea(),
-                                                                                                                    pageRequest);
-                }
+        Page<TradeSummary> byBuildingCodeAndAreaCode = Page.empty();
+        if (optionalBuildingMapping.isPresent()) {
+            BuildingMapping buildingMapping = optionalBuildingMapping.get();
+            if (StringUtils.isNotEmpty(areaId)) {
+                byBuildingCodeAndAreaCode = tradeSummaryRepository.findByBuildingCodeAndAreaCode(buildingMapping.getBuildingCode(),
+                                                                                                 areaId,
+                                                                                                 pageRequest);
             } else {
-                if (StringUtils.isNotEmpty(date)) {
-                    byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdAndDateBetweenOrderByDateDesc(buildingCode,
-                                                                                                                           date + "01",
-                                                                                                                           date + "31",
-                                                                                                                           pageRequest);
-                } else {
-                    byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdOrderByDateDesc(buildingCode,
-                                                                                                             pageRequest);
-                }
+                byBuildingCodeAndAreaCode = tradeSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode(), pageRequest);
             }
-        } else {
-            if (StringUtils.isNotEmpty(date)) {
-                byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdAndDateBetweenOrderByDateDesc(buildingCode,
-                                                                                                                       date + "01",
-                                                                                                                       date + "31",
-                                                                                                                       pageRequest);
-            } else {
-                byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdOrderByDateDesc(buildingCode,
-                                                                                                         pageRequest);
-            }
+            return byBuildingCodeAndAreaCode.getContent()
+                                            .stream()
+                                            .map(x -> GuavaTradeResponse.transform(buildingMapping, x))
+                                            .collect(Collectors.toList());
         }
+        return Lists.newArrayList();
 
-        return byBuildingIdOrderByDateDesc.getContent().stream().map(this::transform).collect(Collectors.toList());
+//        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get()
+//
+// .getBuildingCode());
+//        if (!optionalGuavaBuilding.isPresent()) {
+//            return Lists.newArrayList();
+//        }
+//
+//        GuavaBuilding guavaBuilding = optionalGuavaBuilding.get();
+//        String buildingCode = guavaBuilding.getBuildingCode();
+//        Page<OpenApiTradeInfo> byBuildingIdOrderByDateDesc = Page.empty();
+//        Optional<GuavaBuildingArea> optionalArea = Optional.empty();
+//        if (StringUtils.isNotEmpty(areaId)) {
+//            optionalArea = guavaBuildingAreaRepository.findById(Long.valueOf(areaId));
+//            if (optionalArea.isPresent()) {
+//                if (StringUtils.isNotEmpty(date)) {
+//                    byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdAndAreaAndDateBetweenOrderByDateDesc(
+//                        buildingCode,
+//                        optionalArea.get()
+//                                    .getPrivateArea(),
+//                        date + "01",
+//                        date + "31",
+//                        pageRequest);
+//                } else {
+//                    byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdAndAreaOrderByDateDesc(buildingCode,
+//                                                                                                                    optionalArea.get()
+//
+// .getPrivateArea(),
+//                                                                                                                    pageRequest);
+//                }
+//            } else {
+//                if (StringUtils.isNotEmpty(date)) {
+//                    byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdAndDateBetweenOrderByDateDesc(buildingCode,
+//                                                                                                                           date + "01",
+//                                                                                                                           date + "31",
+//                                                                                                                           pageRequest);
+//                } else {
+//                    byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdOrderByDateDesc(buildingCode,
+//                                                                                                             pageRequest);
+//                }
+//            }
+//        } else {
+//            if (StringUtils.isNotEmpty(date)) {
+//                byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdAndDateBetweenOrderByDateDesc(buildingCode,
+//                                                                                                                       date + "01",
+//                                                                                                                       date + "31",
+//                                                                                                                       pageRequest);
+//            } else {
+//                byBuildingIdOrderByDateDesc = openApiTradeInfoRepository.findByBuildingIdOrderByDateDesc(buildingCode,
+//                                                                                                         pageRequest);
+//            }
+//        }
+//
+//        return byBuildingIdOrderByDateDesc.getContent().stream().map(this::transform).collect(Collectors.toList());
     }
 
     private GuavaTradeResponse transform(OpenApiTradeInfo openApiTradeInfo) {
