@@ -11,6 +11,7 @@ import net.moboo.batch.infrastructure.jpa.OpenApiTradeInfoRepository;
 import net.moboo.batch.wooa.repository.BuildingMapping;
 import net.moboo.batch.wooa.repository.BuildingMappingRepository;
 import net.moboo.batch.wooa.repository.TradeSummaryRepository;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -49,10 +50,10 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
 
     @Override
     public List<TradeSummary> process(BuildingMapping buildingMapping) {
-        if(buildingMapping.getBuildingCode() == null) {
+        if (buildingMapping.getBuildingCode() == null) {
             return Lists.newArrayList();
         }
-        if(buildingMapping.getType() != null && buildingMapping.getType() != 0) {
+        if (buildingMapping.getType() != null && buildingMapping.getType() != 0) {
             return Lists.newArrayList();
         }
         String regionCode = buildingMapping.getRegionCode();
@@ -70,18 +71,19 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
             String day = x.getDay().length() == 1 ? String.format("0%s", x.getDay()) : x.getDay();
             String date = x.getYear() + month + day;
 
+            String price = Optional.ofNullable(x.getPrice()).orElse("").replaceAll("[^0-9]", "");
+            String floor = Optional.ofNullable(x.getFloor()).orElse("").replaceAll("[^0-9]", "");
+
             TradeSummary.TradeSummaryBuilder tradeSummaryBuilder = TradeSummary.builder()
                                                                                .id(x.getId())
                                                                                .type(TradeType.TRADE)
                                                                                .name(x.getAptName())
-                                                                               .price(Integer.valueOf(x.getPrice()
-                                                                                                       .replaceAll("[^0-9]", "")))
-                                                                               .floor(Integer.valueOf(x.getFloor()
-                                                                                                       .replaceAll("[^0-9]", "")))
+                                                                               .price(NumberUtils.toInt(price, -1))
+                                                                               .floor(NumberUtils.toInt(floor, -1))
                                                                                .date(date)
                                                                                .regionCode(buildingMapping.getRegionCode())
                                                                                .buildingCode(buildingMapping.getBuildingCode());
-            if(buildingAreas.size() > 0) {
+            if (buildingAreas.size() > 0) {
                 // 4ba
                 Optional<GuavaBuildingArea> optionalGuavaBuildingArea = buildingAreas.stream()
                                                                                      .filter(y -> String.valueOf(y.getPrivateArea())
