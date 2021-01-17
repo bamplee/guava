@@ -4,11 +4,12 @@ import {useHistory} from 'react-router-dom';
 import Chart from 'chart.js';
 
 import {areaTypeState, filterAreaState, regionState, tableOptionState, tradeDateState} from '../datatool/state';
-import {getTrade} from '../datatool/api';
+import {getTrade, getTradeMarket} from '../datatool/api';
 
 import classNames from 'classnames/bind';
 import styles from './guavaChart.module.scss';
 import {Bar} from 'react-chartjs-2';
+import {TABLE_OPTION} from '../constant';
 
 const options = {
     legend: {
@@ -182,7 +183,11 @@ const GuavaMarketChart = () => {
 
             let result = [];
             if (region.type === 'BUILDING') {
-                result = await getTrade(tableOption, region.buildingId, page, areaType.areaId, date);
+                if (tableOption === TABLE_OPTION.TRADE) {
+                    result = await getTrade(region.buildingId, page, areaType.areaId, date);
+                } else if (tableOption === TABLE_OPTION.MARKET) {
+                    result = await getTradeMarket(region.buildingId, page, areaType.areaId, date);
+                }
             }
 
             if (result.length < 100) {

@@ -92,8 +92,8 @@ export const getChartTrade = async (buildingId, areaId, startDate, endDate) => {
     return await response.json();
 };
 
-export const getTrade = async (type, buildingId, page, areaId, date) => {
-    const response = await fetch(`/api/v1/guava/${type}/buildings/${buildingId}?` + new URLSearchParams({
+export const getTrade = async (tradeType, buildingId, page, areaId, date) => {
+    const response = await fetch(`/api/v1/guava/${tradeType}/buildings/${buildingId}?` + new URLSearchParams({
         page: page,
         areaId: areaId,
         date: date
@@ -101,8 +101,27 @@ export const getTrade = async (type, buildingId, page, areaId, date) => {
     return await response.json();
 };
 
-export const getRegionTrade = async (type, buildingId, page, startArea, endArea, date) => {
-    const response = await fetch(`/api/v1/guava/${type}/regions/${buildingId}?` + new URLSearchParams({
+export const getRegionTrade = async (tradeType, buildingId, page, startArea, endArea, date) => {
+    const response = await fetch(`/api/v1/guava/${tradeType}/regions/${buildingId}?` + new URLSearchParams({
+        page: page,
+        startArea: startArea,
+        endArea: endArea,
+        date: date
+    }));
+    return await response.json();
+};
+
+export const getTradeMarket = async (buildingId, page, areaId, date) => {
+    const response = await fetch(`/api/v1/guava/trade/market/buildings/${buildingId}?` + new URLSearchParams({
+        page: page,
+        areaId: areaId,
+        date: date
+    }));
+    return await response.json();
+};
+
+export const getRegionTradeMarket = async (buildingId, page, startArea, endArea, date) => {
+    const response = await fetch(`/api/v1/guava/trade/market/regions/${buildingId}?` + new URLSearchParams({
         page: page,
         startArea: startArea,
         endArea: endArea,

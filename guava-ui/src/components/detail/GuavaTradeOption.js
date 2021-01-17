@@ -44,14 +44,14 @@ const GuavaTradeOption = () => {
         }
     }, []);
 
-    const handleTabs = (index) => {
-        setTabs(index);
-        if (index === 0) {
-            setTableOption(TABLE_OPTION.TRADE);
-        } else if (index === 1) {
-            setTableOption(TABLE_OPTION.MARKET);
-        }
-    };
+    // const handleTabs = (index) => {
+    //     setTabs(index);
+    //     if (index === 0) {
+    //         setTableOption(TABLE_OPTION.TRADE);
+    //     } else if (index === 1) {
+    //         setTableOption(TABLE_OPTION.MARKET);
+    //     }
+    // };
 
     return (
         <>

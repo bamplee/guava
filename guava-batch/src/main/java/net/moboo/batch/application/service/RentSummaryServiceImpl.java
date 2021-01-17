@@ -120,7 +120,7 @@ public class RentSummaryServiceImpl implements RentSummaryService {
                  buildingMapping.getBuildingCode(),
                  collect.size(),
                  openApiRentInfos.size());
-        return null;
+        return collect;
     }
 
     public static GuavaBuildingArea getAreaByPrivateArea(List<GuavaBuildingArea> guavaBuildingAreaList, String privateArea) {

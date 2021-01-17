@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/guava/market")
+@RequestMapping("/api/v1/guava/trade/market")
 public class GuavaMarketController {
     private final GuavaMarketService guavaMarketService;
 

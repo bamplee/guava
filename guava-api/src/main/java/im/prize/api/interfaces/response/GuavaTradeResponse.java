@@ -1,5 +1,6 @@
 package im.prize.api.interfaces.response;
 
+import im.prize.api.application.RentSummary;
 import im.prize.api.application.TradeSummary;
 import im.prize.api.hgnn.repository.BuildingMapping;
 import lombok.Builder;
@@ -25,6 +26,7 @@ public class GuavaTradeResponse {
     private AreaResponse area;
     private String floor;
     private String price;
+    private String subPrice;
     private String priceName;
     private String minusPrice;
     private String minusPriceName;
@@ -60,6 +62,36 @@ public class GuavaTradeResponse {
 // eforeHighPrice)
 //                                 .isHighPrice(isHighPrice)
                                  .isNew(tradeSummary.getCreatedDateTime().toLocalDate().equals(LocalDate.now()))
+                                 .build();
+    }
+
+    public static GuavaTradeResponse transform(RentSummary rentSummary) {
+        LocalDate yyyyMMdd = LocalDate.parse(rentSummary.getDate(), DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        return GuavaTradeResponse.builder()
+                                 .regionId(rentSummary.getRegionCode())
+                                 .buildingId(rentSummary.getBuildingCode())
+                                 .type(rentSummary.getType().getName())
+                                 .name(rentSummary.getName())
+//                                 .address(buildingMapping.getAddress())
+                                 .date(yyyyMMdd.format(DateTimeFormatter.ofPattern("yy.MM.dd")))
+                                 .year(yyyyMMdd.format(DateTimeFormatter.ofPattern("yyyy")))
+                                 .month(yyyyMMdd.format(DateTimeFormatter.ofPattern("MM")))
+                                 .day(yyyyMMdd.format(DateTimeFormatter.ofPattern("dd")))
+                                 .floor(String.valueOf(rentSummary.getFloor()))
+                                 .price(rentSummary.getTradePrice())
+                                 .subPrice(String.valueOf(rentSummary.getSubPrice()))
+                                 .area(AreaResponse.builder()
+                                                   .areaId(rentSummary.getAreaCode())
+                                                   .type(rentSummary.getAreaType())
+                                                   .name((int) (rentSummary.getPublicArea() * 0.3025) + "평")
+                                                   .publicArea(String.valueOf(rentSummary.getPublicArea()))
+                                                   .privateArea(String.valueOf(rentSummary.getPrivateArea()))
+                                                   .build())
+//                                 .beforeMaxPrice(b
+// eforeHighPrice)
+//                                 .isHighPrice(isHighPrice)
+                                 .isNew(rentSummary.getCreatedDateTime().toLocalDate().equals(LocalDate.now()))
                                  .build();
     }
 }

@@ -3,8 +3,15 @@ import {useHistory} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import {areaTypeState, filterAreaState, regionState, tableOptionState, tradeDateState} from '../datatool/state';
-import {getRegionTrade, getTrade} from '../datatool/api';
+import {
+    areaTypeState,
+    filterAreaState,
+    regionState,
+    tableOptionState,
+    tradeDateState,
+    tradeTypeState
+} from '../datatool/state';
+import {getRegionTrade, getRegionTradeMarket, getTrade, getTradeMarket} from '../datatool/api';
 
 import classNames from 'classnames/bind';
 import styles from './guavaTable.module.scss';
@@ -36,6 +43,7 @@ const GuavaTable = () => {
     const region = useRecoilValue(regionState);
     const [count, setCount] = useState(0);
     const [chartList, setChartList] = useState([]);
+    const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
     useEffect(() => {
         if (page === 0) {
@@ -49,7 +57,7 @@ const GuavaTable = () => {
         setIsLoading(false);
         setIsCompleted(false);
         // fetch();
-    }, [region, tableOption, areaType, filterArea, tradeDate]);
+    }, [region, tableOption, tradeType, areaType, filterArea, tradeDate]);
 
     const fetch = async () => {
         if (!isCompleted && !isLoading) {
@@ -63,9 +71,19 @@ const GuavaTable = () => {
 
             let result = [];
             if (region.type === 'BUILDING') {
-                result = await getTrade(tableOption, region.buildingId, page, areaType.areaId, date);
+                if(tableOption === TABLE_OPTION.TRADE) {
+                    result = await getTrade(tradeType, region.buildingId, page, areaType.areaId, date);
+                }
+                else if(tableOption === TABLE_OPTION.MARKET) {
+                    result = await getTradeMarket(region.buildingId, page, areaType.areaId, date);
+                }
             } else {
-                result = await getRegionTrade(tableOption, region.id, page, startArea, endArea, date);
+                if(tableOption === TABLE_OPTION.TRADE) {
+                    result = await getRegionTrade(tradeType, region.id, page, startArea, endArea, date);
+                }
+                else if(tableOption === TABLE_OPTION.MARKET) {
+                    result = await getRegionTradeMarket(region.id, page, startArea, endArea, date);
+                }
             }
 
             if (result.length < 50) {
