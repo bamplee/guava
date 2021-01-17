@@ -31,6 +31,12 @@ const GuavaSearchHeader = () => {
         if (queryInput && queryInput.current) {
             queryInput.current.focus();
         }
+    }, []);
+
+    useEffect(() => {
+        if (queryInput && queryInput.current) {
+            queryInput.current.focus();
+        }
     }, [queryInput]);
 
     useEffect(() => {
@@ -125,18 +131,18 @@ const GuavaSearchHeader = () => {
                                                 autoEscape={true}
                                                 textToHighlight={x.name}
                                             /><List.Item.Brief
-                                                style={{
-                                                    fontSize: '0.7rem',
-                                                    marginTop: 2,
-                                                    marginBottom: 4
-                                                }}>
-                                                <Highlighter
-                                                    highlightClassName={cx('highlight')}
-                                                    searchWords={query.split('')}
-                                                    autoEscape={true}
-                                                    textToHighlight={x.address}
-                                                />
-                                            </List.Item.Brief></List.Item>
+                                            style={{
+                                                fontSize: '0.7rem',
+                                                marginTop: 2,
+                                                marginBottom: 4
+                                            }}>
+                                            <Highlighter
+                                                highlightClassName={cx('highlight')}
+                                                searchWords={query.split('')}
+                                                autoEscape={true}
+                                                textToHighlight={x.address}
+                                            />
+                                        </List.Item.Brief></List.Item>
                                     )
                                 } else {
                                     return (
