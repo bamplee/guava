@@ -1,23 +1,8 @@
 /*global kakao*/
-import React, {useEffect, useState} from 'react'
-import {useRecoilState, useRecoilValue} from 'recoil';
+import React from 'react'
 import classNames from 'classnames/bind';
-import {useHistory} from 'react-router-dom';
-
-import {fetchSummary} from '../datatool/api';
-
-import {
-    boundsState,
-    centerState,
-    filterAreaState,
-    levelState,
-    regionState,
-} from '../datatool/state';
 
 import styles from './guavaMap.module.scss';
-import GuavaMapLabel from './GuavaMapLabel';
-import GuavaMapFilter from './GuavaMapFilter';
-import {getEndArea, getStartArea} from '../constant';
 import GuavaMainHeader from '../header/GuavaSearch';
 import GuavaMap from './GuavaMap';
 

@@ -1,65 +1,4 @@
-import {atom, selector, selectorFamily} from 'recoil';
-import {fetchSummary, getBuilding, getDetail, getRegion} from './api';
-//
-// export const summaryQuery = selector({
-//     key: 'summaryQuery',
-//     get: async ({get}) => {
-//         // level, northEastLng, northEastLat, southWestLng, southWestLat, startArea, endArea
-//         const level = get(levelState);
-//         const bounds = get(boundsState);
-//         return await fetchSummary(level, bounds.northEastLng, bounds.northEastLat, bounds.southWestLng, bounds.southWestLat, 0, 500);
-//         // return await fetchSummary(level, bounds.northEastLng, bounds.northEastLat, bounds.southWestLng, bounds.southWestLat, 0, 500);
-//     }
-// });
-//
-// export const buildingQuery = selector({
-//     key: 'buildingQuery',
-//     get: async ({get}) => {
-//         const buildingId = get(buildingIdState);
-//         if (buildingId) {
-//             return await getDetail(buildingId);
-//         }
-//         return get(buildingState);
-//     }
-// });
-
-// export const regionState = selector({
-//     key: 'regionState',
-//     get: async ({get}) => {
-//         const buildingId = get(buildingIdState);
-//         const regionId = get(regionIdState);
-//         if (buildingId) {
-//             return getBuilding(buildingId);
-//         } else if (regionId) {
-//             return getRegion(regionId);
-//         }
-//         return get(regionState);
-//     }
-// });
-//
-// export const regionIdState = atom({
-//     key: 'regionIdState',
-//     default: null
-// });
-//
-// export const buildingIdState = atom({
-//     key: 'buildingIdState',
-//     default: null
-// });
-
-/*
-export const buildingQuery = selectorFamily({
-    key: 'buildingQuery',
-    get: (buildingId) => async () => {
-        if(!buildingId) {
-            return {};
-        }
-        // level, northEastLng, northEastLat, southWestLng, southWestLat, startArea, endArea
-        return await getDetail(buildingId);
-        // return await fetchSummary(level, bounds.northEastLng, bounds.northEastLat, bounds.southWestLng, bounds.southWestLat, 0, 500);
-    }
-});
-*/
+import {atom} from 'recoil';
 
 export const centerState = atom({
     key: 'centerState',
@@ -189,21 +128,6 @@ export const tableOptionState = atom({
 export const filterAreaState = atom({
     key: 'filterAreaState',
     default: [0, 5]
-});
-
-export const queryListState = atom({
-    key: 'queryListState',
-    default: []
-});
-
-export const buildingListState = atom({
-    key: 'buildingListState',
-    default: []
-});
-
-export const regionListState = atom({
-    key: 'regionListState',
-    default: []
 });
 
 export const tradeTypeState = atom({

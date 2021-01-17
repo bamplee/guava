@@ -1,5 +1,5 @@
 import React from 'react'
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilValue} from 'recoil';
 
 import classNames from 'classnames/bind';
 import styles from '../guavaTable.module.scss';

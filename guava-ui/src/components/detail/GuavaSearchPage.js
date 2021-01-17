@@ -9,9 +9,7 @@ import GuavaTable from '../table/GuavaTable';
 
 import styles from './guavaDetailPage.module.scss';
 import {useRecoilValue} from 'recoil';
-import {
-    regionState,
-} from '../datatool/state';
+import {regionState,} from '../datatool/state';
 import {WhiteSpace} from 'antd-mobile';
 
 const cx = classNames.bind(styles);

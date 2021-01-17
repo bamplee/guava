@@ -3,13 +3,7 @@ import {useHistory} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import {
-    areaTypeState,
-    filterAreaState,
-    regionState,
-    tableOptionState,
-    tradeDateState, tradeTypeState
-} from '../datatool/state';
+import {areaTypeState, filterAreaState, regionState, tableOptionState, tradeDateState} from '../datatool/state';
 import {getRegionTrade, getTrade} from '../datatool/api';
 
 import classNames from 'classnames/bind';

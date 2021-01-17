@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 
 import {useHistory, useLocation} from 'react-router-dom';
 
@@ -7,19 +7,19 @@ import classNames from 'classnames/bind';
 import styles from './guavaHeader.module.scss';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
-    areaTypeState, buildingState,
+    areaTypeState,
+    buildingState,
     filterAreaState,
     regionState,
     showAreaFilterState,
-    showAreaTypeFilterState, tableOptionState, tradeTypeState
+    showAreaTypeFilterState,
+    tableOptionState,
+    tradeTypeState
 } from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
-import {Button, WingBlank, Modal} from 'antd-mobile';
-import CaretDownOutlined from '@ant-design/icons/es/icons/CaretDownOutlined';
-import {getEndArea, getStartArea, TABLE_OPTION} from '../constant';
-import ReactGA from 'react-ga';
-import SendOutlined from '@ant-design/icons/es/icons/SendOutlined';
+import {Button, WingBlank} from 'antd-mobile';
+import {TABLE_OPTION} from '../constant';
 
 const cx = classNames.bind(styles);
 

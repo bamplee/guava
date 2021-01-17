@@ -7,10 +7,13 @@ import {useHistory} from 'react-router-dom';
 import {fetchSummary} from '../datatool/api';
 
 import {
-    boundsState, buildingState,
+    boundsState,
+    buildingState,
     centerState,
     filterAreaState,
-    levelState, regionState, summaryState,
+    levelState,
+    regionState,
+    summaryState,
 } from '../datatool/state';
 
 import styles from './guavaMap.module.scss';

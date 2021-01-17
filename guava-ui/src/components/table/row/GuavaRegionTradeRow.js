@@ -1,6 +1,6 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilValue} from 'recoil';
 import {Badge} from 'antd-mobile/lib/index';
 
 import {regionState} from '../../datatool/state';

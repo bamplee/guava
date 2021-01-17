@@ -5,21 +5,15 @@ import {useHistory, useLocation} from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './guavaHeader.module.scss';
-import {useRecoilState, useRecoilValue} from 'recoil';
-import {
-    buildingListState,
-    levelState,
-    queryListState,
-    regionListState,
-    regionState
-} from '../datatool/state';
+import {useRecoilState} from 'recoil';
+import {levelState, regionState} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
-import {Button, List, WingBlank} from 'antd-mobile';
-import {fetchSearch, fetchSearchBuilding, getBuildings, getRegionChildList} from '../datatool/api';
-import {TABLE_OPTION} from '../constant';
+import {List, WingBlank} from 'antd-mobile';
+import {fetchSearch} from '../datatool/api';
 import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';
 import ReconciliationOutlined from '@ant-design/icons/es/icons/ReconciliationOutlined';
 import EnvironmentOutlined from '@ant-design/icons/es/icons/EnvironmentOutlined';
+import Highlighter from 'react-highlight-words';
 
 const cx = classNames.bind(styles);
 
@@ -54,7 +48,7 @@ const GuavaSearchHeader = () => {
     const fetchRegion = async () => {
         if (query !== '') {
             const pattern = /([^가-힣a-z\x20])/i;
-            if (!pattern.test(query) && !loading) {
+            if (!pattern.test(query)) {
                 setLoading(true);
                 let regionList = await fetchSearch(query);
                 setQueryList(regionList);
@@ -122,19 +116,41 @@ const GuavaSearchHeader = () => {
                                 if (x.type === 'BUILDING') {
                                     return (
                                         <List.Item
-                                            onClick={() => handleResultItem(x)}><ReconciliationOutlined/><span
-                                            style={{marginLeft: 4}}>{x.name}</span><List.Item.Brief
-                                            style={{
-                                                fontSize: '0.7rem',
-                                                marginTop: 2,
-                                                marginBottom: 4
-                                            }}>{x.address}</List.Item.Brief></List.Item>
+                                            onClick={() => handleResultItem(x)}><ReconciliationOutlined/>
+                                            <Highlighter
+                                                style={{marginLeft: 4}}
+                                                highlightClassName={cx('highlight')}
+                                                searchWords={query.split('')}
+                                                autoEscape={true}
+                                                textToHighlight={x.name}
+                                            /><List.Item.Brief
+                                                style={{
+                                                    fontSize: '0.7rem',
+                                                    marginTop: 2,
+                                                    marginBottom: 4
+                                                }}>
+                                                <Highlighter
+                                                    style={{marginLeft: 4}}
+                                                    highlightClassName={cx('highlight')}
+                                                    searchWords={query.split('')}
+                                                    autoEscape={true}
+                                                    textToHighlight={x.address}
+                                                />
+                                            </List.Item.Brief></List.Item>
                                     )
                                 } else {
                                     return (
                                         <List.Item
                                             onClick={() => handleResultItem(x)}><EnvironmentOutlined/><span
-                                            style={{marginLeft: 4}}>{x.address}</span></List.Item>
+                                            style={{marginLeft: 4}}>
+                                            <Highlighter
+                                                style={{marginLeft: 4}}
+                                                highlightClassName={cx('highlight')}
+                                                searchWords={query.split('')}
+                                                autoEscape={true}
+                                                textToHighlight={x.address}
+                                            />
+                                        </span></List.Item>
                                     )
                                 }
                             }

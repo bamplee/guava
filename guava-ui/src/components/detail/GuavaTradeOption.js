@@ -9,12 +9,14 @@ import CaretDownOutlined from '@ant-design/icons/es/icons/CaretDownOutlined';
 import {getEndArea, getStartArea, TABLE_OPTION} from '../constant';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
-    areaTypeState, buildingState,
-    // buildingState,
-    filterAreaState, regionState,
+    areaTypeState,
+    buildingState,
+    filterAreaState,
+    regionState,
     showAreaFilterState,
     showAreaTypeFilterState,
-    tableOptionState, tradeTypeState
+    tableOptionState,
+    tradeTypeState
 } from '../datatool/state';
 
 const cx = classNames.bind(styles);

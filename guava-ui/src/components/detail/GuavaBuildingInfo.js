@@ -1,11 +1,10 @@
 import React from 'react'
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilValue} from 'recoil';
 
 import {buildingState, regionState} from '../datatool/state';
 
 import classNames from 'classnames/bind';
 import styles from './guavaRegionInfo.module.scss';
-import {WhiteSpace, WingBlank} from 'antd-mobile';
 
 const cx = classNames.bind(styles);
 

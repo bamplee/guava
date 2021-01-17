@@ -1,13 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Badge, Range, SegmentedControl, Slider, Tabs} from 'antd-mobile';
+import {Range} from 'antd-mobile';
 
-import {
-    areaTypeState,
-    filterAreaState, regionState,
-    tableOptionState,
-    tradeDateState
-} from '../datatool/state';
+import {areaTypeState, filterAreaState, regionState, tableOptionState, tradeDateState} from '../datatool/state';
 import {getChart, getRegionChart} from '../datatool/api';
 
 import classNames from 'classnames/bind';
@@ -15,8 +10,7 @@ import styles from './guavaChart.module.scss';
 import {Line} from 'react-chartjs-2';
 import Chart from 'chart.js';
 import moment from 'moment';
-import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
-import {getEndArea, getStartArea, TABLE_OPTION} from '../constant';
+import {getEndArea, getStartArea} from '../constant';
 import GuavaLoading from './GuavaLoading';
 
 const cx = classNames.bind(styles);

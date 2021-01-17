@@ -6,11 +6,7 @@ import classNames from 'classnames/bind';
 
 import styles from './guavaAreaTypeFilter.scss';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {
-    areaTypeState, buildingState,
-    // buildingState,
-    showAreaTypeFilterState,
-} from '../datatool/state';
+import {areaTypeState, buildingState, showAreaTypeFilterState,} from '../datatool/state';
 
 const cx = classNames.bind(styles);
 
