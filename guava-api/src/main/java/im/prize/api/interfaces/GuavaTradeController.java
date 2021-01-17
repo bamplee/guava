@@ -31,8 +31,9 @@ public class GuavaTradeController {
     @GetMapping("/buildings/{buildingId}")
     List<GuavaTradeResponse> getBuildingTradeList(@PathVariable("buildingId") String buildingId,
                                                   @RequestParam("page") Integer page,
-                                                  @RequestParam("areaId") String areaId,
+                                                  @RequestParam(value = "areaId", required = false) String areaId,
                                                   @RequestParam(value = "date", required = false) String date) {
         return guavaTradeService.getBuildingTradeList(buildingId, page, areaId, date);
+//        return guavaTradeService.getBuildingTradeList(buildingId, page, areaId, date);
     }
 }

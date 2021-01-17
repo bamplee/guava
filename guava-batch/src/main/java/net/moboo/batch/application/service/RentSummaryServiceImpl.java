@@ -13,6 +13,7 @@ import net.moboo.batch.wooa.repository.BuildingMappingRepository;
 import net.moboo.batch.wooa.repository.RentSummary;
 import net.moboo.batch.wooa.repository.RentSummaryRepository;
 import net.moboo.batch.wooa.repository.TradeSummary;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
@@ -88,7 +89,7 @@ public class RentSummaryServiceImpl implements RentSummaryService {
                                                                             .date(date)
                                                                             .regionCode(buildingMapping.getRegionCode())
                                                                             .buildingCode(buildingMapping.getBuildingCode());
-            if (buildingAreas.size() > 0) {
+            if (buildingAreas.size() > 0 && StringUtils.isNotEmpty(x.getArea())) {
                 // 4ba
                 Optional<GuavaBuildingArea> optionalGuavaBuildingArea = buildingAreas.stream()
                                                                                      .filter(y -> String.valueOf(y.getPrivateArea())
@@ -103,16 +104,14 @@ public class RentSummaryServiceImpl implements RentSummaryService {
                 }
                 // 가장 유사한 private area 계산
                 if (!optionalGuavaBuildingArea.isPresent()) {
-                    GuavaBuildingArea areaByPrivateArea = this.getAreaByPrivateArea(buildingAreas, x.getArea());
+                    GuavaBuildingArea areaByPrivateArea = getAreaByPrivateArea(buildingAreas, x.getArea());
                     optionalGuavaBuildingArea = Optional.of(areaByPrivateArea);
                 }
-                if (optionalGuavaBuildingArea.isPresent()) {
-                    GuavaBuildingArea guavaBuildingArea = optionalGuavaBuildingArea.get();
-                    tradeSummaryBuilder = tradeSummaryBuilder.areaCode(String.valueOf(guavaBuildingArea.getId()))
-                                                             .privateArea(guavaBuildingArea.getPrivateArea())
-                                                             .publicArea(guavaBuildingArea.getPublicArea())
-                                                             .areaType(guavaBuildingArea.getAreaType());
-                }
+                GuavaBuildingArea guavaBuildingArea = optionalGuavaBuildingArea.get();
+                tradeSummaryBuilder = tradeSummaryBuilder.areaCode(String.valueOf(guavaBuildingArea.getId()))
+                                                         .privateArea(guavaBuildingArea.getPrivateArea())
+                                                         .publicArea(guavaBuildingArea.getPublicArea())
+                                                         .areaType(guavaBuildingArea.getAreaType());
             }
             return tradeSummaryBuilder.build();
         }).collect(Collectors.toList());

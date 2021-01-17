@@ -34,15 +34,15 @@ public class GuavaTradeResponse {
     private Boolean isNew;
     private Boolean isHighPrice;
 
-    public static GuavaTradeResponse transform(BuildingMapping buildingMapping, TradeSummary tradeSummary) {
+    public static GuavaTradeResponse transform(TradeSummary tradeSummary) {
         LocalDate yyyyMMdd = LocalDate.parse(tradeSummary.getDate(), DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         return GuavaTradeResponse.builder()
                                  .regionId(tradeSummary.getRegionCode())
-                                 .buildingId(String.valueOf(buildingMapping.getId()))
+                                 .buildingId(tradeSummary.getBuildingCode())
                                  .type(tradeSummary.getType().getName())
                                  .name(tradeSummary.getName())
-                                 .address(buildingMapping.getAddress())
+//                                 .address(buildingMapping.getAddress())
                                  .date(yyyyMMdd.format(DateTimeFormatter.ofPattern("yy.MM.dd")))
                                  .year(yyyyMMdd.format(DateTimeFormatter.ofPattern("yyyy")))
                                  .month(yyyyMMdd.format(DateTimeFormatter.ofPattern("MM")))

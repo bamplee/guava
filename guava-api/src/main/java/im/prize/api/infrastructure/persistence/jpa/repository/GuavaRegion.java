@@ -77,4 +77,18 @@ public class GuavaRegion {
 
         return RegionType.RI;
     }
+
+    public String getValidRegionCode() {
+        String result = this.getSido();
+        if (!"000".equals(this.getSigungu())) {
+            result += this.getSigungu();
+        }
+        if (!"000".equals(this.getDong())) {
+            result += this.getDong();
+        }
+        if (!"00".equals(this.getRi())) {
+            result += this.getRi();
+        }
+        return result;
+    }
 }

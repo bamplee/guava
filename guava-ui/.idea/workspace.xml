@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/application/service/RentSummaryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/application/service/RentSummaryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/job/RentSummaryJobConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/wooa/repository/RentSummary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/wooa/repository/RentSummaryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaSummaryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaSummaryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/hgnn/service/NaverTradeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/hgnn/service/NaverTradeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/infrastructure/jpa/OpenApiRentInfoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/infrastructure/jpa/OpenApiRentInfoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/wooa/repository/BuildingMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-batch/src/main/java/net/moboo/batch/wooa/repository/BuildingMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/TradeSummarySpecs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/TradeSummaryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/TradeSummaryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -26,10 +22,13 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
+        <entry file="file://$PROJECT_DIR$/src/components/datatool/api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="15" column="30" lean-forward="true" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+            <state relative-caret-position="203">
+              <caret line="84" column="105" lean-forward="true" selection-start-line="84" selection-start-column="105" selection-end-line="84" selection-end-column="105" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -38,7 +37,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.title</find>
       <find>.center</find>
       <find>2E92FC</find>
       <find>전체선택</find>
@@ -68,6 +66,7 @@
       <find>home</find>
       <find>build</find>
       <find>craco</find>
+      <find>page</find>
     </findStrings>
     <replaceStrings>
       <replace>startArea</replace>
@@ -161,13 +160,13 @@
         <option value="$PROJECT_DIR$/src/components/common/guavaAreaTypeFilter.scss" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaHeader.js" />
         <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
-        <option value="$PROJECT_DIR$/src/components/datatool/api.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaSearch.js" />
         <option value="$PROJECT_DIR$/src/components/datatool/state.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaRegionSelector.js" />
         <option value="$PROJECT_DIR$/src/components/header/guavaRegionSelector.module.scss" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/components/datatool/api.js" />
       </list>
     </option>
   </component>
@@ -331,12 +330,12 @@
       <workItem from="1610453583075" duration="13387000" />
       <workItem from="1610502896019" duration="7736000" />
       <workItem from="1610633450489" duration="1142000" />
-      <workItem from="1610676716038" duration="1049000" />
+      <workItem from="1610676716038" duration="1562000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="875586000" />
+    <option name="totallyTimeSpent" value="876099000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -722,16 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/datatool/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="132" column="2" selection-start-line="132" selection-start-column="2" selection-end-line="132" selection-end-column="2" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/setupProxy.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -804,6 +793,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="15" column="30" lean-forward="true" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/datatool/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="84" column="105" lean-forward="true" selection-start-line="84" selection-start-column="105" selection-end-line="84" selection-end-column="105" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
