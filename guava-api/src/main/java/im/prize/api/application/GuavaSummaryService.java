@@ -1,10 +1,7 @@
 package im.prize.api.application;
 
 import im.prize.api.interfaces.response.GuavaBuildingDetailResponse;
-import im.prize.api.interfaces.response.GuavaChartResponse;
-import im.prize.api.interfaces.response.GuavaSearchResponse;
 import im.prize.api.interfaces.response.GuavaSummaryResponse;
-import im.prize.api.interfaces.response.GuavaTradeResponse;
 
 import java.util.List;
 

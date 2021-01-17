@@ -21,7 +21,6 @@ import im.prize.api.interfaces.response.GuavaTradeResponse;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -74,7 +73,11 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
     }
 
     @Override
-    public List<GuavaTradeResponse> getRegionMarketList(String regionId, Integer page, Integer startArea, Integer endArea) {
+    public List<GuavaTradeResponse> getRegionMarketList(String tradeType,
+                                                        String regionId,
+                                                        Integer page,
+                                                        Integer startArea,
+                                                        Integer endArea) {
         Optional<GuavaRegion> optionalGuavaRegion = guavaRegionRepository.findById(Long.valueOf(regionId));
 //        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findById(Long.valueOf(buildingId));
         if (!optionalGuavaRegion.isPresent()) {
@@ -148,27 +151,38 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
     }
 
     @Override
-    public List<GuavaTradeResponse> getBuildingMarketList(String buildingId, Integer page, String areaId) {
+    public List<GuavaTradeResponse> getBuildingMarketList(String tradeType, String buildingId, Integer page, String areaId) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
-        if(!optionalBuildingMapping.isPresent()) {
+        if (!optionalBuildingMapping.isPresent()) {
             return Lists.newArrayList();
         }
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get().getBuildingCode());
+        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get()
+                                                                                                                          .getBuildingCode());
         if (!optionalGuavaBuilding.isPresent()) {
             return Lists.newArrayList();
         }
         GuavaBuilding guavaBuilding = optionalGuavaBuilding.get();
-        List<TradeArticle> tradeArticleList = tradeArticleRepository.findByPortalId(String.valueOf(guavaBuilding.getPortalId()),
-                                                                                    PageRequest.of(0,
-                                                                                                   100,
-                                                                                                   Sort.by(Sort.Direction.DESC,
-                                                                                                           "articleConfirmYmd")))
-                                                                    .stream()
-                                                                    .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
-                                                                                                 DATE_TIME_FORMATTER_YYYYMMDD)
-                                                                                          .isAfter(LocalDate.now().minusMonths(1L)))
-                                                                    .collect(
-                                                                        Collectors.toList());
+        List<String> tradeTypeCode = Lists.newArrayList();
+        if("trade".equals(tradeType)) {
+            tradeTypeCode.add("A1");
+        }
+        else {
+            tradeTypeCode.add("B1");
+            tradeTypeCode.add("B2");
+        }
+        List<TradeArticle> tradeArticleList =
+            tradeArticleRepository.findByPortalIdAndTradeTypeCodeIn(String.valueOf(guavaBuilding.getPortalId()),
+                                                                    tradeTypeCode,
+                                                                    PageRequest.of(0,
+                                                                                   100,
+                                                                                   Sort.by(Sort.Direction.DESC,
+                                                                                           "articleConfirmYmd")))
+                                  .stream()
+                                  .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
+                                                               DATE_TIME_FORMATTER_YYYYMMDD)
+                                                        .isAfter(LocalDate.now().minusMonths(1L)))
+                                  .collect(
+                                      Collectors.toList());
 
         List<GuavaBuildingArea> guavaBuildingAreaList = guavaBuilding.getAreaList();
         List<TradeArticle> progressList = tradeArticleList.stream()

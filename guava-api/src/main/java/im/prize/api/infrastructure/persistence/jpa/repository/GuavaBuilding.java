@@ -1,6 +1,5 @@
 package im.prize.api.infrastructure.persistence.jpa.repository;
 
-import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingArea;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

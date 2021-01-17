@@ -1,11 +1,7 @@
 package im.prize.api.datatool;
 
-import im.prize.api.datatool.request.GoogleNewsRequest;
-import im.prize.api.datatool.response.GoogleNewsResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "infoStockClient", url = "https://m.infostock.co.kr")

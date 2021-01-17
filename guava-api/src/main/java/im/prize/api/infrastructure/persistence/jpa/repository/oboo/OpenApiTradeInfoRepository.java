@@ -1,8 +1,6 @@
 package im.prize.api.infrastructure.persistence.jpa.repository.oboo;
 
-import im.prize.api.application.dto.TradeStatsDto;
 import im.prize.api.domain.oboo.OpenApiTradeInfo;
-import org.hibernate.annotations.Cache;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,11 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public interface OpenApiTradeInfoRepository extends JpaRepository<OpenApiTradeInfo, Long>, JpaSpecificationExecutor<OpenApiTradeInfo> {
 

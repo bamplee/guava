@@ -2,7 +2,14 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {Range} from 'antd-mobile';
 
-import {areaTypeState, filterAreaState, regionState, tableOptionState, tradeDateState} from '../datatool/state';
+import {
+    areaTypeState,
+    filterAreaState,
+    regionState,
+    tableOptionState,
+    tradeDateState,
+    tradeTypeState
+} from '../datatool/state';
 import {getChart, getRegionChart} from '../datatool/api';
 
 import classNames from 'classnames/bind';
@@ -29,6 +36,7 @@ const GuavaChart = () => {
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const [tableOption, setTableOption] = useRecoilState(tableOptionState);
     const region = useRecoilValue(regionState);
+    const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
     const [period, setPeriod] = useState([moment().subtract(24, 'months'), moment()]);
     const [startDate, setStartDate] = useState(period[0]);
@@ -120,11 +128,11 @@ const GuavaChart = () => {
     const fetchChart = async () => {
         let result = [];
         if (region.type === 'BUILDING') {
-            result = await getChart(region.buildingId, areaType.areaId, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
+            result = await getChart(tradeType, region.buildingId, areaType.areaId, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
         } else {
             let startArea = getStartArea(filterArea[0]);
             let endArea = getEndArea(filterArea[1]);
-            result = await getRegionChart(region.id, startArea, endArea, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
+            result = await getRegionChart(tradeType, region.id, startArea, endArea, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
         }
 
         let groupList = groupBy(result.map(x => {

@@ -3,29 +3,26 @@ package im.prize.api.application;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import im.prize.api.domain.oboo.OpenApiRentInfo;
 import im.prize.api.domain.oboo.OpenApiTradeInfo;
 import im.prize.api.hgnn.repository.BuildingMapping;
 import im.prize.api.hgnn.repository.BuildingMappingRepository;
 import im.prize.api.hgnn.repository.GuavaBuildingAreaRepository;
-import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuilding;
-import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingArea;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegion;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegionRepository;
+import im.prize.api.infrastructure.persistence.jpa.repository.oboo.OpenApiRentInfoRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.oboo.OpenApiTradeInfoRepository;
 import im.prize.api.interfaces.GuavaTradeSearch;
-import im.prize.api.interfaces.response.AreaResponse;
 import im.prize.api.interfaces.response.GuavaTradeResponse;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +36,11 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     private final GuavaRegionRepository guavaRegionRepository;
     private final GuavaBuildingRepository guavaBuildingRepository;
     private final OpenApiTradeInfoRepository openApiTradeInfoRepository;
+    private final OpenApiRentInfoRepository openApiRentInfoRepository;
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
     private final BuildingMappingRepository buildingMappingRepository;
     private final TradeSummaryRepository tradeSummaryRepository;
+    private final RentSummaryRepository rentSummaryRepository;
     private final ObjectMapper objectMapper;
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -49,43 +48,44 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     public GuavaTradeServiceImpl(GuavaRegionRepository guavaRegionRepository,
                                  GuavaBuildingRepository guavaBuildingRepository,
                                  OpenApiTradeInfoRepository openApiTradeInfoRepository,
+                                 OpenApiRentInfoRepository openApiRentInfoRepository,
                                  GuavaBuildingAreaRepository guavaBuildingAreaRepository,
                                  BuildingMappingRepository buildingMappingRepository,
-                                 TradeSummaryRepository tradeSummaryRepository, ObjectMapper objectMapper) {
+                                 TradeSummaryRepository tradeSummaryRepository,
+                                 RentSummaryRepository rentSummaryRepository,
+                                 ObjectMapper objectMapper) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
         this.openApiTradeInfoRepository = openApiTradeInfoRepository;
+        this.openApiRentInfoRepository = openApiRentInfoRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
         this.buildingMappingRepository = buildingMappingRepository;
         this.tradeSummaryRepository = tradeSummaryRepository;
+        this.rentSummaryRepository = rentSummaryRepository;
         this.objectMapper = objectMapper;
     }
 
     @Override
-    public List<GuavaTradeResponse> getRegionTrade(String regionId, Integer page, Integer startArea, Integer endArea, String date) {
+    public List<GuavaTradeResponse> getRegionTrade(String tradeType,
+                                                   String regionId,
+                                                   Integer page,
+                                                   Integer startArea,
+                                                   Integer endArea,
+                                                   String date) {
         Optional<GuavaRegion> optionalGuavaRegion = guavaRegionRepository.findById(Long.valueOf(regionId));
         if (optionalGuavaRegion.isPresent()) {
             // todo
             GuavaRegion guavaRegion = optionalGuavaRegion.get();
-            Page<TradeSummary> tradeSummaryPage = tradeSummaryRepository.findAll(this.getParams(guavaRegion.getValidRegionCode(),
-                                                                                                null,
-                                                                                                null,
-                                                                                                date),
-                                                                                 this.getPage(page));
-            return tradeSummaryPage.getContent()
-                                   .stream()
-                                   .peek(x -> {
-                                       if (x.getPublicArea() == null) {
-                                           Optional<OpenApiTradeInfo> openApiTradeInfo = openApiTradeInfoRepository.findById(x.getId());
-                                           if (openApiTradeInfo.isPresent()) {
-                                               OpenApiTradeInfo tradeInfo = openApiTradeInfo.get();
-                                               x.setPrivateArea(tradeInfo.getArea());
-                                               x.setPublicArea(tradeInfo.getArea());
-                                               x.setAreaType((int) (tradeInfo.getArea() * 0.3025) + "평");
-                                           }
-                                       }
-                                   })
-                                   .map(GuavaTradeResponse::transform)
+            if ("trade".equals(tradeType)) {
+                return tradeSummaryRepository.findAll(this.getParamsByTrade(guavaRegion.getValidRegionCode(),
+                                                                            null,
+                                                                            null,
+                                                                            date),
+                                                      this.getPage(page))
+                                             .getContent()
+                                             .stream()
+                                             .peek(this::fillArea)
+                                             .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
 //                                   .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x
 // .getBuildingId())
@@ -93,38 +93,60 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
 //                                                                                                      .findFirst()
 //                                                                                                      .map(BuildingMapping::getId)
 //                                                                                                      .orElse(0l))))
-                                   .collect(Collectors.toList());
+                                             .collect(Collectors.toList());
+            } else {
+                return rentSummaryRepository.findAll(this.getParamsByRent(guavaRegion.getValidRegionCode(),
+                                                                          null,
+                                                                          null,
+                                                                          date),
+                                                     this.getPage(page)).getContent()
+                                            .stream()
+                                            .peek(this::fillArea)
+                                            .map(GuavaTradeResponse::transform)
+//                                   // fixme building id값 조회 안하도록
+//                                   .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x
+// .getBuildingId())
+//                                                                                                      .stream()
+//                                                                                                      .findFirst()
+//                                                                                                      .map(BuildingMapping::getId)
+//                                                                                                      .orElse(0l))))
+                                            .collect(Collectors.toList());
+            }
         }
         return Lists.newArrayList();
     }
 
     @Override
-    public List<GuavaTradeResponse> getBuildingTradeList(String buildingId, Integer page, String areaId, String date) {
+    public List<GuavaTradeResponse> getBuildingTradeList(String tradeType, String buildingId, Integer page, String areaId, String date) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
         if (optionalBuildingMapping.isPresent()) {
             BuildingMapping buildingMapping = optionalBuildingMapping.get();
-            Page<TradeSummary> tradeSummaryPage = tradeSummaryRepository.findAll(this.getParams(null,
-                                                                                                buildingMapping.getBuildingCode(),
-                                                                                                areaId,
-                                                                                                date),
-                                                                                 this.getPage(page));
-            return tradeSummaryPage.getContent()
-                                   .stream()
-                                   .peek(x -> {
-                                       if (x.getPublicArea() == null) {
-                                           Optional<OpenApiTradeInfo> openApiTradeInfo = openApiTradeInfoRepository.findById(x.getId());
-                                           if (openApiTradeInfo.isPresent()) {
-                                               OpenApiTradeInfo tradeInfo = openApiTradeInfo.get();
-                                               x.setPrivateArea(tradeInfo.getArea());
-                                               x.setPublicArea(tradeInfo.getArea());
-                                               x.setAreaType((int) (tradeInfo.getArea() * 0.3025) + "평");
-                                           }
-                                       }
-                                   })
-                                   .map(GuavaTradeResponse::transform)
+            if ("trade".equals(tradeType)) {
+                return tradeSummaryRepository.findAll(this.getParamsByTrade(null,
+                                                                            buildingMapping.getBuildingCode(),
+                                                                            areaId,
+                                                                            date),
+                                                      this.getPage(page)).getContent()
+                                             .stream()
+                                             .peek(this::fillArea)
+                                             .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
 //                                   .peek(x -> x.setBuildingId(buildingId))
-                                   .collect(Collectors.toList());
+                                             .collect(Collectors.toList());
+            } else {
+                return rentSummaryRepository.findAll(this.getParamsByRent(null,
+                                                                          buildingMapping.getBuildingCode(),
+                                                                          areaId,
+                                                                          date),
+                                                     this.getPage(page)).getContent()
+                                            .stream()
+                                            .peek(this::fillArea)
+                                            .map(GuavaTradeResponse::transform)
+//                                   // fixme building id값 조회 안하도록
+//                                   .peek(x -> x.setBuildingId(buildingId))
+                                            .collect(Collectors.toList());
+
+            }
         }
         return Lists.newArrayList();
     }
@@ -133,7 +155,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
         return PageRequest.of(page, 100, Sort.by(Sort.Direction.DESC, "date"));
     }
 
-    private Specification<TradeSummary> getParams(String regionCode, String buildingCode, String areaCode, String date) {
+    private Specification<TradeSummary> getParamsByTrade(String regionCode, String buildingCode, String areaCode, String date) {
         Map<String, Object> paramsMap = objectMapper.convertValue(GuavaTradeSearch.builder()
                                                                                   .regionCode(regionCode)
                                                                                   .buildingCode(buildingCode)
@@ -149,50 +171,45 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
         return TradeSummarySpecs.searchWith(params);
     }
 
-    private GuavaTradeResponse transform(OpenApiTradeInfo openApiTradeInfo) {
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(openApiTradeInfo.getBuildingId());
-        LocalDate yyyyMMdd = LocalDate.parse(openApiTradeInfo.getDate(), DATE_TIME_FORMATTER_YYYYMMDD);
-//        String beforeHighPrice = openApiTradeInfoRepository.getMaxPrice(yyyyMMdd.format(DATE_TIME_FORMATTER_YYYYMMDD),
-//                                                                        openApiTradeInfo.getBuildingId(),
-//                                                                        openApiTradeInfo.getArea());
-//        String beforeHighPrice = openApiTradeInfoRepository.getMaxPrice(LocalDate.now().format(DATE_TIME_FORMATTER_YYYYMMDD),
-//                                                                        openApiTradeInfo.getBuildingId(),
-//                                                                        openApiTradeInfo.getArea());
-////        boolean isHighPrice = false;
-////        if (StringUtils.isNotEmpty(beforeHighPrice)) {
-////            isHighPrice = Integer.valueOf(openApiTradeInfo.getPrice().replace(",", "")) >= Integer.valueOf(
-////                beforeHighPrice.replace(",", ""));
-////            beforeHighPrice = GuavaUtils.getSummaryPrice(beforeHighPrice);
-////        } else {
-////            beforeHighPrice = "거래없음";
-////        }
-
-        GuavaBuildingArea guavaBuildingArea = GuavaUtils.getAreaByPrivateArea(optionalGuavaBuilding.get().getAreaList(),
-                                                                              String.valueOf(openApiTradeInfo.getArea()));
-        Optional<AreaResponse> areaResponse = AreaResponse.transform(guavaBuildingArea);
-        if (!areaResponse.isPresent()) {
-            areaResponse = Optional.of(AreaResponse.builder()
-                                                   .publicArea(String.valueOf(openApiTradeInfo.getArea()))
-                                                   .privateArea(String.valueOf(openApiTradeInfo.getArea()))
-                                                   .build());
+    private Specification<RentSummary> getParamsByRent(String regionCode, String buildingCode, String areaCode, String date) {
+        Map<String, Object> paramsMap = objectMapper.convertValue(GuavaTradeSearch.builder()
+                                                                                  .regionCode(regionCode)
+                                                                                  .buildingCode(buildingCode)
+                                                                                  .areaCode(areaCode)
+                                                                                  .date(date)
+                                                                                  .build(), Map.class);
+        Map<RentSummarySpecs.SearchKey, Object> params = Maps.newHashMap();
+        for (Map.Entry<String, Object> entry : paramsMap.entrySet()) {
+            if (ObjectUtils.isNotEmpty(entry.getValue()) && StringUtils.isNotEmpty(String.valueOf(entry.getValue()))) {
+                params.put(RentSummarySpecs.SearchKey.convert(entry.getKey()), entry.getValue());
+            }
         }
-        return GuavaTradeResponse.builder()
-                                 .regionId(String.valueOf(guavaRegionRepository.findByRegionCode(openApiTradeInfo.getRegionCode()).map(
-                                     GuavaRegion::getId).orElse(1L)))
-                                 .buildingId(String.valueOf(optionalGuavaBuilding.map(GuavaBuilding::getId).orElse(0L)))
-                                 .type("TRADE")
-                                 .name(openApiTradeInfo.getAptName())
-                                 .address(openApiTradeInfo.getDong())
-                                 .date(yyyyMMdd.format(DateTimeFormatter.ofPattern("yy.MM.dd")))
-                                 .year(yyyyMMdd.format(DateTimeFormatter.ofPattern("yyyy")))
-                                 .month(yyyyMMdd.format(DateTimeFormatter.ofPattern("MM")))
-                                 .day(yyyyMMdd.format(DateTimeFormatter.ofPattern("dd")))
-                                 .floor(openApiTradeInfo.getFloor())
-                                 .price(openApiTradeInfo.getTradePrice())
-                                 .area(areaResponse.orElse(AreaResponse.builder().build()))
-//                                 .beforeMaxPrice(beforeHighPrice)
-//                                 .isHighPrice(isHighPrice)
-                                 .isNew(openApiTradeInfo.getCreatedDateTime().toLocalDate().equals(LocalDate.now()))
-                                 .build();
+        return RentSummarySpecs.searchWith(params);
+    }
+
+    private void fillArea(RentSummary x) {
+        if (x.getPublicArea() == null) {
+            Optional<OpenApiRentInfo> openApiTradeInfo =
+                openApiRentInfoRepository.findById(x.getId());
+            if (openApiTradeInfo.isPresent()) {
+                OpenApiRentInfo rentInfo = openApiTradeInfo.get();
+                x.setPrivateArea(Double.valueOf(rentInfo.getArea()));
+                x.setPublicArea(Double.valueOf(rentInfo.getArea()));
+                x.setAreaType((int) (Double.valueOf(rentInfo.getArea()) * 0.3025) + "평");
+            }
+        }
+    }
+
+    private void fillArea(TradeSummary x) {
+        if (x.getPublicArea() == null) {
+            Optional<OpenApiTradeInfo> openApiTradeInfo =
+                openApiTradeInfoRepository.findById(x.getId());
+            if (openApiTradeInfo.isPresent()) {
+                OpenApiTradeInfo tradeInfo = openApiTradeInfo.get();
+                x.setPrivateArea(tradeInfo.getArea());
+                x.setPublicArea(tradeInfo.getArea());
+                x.setAreaType((int) (tradeInfo.getArea() * 0.3025) + "평");
+            }
+        }
     }
 }

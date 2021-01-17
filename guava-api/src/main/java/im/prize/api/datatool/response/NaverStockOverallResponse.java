@@ -2,8 +2,6 @@ package im.prize.api.datatool.response;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class NaverStockOverallResponse {
     private Result result;

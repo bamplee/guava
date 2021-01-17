@@ -75,14 +75,14 @@ const GuavaTable = () => {
                     result = await getTrade(tradeType, region.buildingId, page, areaType.areaId, date);
                 }
                 else if(tableOption === TABLE_OPTION.MARKET) {
-                    result = await getTradeMarket(region.buildingId, page, areaType.areaId, date);
+                    result = await getTradeMarket(tradeType, region.buildingId, page, areaType.areaId, date);
                 }
             } else {
                 if(tableOption === TABLE_OPTION.TRADE) {
                     result = await getRegionTrade(tradeType, region.id, page, startArea, endArea, date);
                 }
                 else if(tableOption === TABLE_OPTION.MARKET) {
-                    result = await getRegionTradeMarket(region.id, page, startArea, endArea, date);
+                    result = await getRegionTradeMarket(tradeType, region.id, page, startArea, endArea, date);
                 }
             }
 

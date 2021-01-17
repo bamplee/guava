@@ -1,6 +1,5 @@
 package im.prize.api.application;
 
-import im.prize.api.application.dto.Location;
 import im.prize.api.domain.oboo.OpenApiTradeInfo;
 import im.prize.api.domain.oboo.TradeArticle;
 import im.prize.api.hgnn.repository.BuildingMapping;

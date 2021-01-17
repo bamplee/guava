@@ -2,10 +2,7 @@ package im.prize.api.interfaces;
 
 import im.prize.api.application.GuavaSummaryService;
 import im.prize.api.interfaces.response.GuavaBuildingDetailResponse;
-import im.prize.api.interfaces.response.GuavaChartResponse;
-import im.prize.api.interfaces.response.GuavaSearchResponse;
 import im.prize.api.interfaces.response.GuavaSummaryResponse;
-import im.prize.api.interfaces.response.GuavaTradeResponse;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

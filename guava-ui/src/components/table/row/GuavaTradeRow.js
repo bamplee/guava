@@ -30,7 +30,7 @@ const GuavaTradeRow = ({page, idx, trade}) => {
             </div>
             {/*<div className={cx('row')}><span className={cx('area_detail')}>{Math.ceil(trade.area.privateArea)}&#13217;/{Math.ceil(trade.area.publicArea)}&#13217;</span></div>*/}
             <div className={cx('row')}>{trade.floor}층</div>
-            <div className={cx('row', 'price', trade.isHighPrice ? 'high_price' : '')}>{trade.price}</div>
+            <div className={cx('row', 'price', trade.isHighPrice ? 'high_price' : '')}>{trade.price}{trade.subPrice > 0 && '/' + trade.subPrice}</div>
         </div>
     )
 };

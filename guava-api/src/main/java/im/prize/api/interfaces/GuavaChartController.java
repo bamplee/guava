@@ -1,6 +1,6 @@
 package im.prize.api.interfaces;
 
-import im.prize.api.application.GuavaChartService;
+import im.prize.api.application.GuavaTradeChartService;
 import im.prize.api.interfaces.response.GuavaChartResponse;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/guava/chart")
 public class GuavaChartController {
-    private final GuavaChartService guavaChartService;
+    private final GuavaTradeChartService guavaTradeChartService;
 
-    public GuavaChartController(GuavaChartService guavaChartService) {this.guavaChartService = guavaChartService;}
+    public GuavaChartController(GuavaTradeChartService guavaTradeChartService) {this.guavaTradeChartService = guavaTradeChartService;}
 
     @GetMapping("/regions/{regionId}")
     List<GuavaChartResponse> getRegionChartList(@PathVariable("regionId") String regionId,
@@ -25,7 +25,7 @@ public class GuavaChartController {
                                                 @RequestParam(value = "endArea", required = false, defaultValue = "0") Integer endArea,
                                                 @RequestParam(value = "startDate", required = false) String startDate,
                                                 @RequestParam(value = "endDate", required = false) String endDate) {
-        return guavaChartService.getRegionChartList(regionId, startArea, endArea, startDate, endDate);
+        return guavaTradeChartService.getRegionChartList(regionId, startArea, endArea, startDate, endDate);
     }
 
     @GetMapping("/buildings/{buildingId}")
@@ -33,6 +33,6 @@ public class GuavaChartController {
                                           @RequestParam(value = "areaId", required = false) String areaId,
                                           @RequestParam(value = "startDate", required = false) String startDate,
                                           @RequestParam(value = "endDate", required = false) String endDate) {
-        return guavaChartService.getChartList(buildingId, areaId, startDate, endDate);
+        return guavaTradeChartService.getChartList(buildingId, areaId, startDate, endDate);
     }
 }

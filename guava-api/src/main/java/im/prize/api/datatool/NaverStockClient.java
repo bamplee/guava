@@ -7,8 +7,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Map;
-
 @FeignClient(name = "naverStockClient", url = "https://m.stock.naver.com/")
 public interface NaverStockClient {
     @GetMapping("/api/item/getPriceDayList.nhn")

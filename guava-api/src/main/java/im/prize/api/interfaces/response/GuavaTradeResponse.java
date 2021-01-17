@@ -2,7 +2,6 @@ package im.prize.api.interfaces.response;
 
 import im.prize.api.application.RentSummary;
 import im.prize.api.application.TradeSummary;
-import im.prize.api.hgnn.repository.BuildingMapping;
 import lombok.Builder;
 import lombok.Data;
 

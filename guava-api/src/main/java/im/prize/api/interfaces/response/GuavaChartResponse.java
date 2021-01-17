@@ -1,5 +1,6 @@
 package im.prize.api.interfaces.response;
 
+import im.prize.api.application.RentSummary;
 import im.prize.api.application.TradeSummary;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,14 @@ public class GuavaChartResponse {
                                  .date(tradeSummary.getDate())
                                  .area(String.valueOf(tradeSummary.getPrivateArea()))
                                  .price(String.valueOf(tradeSummary.getPrice()))
+                                 .build();
+    }
+
+    public static GuavaChartResponse transform(RentSummary rentSummary) {
+        return GuavaChartResponse.builder()
+                                 .date(rentSummary.getDate())
+                                 .area(String.valueOf(rentSummary.getPrivateArea()))
+                                 .price(String.valueOf(rentSummary.getPrice()))
                                  .build();
     }
 }

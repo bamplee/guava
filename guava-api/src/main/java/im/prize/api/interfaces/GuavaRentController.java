@@ -1,7 +1,6 @@
 package im.prize.api.interfaces;
 
 import im.prize.api.application.GuavaRentService;
-import im.prize.api.application.GuavaTradeService;
 import im.prize.api.interfaces.response.GuavaTradeResponse;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
