@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Badge, SegmentedControl, Slider, Tabs} from 'antd-mobile';
+import {Badge, Range, SegmentedControl, Slider, Tabs} from 'antd-mobile';
 
 import {
     areaTypeState,
@@ -36,6 +36,10 @@ const GuavaChart = () => {
     const [tableOption, setTableOption] = useRecoilState(tableOptionState);
     const region = useRecoilValue(regionState);
 
+    const [period, setPeriod] = useState([moment().subtract(24, 'months'), moment()]);
+    const [startDate, setStartDate] = useState(period[0]);
+    const [endDate, setEndDate] = useState(period[1]);
+
     useEffect(() => {
         // fetchChart();
         // initChartEvent();
@@ -46,7 +50,7 @@ const GuavaChart = () => {
         if (region !== null) {
             fetchChart();
         }
-    }, [region, beforeMonth, filterArea, areaType]);
+    }, [region, startDate, endDate, filterArea, areaType]);
 
     useEffect(() => {
         if (chartList.datasets && chartList.datasets[0].data.length > 0 && activeChartIndex && activeChartIndex !== -1) {
@@ -122,7 +126,7 @@ const GuavaChart = () => {
     const fetchChart = async () => {
         let result = [];
         if (region.type === 'BUILDING') {
-            result = await getChart(region.buildingId, areaType.areaId, beforeMonth);
+            result = await getChart(region.buildingId, areaType.areaId, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
         } else {
             let startArea = getStartArea(filterArea[0]);
             let endArea = getEndArea(filterArea[1]);
@@ -134,13 +138,13 @@ const GuavaChart = () => {
             return x;
         }), 'yearMonth');
 
-        let startDate = moment(Object.keys(groupList)[0] + '01', 'YYYYMMDD');
-        let endDate = moment(Object.keys(groupList)[Object.keys(groupList).length - 1] + '01', 'YYYYMMDD');
+        let sDate = moment(Object.keys(groupList)[0] + '01', 'YYYYMMDD');
+        let eDate = moment(Object.keys(groupList)[Object.keys(groupList).length - 1] + '01', 'YYYYMMDD');
 
-        while (startDate.isBefore(endDate)) {
-            let beforeKey = moment(startDate).subtract(1, 'months').format('YYYYMM');
-            let key = startDate.format('YYYYMM');
-            startDate = startDate.add(1, 'months');
+        while (sDate.isBefore(eDate)) {
+            let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
+            let key = sDate.format('YYYYMM');
+            sDate = sDate.add(1, 'months');
             let total = groupList[key];
             let beforeTotal = groupList[beforeKey];
             if (!total) {
@@ -295,24 +299,42 @@ const GuavaChart = () => {
                             <GuavaLoading isLoading={true}/>
                     }
                     <div className={cx('slider')}>
-                        <Slider
+                        <Range
                             // marks={beforeYear}
-                            defaultValue={sliderValue}
-                            value={sliderValue}
-                            min={0}
-                            max={179}
-                            onChange={(value) => setSliderValue(value)}
-                            onAfterChange={() => setBeforeMonth(180 - sliderValue)}
+                            defaultValue={period}
+                            value={period}
+                            min={moment('20060101', 'YYYYMMDD')}
+                            max={moment()}
+                            onChange={(e) => setPeriod([moment(e[0]), moment(e[1])])}
+                            onAfterChange={(e) => {
+                                setStartDate(period[0]);
+                                setEndDate(period[1]);
+                            }}
                             trackStyle={{
                                 backgroundColor: '#DDDDDD',
                             }}
                             railStyle={{
-                                backgroundColor: '#2E92FC',
+                                // backgroundColor: '#2E92FC',
                             }}
                         />
+                        {/*<Slider*/}
+                        {/*    // marks={beforeYear}*/}
+                        {/*    defaultValue={sliderValue}*/}
+                        {/*    value={sliderValue}*/}
+                        {/*    min={0}*/}
+                        {/*    max={179}*/}
+                        {/*    onChange={(value) => setSliderValue(value)}*/}
+                        {/*    onAfterChange={() => setBeforeMonth(180 - sliderValue)}*/}
+                        {/*    trackStyle={{*/}
+                        {/*        backgroundColor: '#DDDDDD',*/}
+                        {/*    }}*/}
+                        {/*    railStyle={{*/}
+                        {/*        backgroundColor: '#2E92FC',*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                     </div>
                     <div className={cx('title')}>
-                        {moment().subtract(180 - sliderValue, 'months').format('YYYY년 M월')} ~ {moment().format('YYYY년 M월')}
+                        {period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}
                     </div>
                     {/*{*/}
                     {/*    tradeDate &&*/}

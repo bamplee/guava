@@ -32,7 +32,8 @@ public class GuavaChartController {
     @GetMapping("/buildings/{buildingId}")
     List<GuavaChartResponse> getChartList(@PathVariable("buildingId") String buildingId,
                                           @RequestParam(value = "areaId", required = false) String areaId,
-                                          @RequestParam(value = "beforeMonth", required = false, defaultValue = "36") Long beforeMonth) {
-        return guavaChartService.getChartList(buildingId, areaId, beforeMonth);
+                                          @RequestParam(value = "startDate", required = false) String startDate,
+                                          @RequestParam(value = "endDate", required = false) String endDate) {
+        return guavaChartService.getChartList(buildingId, areaId, startDate, endDate);
     }
 }

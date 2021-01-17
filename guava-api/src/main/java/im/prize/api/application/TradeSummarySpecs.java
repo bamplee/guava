@@ -14,6 +14,8 @@ public class TradeSummarySpecs {
         REGION_CODE("regionCode"),
         BUILDING_CODE("buildingCode"),
         AREA_CODE("areaCode"),
+        START_DATE("startDate"),
+        END_DATE("endDate"),
         DATE("date");
 //        DATE_BETWEEN("date");
 //        LIKESGREATERTHAN("likes");
@@ -69,6 +71,16 @@ public class TradeSummarySpecs {
 //                        root.get(key.value), Integer.valueOf(searchKeyword.get(key).toString())
 //                    ));
 //                    break;
+                case START_DATE:
+                    predicate.add(builder.greaterThanOrEqualTo(
+                        root.get("date"), searchKeyword.get(key) + ""
+                    ));
+                    break;
+                case END_DATE:
+                    predicate.add(builder.lessThanOrEqualTo(
+                        root.get("date"), searchKeyword.get(key) + ""
+                    ));
+                    break;
                 case REGION_CODE:
                     predicate.add(builder.like(
                         root.get(key.value), searchKeyword.get(key) + "%"

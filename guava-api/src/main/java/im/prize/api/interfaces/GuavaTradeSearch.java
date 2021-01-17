@@ -14,4 +14,6 @@ public class GuavaTradeSearch {
     private String buildingCode;
     private String areaCode;
     private String date;
+    private String startDate;
+    private String endDate;
 }

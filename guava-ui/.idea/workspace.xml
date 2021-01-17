@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/TradeSummarySpecs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaChartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaChartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaChartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaChartServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaMarketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaMarketServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/TradeSummaryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/TradeSummaryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaChartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaChartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaChartResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaChartResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -22,12 +24,12 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/datatool/api.js">
+        <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="84" column="105" lean-forward="true" selection-start-line="84" selection-start-column="105" selection-end-line="84" selection-end-column="105" />
+            <state relative-caret-position="263">
+              <caret line="309" column="51" selection-start-line="309" selection-start-column="45" selection-end-line="309" selection-end-column="51" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#0#48#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -37,16 +39,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.center</find>
-      <find>2E92FC</find>
-      <find>전체선택</find>
-      <find>.all</find>
-      <find>modal_</find>
-      <find>modal_c</find>
-      <find>modal-container</find>
-      <find>all</find>
-      <find>.logo</find>
-      <find>/chart</find>
       <find>chart</find>
       <find>/buildings</find>
       <find>부동산</find>
@@ -67,6 +59,16 @@
       <find>build</find>
       <find>craco</find>
       <find>page</find>
+      <find>header_container</find>
+      <find>tradeDate</find>
+      <find>import moment from 'moment'</find>
+      <find>moment</find>
+      <find>api</find>
+      <find>fetch</find>
+      <find>beforeMonth</find>
+      <find>&lt;Ragne</find>
+      <find>useEffec</find>
+      <find>&lt;Range</find>
     </findStrings>
     <replaceStrings>
       <replace>startArea</replace>
@@ -129,7 +131,6 @@
         <option value="$PROJECT_DIR$/src/components/map/GuavaMapFilter.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaRegionInfo.js" />
-        <option value="$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaSearchPage.js" />
         <option value="$PROJECT_DIR$/src/components/map/GuavaMapPage.js" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaInit.js" />
@@ -145,9 +146,7 @@
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaRegionMarketRow.js" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaRegionTradeRow.js" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaTradeRow.js" />
-        <option value="$PROJECT_DIR$/src/components/table/GuavaTable.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaIntroHeader.js" />
-        <option value="$PROJECT_DIR$/src/components/detail/GuavaChart.js" />
         <option value="$PROJECT_DIR$/src/components/map/guavaMap.module.scss" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaDetailPage.js" />
         <option value="$PROJECT_DIR$/src/components/table/guavaTable.module.scss" />
@@ -159,14 +158,17 @@
         <option value="$PROJECT_DIR$/src/components/common/GuavaAreaTypeFilter.js" />
         <option value="$PROJECT_DIR$/src/components/common/guavaAreaTypeFilter.scss" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaHeader.js" />
-        <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaSearch.js" />
         <option value="$PROJECT_DIR$/src/components/datatool/state.js" />
-        <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaRegionSelector.js" />
         <option value="$PROJECT_DIR$/src/components/header/guavaRegionSelector.module.scss" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
+        <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/table/GuavaTable.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js" />
         <option value="$PROJECT_DIR$/src/components/datatool/api.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaChart.js" />
       </list>
     </option>
   </component>
@@ -187,7 +189,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -199,6 +200,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -331,24 +333,25 @@
       <workItem from="1610502896019" duration="7736000" />
       <workItem from="1610633450489" duration="1142000" />
       <workItem from="1610676716038" duration="1562000" />
+      <workItem from="1610846626859" duration="5410000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="876099000" />
+    <option name="totallyTimeSpent" value="881509000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.65241635" visible="true" weight="0.23255815" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.65241635" weight="0.23255815" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.34758365" side_tool="true" weight="0.23255815" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3270202" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3270202" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.32070708" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.32070708" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -479,29 +482,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaInit.js" />
     <entry file="file://$USER_HOME$/Downloads/건축데이터 민간개방 시스템 다운로드-2.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret column="881" lean-forward="true" selection-start-column="881" selection-end-column="881" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/GuavaAreaFilter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="53" column="69" selection-start-line="53" selection-start-column="68" selection-end-line="53" selection-end-column="69" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#17#42#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -586,30 +571,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="48" column="41" lean-forward="true" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/map/guavaMap.module.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
           <caret line="73" column="20" lean-forward="true" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/table/GuavaTable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="78" column="13" lean-forward="true" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -714,13 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/guavaHeader.module.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/setupProxy.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -738,44 +696,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/guavaRegionSelector.module.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="61" column="27" lean-forward="true" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaRegionSelector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="132" column="57" lean-forward="true" selection-start-line="132" selection-start-column="57" selection-end-line="132" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -796,12 +720,97 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaRegionSelector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3">
+          <caret line="118" column="43" lean-forward="true" selection-start-line="118" selection-start-column="43" selection-end-line="118" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/guavaRegionSelector.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="59" column="21" lean-forward="true" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="40" column="48" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="64" column="51" lean-forward="true" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/guavaHeader.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/GuavaTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="71" column="35" lean-forward="true" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="188" column="28" lean-forward="true" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/datatool/api.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="84" column="105" lean-forward="true" selection-start-line="84" selection-start-column="105" selection-end-line="84" selection-end-column="105" />
+        <state relative-caret-position="162">
+          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/GuavaAreaFilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="50" column="32" lean-forward="true" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="32" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#17#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="309" column="51" selection-start-line="309" selection-start-column="45" selection-end-line="309" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
           </folding>
         </state>
       </provider>

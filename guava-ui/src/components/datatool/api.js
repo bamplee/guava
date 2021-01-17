@@ -44,10 +44,11 @@ export const fetchSummary = async (level, northEastLng, northEastLat, southWestL
 //     return await response.json();
 // };
 
-export const getChart = async (buildingId, areaId, beforeMonth) => {
+export const getChart = async (buildingId, areaId, startDate, endDate) => {
     const response = await fetch(`/api/v1/guava/chart/buildings/${buildingId}?` + new URLSearchParams({
         areaId: areaId,
-        beforeMonth: beforeMonth
+        startDate: startDate,
+        endDate: endDate
     }));
     return await response.json();
 };
@@ -78,6 +79,15 @@ export const getRegionChart = async (regionId, startArea, endArea, beforeMonth) 
 
 export const getDetail = async (buildingId) => {
     const response = await fetch(`/api/v1/guava/buildings/${buildingId}/detail`);
+    return await response.json();
+};
+
+export const getChartTrade = async (buildingId, areaId, startDate, endDate) => {
+    const response = await fetch(`/api/v1/guava/chart/buildings/${buildingId}?` + new URLSearchParams({
+        areaId: areaId,
+        startDate: startDate,
+        endDate: endDate,
+    }));
     return await response.json();
 };
 
