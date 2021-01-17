@@ -140,8 +140,10 @@ const GuavaSearchHeader = () => {
                                     )
                                 } else {
                                     return (
-                                        <List.Item onClick={() => handleResultItem(x)}><EnvironmentOutlined/>
+                                        <List.Item onClick={() => handleResultItem(x)}>
+                                            <EnvironmentOutlined/>
                                             <Highlighter
+                                                style={{marginLeft: 4}}
                                                 highlightClassName={cx('highlight')}
                                                 searchWords={query.split('')}
                                                 autoEscape={true}
