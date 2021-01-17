@@ -116,7 +116,8 @@ const GuavaSearchHeader = () => {
                                 if (x.type === 'BUILDING') {
                                     return (
                                         <List.Item
-                                            onClick={() => handleResultItem(x)}><ReconciliationOutlined/>
+                                            onClick={() => handleResultItem(x)}>
+                                            <ReconciliationOutlined/>
                                             <Highlighter
                                                 style={{marginLeft: 4}}
                                                 highlightClassName={cx('highlight')}
@@ -130,7 +131,6 @@ const GuavaSearchHeader = () => {
                                                     marginBottom: 4
                                                 }}>
                                                 <Highlighter
-                                                    style={{marginLeft: 4}}
                                                     highlightClassName={cx('highlight')}
                                                     searchWords={query.split('')}
                                                     autoEscape={true}
@@ -140,17 +140,14 @@ const GuavaSearchHeader = () => {
                                     )
                                 } else {
                                     return (
-                                        <List.Item
-                                            onClick={() => handleResultItem(x)}><EnvironmentOutlined/><span
-                                            style={{marginLeft: 4}}>
+                                        <List.Item onClick={() => handleResultItem(x)}><EnvironmentOutlined/>
                                             <Highlighter
-                                                style={{marginLeft: 4}}
                                                 highlightClassName={cx('highlight')}
                                                 searchWords={query.split('')}
                                                 autoEscape={true}
                                                 textToHighlight={x.address}
                                             />
-                                        </span></List.Item>
+                                        </List.Item>
                                     )
                                 }
                             }

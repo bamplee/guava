@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/GuavaAreaTypeFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/GuavaAreaTypeFilter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/datatool/state.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/datatool/state.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/detail/GuavaBuildingInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/detail/GuavaBuildingInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/detail/GuavaChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/detail/GuavaChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/detail/GuavaDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/detail/GuavaDetailPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/detail/GuavaSearchPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/detail/GuavaSearchPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/detail/GuavaTradeOption.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/detail/GuavaTradeOption.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/map/GuavaMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/GuavaMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/map/GuavaMapPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/GuavaMapPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/table/GuavaTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/GuavaTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/table/col/GuavaRegionTradeCol.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/col/GuavaRegionTradeCol.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/table/row/GuavaRegionTradeRow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/row/GuavaRegionTradeRow.js" afterDir="false" />
-    </list>
+    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -35,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="151" column="46" selection-start-line="151" selection-start-column="46" selection-end-line="151" selection-end-column="46" />
+            <state relative-caret-position="150">
+              <caret line="119" column="44" selection-start-line="119" selection-start-column="44" selection-end-line="119" selection-end-column="44" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
               </folding>
@@ -188,7 +170,6 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="720" />
     <option name="width" value="720" />
     <option name="height" value="900" />
   </component>
@@ -381,12 +362,12 @@
       <workItem from="1610502896019" duration="7736000" />
       <workItem from="1610633450489" duration="1142000" />
       <workItem from="1610676716038" duration="1562000" />
-      <workItem from="1610846626859" duration="17870000" />
+      <workItem from="1610846626859" duration="17989000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="893969000" />
+    <option name="totallyTimeSpent" value="894088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -399,7 +380,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3270202" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3270202" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.32070708" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.32070708" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -849,8 +830,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="151" column="46" selection-start-line="151" selection-start-column="46" selection-end-line="151" selection-end-column="46" />
+        <state relative-caret-position="150">
+          <caret line="119" column="44" selection-start-line="119" selection-start-column="44" selection-end-line="119" selection-end-column="44" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
           </folding>
