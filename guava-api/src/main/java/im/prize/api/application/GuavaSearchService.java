@@ -5,6 +5,8 @@ import im.prize.api.interfaces.response.GuavaSearchResponse;
 import java.util.List;
 
 public interface GuavaSearchService {
+    List<GuavaSearchResponse> search(String query);
+
     List<GuavaSearchResponse> getRegions(String query);
 
     List<GuavaSearchResponse> getBuildings(String query);

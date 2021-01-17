@@ -1,6 +1,6 @@
 /* SEARCH */
 export const fetchSearch = async (query) => {
-    const response = await fetch('/api/v1/guava/search/regions?' + new URLSearchParams({
+    const response = await fetch('/api/v1/guava/search?' + new URLSearchParams({
         query: query
     }));
     return await response.json();
@@ -68,11 +68,12 @@ export const setMatch = async (tradeId, buildingId) => {
     return await response.json();
 };
 
-export const getRegionChart = async (regionId, startArea, endArea, beforeMonth) => {
+export const getRegionChart = async (regionId, startArea, endArea, startDate, endDate) => {
     const response = await fetch(`/api/v1/guava/chart/regions/${regionId}?` + new URLSearchParams({
         startArea: startArea,
         endArea: endArea,
-        beforeMonth: beforeMonth
+        startDate: startDate,
+        endDate: endDate
     }));
     return await response.json();
 };

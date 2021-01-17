@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 import GuavaBuildingInfo from './GuavaBuildingInfo';
-import GuavaHeader from '../header/GuavaHeader';
+import GuavaDetailHeader from '../header/GuavaDetailHeader';
 import GuavaTradeOption from './GuavaTradeOption';
 import GuavaChart from './GuavaChart';
 import GuavaTable from '../table/GuavaTable';
@@ -51,7 +51,7 @@ const GuavaDetailPage = () => {
                 ((region.buildingId === buildingId)
                     || (region.id === regionId)) &&
                 <div style={{paddingTop: 90}}>
-                    <GuavaHeader/>
+                    {/*<GuavaDetailHeader/>*/}
                     <GuavaBuildingInfo/>
                     {/*<WhiteSpace/>*/}
                     <GuavaTradeOption/>

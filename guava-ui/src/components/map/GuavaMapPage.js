@@ -18,7 +18,7 @@ import styles from './guavaMap.module.scss';
 import GuavaMapLabel from './GuavaMapLabel';
 import GuavaMapFilter from './GuavaMapFilter';
 import {getEndArea, getStartArea} from '../constant';
-import GuavaSearch from '../header/GuavaSearch';
+import GuavaMainHeader from '../header/GuavaSearch';
 import GuavaMap from './GuavaMap';
 
 const cx = classNames.bind(styles);
@@ -219,7 +219,7 @@ const GuavaMapPage = () => {
 
     return (
         <div>
-            <GuavaSearch/>
+            <GuavaMainHeader/>
             {/*<GuavaMapLabel/>*/}
             {/*<GuavaMapFilter/>*/}
             {/*<div id="map" className={cx('map')}/>*/}

@@ -2,7 +2,7 @@ import React from 'react'
 
 import classNames from 'classnames/bind';
 import GuavaBuildingInfo from './GuavaBuildingInfo';
-import GuavaHeader from '../header/GuavaHeader';
+import GuavaDetailHeader from '../header/GuavaHeader';
 import GuavaTradeOption from './GuavaTradeOption';
 import GuavaChart from './GuavaChart';
 import GuavaTable from '../table/GuavaTable';
@@ -24,7 +24,7 @@ const GuavaSearchPage = () => {
             {
                 region &&
                 <>
-                    <GuavaHeader/>
+                    <GuavaDetailHeader/>
                     <GuavaBuildingInfo/>
                     <WhiteSpace/>
                     <GuavaTradeOption/>

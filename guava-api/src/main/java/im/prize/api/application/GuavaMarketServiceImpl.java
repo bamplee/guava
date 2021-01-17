@@ -150,62 +150,49 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
     @Override
     public List<GuavaTradeResponse> getBuildingMarketList(String buildingId, Integer page, String areaId) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
-//        if (optionalBuildingMapping.isPresent()) {
-//            BuildingMapping buildingMapping = optionalBuildingMapping.get();
-//            Page<TradeArticle> tradeSummaryPage = tradeArticleRepository.findAll(this.getParams(null,
-//                                                                                                buildingMapping.getBuildingCode(),
-//                                                                                                areaId,
-//                                                                                                date),
-//                                                                                 this.getPage(page));
-//            return tradeSummaryPage.getContent()
-//                                   .stream()
-//                                   .map(this::transform)
-////                                   // fixme building id값 조회 안하도록
-////                                   .peek(x -> x.setBuildingId(buildingId))
-//                                   .collect(Collectors.toList());
-//        }
-        return Lists.newArrayList();
+        if(!optionalBuildingMapping.isPresent()) {
+            return Lists.newArrayList();
+        }
+        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get().getBuildingCode());
+        if (!optionalGuavaBuilding.isPresent()) {
+            return Lists.newArrayList();
+        }
+        GuavaBuilding guavaBuilding = optionalGuavaBuilding.get();
+        List<TradeArticle> tradeArticleList = tradeArticleRepository.findByPortalId(String.valueOf(guavaBuilding.getPortalId()),
+                                                                                    PageRequest.of(0,
+                                                                                                   100,
+                                                                                                   Sort.by(Sort.Direction.DESC,
+                                                                                                           "articleConfirmYmd")))
+                                                                    .stream()
+                                                                    .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
+                                                                                                 DATE_TIME_FORMATTER_YYYYMMDD)
+                                                                                          .isAfter(LocalDate.now().minusMonths(1L)))
+                                                                    .collect(
+                                                                        Collectors.toList());
 
-//        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findById(Long.valueOf(buildingId));
-//        if (!optionalGuavaBuilding.isPresent()) {
-//            return Lists.newArrayList();
-//        }
-//        GuavaBuilding guavaBuilding = optionalGuavaBuilding.get();
-//        List<TradeArticle> tradeArticleList = tradeArticleRepository.findByPortalId(String.valueOf(guavaBuilding.getPortalId()),
-//                                                                                    PageRequest.of(0,
-//                                                                                                   100,
-//                                                                                                   Sort.by(Sort.Direction.DESC,
-//                                                                                                           "articleConfirmYmd")))
-//                                                                    .stream()
-//                                                                    .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
-//                                                                                                 DATE_TIME_FORMATTER_YYYYMMDD)
-//                                                                                          .isAfter(LocalDate.now().minusMonths(1L)))
-//                                                                    .collect(
-//                                                                        Collectors.toList());
-//
-//        List<GuavaBuildingArea> guavaBuildingAreaList = guavaBuilding.getAreaList();
-//        List<TradeArticle> progressList = tradeArticleList.stream()
-//                                                          .filter(x -> StringUtils.isEmpty(x.getEndDate()))
-//                                                          .filter(GuavaUtils.distinctByKeys(x -> getDupleCheckKey(x)))
-//                                                          .collect(Collectors.toList());
-//        List<String> dupleKeyList = progressList.stream().map(this::getDupleCheckKey).collect(Collectors.toList());
-//        List<TradeArticle> endList = tradeArticleList.stream()
-//                                                     .filter(x -> StringUtils.isNotEmpty(x.getEndDate()))
-//                                                     .filter(GuavaUtils.distinctByKeys(this::getDupleCheckKey))
-//                                                     .filter(x -> !dupleKeyList.contains(getDupleCheckKey(x)))
-//                                                     .collect(Collectors.toList());
-//
-//        return Stream.concat(progressList.stream(), endList.stream()).peek(tradeArticle -> {
-//            Optional<GuavaBuildingArea> first = guavaBuildingAreaList.stream()
-//                                                                     .filter(x -> x.getAreaType().equals(tradeArticle.getAreaName()))
-//                                                                     .findFirst();
-//            GuavaBuildingArea areaBuildingArea = first.orElse(getAreaByPublicArea(guavaBuildingAreaList, tradeArticle.getArea1()));
-//            tradeArticle.setAreaName(String.valueOf(areaBuildingArea.getId()));
-//            tradeArticle.setArea1(String.valueOf(areaBuildingArea.getPrivateArea()));
-//            tradeArticle.setArea2(String.valueOf(areaBuildingArea.getPublicArea()));
-//        }).filter(x -> !StringUtils.isNotEmpty(areaId) || x.getAreaName().equals(areaId))
-//                     .sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
-//                     .map(this::transform).collect(Collectors.toList());
+        List<GuavaBuildingArea> guavaBuildingAreaList = guavaBuilding.getAreaList();
+        List<TradeArticle> progressList = tradeArticleList.stream()
+                                                          .filter(x -> StringUtils.isEmpty(x.getEndDate()))
+                                                          .filter(GuavaUtils.distinctByKeys(x -> getDupleCheckKey(x)))
+                                                          .collect(Collectors.toList());
+        List<String> dupleKeyList = progressList.stream().map(this::getDupleCheckKey).collect(Collectors.toList());
+        List<TradeArticle> endList = tradeArticleList.stream()
+                                                     .filter(x -> StringUtils.isNotEmpty(x.getEndDate()))
+                                                     .filter(GuavaUtils.distinctByKeys(this::getDupleCheckKey))
+                                                     .filter(x -> !dupleKeyList.contains(getDupleCheckKey(x)))
+                                                     .collect(Collectors.toList());
+
+        return Stream.concat(progressList.stream(), endList.stream()).peek(tradeArticle -> {
+            Optional<GuavaBuildingArea> first = guavaBuildingAreaList.stream()
+                                                                     .filter(x -> x.getAreaType().equals(tradeArticle.getAreaName()))
+                                                                     .findFirst();
+            GuavaBuildingArea areaBuildingArea = first.orElse(getAreaByPublicArea(guavaBuildingAreaList, tradeArticle.getArea1()));
+            tradeArticle.setAreaName(String.valueOf(areaBuildingArea.getId()));
+            tradeArticle.setArea1(String.valueOf(areaBuildingArea.getPrivateArea()));
+            tradeArticle.setArea2(String.valueOf(areaBuildingArea.getPublicArea()));
+        }).filter(x -> !StringUtils.isNotEmpty(areaId) || x.getAreaName().equals(areaId))
+                     .sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
+                     .map(this::transform).collect(Collectors.toList());
     }
 
     private Specification<TradeSummary> getParams(String regionCode, String buildingCode, String areaCode, String date) {

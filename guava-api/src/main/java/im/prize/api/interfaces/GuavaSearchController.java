@@ -20,6 +20,11 @@ public class GuavaSearchController {
 
     public GuavaSearchController(GuavaSearchService guavaSearchService) {this.guavaSearchService = guavaSearchService;}
 
+    @GetMapping
+    List<GuavaSearchResponse> search(@RequestParam("query") String query) {
+        return guavaSearchService.search(query);
+    }
+
     @GetMapping("/buildings")
     List<GuavaSearchResponse> getBuildings(@RequestParam("query") String query) {
         return guavaSearchService.getBuildings(query);

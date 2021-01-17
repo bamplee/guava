@@ -130,7 +130,7 @@ const GuavaChart = () => {
         } else {
             let startArea = getStartArea(filterArea[0]);
             let endArea = getEndArea(filterArea[1]);
-            result = await getRegionChart(region.id, startArea, endArea, beforeMonth);
+            result = await getRegionChart(region.id, startArea, endArea, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
         }
 
         let groupList = groupBy(result.map(x => {

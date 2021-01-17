@@ -1,18 +1,23 @@
-import React, {Suspense} from 'react'
+import React, {Suspense, useEffect} from 'react'
 import {RecoilRoot} from 'recoil'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.less';
 import {ActivityIndicator} from 'antd-mobile';
 import GuavaAreaFilter from './common/GuavaAreaFilter';
 import GuavaAreaTypeFilter from './common/GuavaAreaTypeFilter';
-import GuavaRegionSelector from './header/GuavaRegionSelector';
 import GuavaDetailPage from './detail/GuavaDetailPage';
-import GuavaIntro from './common/GuavaIntro';
 import GuavaSearchHeader from './header/GuavaSearchHeader';
 import GuavaMap from './map/GuavaMap';
-import GuavaSearch from './header/GuavaSearch';
+import GuavaMainHeader from './header/GuavaMainHeader';
+import GuavaDetailHeader from './header/GuavaDetailHeader';
+import GuavaIntroHeader from './header/GuavaIntroHeader';
+import ReactGA from 'react-ga';
 
 function App() {
+    useEffect(() => {
+        ReactGA.initialize('UA-129316162-1');
+    }, []);
+
     return (
         <RecoilRoot>
             <Router>
@@ -25,40 +30,19 @@ function App() {
                         <GuavaAreaFilter/>
                         <GuavaAreaTypeFilter/>
                         <Route path={['/']} exact>
-                            <GuavaSearch/>
+                            <GuavaMainHeader/>
                             <GuavaMap/>
                         </Route>
                         <Route path={['/intro']} exact>
-                            <GuavaIntro/>
+                            <GuavaIntroHeader/>
                         </Route>
                         <Route path={['/search', '/r/:regionId/search', '/b/:buildingId/search']} exact>
-                            {/*<GuavaInit/>*/}
                             <GuavaSearchHeader/>
-                            <GuavaRegionSelector/>
                         </Route>
-                        {/*<Route path={['/r/:regionId']} exact>*/}
-                        {/*    <GuavaInit/>*/}
-                        {/*    <GuavaHeader/>*/}
-                        {/*    <WhiteSpace/>*/}
-                        {/*    <GuavaTradeOption/>*/}
-                        {/*    <GuavaChart/>*/}
-                        {/*    <GuavaTable/>*/}
-                        {/*</Route>*/}
                         <Route path={['/r/:regionId', '/b/:buildingId']} exact>
+                            <GuavaDetailHeader/>
                             <GuavaDetailPage/>
                         </Route>
-                        {/*<Route path={['/r/:regionId/search', '/b/:buildingId/search']} exact>*/}
-                        {/*    <GuavaHeader/>*/}
-                        {/*    <GuavaRegionSelector/>*/}
-                        {/*</Route>*/}
-                        {/*<Route path={['/detail/:buildingId/market']} exact>*/}
-                        {/*    <GuavaHeader/>*/}
-                        {/*    <GuavaRegionInfo/>*/}
-                        {/*    <GuavaSpaceLine/>*/}
-                        {/*    <GuavaTradeOption/>*/}
-                        {/*    <GuavaTradeChart/>*/}
-                        {/*    <GuavaMarketList/>*/}
-                        {/*</Route>*/}
                     </Suspense>
                 </Switch>
             </Router>

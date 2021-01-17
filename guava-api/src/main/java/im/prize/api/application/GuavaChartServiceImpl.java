@@ -72,46 +72,65 @@ public class GuavaChartServiceImpl implements GuavaChartService {
     }
 
     @Override
-    public List<GuavaChartResponse> getRegionChartList(String regionId, Integer startArea, Integer endArea, Long beforeMonth) {
-        Optional<GuavaRegion> byId = guavaRegionRepository.findById(Long.valueOf(regionId));
-        if (!byId.isPresent()) {
-            return Lists.newArrayList();
-        }
-        GuavaRegion guavaRegion = byId.get();
-        List<OpenApiTradeInfo> openApiTradeInfoList = Lists.newArrayList();
-        String baseYear = String.valueOf(YearMonth.now().minusMonths(beforeMonth).getYear());
-        if (guavaRegion.getRegionType() == RegionType.DONG) {
-            if (startArea + endArea == 0) {
-                openApiTradeInfoList = openApiTradeInfoRepository.findByDongSigunguCodeAndDongCodeAndYearGreaterThanOrderByDateDesc(
-                    guavaRegion.getSigunguCode(),
-                    guavaRegion.getDongCode(),
-                    baseYear);
-            } else {
-                openApiTradeInfoList =
-                    openApiTradeInfoRepository.findByDongSigunguCodeAndDongCodeAndAreaBetweenAndYearGreaterThanEqualOrderByDateDesc(
-                        guavaRegion.getSigunguCode(),
-                        guavaRegion.getDongCode(),
-                        Double.valueOf(startArea),
-                        Double.valueOf(endArea),
-                        baseYear);
-            }
-        } else if (guavaRegion.getRegionType() == RegionType.SIGUNGU) {
-            if (startArea + endArea == 0) {
-                openApiTradeInfoList = openApiTradeInfoRepository.findByDongSigunguCodeAndYearGreaterThanOrderByDateDesc(
-                    guavaRegion.getSigunguCode(),
-                    baseYear);
-            } else {
-                openApiTradeInfoList = openApiTradeInfoRepository.findByDongSigunguCodeAndAreaBetweenAndYearGreaterThanEqualOrderByDateDesc(
-                    guavaRegion.getSigunguCode(),
-                    Double.valueOf(startArea),
-                    Double.valueOf(endArea),
-                    baseYear);
-            }
-        }
-        return openApiTradeInfoList.stream()
-                                   .filter(x -> StringUtils.isNotEmpty(x.getBuildingId()))
-                                   .map(this::transformChartData)
+    public List<GuavaChartResponse> getRegionChartList(String regionId,
+                                                       Integer startArea,
+                                                       Integer endArea,
+                                                       String startDate,
+                                                       String endDate) {
+        Optional<GuavaRegion> optionalGuavaRegion = guavaRegionRepository.findById(Long.valueOf(regionId));
+        if (optionalGuavaRegion.isPresent()) {
+            GuavaRegion guavaRegion = optionalGuavaRegion.get();
+            List<TradeSummary> tradeSummaryPage = tradeSummaryRepository.findAll(this.getParams(guavaRegion.getValidRegionCode(),
+                                                                                                null,
+                                                                                                null,
+                                                                                                startDate, endDate));
+            return tradeSummaryPage.stream()
+                                   .map(GuavaChartResponse::transform)
+//                                   // fixme building id값 조회 안하도록
+//                                   .peek(x -> x.setBuildingId(buildingId))
                                    .collect(Collectors.toList());
+        }
+        return Lists.newArrayList();
+
+//        Optional<GuavaRegion> byId = guavaRegionRepository.findById(Long.valueOf(regionId));
+//        if (!byId.isPresent()) {
+//            return Lists.newArrayList();
+//        }
+//        GuavaRegion guavaRegion = byId.get();
+//        List<OpenApiTradeInfo> openApiTradeInfoList = Lists.newArrayList();
+//        String baseYear = String.valueOf(YearMonth.now().minusMonths(beforeMonth).getYear());
+//        if (guavaRegion.getRegionType() == RegionType.DONG) {
+//            if (startArea + endArea == 0) {
+//                openApiTradeInfoList = openApiTradeInfoRepository.findByDongSigunguCodeAndDongCodeAndYearGreaterThanOrderByDateDesc(
+//                    guavaRegion.getSigunguCode(),
+//                    guavaRegion.getDongCode(),
+//                    baseYear);
+//            } else {
+//                openApiTradeInfoList =
+//                    openApiTradeInfoRepository.findByDongSigunguCodeAndDongCodeAndAreaBetweenAndYearGreaterThanEqualOrderByDateDesc(
+//                        guavaRegion.getSigunguCode(),
+//                        guavaRegion.getDongCode(),
+//                        Double.valueOf(startArea),
+//                        Double.valueOf(endArea),
+//                        baseYear);
+//            }
+//        } else if (guavaRegion.getRegionType() == RegionType.SIGUNGU) {
+//            if (startArea + endArea == 0) {
+//                openApiTradeInfoList = openApiTradeInfoRepository.findByDongSigunguCodeAndYearGreaterThanOrderByDateDesc(
+//                    guavaRegion.getSigunguCode(),
+//                    baseYear);
+//            } else {
+//                openApiTradeInfoList = openApiTradeInfoRepository.findByDongSigunguCodeAndAreaBetweenAndYearGreaterThanEqualOrderByDateDesc(
+//                    guavaRegion.getSigunguCode(),
+//                    Double.valueOf(startArea),
+//                    Double.valueOf(endArea),
+//                    baseYear);
+//            }
+//        }
+//        return openApiTradeInfoList.stream()
+//                                   .filter(x -> StringUtils.isNotEmpty(x.getBuildingId()))
+//                                   .map(this::transformChartData)
+//                                   .collect(Collectors.toList());
     }
 
     @Override

@@ -191,11 +191,6 @@ export const filterAreaState = atom({
     default: [0, 5]
 });
 
-export const isQueryModeState = atom({
-    key: 'isQueryModeState',
-    default: false
-});
-
 export const queryListState = atom({
     key: 'queryListState',
     default: []
@@ -203,6 +198,11 @@ export const queryListState = atom({
 
 export const buildingListState = atom({
     key: 'buildingListState',
+    default: []
+});
+
+export const regionListState = atom({
+    key: 'regionListState',
     default: []
 });
 

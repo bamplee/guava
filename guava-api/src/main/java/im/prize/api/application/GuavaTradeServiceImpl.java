@@ -74,9 +74,21 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                                                                  this.getPage(page));
             return tradeSummaryPage.getContent()
                                    .stream()
+                                   .peek(x -> {
+                                       if (x.getPublicArea() == null) {
+                                           Optional<OpenApiTradeInfo> openApiTradeInfo = openApiTradeInfoRepository.findById(x.getId());
+                                           if (openApiTradeInfo.isPresent()) {
+                                               OpenApiTradeInfo tradeInfo = openApiTradeInfo.get();
+                                               x.setPrivateArea(tradeInfo.getArea());
+                                               x.setPublicArea(tradeInfo.getArea());
+                                               x.setAreaType((int) (tradeInfo.getArea() * 0.3025) + "평");
+                                           }
+                                       }
+                                   })
                                    .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
-//                                   .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
+//                                   .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x
+// .getBuildingId())
 //                                                                                                      .stream()
 //                                                                                                      .findFirst()
 //                                                                                                      .map(BuildingMapping::getId)
@@ -98,6 +110,17 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                                                                  this.getPage(page));
             return tradeSummaryPage.getContent()
                                    .stream()
+                                   .peek(x -> {
+                                       if (x.getPublicArea() == null) {
+                                           Optional<OpenApiTradeInfo> openApiTradeInfo = openApiTradeInfoRepository.findById(x.getId());
+                                           if (openApiTradeInfo.isPresent()) {
+                                               OpenApiTradeInfo tradeInfo = openApiTradeInfo.get();
+                                               x.setPrivateArea(tradeInfo.getArea());
+                                               x.setPublicArea(tradeInfo.getArea());
+                                               x.setAreaType((int) (tradeInfo.getArea() * 0.3025) + "평");
+                                           }
+                                       }
+                                   })
                                    .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
 //                                   .peek(x -> x.setBuildingId(buildingId))

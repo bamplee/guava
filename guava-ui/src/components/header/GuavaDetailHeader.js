@@ -23,7 +23,7 @@ import SendOutlined from '@ant-design/icons/es/icons/SendOutlined';
 
 const cx = classNames.bind(styles);
 
-const GuavaHeader = () => {
+const GuavaDetailHeader = () => {
     const location = useLocation();
     const history = useHistory();
     // const [region, setRegion] = useRecoilState(regionState);
@@ -63,40 +63,17 @@ const GuavaHeader = () => {
                     </WingBlank>
                 </div>
                 <div className={cx('filter_container')}>
-                    {/*<div className={cx('filter_select')}>*/}
-                    {/*    <Button className={cx('filter_btn', tradeType === 'trade' ? '' : 'filter_btn_active')}*/}
-                    {/*            type={'primary'}*/}
-                    {/*            onClick={() => setTradeType(tradeType === 'trade' ? 'rent' : 'trade')}*/}
-                    {/*            // onClick={() =>*/}
-                    {/*            //     Modal.operation([*/}
-                    {/*            //         {text: '매매', onPress: () => setTradeType('trade')},*/}
-                    {/*            //         {text: '전/월세', onPress: () => setTradeType('rent')},*/}
-                    {/*            //     ])*/}
-                    {/*            // }*/}
-                    {/*            size={'small'}>{tradeType === 'trade' ? '매매' : '전월세'}</Button>*/}
-                    {/*</div>*/}
                     <div className={cx('filter_select')}>
                         <Button
                             className={cx('filter_btn', tableOption === TABLE_OPTION.TRADE && 'filter_btn_active')}
                             type={'primary'}
                             onClick={() => setTableOption(TABLE_OPTION.TRADE)}
-                            // onClick={() =>
-                            //     Modal.operation([
-                            //         {text: '매매', onPress: () => setTradeType('trade')},
-                            //         {text: '전/월세', onPress: () => setTradeType('rent')},
-                            //     ])
-                            // }
                             size={'small'}>시세</Button>
                     </div>
                     <div className={cx('filter_select')}>
                         <Button className={cx('filter_btn', tableOption === TABLE_OPTION.MARKET && 'filter_btn_active')}
                                 type={'primary'} size={'small'}
                                 onClick={() => setTableOption(TABLE_OPTION.MARKET)}
-                            // onClick={() =>
-                            //     Modal.operation([
-                            //         {text: '실거래', onPress: () => setTableOption(TABLE_OPTION.TRADE)},
-                            //         {text: '호가', onPress: () => setTableOption(TABLE_OPTION.MARKET)},
-                            //     ])}
                         >매물</Button>
                     </div>
                     <div className={cx('filter_select')}>
@@ -106,30 +83,6 @@ const GuavaHeader = () => {
                                 onClick={() => alert('비교')}>
                             <span>비교</span>
                         </Button>
-                        {/*{*/}
-                        {/*    region && region.type === 'BUILDING' && building && building.areaList.length > 0 ?*/}
-                        {/*        <Button className={cx('filter_btn', areaType.areaId !== '' && 'filter_btn_active')}*/}
-                        {/*                type={'primary'} size={'small'}*/}
-                        {/*                inline*/}
-                        {/*                onClick={() => setShowAreaTypeFilter(!showAreaTypeFilter)}>*/}
-                        {/*            {*/}
-                        {/*                areaType.areaId !== '' ?*/}
-                        {/*                    <span>*/}
-                        {/*            {areaType.name}*/}
-                        {/*        </span> : <span>비교</span>*/}
-                        {/*            }*/}
-                        {/*        </Button> :*/}
-                        {/*        <Button*/}
-                        {/*            className={cx('filter_btn', filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'filter_btn_active')}*/}
-                        {/*            type={'primary'} size={'small'}*/}
-                        {/*            // type={filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'primary'}*/}
-                        {/*            inline*/}
-                        {/*            onClick={() => setShowAreaFilter(!showAreaFilter)}>*/}
-                        {/*            {*/}
-                        {/*                filterArea[0] === 0 && filterArea[1] === 5 ? '면적' : `${getStartArea(filterArea[0])}㎡~${getEndArea(filterArea[1])}㎡`*/}
-                        {/*            }*/}
-                        {/*        </Button>*/}
-                        {/*}*/}
                     </div>
                 </div>
             </div>
@@ -137,4 +90,4 @@ const GuavaHeader = () => {
     )
 };
 
-export default GuavaHeader;
+export default GuavaDetailHeader;

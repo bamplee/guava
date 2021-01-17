@@ -61,14 +61,14 @@ public class RentSummaryServiceImpl implements RentSummaryService {
         String regionCode = buildingMapping.getRegionCode();
         String sigunguCode = regionCode.substring(0, 5);
         String dongCode = regionCode.substring(5);
-        List<OpenApiRentInfo> openApiTradeInfos = openApiRentInfoRepository.findByRegionCodeAndLotNumberAndAptName(
+        List<OpenApiRentInfo> openApiRentInfos = openApiRentInfoRepository.findByRegionCodeAndLotNumberAndAptName(
             sigunguCode,
             buildingMapping.getLotNumber(),
             buildingMapping.getBuildingName());
 //        List<TradeSummary> byBuildingCode = tradeSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode());
         List<GuavaBuildingArea> buildingAreas = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
 
-        List<RentSummary> collect = openApiTradeInfos.stream().map(x -> {
+        List<RentSummary> collect = openApiRentInfos.stream().map(x -> {
             String month = x.getMonth().length() == 1 ? String.format("0%s", x.getMonth()) : x.getMonth();
             String day = x.getDay().length() == 1 ? String.format("0%s", x.getDay()) : x.getDay();
             String date = x.getYear() + month + day;
@@ -119,7 +119,7 @@ public class RentSummaryServiceImpl implements RentSummaryService {
                  buildingMapping.getBuildingName(),
                  buildingMapping.getBuildingCode(),
                  collect.size(),
-                 openApiTradeInfos.size());
+                 openApiRentInfos.size());
         return null;
     }
 
