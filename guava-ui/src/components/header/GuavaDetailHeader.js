@@ -1,43 +1,52 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
-import {useHistory, useLocation} from 'react-router-dom';
+import {useHistory, useLocation, useParams, useRouteMatch} from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
 import styles from './guavaHeader.module.scss';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
-    areaTypeState,
     buildingState,
-    filterAreaState,
     regionState,
-    showAreaFilterState,
-    showAreaTypeFilterState,
-    tableOptionState,
-    tradeTypeState
 } from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
 import {Button, WingBlank} from 'antd-mobile';
-import {TABLE_OPTION} from '../constant';
+import {getBuilding, getDetail, getRegion} from '../datatool/api';
 
 const cx = classNames.bind(styles);
 
-const GuavaDetailHeader = () => {
+const GuavaDetailHeader = ({tabId}) => {
     const location = useLocation();
+    const match = useRouteMatch();
     const history = useHistory();
     // const [region, setRegion] = useRecoilState(regionState);
-    const region = useRecoilValue(regionState);
-    const [showAreaFilter, setShowAreaFilter] = useRecoilState(showAreaFilterState);
-    const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
-    const [areaType, setAreaType] = useRecoilState(areaTypeState);
-    const [showAreaTypeFilter, setShowAreaTypeFilter] = useRecoilState(showAreaTypeFilterState);
-    const building = useRecoilValue(buildingState);
-    const [tableOption, setTableOption] = useRecoilState(tableOptionState);
-    const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
+    const {regionType, buildingId, regionId} = useParams();
+    const [region, setRegion] = useRecoilState(regionState);
+    const [building, setBuilding] = useRecoilState(buildingState);
+    // const [tab, setTab] = useState(tabId);
+
+    useEffect(() => {
+        if (regionType === 'b') {
+            const init = async () => {
+                setRegion(await getBuilding(regionId));
+                setBuilding(await getDetail(regionId));
+            };
+            init();
+        } else {
+            const init = async () => {
+                setRegion(await getRegion(regionId));
+                setBuilding(null);
+            };
+            init();
+        }
+    }, [regionId]);
 
     return (
         <>
+            <div className={cx('empty_container')}>
+            </div>
             <div className={cx('header_container')}>
                 <div className={cx('title_container')}>
                     <WingBlank>
@@ -45,7 +54,7 @@ const GuavaDetailHeader = () => {
                             <ArrowLeftOutlined/>
                         </div>
                     </WingBlank>
-                    <div className={cx('center')} onClick={() => history.push(location.pathname + '/search')}>
+                    <div className={cx('center')} onClick={() => history.push('/search')}>
                         <span className={cx('title')}>{region.name}</span>
                     </div>
                     <WingBlank>
@@ -58,26 +67,30 @@ const GuavaDetailHeader = () => {
                             {/*        }*/}
                             {/*    },*/}
                             {/*], 'default', '')}/>*/}
-                            <SearchOutlined onClick={() => history.push(location.pathname + '/search')}/>
+                            <SearchOutlined onClick={() => history.push('/search')}/>
                         </div>
                     </WingBlank>
                 </div>
                 <div className={cx('filter_container')}>
                     <div className={cx('filter_select')}>
                         <Button
-                            className={cx('filter_btn', tableOption === TABLE_OPTION.TRADE && 'filter_btn_active')}
+                            className={cx('filter_btn', tabId === '0' && 'filter_btn_active')}
                             type={'primary'}
-                            onClick={() => setTableOption(TABLE_OPTION.TRADE)}
+                            onClick={() => {
+                                history.replace('/' + regionType + '/' + regionId + '/0')
+                            }}
                             size={'small'}>시세</Button>
                     </div>
                     <div className={cx('filter_select')}>
-                        <Button className={cx('filter_btn', tableOption === TABLE_OPTION.MARKET && 'filter_btn_active')}
+                        <Button className={cx('filter_btn', tabId === '1' && 'filter_btn_active')}
                                 type={'primary'} size={'small'}
-                                onClick={() => setTableOption(TABLE_OPTION.MARKET)}
-                        >매물</Button>
+                                onClick={() => {
+                                    history.replace('/' + regionType + '/' + regionId + '/1')
+                                }}
+                        >호가</Button>
                     </div>
                     <div className={cx('filter_select')}>
-                        <Button className={cx('filter_btn', areaType.areaId !== '' && 'filter_btn_active')}
+                        <Button className={cx('filter_btn')}
                                 type={'primary'} size={'small'}
                                 inline
                                 onClick={() => alert('비교')}>

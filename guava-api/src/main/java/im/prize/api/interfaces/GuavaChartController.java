@@ -21,18 +21,20 @@ public class GuavaChartController {
 
     @GetMapping("/regions/{regionId}")
     List<GuavaChartResponse> getRegionChartList(@PathVariable("regionId") String regionId,
+                                                @RequestParam("tradeType") String tradeType,
                                                 @RequestParam(value = "startArea", required = false, defaultValue = "0") Integer startArea,
                                                 @RequestParam(value = "endArea", required = false, defaultValue = "0") Integer endArea,
                                                 @RequestParam(value = "startDate", required = false) String startDate,
                                                 @RequestParam(value = "endDate", required = false) String endDate) {
-        return guavaTradeChartService.getRegionChartList(regionId, startArea, endArea, startDate, endDate);
+        return guavaTradeChartService.getRegionChartList(tradeType, regionId, startArea, endArea, startDate, endDate);
     }
 
     @GetMapping("/buildings/{buildingId}")
     List<GuavaChartResponse> getChartList(@PathVariable("buildingId") String buildingId,
+                                          @RequestParam("tradeType") String tradeType,
                                           @RequestParam(value = "areaId", required = false) String areaId,
                                           @RequestParam(value = "startDate", required = false) String startDate,
                                           @RequestParam(value = "endDate", required = false) String endDate) {
-        return guavaTradeChartService.getChartList(buildingId, areaId, startDate, endDate);
+        return guavaTradeChartService.getChartList(tradeType, buildingId, areaId, startDate, endDate);
     }
 }

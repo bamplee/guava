@@ -18,28 +18,6 @@ const cx = classNames.bind(styles);
 const GuavaDetailPage = () => {
     const {buildingId, regionId} = useParams();
     const [region, setRegion] = useRecoilState(regionState);
-    const [building, setBuilding] = useRecoilState(buildingState);
-    const tableOption = useRecoilValue(tableOptionState);
-
-    useEffect(() => {
-        if (buildingId) {
-            const init = async () => {
-                setRegion(await getBuilding(buildingId));
-                setBuilding(await getDetail(buildingId));
-            };
-            init();
-        }
-    }, [buildingId]);
-
-    useEffect(() => {
-        if (regionId) {
-            const init = async () => {
-                setRegion(await getRegion(regionId));
-                setBuilding(null);
-            };
-            init();
-        }
-    }, [regionId]);
 
     return (
         <>
@@ -51,11 +29,8 @@ const GuavaDetailPage = () => {
                     <GuavaBuildingInfo/>
                     {/*<WhiteSpace/>*/}
                     <GuavaTradeOption/>
-                    {
-                        tableOption === 'trade' ?
-                            <GuavaChart/> :
-                            <GuavaMarketChart/>
-                    }
+                    <GuavaChart/>
+                    <GuavaMarketChart/>
                     <GuavaTable/>
                 </div>
             }

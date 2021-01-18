@@ -52,7 +52,7 @@ const GuavaChart = () => {
         if (region !== null) {
             fetchChart();
         }
-    }, [region, startDate, endDate, filterArea, areaType]);
+    }, [region, tradeType, startDate, endDate, filterArea, areaType]);
 
     useEffect(() => {
         if (chartList.datasets && chartList.datasets[0].data.length > 0 && activeChartIndex && activeChartIndex !== -1) {

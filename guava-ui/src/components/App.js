@@ -12,6 +12,14 @@ import GuavaMainHeader from './header/GuavaMainHeader';
 import GuavaDetailHeader from './header/GuavaDetailHeader';
 import GuavaIntroHeader from './header/GuavaIntroHeader';
 import ReactGA from 'react-ga';
+import GuavaBuildingInfo from './detail/GuavaBuildingInfo';
+import GuavaTradeOption from './detail/GuavaTradeOption';
+import GuavaChart from './detail/GuavaChart';
+import GuavaMarketChart from './detail/GuavaMarketChart';
+import GuavaTable from './table/GuavaTable';
+import GuavaMarketTable from './table/GuavaMarketTable';
+import {DetailHeaderPage, DetailMarketPage, DetailTradePage, IntroPage, MapPage} from '../pages';
+import SearchPage from '../pages/SearchPage';
 
 function App() {
     useEffect(() => {
@@ -29,20 +37,10 @@ function App() {
                     />}>
                         <GuavaAreaFilter/>
                         <GuavaAreaTypeFilter/>
-                        <Route path={['/']} exact>
-                            <GuavaMainHeader/>
-                            <GuavaMap/>
-                        </Route>
-                        <Route path={['/intro']} exact>
-                            <GuavaIntroHeader/>
-                        </Route>
-                        <Route path={['/search', '/r/:regionId/search', '/b/:buildingId/search']} exact>
-                            <GuavaSearchHeader/>
-                        </Route>
-                        <Route path={['/r/:regionId', '/b/:buildingId']} exact>
-                            <GuavaDetailHeader/>
-                            <GuavaDetailPage/>
-                        </Route>
+                        <Route exact path={['/']} component={MapPage}/>
+                        <Route exact path={['/intro']} component={IntroPage}/>
+                        <Route exact path={['/search']} component={SearchPage}/>
+                        <Route path="/:regionType/:regionId/:tabId?" component={DetailHeaderPage}/>
                     </Suspense>
                 </Switch>
             </Router>

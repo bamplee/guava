@@ -3,13 +3,18 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import {useHistory} from 'react-router-dom';
 import Chart from 'chart.js';
 
-import {areaTypeState, filterAreaState, regionState, tableOptionState, tradeDateState} from '../datatool/state';
+import {
+    areaTypeState,
+    filterAreaState,
+    regionState,
+    tradeDateState,
+    tradeTypeState
+} from '../datatool/state';
 import {getTrade, getTradeMarket} from '../datatool/api';
 
 import classNames from 'classnames/bind';
 import styles from './guavaChart.module.scss';
 import {Bar} from 'react-chartjs-2';
-import {TABLE_OPTION} from '../constant';
 
 const options = {
     legend: {
@@ -113,9 +118,8 @@ const GuavaMarketChart = () => {
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
     const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
     // const [region, setRegion] = useRecoilState(regionState);
-    const [tableOption, setTableOption] = useRecoilState(tableOptionState);
-    const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const region = useRecoilValue(regionState);
+    const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
     useEffect(() => {
         // fetchChart();
@@ -125,7 +129,7 @@ const GuavaMarketChart = () => {
 
     useEffect(() => {
         fetch();
-    }, [region, tableOption]);
+    }, [region]);
 
     const initChartEvent = () => {
         Chart.pluginService.register({afterDraw: chartPlugin});
@@ -183,16 +187,12 @@ const GuavaMarketChart = () => {
 
             let result = [];
             if (region.type === 'BUILDING') {
-                if (tableOption === TABLE_OPTION.TRADE) {
-                    result = await getTrade(region.buildingId, page, areaType.areaId, date);
-                } else if (tableOption === TABLE_OPTION.MARKET) {
-                    result = await getTradeMarket(region.buildingId, page, areaType.areaId, date);
-                }
+                result = await getTradeMarket(tradeType, region.buildingId, page, areaType.areaId, date);
             }
 
-            if (result.length < 100) {
-                setIsCompleted(true);
-            }
+            // if (result.length < 100) {
+            //     setIsCompleted(true);
+            // }
 
             let groupList = groupBy(result.map(x => {
                 x.areaType = x.area.type;
@@ -262,18 +262,6 @@ const GuavaMarketChart = () => {
 
     return (
         <div className={cx('chart_container')}>
-            {/*<Tabs tabs={[*/}
-            {/*    // {title: <Badge>최근 1년</Badge>, value: 12},*/}
-            {/*    {title: <Badge>최근 3년</Badge>, value: 36},*/}
-            {/*    // {title: <Badge>최근 5년</Badge>, value: 60},*/}
-            {/*    {title: <Badge>전체</Badge>, value: 240},*/}
-            {/*]}*/}
-            {/*      onTabClick={(tab, index) => {*/}
-            {/*          // setBeforeMonth(tab.value);*/}
-            {/*      }}*/}
-            {/*      animated={false} useOnPan={false}*/}
-            {/*>*/}
-            {/*</Tabs>*/}
             <Bar data={chartList} options={options}/>
         </div>
     );

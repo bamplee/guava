@@ -30,6 +30,7 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
     private final BuildingMappingRepository buildingMappingRepository;
     private final TradeSummaryRepository tradeSummaryRepository;
+    private final RentSummaryRepository rentSummaryRepository;
     private final ObjectMapper objectMapper;
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -37,16 +38,20 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
     public GuavaTradeChartServiceImpl(GuavaRegionRepository guavaRegionRepository,
                                       GuavaBuildingAreaRepository guavaBuildingAreaRepository,
                                       BuildingMappingRepository buildingMappingRepository,
-                                      TradeSummaryRepository tradeSummaryRepository, ObjectMapper objectMapper) {
+                                      TradeSummaryRepository tradeSummaryRepository,
+                                      RentSummaryRepository rentSummaryRepository,
+                                      ObjectMapper objectMapper) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
         this.buildingMappingRepository = buildingMappingRepository;
         this.tradeSummaryRepository = tradeSummaryRepository;
+        this.rentSummaryRepository = rentSummaryRepository;
         this.objectMapper = objectMapper;
     }
 
     @Override
-    public List<GuavaChartResponse> getRegionChartList(String regionId,
+    public List<GuavaChartResponse> getRegionChartList(String tradeType,
+                                                       String regionId,
                                                        Integer startArea,
                                                        Integer endArea,
                                                        String startDate,
@@ -54,33 +59,57 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
         Optional<GuavaRegion> optionalGuavaRegion = guavaRegionRepository.findById(Long.valueOf(regionId));
         if (optionalGuavaRegion.isPresent()) {
             GuavaRegion guavaRegion = optionalGuavaRegion.get();
-            List<TradeSummary> tradeSummaryPage = tradeSummaryRepository.findAll(this.getParams(guavaRegion.getValidRegionCode(),
-                                                                                                null,
-                                                                                                null,
-                                                                                                startDate, endDate));
-            return tradeSummaryPage.stream()
-                                   .map(GuavaChartResponse::transform)
+            if ("trade".equals(tradeType)) {
+                return tradeSummaryRepository.findAll(this.getParams(guavaRegion.getValidRegionCode(),
+                                                                     null,
+                                                                     null,
+                                                                     startDate, endDate))
+                                             .stream()
+                                             .map(GuavaChartResponse::transform)
 //                                   // fixme building id값 조회 안하도록
 //                                   .peek(x -> x.setBuildingId(buildingId))
-                                   .collect(Collectors.toList());
+                                             .collect(Collectors.toList());
+            } else {
+                return rentSummaryRepository.findAll(this.getParamsByRent(guavaRegion.getValidRegionCode(),
+                                                                          null,
+                                                                          null,
+                                                                          startDate, endDate))
+                                            .stream()
+                                            .map(GuavaChartResponse::transform)
+//                                   // fixme building id값 조회 안하도록
+//                                   .peek(x -> x.setBuildingId(buildingId))
+                                            .collect(Collectors.toList());
+            }
         }
         return Lists.newArrayList();
     }
 
     @Override
-    public List<GuavaChartResponse> getChartList(String buildingCode, String areaId, String startDate, String endDate) {
+    public List<GuavaChartResponse> getChartList(String tradeType, String buildingCode, String areaId, String startDate, String endDate) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingCode));
         if (optionalBuildingMapping.isPresent()) {
             BuildingMapping buildingMapping = optionalBuildingMapping.get();
-            List<TradeSummary> tradeSummaryPage = tradeSummaryRepository.findAll(this.getParams(null,
-                                                                                                buildingMapping.getBuildingCode(),
-                                                                                                areaId,
-                                                                                                startDate, endDate));
-            return tradeSummaryPage.stream()
-                                   .map(GuavaChartResponse::transform)
+            if ("trade".equals(tradeType)) {
+                return tradeSummaryRepository.findAll(this.getParams(null,
+                                                                     buildingMapping.getBuildingCode(),
+                                                                     areaId,
+                                                                     startDate, endDate))
+                                             .stream()
+                                             .map(GuavaChartResponse::transform)
 //                                   // fixme building id값 조회 안하도록
 //                                   .peek(x -> x.setBuildingId(buildingId))
-                                   .collect(Collectors.toList());
+                                             .collect(Collectors.toList());
+            } else {
+                return rentSummaryRepository.findAll(this.getParamsByRent(null,
+                                                                          buildingMapping.getBuildingCode(),
+                                                                          areaId,
+                                                                          startDate, endDate))
+                                            .stream()
+                                            .map(GuavaChartResponse::transform)
+//                                   // fixme building id값 조회 안하도록
+//                                   .peek(x -> x.setBuildingId(buildingId))
+                                            .collect(Collectors.toList());
+            }
         }
         return Lists.newArrayList();
     }
@@ -104,5 +133,26 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
             }
         }
         return TradeSummarySpecs.searchWith(params);
+    }
+
+    private Specification<RentSummary> getParamsByRent(String regionCode,
+                                                       String buildingCode,
+                                                       String areaCode,
+                                                       String startDate,
+                                                       String endDate) {
+        Map<String, Object> paramsMap = objectMapper.convertValue(GuavaTradeSearch.builder()
+                                                                                  .regionCode(regionCode)
+                                                                                  .buildingCode(buildingCode)
+                                                                                  .areaCode(areaCode)
+                                                                                  .startDate(startDate)
+                                                                                  .endDate(endDate)
+                                                                                  .build(), Map.class);
+        Map<RentSummarySpecs.SearchKey, Object> params = Maps.newHashMap();
+        for (Map.Entry<String, Object> entry : paramsMap.entrySet()) {
+            if (ObjectUtils.isNotEmpty(entry.getValue()) && StringUtils.isNotEmpty(String.valueOf(entry.getValue()))) {
+                params.put(RentSummarySpecs.SearchKey.convert(entry.getKey()), entry.getValue());
+            }
+        }
+        return RentSummarySpecs.searchWith(params);
     }
 }

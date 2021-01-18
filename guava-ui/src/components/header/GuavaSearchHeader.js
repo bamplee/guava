@@ -84,7 +84,7 @@ const GuavaSearchHeader = () => {
                 <div className={cx('title_container')}>
                     <WingBlank>
                         <div className={cx('left')}
-                             onClick={() => history.push(location.pathname.replace('/search', ''))}>
+                             onClick={() => history.goBack()}>
                             {/*<SearchOutlined/>*/}
                             <ArrowLeftOutlined/>
                         </div>
