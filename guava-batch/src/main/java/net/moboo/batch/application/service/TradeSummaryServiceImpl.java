@@ -64,7 +64,13 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
             dongCode,
             buildingMapping.getLotNumber(),
             buildingMapping.getBuildingName());
-//        List<TradeSummary> byBuildingCode = tradeSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode());
+        List<Long> existIds = tradeSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode())
+                                                    .stream()
+                                                    .map(TradeSummary::getId)
+                                                    .collect(Collectors.toList());
+
+        openApiTradeInfos = openApiTradeInfos.stream().filter(x -> !existIds.contains(x.getId())).collect(Collectors.toList());
+
         List<GuavaBuildingArea> buildingAreas = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
 
         List<TradeSummary> collect = openApiTradeInfos.stream().map(x -> {
@@ -112,7 +118,11 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
             }
             return tradeSummaryBuilder.build();
         }).collect(Collectors.toList());
-        log.info("building : {}({}), {}/{}", buildingMapping.getBuildingName(), buildingMapping.getBuildingCode(), collect.size(), openApiTradeInfos.size());
+        log.info("building : {}({}), {}/{}",
+                 buildingMapping.getBuildingName(),
+                 buildingMapping.getBuildingCode(),
+                 collect.size(),
+                 openApiTradeInfos.size());
         return collect;
     }
 

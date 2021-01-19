@@ -65,7 +65,14 @@ public class RentSummaryServiceImpl implements RentSummaryService {
             sigunguCode,
             buildingMapping.getLotNumber(),
             buildingMapping.getBuildingName());
-//        List<TradeSummary> byBuildingCode = tradeSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode());
+
+        List<Long> existIds = rentSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode())
+                                                   .stream()
+                                                   .map(RentSummary::getId)
+                                                   .collect(Collectors.toList());
+
+        openApiRentInfos = openApiRentInfos.stream().filter(x -> !existIds.contains(x.getId())).collect(Collectors.toList());
+
         List<GuavaBuildingArea> buildingAreas = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
 
         List<RentSummary> collect = openApiRentInfos.stream().map(x -> {
