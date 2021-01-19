@@ -25,7 +25,7 @@ const GuavaMainHeader = () => {
                     </div>
                 </WingBlank>
                 <div className={cx('logo')} onClick={() => history.push('/search')}>
-                    <span className={cx('title')}>아파트 / 지역 검색하기</span>
+                    <span className={cx('title')}>지역 / 아파트 검색하기</span>
                     {/*<span className={cx('sub')}>SUBTITLE</span>*/}
                 </div>
                 <WingBlank>
