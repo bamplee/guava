@@ -22,6 +22,14 @@
   background-color: #fff;
   border-bottom: 1px solid #EEEEEE;
 
+  .empty_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888888;
+    //height: 180px;
+  }
+
   .loading {
     height: 180px;
     display: flex;

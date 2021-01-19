@@ -26,77 +26,47 @@ const GuavaTradeOption = () => {
     const region = useRecoilValue(regionState);
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
-    // useEffect(() => {
-    //     if (tableOption === TABLE_OPTION.TRADE) {
-    //         setTabs(0);
-    //     } else if (tableOption === TABLE_OPTION.MARKET) {
-    //         setTabs(1);
-    //     }
-    // }, []);
-
-    // const handleTabs = (index) => {
-    //     setTabs(index);
-    //     if (index === 0) {
-    //         setTableOption(TABLE_OPTION.TRADE);
-    //     } else if (index === 1) {
-    //         setTableOption(TABLE_OPTION.MARKET);
-    //     }
-    // };
-
     return (
-        <>
-            {/*<Tabs tabs={[{title: '매매'}, {title: '호가'}]} initialPage={1} animated={false} useOnPan={false}>*/}
-            {/*    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>*/}
-            {/*        Content of first tab*/}
-            {/*    </div>*/}
-            {/*    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>*/}
-            {/*        Content of second tab*/}
-            {/*    </div>*/}
-            {/*    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>*/}
-            {/*        Content of third tab*/}
-            {/*    </div>*/}
-            {/*</Tabs>*/}
-            <div className={cx('filter_container')}>
-                <SegmentedControl
-                    selectedIndex={tradeType === 'trade' ? 0 : 1}
-                    onChange={(e) => {
-                        let index = e.nativeEvent.selectedSegmentIndex;
-                        if (index === 0) {
-                            setTradeType('trade');
-                        } else {
-                            setTradeType('rent');
-                        }
-                    }}
-                    values={[<Badge>매매</Badge>, <Badge>전/월세</Badge>]}
-                    tintColor={'#2E92FC'}
-                    style={{height: 30, width: 140}}
-                />
-                {
-                    region && region.type === 'BUILDING' ?
-                        <Button className={cx('filter_btn', areaType.areaId !== '' ? 'active' : '')}
-                                type={areaType.areaId !== '' ? 'primary' : ''}
-                                inline
-                                onClick={() => setShowAreaTypeFilter(true)}>
-                            {
-                                areaType.areaId !== '' ?
-                                    <span>
+        <div className={cx('filter_container')}>
+            <SegmentedControl
+                selectedIndex={tradeType === 'trade' ? 0 : 1}
+                onChange={(e) => {
+                    let index = e.nativeEvent.selectedSegmentIndex;
+                    if (index === 0) {
+                        setTradeType('trade');
+                    } else {
+                        setTradeType('rent');
+                    }
+                }}
+                values={[<Badge>매매</Badge>, <Badge>전/월세</Badge>]}
+                tintColor={'#2E92FC'}
+                style={{height: 30, width: 140}}
+            />
+            {
+                region && region.type === 'BUILDING' ?
+                    <Button className={cx('filter_btn', areaType.areaId !== '' ? 'active' : '')}
+                            type={areaType.areaId !== '' ? 'primary' : ''}
+                            inline
+                            onClick={() => setShowAreaTypeFilter(true)}>
+                        {
+                            areaType.areaId !== '' ?
+                                <span>
                                     {areaType.name}
                                 </span> :
-                                    <span>평형</span>
-                            }
-                        </Button> :
-                        <Button className={cx('filter_btn')}
-                                type={filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'primary'}
-                                inline
-                                onClick={() => setShowAreaFilter(true)}>
-                            {
-                                filterArea[0] === 0 && filterArea[1] === 5 ? '면적' : `${getStartArea(filterArea[0])}&#13217;~${getEndArea(filterArea[1])}&#13217;`
-                            }
-                            <CaretDownOutlined/>
-                        </Button>
-                }
-            </div>
-        </>
+                                <span>평형</span>
+                        }
+                    </Button> :
+                    <Button className={cx('filter_btn')}
+                            type={filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'primary'}
+                            inline
+                            onClick={() => setShowAreaFilter(true)}>
+                        {
+                            filterArea[0] === 0 && filterArea[1] === 5 ? '면적' : `${getStartArea(filterArea[0])}&#13217;~${getEndArea(filterArea[1])}&#13217;`
+                        }
+                        <CaretDownOutlined/>
+                    </Button>
+            }
+        </div>
     );
 };
 

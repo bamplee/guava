@@ -10,6 +10,7 @@ import classNames from 'classnames/bind';
 import styles from './guavaChart.module.scss';
 import {Bar} from 'react-chartjs-2';
 import GuavaLoading from './GuavaLoading';
+import {Result} from 'antd-mobile';
 
 const options = {
     legend: {
@@ -172,6 +173,9 @@ const GuavaMarketChart = () => {
     };
 
     const fetch = async () => {
+        if (region.type !== 'BUILDING') {
+            return;
+        }
         if (!isCompleted && !isLoading) {
             setIsLoading(true);
             let date = '';
@@ -257,10 +261,19 @@ const GuavaMarketChart = () => {
     return (
         <div className={cx('chart_container')}>
             {
-                (chartList) ?
-                    <Bar data={chartList} options={options}/> :
-                    <div className={cx('loading')}>
-                        <GuavaLoading isLoading={true}/>
+                region.type === 'BUILDING' ?
+                    (chartList) ?
+                        <Bar data={chartList} options={options}/> :
+                        <div className={cx('loading')}>
+                            <GuavaLoading isLoading={true}/>
+                        </div>
+                    :
+                    <div className={cx('empty_container')}>
+                        <Result
+                            img={<img src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'} style={{width: 50, height: 50}}/>}
+                            // title="지역 호가 차트 준비중"
+                            message="지역 호가 차트는 개발중"
+                        />
                     </div>
             }
         </div>

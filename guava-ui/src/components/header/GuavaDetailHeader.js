@@ -23,6 +23,7 @@ const GuavaDetailHeader = ({tabId}) => {
     // const [tab, setTab] = useState(tabId);
 
     useEffect(() => {
+        console.log(regionId);
         if (regionType === 'b') {
             const init = async () => {
                 setRegion(await getBuilding(regionId));

@@ -10,6 +10,8 @@ import im.prize.api.hgnn.repository.GuavaBuildingAreaRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuilding;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingArea;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingRepository;
+import im.prize.api.infrastructure.persistence.jpa.repository.GuavaMappingInfo;
+import im.prize.api.infrastructure.persistence.jpa.repository.GuavaMappingInfoRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegion;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegionRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.oboo.TradeArticleRepository;
@@ -248,9 +250,12 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
     }
 
     private GuavaTradeResponse transform(String tradeType, TradeArticle tradeArticle) {
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(tradeArticle.getBuildingCode());
+        Optional<BuildingMapping> optionalGuavaMappingInfo = buildingMappingRepository.findByBuildingCode(tradeArticle.getBuildingCode())
+                                                                                      .stream()
+                                                                                      .findFirst();
+//        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(tradeArticle.getBuildingCode());
 
-        List<GuavaBuildingArea> areaList = optionalGuavaBuilding.get().getAreaList();
+        List<GuavaBuildingArea> areaList = guavaBuildingAreaRepository.findByBuildingCode(tradeArticle.getBuildingCode());
         Optional<GuavaBuildingArea> first = areaList.stream()
                                                     .filter(x -> x.getAreaType()
                                                                   .toLowerCase()
@@ -265,6 +270,10 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
             first = areaList.stream()
                             .filter(x -> x.getAreaType().toLowerCase().contains(tradeArticle.getAreaName().toLowerCase()))
                             .findFirst();
+        }
+        if (!first.isPresent()) {
+            first = Optional.of(GuavaUtils.getAreaByPrivateArea(areaList,
+                                                                String.valueOf(tradeArticle.getArea2())));
         }
         GuavaBuildingArea areaByPrivateArea = first.get();
 //        GuavaBuildingArea areaByPrivateArea = GuavaUtils.getAreaByPrivateArea(optionalGuavaBuilding.get().getAreaList(),
@@ -283,7 +292,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                 tradeSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(
                     tradeArticle.getBuildingCode(),
                     areaByPrivateArea.getAreaType());
-            if(tradeSummary.isPresent()) {
+            if (tradeSummary.isPresent()) {
                 beforeMaxPrice = String.valueOf(tradeSummary.get().getPrice());
             }
         } else {
@@ -291,7 +300,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                 rentSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(
                     tradeArticle.getBuildingCode(),
                     areaByPrivateArea.getAreaType());
-            if(rentSummary.isPresent()) {
+            if (rentSummary.isPresent()) {
                 beforeMaxPrice = String.valueOf(rentSummary.get().getPrice());
             }
         }
@@ -305,11 +314,9 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
         }
         return GuavaTradeResponse.builder()
                                  .isRent(isRent)
-                                 .name(optionalGuavaBuilding.get().getName())
+                                 .name(optionalGuavaMappingInfo.get().getBuildingName())
                                  .dongName(tradeArticle.getBuildingName())
-                                 .buildingId(String.valueOf(optionalGuavaBuilding
-                                                                .map(GuavaBuilding::getId)
-                                                                .orElse(0L)))
+                                 .buildingId(String.valueOf(optionalGuavaMappingInfo.get().getId()))
                                  .regionId(String.valueOf(guavaRegionRepository.findByRegionCode(tradeArticle.getRegionCode())
                                                                                .map(GuavaRegion::getId)
                                                                                .orElse(0L)))

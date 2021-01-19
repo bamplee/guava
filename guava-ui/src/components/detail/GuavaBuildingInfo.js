@@ -22,8 +22,10 @@ const GuavaBuildingInfo = () => {
         const init = async () => {
             setBuilding(await getDetail(region.buildingId));
         };
-        init();
-    }, []);
+        if(region.type === 'BUILDING') {
+            init();
+        }
+    }, [region]);
 
     return (
         <div className={cx('title_container')}>
@@ -50,7 +52,11 @@ const GuavaBuildingInfo = () => {
                             <span>주차 {building.parkingTotal}대</span>
                         </span>
                     </div> :
-                    <GuavaLoading isLoading={true}/>
+                    <div className={cx('title')}>
+                        <span className={cx('address')}>
+                            {region.address}
+                        </span>
+                    </div>
             }
         </div>
     );

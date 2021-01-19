@@ -44,16 +44,6 @@ const GuavaAreaTypeFilter = () => {
                 {
                     (building && building.areaList) &&
                     <div className={cx('area_container')}>
-                        {/*<div onClick={() => {*/}
-                        {/*    setAreaType({areaId: ''});*/}
-                        {/*    setShowAreaTypeFilter(false)*/}
-                        {/*}} className={cx('area_list')}>*/}
-                        {/*    <div className={cx('all')}>*/}
-                        {/*        <div>*/}
-                        {/*            전체선택*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
                         {
                             building && building.areaList && building.areaList.map((x, idx) =>
                                 <div key={'area-list-' + idx}

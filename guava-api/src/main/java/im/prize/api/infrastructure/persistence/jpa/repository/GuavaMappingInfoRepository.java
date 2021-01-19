@@ -6,8 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GuavaMappingInfoRepository extends JpaRepository<GuavaMappingInfo, Long>, JpaSpecificationExecutor<GuavaMappingInfo> {
     List<GuavaMappingInfo> findByIdGreaterThanEqual(Long id);
@@ -19,6 +21,9 @@ public interface GuavaMappingInfoRepository extends JpaRepository<GuavaMappingIn
     List<GuavaMappingInfo> findByRegionCodeStartsWithAndPortalIdIsNotNull(String regionCode);
 
     List<GuavaMappingInfo> findByBuildingCodeIn(List<String> buildingCodeList);
+
+//    @Query(value = "SELECT * FROM building_mapping_tb t WHERE t.building_code = BINARY(?1)", nativeQuery = true)
+//    Optional<GuavaMappingInfo> findByBuildingCode(String buildingCode);
 
     List<GuavaMappingInfo> findByRegionCode(String regionCode);
 
