@@ -99,7 +99,6 @@ const GuavaSearchHeader = () => {
                                    }
                                }}
                                onChange={onChangeQuery}
-                               className={cx('search_input')}
                                placeholder="지역 / 아파트 명을 입력하세요">
                         </input>
                     </div>

@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.less';
 import {ActivityIndicator} from 'antd-mobile';
 import GuavaAreaFilter from './common/GuavaAreaFilter';
-import GuavaAreaTypeFilter from './common/GuavaAreaTypeFilter';
 import ReactGA from 'react-ga';
 import {DetailHeaderPage, IntroPage, MapPage} from '../pages';
 import SearchPage from '../pages/SearchPage';
@@ -24,7 +23,6 @@ function App() {
                         animating={false}
                     />}>
                         <GuavaAreaFilter/>
-                        <GuavaAreaTypeFilter/>
                         <Route exact path={['/']} component={MapPage}/>
                         <Route exact path={['/intro']} component={IntroPage}/>
                         <Route exact path={['/search']} component={SearchPage}/>

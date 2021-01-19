@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {Modal} from 'antd-mobile';
 
@@ -6,7 +6,8 @@ import classNames from 'classnames/bind';
 
 import styles from './guavaAreaTypeFilter.scss';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {areaTypeState, buildingState, showAreaTypeFilterState,} from '../datatool/state';
+import {areaTypeState, buildingState, regionState, showAreaTypeFilterState,} from '../datatool/state';
+import {getDetail} from '../datatool/api';
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +15,15 @@ const GuavaAreaTypeFilter = () => {
     // const [building, setBuilding] = useRecoilState(buildingState);
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
     const [showAreaTypeFilter, setShowAreaTypeFilter] = useRecoilState(showAreaTypeFilterState);
-    const building = useRecoilValue(buildingState);
+    const [building, setBuilding] = useState(null);
+    const region = useRecoilValue(regionState);
+
+    useEffect(() => {
+        const init = async () => {
+            setBuilding(await getDetail(region.buildingId));
+        };
+        init();
+    }, []);
 
     return (
         <div className={cx('modal-container')}>
@@ -25,7 +34,7 @@ const GuavaAreaTypeFilter = () => {
                     setAreaType({areaId: ''});
                     setShowAreaTypeFilter(false)
                 }} className={cx('all')}>
-                        전체선택
+                    전체선택
                 </div>}
                 visible={showAreaTypeFilter}
                 onCancel={() => setShowAreaTypeFilter(false)}

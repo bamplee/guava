@@ -53,6 +53,7 @@ public class NaverPcLandResponse {
         private String latitude;
         private String longitude;
         private Boolean isLocationShow;
+        private String rentPrc;
         private String realtorName;
         private String realtorId;
         private Boolean tradeCheckedByOwner;

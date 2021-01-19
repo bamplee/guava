@@ -12,8 +12,6 @@ import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingArea;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegion;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegionRepository;
-import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegionStatsRepository;
-import im.prize.api.infrastructure.persistence.jpa.repository.oboo.OpenApiTradeInfoRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.oboo.TradeArticleRepository;
 import im.prize.api.interfaces.GuavaTradeSearch;
 import im.prize.api.interfaces.response.AreaResponse;
@@ -26,7 +24,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -43,6 +40,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
     private String kakaoMapApiKey;
     private final GuavaRegionRepository guavaRegionRepository;
     private final GuavaBuildingRepository guavaBuildingRepository;
+    private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
     private final TradeArticleRepository tradeArticleRepository;
     private final BuildingMappingRepository buildingMappingRepository;
     private final RentSummaryRepository rentSummaryRepository;
@@ -53,6 +51,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
 
     public GuavaMarketServiceImpl(GuavaRegionRepository guavaRegionRepository,
                                   GuavaBuildingRepository guavaBuildingRepository,
+                                  GuavaBuildingAreaRepository guavaBuildingAreaRepository,
                                   TradeArticleRepository tradeArticleRepository,
                                   BuildingMappingRepository buildingMappingRepository,
                                   RentSummaryRepository rentSummaryRepository,
@@ -60,6 +59,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                   ObjectMapper objectMapper) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
+        this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
         this.tradeArticleRepository = tradeArticleRepository;
         this.buildingMappingRepository = buildingMappingRepository;
         this.rentSummaryRepository = rentSummaryRepository;
@@ -132,7 +132,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                      .filter(x -> !dupleKeyList.contains(getDupleCheckKey(x)))
                                                      .collect(Collectors.toList());
 
-        return Stream.concat(progressList.stream(), endList.stream()).peek(openApiTradeInfo -> {
+        return Stream.concat(progressList.stream(), endList.stream())/*.peek(openApiTradeInfo -> {
             Optional<GuavaBuilding> first = guavaBuildingRepository.findByBuildingCode(openApiTradeInfo.getBuildingCode());
             if (first.isPresent()) {
                 List<GuavaBuildingArea> guavaBuildingAreaList = first.get().getAreaList();
@@ -141,7 +141,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                 openApiTradeInfo.setArea1(String.valueOf(areaBuildingArea.getPrivateArea()));
                 openApiTradeInfo.setArea2(String.valueOf(areaBuildingArea.getPublicArea()));
             }
-        }).sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
+        })*/.sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
                      .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1)).collect(Collectors.toList());
     }
 
@@ -190,7 +190,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                      .filter(x -> !dupleKeyList.contains(getDupleCheckKey(x)))
                                                      .collect(Collectors.toList());
 
-        return Stream.concat(progressList.stream(), endList.stream()).peek(tradeArticle -> {
+        return Stream.concat(progressList.stream(), endList.stream())/*.peek(tradeArticle -> {
             Optional<GuavaBuildingArea> first = guavaBuildingAreaList.stream()
                                                                      .filter(x -> x.getAreaType().equals(tradeArticle.getAreaName()))
                                                                      .findFirst();
@@ -198,7 +198,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
             tradeArticle.setAreaName(String.valueOf(areaBuildingArea.getId()));
             tradeArticle.setArea1(String.valueOf(areaBuildingArea.getPrivateArea()));
             tradeArticle.setArea2(String.valueOf(areaBuildingArea.getPublicArea()));
-        }).filter(x -> !StringUtils.isNotEmpty(areaId) || x.getAreaName().equals(areaId))
+        }).filter(x -> !StringUtils.isNotEmpty(areaId) || x.getAreaName().equals(areaId))*/
                      .sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
                      .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1)).collect(Collectors.toList());
     }
@@ -249,8 +249,18 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
 
     private GuavaTradeResponse transform(String tradeType, TradeArticle tradeArticle) {
         Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(tradeArticle.getBuildingCode());
-        GuavaBuildingArea areaByPrivateArea = GuavaUtils.getAreaByPrivateArea(optionalGuavaBuilding.get().getAreaList(),
-                                                                              String.valueOf(tradeArticle.getArea1()));
+
+        List<GuavaBuildingArea> areaList = optionalGuavaBuilding.get().getAreaList();
+        Optional<GuavaBuildingArea> first = areaList.stream().filter(x -> x.getAreaType().equals(tradeArticle.getAreaName())).findFirst();
+        if (!first.isPresent()) {
+            first = areaList.stream().filter(x -> x.getAreaType().replace("타입", "").contains(tradeArticle.getAreaName())).findFirst();
+        }
+        if (!first.isPresent()) {
+            first = areaList.stream().filter(x -> x.getAreaType().contains(tradeArticle.getAreaName())).findFirst();
+        }
+        GuavaBuildingArea areaByPrivateArea = first.get();
+//        GuavaBuildingArea areaByPrivateArea = GuavaUtils.getAreaByPrivateArea(optionalGuavaBuilding.get().getAreaList(),
+//                                                                              String.valueOf(tradeArticle.getArea1()));
         LocalDate yyyyMMdd = LocalDate.parse(tradeArticle.getStartDate(), DATE_TIME_FORMATTER_YYYYMMDD);
         int untilDays = LocalDate.parse(tradeArticle.getArticleConfirmYmd(), DATE_TIME_FORMATTER_YYYYMMDD)
                                  .until(LocalDate.now())
@@ -261,11 +271,15 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
 
         String beforeMaxPrice = "";
         if ("trade".equals(tradeType)) {
-            beforeMaxPrice = String.valueOf(tradeSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(tradeArticle.getBuildingCode(),
-                                                                                                                    areaByPrivateArea.getAreaType()).getPrice());
+            beforeMaxPrice =
+                String.valueOf(tradeSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(tradeArticle.getBuildingCode(),
+                                                                                                        areaByPrivateArea.getAreaType())
+                                                     .getPrice());
         } else {
-            beforeMaxPrice = String.valueOf(rentSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(tradeArticle.getBuildingCode(),
-                                                                                                                    areaByPrivateArea.getAreaType()).getPrice());
+            beforeMaxPrice =
+                String.valueOf(rentSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(tradeArticle.getBuildingCode(),
+                                                                                                       areaByPrivateArea.getAreaType())
+                                                    .getPrice());
         }
 
         String articleFeatureDesc = tradeArticle.getArticleFeatureDesc();
@@ -294,7 +308,8 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                                                                         .split("/")[0] :
                                             tradeArticle.getFloorInfo())
                                  .price(String.valueOf(tradeArticle.getPrice()))
-                                 .priceName(tradeArticle.getSameAddrMinPrc())
+                                 .priceName(tradeArticle.getSummaryPrice())
+                                 .subPrice(tradeArticle.getRentPrc())
                                  .beforeMaxPrice(beforeMaxPrice)
                                  .beforeMaxPriceName(GuavaUtils.getTradePrice(beforeMaxPrice))
                                  .minusPrice(StringUtils.isNotEmpty(beforeMaxPrice) ?

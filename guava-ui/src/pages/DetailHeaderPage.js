@@ -8,6 +8,7 @@ import GuavaChart from '../components/detail/GuavaChart';
 import GuavaTable from '../components/table/GuavaTable';
 import {useRecoilValue} from 'recoil';
 import {regionState} from '../components/datatool/state';
+import GuavaAreaTypeFilter from '../components/common/GuavaAreaTypeFilter';
 
 const DetailHeaderPage = ({match, location}) => {
     const region = useRecoilValue(regionState);
@@ -16,21 +17,25 @@ const DetailHeaderPage = ({match, location}) => {
         <>
             <GuavaDetailHeader tabId={!match.params.tabId ? '0' : match.params.tabId}/>
             {
-                region && (!match.params.tabId || match.params.tabId === '0') &&
+                region &&
                 <>
+                    <GuavaAreaTypeFilter/>
                     <GuavaBuildingInfo/>
                     <GuavaTradeOption/>
-                    <GuavaChart/>
-                    <GuavaTable/>
-                </>
-            }
-            {
-                region && match.params.tabId === '1' &&
-                <>
-                    <GuavaBuildingInfo/>
-                    <GuavaTradeOption/>
-                    <GuavaMarketChart/>
-                    <GuavaMarketTable/>
+                    {
+                        (!match.params.tabId || match.params.tabId === '0') &&
+                        <>
+                            <GuavaChart/>
+                            <GuavaTable/>
+                        </>
+                    }
+                    {
+                        match.params.tabId === '1' &&
+                        <>
+                            <GuavaMarketChart/>
+                            <GuavaMarketTable/>
+                        </>
+                    }
                 </>
             }
         </>

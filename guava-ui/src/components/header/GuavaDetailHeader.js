@@ -26,13 +26,13 @@ const GuavaDetailHeader = ({tabId}) => {
         if (regionType === 'b') {
             const init = async () => {
                 setRegion(await getBuilding(regionId));
-                setBuilding(await getDetail(regionId));
+                // setBuilding(await getDetail(regionId));
             };
             init();
         } else {
             const init = async () => {
                 setRegion(await getRegion(regionId));
-                setBuilding(null);
+                // setBuilding(null);
             };
             init();
         }

@@ -87,8 +87,9 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                    .parallelStream()
                    .filter(x -> x.getRegionType() == type)
                    .map(this::transform)
-                   .filter(ObjectUtils::isNotEmpty)
-                   .peek(x -> x.setType(type))
+                   .filter(Optional::isPresent)
+                   .map(Optional::get)
+//                   .peek(x -> x.setType(type))
                    .collect(Collectors.toList());
     }
 
@@ -555,7 +556,8 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
 
     public Optional<GuavaSummaryResponse> transform(BuildingMapping buildingMapping) {
 //        List<GuavaBuildingArea> byBuildingCode = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
-        Optional<TradeSummary> optionalTradeSummary = tradeSummaryRepository.findTop1ByBuildingCodeOrderByDateDesc(buildingMapping.getBuildingCode());
+        Optional<TradeSummary> optionalTradeSummary =
+            tradeSummaryRepository.findTop1ByBuildingCodeOrderByDateDesc(buildingMapping.getBuildingCode());
         if (!optionalTradeSummary.isPresent()) {
             return Optional.empty();
         }
@@ -627,71 +629,38 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                                                .build());
     }
 
-    private GuavaSummaryResponse transform(GuavaRegion guavaRegion) {
-        int price = 0;
-        int marketPrice = 0;
+    private Optional<GuavaSummaryResponse> transform(GuavaRegion guavaRegion) {
+//        int price = 0;
+//        int marketPrice = 0;
+        String regionCode = "";
         if (guavaRegion.getRegionType() == RegionType.SIDO) {
-            List<GuavaRegionStats> optionalGuavaRegionStats = guavaRegionStatsRepository.findByRegionCodeLike(guavaRegion.getSido() + "%");
-            if (optionalGuavaRegionStats.size() > 0) {
-                List<Integer> validPrice = optionalGuavaRegionStats.stream()
-                                                                   .map(GuavaRegionStats::getPrice)
-                                                                   .filter(x -> x != 0)
-                                                                   .collect(Collectors.toList());
-                List<Integer> validMarketPrice = optionalGuavaRegionStats.stream()
-                                                                         .map(GuavaRegionStats::getMarketPrice)
-                                                                         .filter(x -> x != 0)
-                                                                         .collect(Collectors.toList());
-                if (validPrice.size() > 0) {
-                    price = validPrice.stream().reduce((a, b) -> a + b).orElse(0) / validPrice.size();
-                }
-                if (validMarketPrice.size() > 0) {
-                    marketPrice = validMarketPrice.stream().reduce((a, b) -> a + b).orElse(0) / validMarketPrice.size();
-                }
-                if (price + marketPrice == 0) {
-                    return null;
-                }
-            }
+            regionCode = guavaRegion.getSido() + "%";
         } else if (guavaRegion.getRegionType() == RegionType.SIGUNGU) {
-            List<GuavaRegionStats> optionalGuavaRegionStats = guavaRegionStatsRepository.findByRegionCodeLike(guavaRegion.getSigunguCode() +
-                                                                                                                  "%");
-            if (optionalGuavaRegionStats.size() > 0) {
-                List<Integer> validPrice = optionalGuavaRegionStats.stream()
-                                                                   .map(GuavaRegionStats::getPrice)
-                                                                   .filter(x -> x != 0)
-                                                                   .collect(Collectors.toList());
-                List<Integer> validMarketPrice = optionalGuavaRegionStats.stream()
-                                                                         .map(GuavaRegionStats::getMarketPrice)
-                                                                         .filter(x -> x != 0)
-                                                                         .collect(Collectors.toList());
-                if (validPrice.size() > 0) {
-                    price = validPrice.stream().reduce((a, b) -> a + b).orElse(0) / validPrice.size();
-                }
-                if (validMarketPrice.size() > 0) {
-                    marketPrice = validMarketPrice.stream().reduce((a, b) -> a + b).orElse(0) / validMarketPrice.size();
-                }
-                if (price + marketPrice == 0) {
-                    return null;
-                }
-            }
+            regionCode = guavaRegion.getSigunguCode() + "%";
         } else if (guavaRegion.getRegionType() == RegionType.DONG) {
-            Optional<GuavaRegionStats> optionalGuavaRegionStats = guavaRegionStatsRepository.findByRegionCode(guavaRegion.getRegionCode());
-            if (optionalGuavaRegionStats.isPresent()) {
-                price = optionalGuavaRegionStats.get().getPrice();
-                marketPrice = optionalGuavaRegionStats.get().getMarketPrice();
-            }
-            if (price + marketPrice == 0) {
-                return null;
-            }
+            regionCode = guavaRegion.getRegionCode();
         }
 
-        return GuavaSummaryResponse.builder()
-                                   .id(String.valueOf(guavaRegion.getId()))
-                                   .lat(guavaRegion.getLat())
-                                   .lng(guavaRegion.getLng())
-                                   .name(guavaRegion.getDisplayName())
-                                   .price(GuavaUtils.getSummaryPrice(String.valueOf(price)))
-                                   .marketPrice(GuavaUtils.getSummaryPrice(String.valueOf(marketPrice)))
-                                   .build();
+        List<TradeSummary> optionalTradeSummary = tradeSummaryRepository.findTop100ByRegionCodeLikeAndPrivateAreaIsNotNullOrderByDateDesc(regionCode);
+        if (optionalTradeSummary.size() <= 0) {
+            return Optional.empty();
+        }
+        int price = optionalTradeSummary.stream()
+                                        .map(x -> x.getPrice() / x.getPrivateArea())
+                                        .reduce((a, b) -> a + b).orElse(0d).intValue();
+        if (price != 0) {
+            price = (int) (Math.floor((price / optionalTradeSummary.size()) * 84 / 1000) * 1000);
+        }
+
+        return Optional.of(GuavaSummaryResponse.builder()
+                                               .id(String.valueOf(guavaRegion.getId()))
+                                               .lat(guavaRegion.getLat())
+                                               .lng(guavaRegion.getLng())
+                                               .name(guavaRegion.getDisplayName())
+                                               .price(GuavaUtils.getSummaryPrice(String.valueOf(price)))
+                                               .type(guavaRegion.getRegionType())
+//                                   .marketPrice(GuavaUtils.getSummaryPrice(String.valueOf(marketPrice)))
+                                               .build());
 
     }
 

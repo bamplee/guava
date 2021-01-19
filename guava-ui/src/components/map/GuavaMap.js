@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
 import classNames from 'classnames/bind';
 import {useHistory} from 'react-router-dom';
+import { Badge } from 'antd-mobile';
 
 import {fetchSummary} from '../datatool/api';
 
@@ -285,7 +286,7 @@ const GuavaMap = () => {
         return `<div class="customoverlay" id="${x.id}">
                                 <div class="name">${x.name}</div>
                                 <div class="price" style="display: ${x.price !== '0' ? '' : 'none;'}">${x.price}</div>
-                                <div class="market_price" style="display: ${x.marketPrice ? '' : 'none;'}">${x.marketPrice}</div>
+<!--                                <div class="market_price" style="display: ${x.marketPrice ? '' : 'none;'}">${x.marketPrice}</div>-->
                            </div>`;
     };
 
@@ -293,7 +294,7 @@ const GuavaMap = () => {
         return `<div class="customoverlay" id="${x.id}">
                                 <div class="name">${x.name}</div>
                                 <div class="price" style="display: ${x.price !== '0' ? '' : 'none;'}">${x.price}</div>
-                                <div class="market_price" style="display: ${x.marketPrice !== '0' ? '' : 'none;'}">${x.marketPrice}</div>
+<!--                                <div class="market_price" style="display: ${x.marketPrice !== '0' ? '' : 'none;'}">${x.marketPrice}</div>-->
                            </div>`;
     };
 

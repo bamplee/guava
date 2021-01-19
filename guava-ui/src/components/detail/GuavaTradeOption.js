@@ -9,7 +9,6 @@ import {getEndArea, getStartArea} from '../constant';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
     areaTypeState,
-    buildingState,
     filterAreaState,
     regionState,
     showAreaFilterState,
@@ -24,9 +23,7 @@ const GuavaTradeOption = () => {
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const [showAreaTypeFilter, setShowAreaTypeFilter] = useRecoilState(showAreaTypeFilterState);
     const [showAreaFilter, setShowAreaFilter] = useRecoilState(showAreaFilterState);
-    // const [building, setBuilding] = useRecoilState(buildingState);
     const region = useRecoilValue(regionState);
-    const building = useRecoilValue(buildingState);
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
     // useEffect(() => {
@@ -75,7 +72,7 @@ const GuavaTradeOption = () => {
                     style={{height: 30, width: 140}}
                 />
                 {
-                    region && region.type === 'BUILDING' && building && building.areaList.length > 0 ?
+                    region && region.type === 'BUILDING' ?
                         <Button className={cx('filter_btn', areaType.areaId !== '' ? 'active' : '')}
                                 type={areaType.areaId !== '' ? 'primary' : ''}
                                 inline

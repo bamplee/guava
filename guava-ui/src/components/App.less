@@ -41,7 +41,7 @@ body {
   background: #1B69D9;
   border: 1px solid #1451A6;
   padding: 3px 3px 5px;
-  border-radius: 10px;
+  border-radius: 8px;
   -ms-user-select: none;
   -moz-user-select: -moz-none;
   -webkit-user-select: none;
@@ -49,16 +49,29 @@ body {
   user-select: none;
 
   .name {
-    font-size: 0.5rem;
-    color: #FFF;
+    font-size: 10px;
+    font-weight: 300;
+    color: #f2f2f2;
   }
 
   .price {
-    font-size: 0.7rem;
-    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    //align-items:center;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 400;
     //color: #B4C7D5;
     //color: #F5DCB5;
     color: #FFF;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 20px;
+    position: fixed;
   }
 
   .market_price {

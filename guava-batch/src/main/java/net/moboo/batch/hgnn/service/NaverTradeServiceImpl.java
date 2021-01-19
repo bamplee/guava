@@ -232,6 +232,7 @@ public class NaverTradeServiceImpl implements NaverTradeService {
         tradeArticle.setLatitude(item.getLatitude());
         tradeArticle.setLongitude(item.getLongitude());
         tradeArticle.setIsLocationShow(item.getIsLocationShow());
+        tradeArticle.setRentPrc(item.getRentPrc());
         tradeArticle.setRealtorName(item.getRealtorName());
         tradeArticle.setRealtorId(item.getRealtorId());
         tradeArticle.setTradeCheckedByOwner(item.getTradeCheckedByOwner());
