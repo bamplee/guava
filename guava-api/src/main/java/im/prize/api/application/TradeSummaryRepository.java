@@ -17,7 +17,7 @@ public interface TradeSummaryRepository extends JpaRepository<TradeSummary, Long
 
     Page<TradeSummary> findByBuildingCodeAndAreaCode(String buildingCode, String areaCode, Pageable pageable);
 
-    TradeSummary findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(String buildingCode, String areaType);
+    Optional<TradeSummary> findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(String buildingCode, String areaType);
 
     Optional<TradeSummary> findTop1ByBuildingCodeOrderByDateDesc(String buildingCode);
 

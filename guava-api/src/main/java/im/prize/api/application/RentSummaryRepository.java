@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RentSummaryRepository extends JpaRepository<RentSummary, Long>, JpaSpecificationExecutor<RentSummary> {
     List<RentSummary> findByBuildingCode(String buildingCode);
 
-    RentSummary findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(String buildingCode, String areaType);
+    Optional<RentSummary> findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(String buildingCode, String areaType);
 }

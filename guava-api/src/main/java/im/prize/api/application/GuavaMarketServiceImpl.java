@@ -251,12 +251,20 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
         Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(tradeArticle.getBuildingCode());
 
         List<GuavaBuildingArea> areaList = optionalGuavaBuilding.get().getAreaList();
-        Optional<GuavaBuildingArea> first = areaList.stream().filter(x -> x.getAreaType().equals(tradeArticle.getAreaName())).findFirst();
+        Optional<GuavaBuildingArea> first = areaList.stream()
+                                                    .filter(x -> x.getAreaType()
+                                                                  .toLowerCase()
+                                                                  .equals(tradeArticle.getAreaName().toLowerCase()))
+                                                    .findFirst();
         if (!first.isPresent()) {
-            first = areaList.stream().filter(x -> x.getAreaType().replace("타입", "").contains(tradeArticle.getAreaName())).findFirst();
+            first = areaList.stream()
+                            .filter(x -> x.getAreaType().replace("타입", "").toLowerCase().contains(tradeArticle.getAreaName().toLowerCase()))
+                            .findFirst();
         }
         if (!first.isPresent()) {
-            first = areaList.stream().filter(x -> x.getAreaType().contains(tradeArticle.getAreaName())).findFirst();
+            first = areaList.stream()
+                            .filter(x -> x.getAreaType().toLowerCase().contains(tradeArticle.getAreaName().toLowerCase()))
+                            .findFirst();
         }
         GuavaBuildingArea areaByPrivateArea = first.get();
 //        GuavaBuildingArea areaByPrivateArea = GuavaUtils.getAreaByPrivateArea(optionalGuavaBuilding.get().getAreaList(),
@@ -271,15 +279,21 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
 
         String beforeMaxPrice = "";
         if ("trade".equals(tradeType)) {
-            beforeMaxPrice =
-                String.valueOf(tradeSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(tradeArticle.getBuildingCode(),
-                                                                                                        areaByPrivateArea.getAreaType())
-                                                     .getPrice());
+            Optional<TradeSummary> tradeSummary =
+                tradeSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(
+                    tradeArticle.getBuildingCode(),
+                    areaByPrivateArea.getAreaType());
+            if(tradeSummary.isPresent()) {
+                beforeMaxPrice = String.valueOf(tradeSummary.get().getPrice());
+            }
         } else {
-            beforeMaxPrice =
-                String.valueOf(rentSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(tradeArticle.getBuildingCode(),
-                                                                                                       areaByPrivateArea.getAreaType())
-                                                    .getPrice());
+            Optional<RentSummary> rentSummary =
+                rentSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(
+                    tradeArticle.getBuildingCode(),
+                    areaByPrivateArea.getAreaType());
+            if(rentSummary.isPresent()) {
+                beforeMaxPrice = String.valueOf(rentSummary.get().getPrice());
+            }
         }
 
         String articleFeatureDesc = tradeArticle.getArticleFeatureDesc();
