@@ -21,5 +21,13 @@ public interface TradeSummaryRepository extends JpaRepository<TradeSummary, Long
 
     Optional<TradeSummary> findTop1ByBuildingCodeOrderByDateDesc(String buildingCode);
 
+    Optional<TradeSummary> findTop1ByBuildingCodeAndPrivateAreaGreaterThanEqualAndPrivateAreaLessThanEqualOrderByDateDesc(String buildingCode,
+                                                                                                                          Double startArea,
+                                                                                                                          Double endArea);
+
     List<TradeSummary> findTop100ByRegionCodeLikeAndPrivateAreaIsNotNullOrderByDateDesc(String regionCode);
+
+    List<TradeSummary> findTop100ByRegionCodeLikeAndPrivateAreaGreaterThanEqualAndPrivateAreaLessThanEqualOrderByDateDesc(String regionCode,
+                                                                                                                          Double startArea,
+                                                                                                                          Double endArea);
 }

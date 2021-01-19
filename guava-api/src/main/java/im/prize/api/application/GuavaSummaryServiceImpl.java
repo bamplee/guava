@@ -1,5 +1,6 @@
 package im.prize.api.application;
 
+import com.google.common.collect.Lists;
 import im.prize.api.domain.oboo.OpenApiTradeInfo;
 import im.prize.api.domain.oboo.TradeArticle;
 import im.prize.api.hgnn.repository.BuildingMapping;
@@ -78,7 +79,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         if (type == RegionType.BUILDING) {
             return this.getBuildingList(northEastLng, northEastLat, southWestLng, southWestLat)
                        .parallelStream()
-                       .map(this::transform)
+                       .map(buildingMapping -> transform(buildingMapping, startArea, endArea))
                        .filter(Optional::isPresent)
                        .map(Optional::get)
                        .collect(Collectors.toList());
@@ -86,7 +87,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         return this.getRegionList(northEastLng, northEastLat, southWestLng, southWestLat)
                    .parallelStream()
                    .filter(x -> x.getRegionType() == type)
-                   .map(this::transform)
+                   .map(guavaRegion -> transform(guavaRegion, startArea, endArea))
                    .filter(Optional::isPresent)
                    .map(Optional::get)
 //                   .peek(x -> x.setType(type))
@@ -554,10 +555,18 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         return this.searchGuavaBuilding(northEastLng, northEastLat, southWestLng, southWestLat);
     }
 
-    public Optional<GuavaSummaryResponse> transform(BuildingMapping buildingMapping) {
+    public Optional<GuavaSummaryResponse> transform(BuildingMapping buildingMapping, Integer startArea, Integer endArea) {
 //        List<GuavaBuildingArea> byBuildingCode = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
-        Optional<TradeSummary> optionalTradeSummary =
-            tradeSummaryRepository.findTop1ByBuildingCodeOrderByDateDesc(buildingMapping.getBuildingCode());
+        Optional<TradeSummary> optionalTradeSummary = Optional.empty();
+        if (startArea == 0 && endArea >= 500) {
+            optionalTradeSummary = tradeSummaryRepository.findTop1ByBuildingCodeOrderByDateDesc(buildingMapping.getBuildingCode());
+        } else {
+            optionalTradeSummary =
+                tradeSummaryRepository.findTop1ByBuildingCodeAndPrivateAreaGreaterThanEqualAndPrivateAreaLessThanEqualOrderByDateDesc(
+                    buildingMapping.getBuildingCode(),
+                    (double) startArea,
+                    (double) endArea);
+        }
         if (!optionalTradeSummary.isPresent()) {
             return Optional.empty();
         }
@@ -579,57 +588,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                                                .build());
     }
 
-    public Optional<GuavaSummaryResponse> transform(GuavaBuilding guavaBuilding, Integer startArea, Integer endArea) {
-        Optional<OpenApiTradeInfo> optionalTrade =
-            openApiTradeInfoRepository.findTop100ByBuildingIdAndAreaBetweenOrderByDateDesc(guavaBuilding.getBuildingCode(),
-                                                                                           Double.valueOf(startArea),
-                                                                                           Double.valueOf(endArea))
-                                      .stream()
-                                      .findFirst();
-        if (!optionalTrade.isPresent()) {
-            return Optional.empty();
-        }
-        OpenApiTradeInfo openApiTradeInfo = optionalTrade.get();
-        GuavaBuildingArea guavaBuildingArea = GuavaUtils.getAreaByPrivateArea(guavaBuilding.getAreaList(),
-                                                                              String.valueOf(openApiTradeInfo.getArea()));
-//        double publicArea = guavaBuildingArea.getPublicArea();
-        String marketPrice = null;
-        Optional<TradeArticle> tradeArticle = tradeArticleRepository.findByBuildingCodeAndArea1AndArea2(guavaBuilding.getBuildingCode(),
-                                                                                                        String.valueOf((int) Math.floor(
-                                                                                                            guavaBuildingArea.getPublicArea())),
-                                                                                                        String.valueOf((int) Math.floor(
-                                                                                                            guavaBuildingArea.getPrivateArea())))
-                                                                    .stream()
-                                                                    .max(Comparator.comparingInt(TradeArticle::getPrice));
-        if (tradeArticle.isPresent()) {
-            marketPrice = tradeArticle.get().getTradePrice();
-        }
-//        List<GuavaTradeResponse> buildingMarketList = this.getBuildingMarketList(String.valueOf(guavaBuilding.getId()),
-//                                                                                 0,
-//                                                                                 String.valueOf(areaByPrivateArea.getId()));
-//        if (buildingMarketList.size() > 0) {
-//            marketPrice = buildingMarketList.stream()
-//                                            .map(x -> NumberUtils.toInt(x.getPrice()))
-//                                            .max(Integer::compareTo)
-//                                            .map(String::valueOf)
-//                                            .orElse("");
-//        }
-        String name = String.valueOf((int) (openApiTradeInfo.getArea() * 0.3025));
-        if (guavaBuildingArea.getPublicArea() != 0d) {
-            name = String.valueOf((int) (guavaBuildingArea.getPublicArea() * 0.3025));
-        }
-        return Optional.of(GuavaSummaryResponse.builder()
-                                               .type(RegionType.BUILDING)
-                                               .id(String.valueOf(guavaBuilding.getId()))
-                                               .lat(guavaBuilding.getLat())
-                                               .lng(guavaBuilding.getLng())
-                                               .price(openApiTradeInfo.getSummaryPrice())
-                                               .marketPrice(marketPrice)
-                                               .name(name)
-                                               .build());
-    }
-
-    private Optional<GuavaSummaryResponse> transform(GuavaRegion guavaRegion) {
+    private Optional<GuavaSummaryResponse> transform(GuavaRegion guavaRegion, Integer startArea, Integer endArea) {
 //        int price = 0;
 //        int marketPrice = 0;
         String regionCode = "";
@@ -641,15 +600,33 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
             regionCode = guavaRegion.getRegionCode();
         }
 
-        List<TradeSummary> optionalTradeSummary = tradeSummaryRepository.findTop100ByRegionCodeLikeAndPrivateAreaIsNotNullOrderByDateDesc(regionCode);
+        List<TradeSummary> optionalTradeSummary = Lists.newArrayList();
+        if (startArea == 0 && endArea >= 500) {
+            optionalTradeSummary = tradeSummaryRepository.findTop100ByRegionCodeLikeAndPrivateAreaIsNotNullOrderByDateDesc(regionCode);
+        } else {
+            optionalTradeSummary =
+                tradeSummaryRepository.findTop100ByRegionCodeLikeAndPrivateAreaGreaterThanEqualAndPrivateAreaLessThanEqualOrderByDateDesc(
+                    regionCode,
+                    (double) startArea,
+                    (double) endArea);
+        }
+
         if (optionalTradeSummary.size() <= 0) {
             return Optional.empty();
         }
+
         int price = optionalTradeSummary.stream()
                                         .map(x -> x.getPrice() / x.getPrivateArea())
                                         .reduce((a, b) -> a + b).orElse(0d).intValue();
+
         if (price != 0) {
-            price = (int) (Math.floor((price / optionalTradeSummary.size()) * 84 / 1000) * 1000);
+            // area 별 평균가격 계산, 기본은 84 기준
+            if (startArea == 0 && endArea >= 500) {
+                price = (int) (Math.floor((price / optionalTradeSummary.size()) * 84 / 1000) * 1000);
+            } else {
+                int base = startArea + endArea / 2;
+                price = (int) (Math.floor((price / optionalTradeSummary.size()) * base / 1000) * 1000);
+            }
         }
 
         return Optional.of(GuavaSummaryResponse.builder()
