@@ -88,12 +88,11 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                              .peek(this::fillArea)
                                              .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
-//                                   .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x
-// .getBuildingId())
-//                                                                                                      .stream()
-//                                                                                                      .findFirst()
-//                                                                                                      .map(BuildingMapping::getId)
-//                                                                                                      .orElse(0l))))
+                                             .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
+                                                                                                                .stream()
+                                                                                                                .findFirst()
+                                                                                                                .map(BuildingMapping::getId)
+                                                                                                                .orElse(0l))))
                                              .collect(Collectors.toList());
             } else {
                 return rentSummaryRepository.findAll(this.getParamsByRent(guavaRegion.getValidRegionCode(),
@@ -105,12 +104,11 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                             .peek(this::fillArea)
                                             .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
-//                                   .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x
-// .getBuildingId())
-//                                                                                                      .stream()
-//                                                                                                      .findFirst()
-//                                                                                                      .map(BuildingMapping::getId)
-//                                                                                                      .orElse(0l))))
+                                            .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
+                                                                                                               .stream()
+                                                                                                               .findFirst()
+                                                                                                               .map(BuildingMapping::getId)
+                                                                                                               .orElse(0l))))
                                             .collect(Collectors.toList());
             }
         }
@@ -132,7 +130,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                              .peek(this::fillArea)
                                              .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
-//                                   .peek(x -> x.setBuildingId(buildingId))
+                                             .peek(x -> x.setBuildingId(buildingId))
                                              .collect(Collectors.toList());
             } else {
                 return rentSummaryRepository.findAll(this.getParamsByRent(null,
@@ -144,7 +142,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                             .peek(this::fillArea)
                                             .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
-//                                   .peek(x -> x.setBuildingId(buildingId))
+                                            .peek(x -> x.setBuildingId(buildingId))
                                             .collect(Collectors.toList());
 
             }
