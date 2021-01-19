@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TradeSummaryRepository extends JpaRepository<TradeSummary, Long>, JpaSpecificationExecutor<TradeSummary> {
@@ -17,4 +18,5 @@ public interface TradeSummaryRepository extends JpaRepository<TradeSummary, Long
     Page<TradeSummary> findByBuildingCodeAndAreaCode(String buildingCode, String areaCode, Pageable pageable);
 
     TradeSummary findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(String buildingCode, String areaType);
+    Optional<TradeSummary> findTop1ByBuildingCodeOrderByDateDesc(String buildingCode);
 }

@@ -18,6 +18,7 @@ import im.prize.api.interfaces.response.AreaResponse;
 import im.prize.api.interfaces.response.GuavaBuildingDetailResponse;
 import im.prize.api.interfaces.response.GuavaSummaryResponse;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
     private final GuavaRegionStatsRepository guavaRegionStatsRepository;
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
     private final BuildingMappingRepository buildingMappingRepository;
+    private final TradeSummaryRepository tradeSummaryRepository;
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -51,7 +53,8 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                                    TradeArticleRepository tradeArticleRepository,
                                    GuavaRegionStatsRepository guavaRegionStatsRepository,
                                    GuavaBuildingAreaRepository guavaBuildingAreaRepository,
-                                   BuildingMappingRepository buildingMappingRepository) {
+                                   BuildingMappingRepository buildingMappingRepository,
+                                   TradeSummaryRepository tradeSummaryRepository) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
         this.entityManager = entityManager;
@@ -60,6 +63,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         this.guavaRegionStatsRepository = guavaRegionStatsRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
         this.buildingMappingRepository = buildingMappingRepository;
+        this.tradeSummaryRepository = tradeSummaryRepository;
     }
 
     @Override
@@ -91,7 +95,8 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
     @Override
     public GuavaBuildingDetailResponse getBuildingDetail(String buildingId) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
-        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get().getBuildingCode());
+        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(optionalBuildingMapping.get()
+                                                                                                                          .getBuildingCode());
         if (optionalGuavaBuilding.isPresent()) {
             GuavaBuilding guavaBuilding = optionalGuavaBuilding.get();
 
@@ -549,15 +554,26 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
     }
 
     public Optional<GuavaSummaryResponse> transform(BuildingMapping buildingMapping) {
-        List<GuavaBuildingArea> byBuildingCode = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
+//        List<GuavaBuildingArea> byBuildingCode = guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode());
+        Optional<TradeSummary> optionalTradeSummary = tradeSummaryRepository.findTop1ByBuildingCodeOrderByDateDesc(buildingMapping.getBuildingCode());
+        if (!optionalTradeSummary.isPresent()) {
+            return Optional.empty();
+        }
+
+        TradeSummary tradeSummary = optionalTradeSummary.get();
+
+        String name = "-";
+        if (tradeSummary.getPublicArea() != null) {
+            name = (int) (tradeSummary.getPublicArea() * 0.3025) + "평";
+        }
         return Optional.of(GuavaSummaryResponse.builder()
                                                .type(RegionType.BUILDING)
                                                .id(String.valueOf(buildingMapping.getId()))
                                                .lat(buildingMapping.getPoint().getY())
                                                .lng(buildingMapping.getPoint().getX())
-//                                               .price(openApiTradeInfo.getSummaryPrice())
+                                               .price(tradeSummary.getSummaryPrice())
 //                                               .marketPrice(marketPrice)
-                                               .name(buildingMapping.getBuildingName())
+                                               .name(name)
                                                .build());
     }
 
