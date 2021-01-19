@@ -30,6 +30,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class GuavaRentServiceImpl implements GuavaRentService {
+    private static final Integer PAGE_SIZE = 30;
+
     @Value("${app.kakao.apiKey}")
     private String kakaoMapApiKey;
     private final GuavaRegionRepository guavaRegionRepository;
@@ -127,7 +129,7 @@ public class GuavaRentServiceImpl implements GuavaRentService {
     }
 
     private PageRequest getPage(Integer page) {
-        return PageRequest.of(page, 100, Sort.by(Sort.Direction.DESC, "date"));
+        return PageRequest.of(page, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "date"));
     }
 
     private Specification<RentSummary> getParams(String regionCode, String buildingCode, String areaCode, String date) {

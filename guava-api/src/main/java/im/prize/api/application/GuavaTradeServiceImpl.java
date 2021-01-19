@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class GuavaTradeServiceImpl implements GuavaTradeService {
+    private static final Integer PAGE_SIZE = 30;
     @Value("${app.kakao.apiKey}")
     private String kakaoMapApiKey;
     private final GuavaRegionRepository guavaRegionRepository;
@@ -152,7 +153,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     }
 
     private PageRequest getPage(Integer page) {
-        return PageRequest.of(page, 100, Sort.by(Sort.Direction.DESC, "date"));
+        return PageRequest.of(page, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "date"));
     }
 
     private Specification<TradeSummary> getParamsByTrade(String regionCode, String buildingCode, String areaCode, String date) {

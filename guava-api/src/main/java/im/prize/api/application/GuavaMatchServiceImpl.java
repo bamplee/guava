@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class GuavaMatchServiceImpl implements GuavaMatchService {
+    private static final Integer PAGE_SIZE = 30;
+
     @Value("${app.kakao.apiKey}")
     private String kakaoMapApiKey;
 
@@ -39,7 +41,7 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
 
     @Override
     public GuavaMatchResponse match(Integer page) {
-        Optional<UnmappingTradeList> byBuildingIdIsNull = unmappingTradeListRepository.findByBuildingIdIsNull(PageRequest.of(page, 100))
+        Optional<UnmappingTradeList> byBuildingIdIsNull = unmappingTradeListRepository.findByBuildingIdIsNull(PageRequest.of(page, PAGE_SIZE))
                                                                                       .getContent()
                                                                                       .stream()
                                                                                       .findFirst();

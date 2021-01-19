@@ -8,7 +8,7 @@ import GuavaChart from './GuavaChart';
 import GuavaTable from '../table/GuavaTable';
 
 import styles from './guavaDetailPage.module.scss';
-import {useRecoilState} from 'recoil';
+import {useRecoilValue} from 'recoil';
 import {regionState} from '../datatool/state';
 import GuavaMarketChart from './GuavaMarketChart';
 
@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 
 const GuavaDetailPage = () => {
     const {buildingId, regionId} = useParams();
-    const [region, setRegion] = useRecoilState(regionState);
+    const region = useRecoilValue(regionState);
 
     return (
         <>

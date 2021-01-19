@@ -9,6 +9,7 @@ import {getTradeMarket} from '../datatool/api';
 import classNames from 'classnames/bind';
 import styles from './guavaChart.module.scss';
 import {Bar} from 'react-chartjs-2';
+import GuavaLoading from './GuavaLoading';
 
 const options = {
     legend: {
@@ -108,7 +109,7 @@ const GuavaMarketChart = () => {
     const [page, setPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
-    const [chartList, setChartList] = useState({label: '', datasets: []});
+    const [chartList, setChartList] = useState(null);
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
     const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
     // const [region, setRegion] = useRecoilState(regionState);
@@ -256,7 +257,13 @@ const GuavaMarketChart = () => {
 
     return (
         <div className={cx('chart_container')}>
-            <Bar data={chartList} options={options}/>
+            {
+                (chartList) ?
+                    <Bar data={chartList} options={options}/> :
+                    <div className={cx('loading')}>
+                        <GuavaLoading isLoading={true}/>
+                    </div>
+            }
         </div>
     );
 };

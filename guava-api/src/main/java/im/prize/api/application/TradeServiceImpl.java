@@ -24,6 +24,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class TradeServiceImpl implements TradeService {
+    private static final Integer PAGE_SIZE = 30;
+
     private final ApartmentMatchTableRepository apartmentMatchTableRepository;
     private final OpenApiTradeInfoRepository openApiTradeInfoRepository;
     private final AptAreaRepository aptAreaRepository;
@@ -46,7 +48,7 @@ public class TradeServiceImpl implements TradeService {
     public List<TradeDto> getTrade(String aptId, Integer page, String area) {
         Optional<ApartmentMatchTable> byId = apartmentMatchTableRepository.findById(Long.valueOf(aptId));
         if (byId.isPresent()) {
-            Pageable pageable = PageRequest.of(page, 50);
+            Pageable pageable = PageRequest.of(page, PAGE_SIZE);
             ApartmentMatchTable apartmentMatchTable = byId.get();
             List<OpenApiTradeInfo> tradeList = Lists.newArrayList();
             if (StringUtils.isEmpty(area)) {
@@ -75,7 +77,7 @@ public class TradeServiceImpl implements TradeService {
     public List<TradeDto> getNaverTrade(String aptId, Integer page) {
         Optional<ApartmentMatchTable> apartmentMatchTable = apartmentMatchTableRepository.findById(Long.valueOf(aptId));
         if (apartmentMatchTable.isPresent()) {
-            Pageable pageable = PageRequest.of(page, 50);
+            Pageable pageable = PageRequest.of(page, PAGE_SIZE);
             String portalId = apartmentMatchTable.get().getPortalId();
             return tradeItemRepository.findByHcpcNo(portalId, pageable)
                                       .stream()

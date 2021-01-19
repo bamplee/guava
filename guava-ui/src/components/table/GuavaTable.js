@@ -64,7 +64,7 @@ const GuavaTable = () => {
                 result = await getRegionTrade(tradeType, region.id, page, startArea, endArea, date);
             }
 
-            if (result.length < 50) {
+            if (result.length === 0) {
                 setIsCompleted(true);
             }
 

@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import {useHistory, useLocation, useParams} from 'react-router-dom';
+import React from 'react'
 
 import {Badge, Button, SegmentedControl} from 'antd-mobile';
 
@@ -21,12 +20,7 @@ import {
 const cx = classNames.bind(styles);
 
 const GuavaTradeOption = () => {
-    const {type} = useParams();
-    const location = useLocation();
-    const history = useHistory();
-    const [tabs, setTabs] = useState(0);
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
-    // const [region, setRegion] = useRecoilState(regionState);
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const [showAreaTypeFilter, setShowAreaTypeFilter] = useRecoilState(showAreaTypeFilterState);
     const [showAreaFilter, setShowAreaFilter] = useRecoilState(showAreaFilterState);
@@ -70,7 +64,6 @@ const GuavaTradeOption = () => {
                     selectedIndex={tradeType === 'trade' ? 0 : 1}
                     onChange={(e) => {
                         let index = e.nativeEvent.selectedSegmentIndex;
-                        console.log(location.pathname);
                         if (index === 0) {
                             setTradeType('trade');
                         } else {

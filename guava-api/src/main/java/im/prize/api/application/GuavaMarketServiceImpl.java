@@ -38,6 +38,7 @@ import java.util.stream.Stream;
 
 @Service
 public class GuavaMarketServiceImpl implements GuavaMarketService {
+    private static final Integer PAGE_SIZE = 30;
     @Value("${app.kakao.apiKey}")
     private String kakaoMapApiKey;
     private final GuavaRegionRepository guavaRegionRepository;
@@ -89,8 +90,8 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
             tradeArticleList = tradeArticleRepository.findByRegionCodeAndArea2Between(String.valueOf(guavaRegion.getRegionCode()),
                                                                                       startArea,
                                                                                       endArea,
-                                                                                      PageRequest.of(0,
-                                                                                                     100))
+                                                                                      PageRequest.of(page,
+                                                                                                     PAGE_SIZE))
                                                      .stream()
                                                      .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
                                                                                   DATE_TIME_FORMATTER_YYYYMMDD)
@@ -103,8 +104,8 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                                                                              "%"),
                                                                                           startArea,
                                                                                           endArea,
-                                                                                          PageRequest.of(0,
-                                                                                                         100))
+                                                                                          PageRequest.of(page,
+                                                                                                         PAGE_SIZE))
                                                      .stream()
                                                      .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
                                                                                   DATE_TIME_FORMATTER_YYYYMMDD)
@@ -115,8 +116,8 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
             tradeArticleList = tradeArticleRepository.findByRegionCodeLikeAndArea2Between(String.valueOf(guavaRegion.getSido() + "%"),
                                                                                           startArea,
                                                                                           endArea,
-                                                                                          PageRequest.of(0,
-                                                                                                         100))
+                                                                                          PageRequest.of(page,
+                                                                                                         PAGE_SIZE))
                                                      .stream()
                                                      .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
                                                                                   DATE_TIME_FORMATTER_YYYYMMDD)
@@ -173,8 +174,8 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
         List<TradeArticle> tradeArticleList =
             tradeArticleRepository.findByPortalIdAndTradeTypeCodeIn(String.valueOf(guavaBuilding.getPortalId()),
                                                                     tradeTypeCode,
-                                                                    PageRequest.of(0,
-                                                                                   100,
+                                                                    PageRequest.of(page,
+                                                                                   PAGE_SIZE,
                                                                                    Sort.by(Sort.Direction.DESC,
                                                                                            "articleConfirmYmd")))
                                   .stream()

@@ -23,7 +23,9 @@ const GuavaMapLabel = () => {
     }, [center.lat, center.lng, level]);
 
     useEffect(() => {
-        searchAddrFromCoords(region.lng, region.lat, setCurrentName);
+        if (region) {
+            searchAddrFromCoords(region.lng, region.lat, setCurrentName);
+        }
     }, [region]);
 
     const setCurrentName = (regionList) => {

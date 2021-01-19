@@ -15,8 +15,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
-@Table(name = "rent_summary_tb")
 public class RentSummary extends BaseEntity {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)

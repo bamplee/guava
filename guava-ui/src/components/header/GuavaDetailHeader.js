@@ -50,7 +50,7 @@ const GuavaDetailHeader = ({tabId}) => {
                         </div>
                     </WingBlank>
                     <div className={cx('center')} onClick={() => history.push('/search')}>
-                        <span className={cx('title')}>{region.name}</span>
+                        <span className={cx('title')}>{region?.name}</span>
                     </div>
                     <WingBlank>
                         <div className={cx('right')}>

@@ -9,9 +9,8 @@ const cx = classNames.bind(styles);
 const GuavaLoading = ({isLoading}) => {
     return (
         isLoading &&
-        <div>
+        <div className={cx('loading_container')}>
             <ActivityIndicator size="large" className={cx('loading')}/>
-            <div className={cx('loading_message')}>로딩중..</div>
         </div>
     )
 };
