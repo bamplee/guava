@@ -3,29 +3,17 @@ import {useHistory} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import {
-    areaTypeState,
-    filterAreaState,
-    regionState,
-    tableOptionState,
-    tradeDateState,
-    tradeTypeState
-} from '../datatool/state';
-import {getRegionTrade, getRegionTradeMarket, getTrade, getTradeMarket} from '../datatool/api';
+import {areaTypeState, filterAreaState, regionState, tradeDateState, tradeTypeState} from '../datatool/state';
+import {getRegionTradeMarket, getTradeMarket} from '../datatool/api';
 
 import classNames from 'classnames/bind';
 import styles from './guavaTable.module.scss';
-import {getEndArea, getStartArea, TABLE_OPTION} from '../constant';
-import GuavaTradeRow from './row/GuavaTradeRow';
+import {getEndArea, getStartArea} from '../constant';
 import GuavaMarketRow from './row/GuavaMarketRow';
-import GuavaRegionTradeRow from './row/GuavaRegionTradeRow';
 import GuavaRegionMarketRow from './row/GuavaRegionMarketRow';
-import GuavaTradeCol from './col/GuavaTradeCol';
 import GuavaRegionMarketCol from './col/GuavaRegionMarketCol';
-import GuavaRegionTradeCol from './col/GuavaRegionTradeCol';
 import GuavaMarketCol from './col/GuavaMarketCol';
 import GuavaLoading from '../detail/GuavaLoading';
-import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 
 const cx = classNames.bind(styles);
 
@@ -38,18 +26,17 @@ const GuavaMarketTable = () => {
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
     const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
     // const [region, setRegion] = useRecoilState(regionState);
-    const [tableOption, setTableOption] = useRecoilState(tableOptionState);
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const region = useRecoilValue(regionState);
-    const [count, setCount] = useState(0);
-    const [chartList, setChartList] = useState([]);
+    // const [count, setCount] = useState(0);
+    // const [chartList, setChartList] = useState([]);
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
     useEffect(() => {
-        if (page === 0) {
+        if (tradeList.length === 0) {
             fetch();
         }
-    }, [page]);
+    }, [tradeList]);
 
     useEffect(() => {
         setPage(0);

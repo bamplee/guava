@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import GuavaDetailHeader from '../components/header/GuavaDetailHeader';
 import GuavaBuildingInfo from '../components/detail/GuavaBuildingInfo';
 import GuavaTradeOption from '../components/detail/GuavaTradeOption';

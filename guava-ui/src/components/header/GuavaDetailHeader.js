@@ -1,15 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 
-import {useHistory, useLocation, useParams, useRouteMatch} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
 import styles from './guavaHeader.module.scss';
-import {useRecoilState, useRecoilValue} from 'recoil';
-import {
-    buildingState,
-    regionState,
-} from '../datatool/state';
+import {useRecoilState} from 'recoil';
+import {buildingState, regionState,} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
 import {Button, WingBlank} from 'antd-mobile';
@@ -18,8 +15,6 @@ import {getBuilding, getDetail, getRegion} from '../datatool/api';
 const cx = classNames.bind(styles);
 
 const GuavaDetailHeader = ({tabId}) => {
-    const location = useLocation();
-    const match = useRouteMatch();
     const history = useHistory();
     // const [region, setRegion] = useRecoilState(regionState);
     const {regionType, buildingId, regionId} = useParams();

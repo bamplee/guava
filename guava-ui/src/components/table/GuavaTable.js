@@ -3,27 +3,16 @@ import {useHistory} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import {
-    areaTypeState,
-    filterAreaState,
-    regionState,
-    tableOptionState,
-    tradeDateState,
-    tradeTypeState
-} from '../datatool/state';
-import {getRegionTrade, getRegionTradeMarket, getTrade, getTradeMarket} from '../datatool/api';
+import {areaTypeState, filterAreaState, regionState, tradeDateState, tradeTypeState} from '../datatool/state';
+import {getRegionTrade, getTrade} from '../datatool/api';
 
 import classNames from 'classnames/bind';
 import styles from './guavaTable.module.scss';
-import {getEndArea, getStartArea, TABLE_OPTION} from '../constant';
+import {getEndArea, getStartArea} from '../constant';
 import GuavaTradeRow from './row/GuavaTradeRow';
-import GuavaMarketRow from './row/GuavaMarketRow';
 import GuavaRegionTradeRow from './row/GuavaRegionTradeRow';
-import GuavaRegionMarketRow from './row/GuavaRegionMarketRow';
 import GuavaTradeCol from './col/GuavaTradeCol';
-import GuavaRegionMarketCol from './col/GuavaRegionMarketCol';
 import GuavaRegionTradeCol from './col/GuavaRegionTradeCol';
-import GuavaMarketCol from './col/GuavaMarketCol';
 import GuavaLoading from '../detail/GuavaLoading';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 
@@ -38,7 +27,6 @@ const GuavaTable = () => {
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
     const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
     // const [region, setRegion] = useRecoilState(regionState);
-    const [tableOption, setTableOption] = useRecoilState(tableOptionState);
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const region = useRecoilValue(regionState);
     const [count, setCount] = useState(0);
@@ -46,10 +34,10 @@ const GuavaTable = () => {
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
     useEffect(() => {
-        if (page === 0) {
+        if (tradeList.length === 0) {
             fetch();
         }
-    }, [page]);
+    }, [tradeList]);
 
     useEffect(() => {
         setPage(0);
@@ -57,7 +45,7 @@ const GuavaTable = () => {
         setIsLoading(false);
         setIsCompleted(false);
         // fetch();
-    }, [region, tableOption, tradeType, areaType, filterArea, tradeDate]);
+    }, [region, tradeType, areaType, filterArea, tradeDate]);
 
     const fetch = async () => {
         if (!isCompleted && !isLoading) {
@@ -71,19 +59,9 @@ const GuavaTable = () => {
 
             let result = [];
             if (region.type === 'BUILDING') {
-                if(tableOption === TABLE_OPTION.TRADE) {
-                    result = await getTrade(tradeType, region.buildingId, page, areaType.areaId, date);
-                }
-                else if(tableOption === TABLE_OPTION.MARKET) {
-                    result = await getTradeMarket(tradeType, region.buildingId, page, areaType.areaId, date);
-                }
+                result = await getTrade(tradeType, region.buildingId, page, areaType.areaId, date);
             } else {
-                if(tableOption === TABLE_OPTION.TRADE) {
-                    result = await getRegionTrade(tradeType, region.id, page, startArea, endArea, date);
-                }
-                else if(tableOption === TABLE_OPTION.MARKET) {
-                    result = await getRegionTradeMarket(tradeType, region.id, page, startArea, endArea, date);
-                }
+                result = await getRegionTrade(tradeType, region.id, page, startArea, endArea, date);
             }
 
             if (result.length < 50) {
@@ -99,34 +77,18 @@ const GuavaTable = () => {
 
     const getRow = (page, index, trade) => {
         if (region.type === 'BUILDING') {
-            if (tableOption === TABLE_OPTION.TRADE) {
-                return <GuavaTradeRow page={page} idx={index} trade={trade}/>;
-            } else if (tableOption === TABLE_OPTION.MARKET) {
-                return <GuavaMarketRow page={page} idx={index} trade={trade}/>;
-            }
+            return <GuavaTradeRow page={page} idx={index} trade={trade}/>;
         } else {
-            if (tableOption === TABLE_OPTION.TRADE) {
-                return <GuavaRegionTradeRow page={page} idx={index} trade={trade}/>;
-            } else if (tableOption === TABLE_OPTION.MARKET) {
-                return <GuavaRegionMarketRow page={page} idx={index} trade={trade}/>;
-            }
+            return <GuavaRegionTradeRow page={page} idx={index} trade={trade}/>;
         }
         return <></>;
     };
 
     const getCol = () => {
         if (region.type === 'BUILDING') {
-            if (tableOption === TABLE_OPTION.TRADE) {
-                return <GuavaTradeCol/>;
-            } else if (tableOption === TABLE_OPTION.MARKET) {
-                return <GuavaMarketCol/>;
-            }
+            return <GuavaTradeCol/>;
         } else {
-            if (tableOption === TABLE_OPTION.TRADE) {
-                return <GuavaRegionTradeCol/>;
-            } else if (tableOption === TABLE_OPTION.MARKET) {
-                return <GuavaRegionMarketCol/>;
-            }
+            return <GuavaRegionTradeCol/>;
         }
     };
 
@@ -169,7 +131,7 @@ const GuavaTable = () => {
     return (
         <>
             {
-                (TABLE_OPTION.TRADE === tableOption && tradeDate) &&
+                tradeDate &&
                 <div className={cx('date')}>
                     <div className={cx('back_btn')} onClick={() => {
                         setChartList([]);

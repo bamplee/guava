@@ -102,27 +102,12 @@ export const regionState = atom({
         'address': '성남시 분당구 정자동',
         'lat': 37.3614463,
         'lng': 127.1114893,
-        'sidoCode': '41',
-        'sidoName': '경기도',
-        'sigunguCode': '135',
-        'sigunguName': '성남시 분당구',
-        'dongCode': '103',
-        'dongName': '정자동',
-        'riCode': '00',
-        'riName': '',
-        'buildingId': null,
-        'buildingName': null
     }
 });
 
 export const showAreaFilterState = atom({
     key: 'showAreaFilterState',
     default: false
-});
-
-export const tableOptionState = atom({
-    key: 'tableState',
-    default: 'trade'
 });
 
 export const filterAreaState = atom({

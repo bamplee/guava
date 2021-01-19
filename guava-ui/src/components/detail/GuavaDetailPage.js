@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {useParams} from 'react-router-dom';
 
 import classNames from 'classnames/bind';
@@ -8,10 +8,9 @@ import GuavaChart from './GuavaChart';
 import GuavaTable from '../table/GuavaTable';
 
 import styles from './guavaDetailPage.module.scss';
-import {useRecoilState, useRecoilValue} from 'recoil';
-import {buildingState, regionState, tableOptionState} from '../datatool/state';
+import {useRecoilState} from 'recoil';
+import {regionState} from '../datatool/state';
 import GuavaMarketChart from './GuavaMarketChart';
-import {getBuilding, getDetail, getRegion} from '../datatool/api';
 
 const cx = classNames.bind(styles);
 

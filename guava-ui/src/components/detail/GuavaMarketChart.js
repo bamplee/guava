@@ -3,14 +3,8 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import {useHistory} from 'react-router-dom';
 import Chart from 'chart.js';
 
-import {
-    areaTypeState,
-    filterAreaState,
-    regionState,
-    tradeDateState,
-    tradeTypeState
-} from '../datatool/state';
-import {getTrade, getTradeMarket} from '../datatool/api';
+import {areaTypeState, regionState, tradeDateState, tradeTypeState} from '../datatool/state';
+import {getTradeMarket} from '../datatool/api';
 
 import classNames from 'classnames/bind';
 import styles from './guavaChart.module.scss';

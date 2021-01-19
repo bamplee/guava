@@ -2,14 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {Range} from 'antd-mobile';
 
-import {
-    areaTypeState,
-    filterAreaState,
-    regionState,
-    tableOptionState,
-    tradeDateState,
-    tradeTypeState
-} from '../datatool/state';
+import {areaTypeState, filterAreaState, regionState, tradeDateState, tradeTypeState} from '../datatool/state';
 import {getChart, getRegionChart} from '../datatool/api';
 
 import classNames from 'classnames/bind';
@@ -27,14 +20,11 @@ const GuavaChart = () => {
     const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
     const [count, setCount] = useState(0);
     const [chartList, setChartList] = useState([]);
-    const [chartTab, setChartTab] = useState(0);
     const [beforeMonth, setBeforeMonth] = useState(36);
-    const [sliderValue, setSliderValue] = useState(180 - beforeMonth);
     // const [beforeYear, setBeforeYear] = useState(3);
     const [activeChartIndex, setActiveChartIndex] = useState(null);
     // const [region, setRegion] = useRecoilState(regionState);
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
-    const [tableOption, setTableOption] = useRecoilState(tableOptionState);
     const region = useRecoilValue(regionState);
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 

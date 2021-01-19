@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import {useHistory, useParams, useLocation} from 'react-router-dom';
+import React, {useState} from 'react'
+import {useHistory, useLocation, useParams} from 'react-router-dom';
 
 import {Badge, Button, SegmentedControl} from 'antd-mobile';
 
 import classNames from 'classnames/bind';
 import styles from './guavaTradeOption.module.scss';
 import CaretDownOutlined from '@ant-design/icons/es/icons/CaretDownOutlined';
-import {getEndArea, getStartArea, TABLE_OPTION} from '../constant';
+import {getEndArea, getStartArea} from '../constant';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
     areaTypeState,
@@ -15,7 +15,6 @@ import {
     regionState,
     showAreaFilterState,
     showAreaTypeFilterState,
-    tableOptionState,
     tradeTypeState
 } from '../datatool/state';
 
@@ -31,19 +30,18 @@ const GuavaTradeOption = () => {
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const [showAreaTypeFilter, setShowAreaTypeFilter] = useRecoilState(showAreaTypeFilterState);
     const [showAreaFilter, setShowAreaFilter] = useRecoilState(showAreaFilterState);
-    const [tableOption, setTableOption] = useRecoilState(tableOptionState);
     // const [building, setBuilding] = useRecoilState(buildingState);
     const region = useRecoilValue(regionState);
     const building = useRecoilValue(buildingState);
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
-    useEffect(() => {
-        if (tableOption === TABLE_OPTION.TRADE) {
-            setTabs(0);
-        } else if (tableOption === TABLE_OPTION.MARKET) {
-            setTabs(1);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (tableOption === TABLE_OPTION.TRADE) {
+    //         setTabs(0);
+    //     } else if (tableOption === TABLE_OPTION.MARKET) {
+    //         setTabs(1);
+    //     }
+    // }, []);
 
     // const handleTabs = (index) => {
     //     setTabs(index);
