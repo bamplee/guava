@@ -38,38 +38,32 @@ import java.util.stream.Stream;
 
 @Service
 public class GuavaMarketServiceImpl implements GuavaMarketService {
-    private static final Integer PAGE_SIZE = 30;
+    private static final Integer PAGE_SIZE = 100;
     @Value("${app.kakao.apiKey}")
     private String kakaoMapApiKey;
     private final GuavaRegionRepository guavaRegionRepository;
     private final GuavaBuildingRepository guavaBuildingRepository;
-    private final EntityManager entityManager;
-    private final OpenApiTradeInfoRepository openApiTradeInfoRepository;
     private final TradeArticleRepository tradeArticleRepository;
-    private final GuavaRegionStatsRepository guavaRegionStatsRepository;
-    private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
     private final BuildingMappingRepository buildingMappingRepository;
+    private final RentSummaryRepository rentSummaryRepository;
+    private final TradeSummaryRepository tradeSummaryRepository;
     private final ObjectMapper objectMapper;
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     public GuavaMarketServiceImpl(GuavaRegionRepository guavaRegionRepository,
                                   GuavaBuildingRepository guavaBuildingRepository,
-                                  EntityManager entityManager,
-                                  OpenApiTradeInfoRepository openApiTradeInfoRepository,
                                   TradeArticleRepository tradeArticleRepository,
-                                  GuavaRegionStatsRepository guavaRegionStatsRepository,
-                                  GuavaBuildingAreaRepository guavaBuildingAreaRepository,
                                   BuildingMappingRepository buildingMappingRepository,
+                                  RentSummaryRepository rentSummaryRepository,
+                                  TradeSummaryRepository tradeSummaryRepository,
                                   ObjectMapper objectMapper) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.guavaBuildingRepository = guavaBuildingRepository;
-        this.entityManager = entityManager;
-        this.openApiTradeInfoRepository = openApiTradeInfoRepository;
         this.tradeArticleRepository = tradeArticleRepository;
-        this.guavaRegionStatsRepository = guavaRegionStatsRepository;
-        this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
         this.buildingMappingRepository = buildingMappingRepository;
+        this.rentSummaryRepository = rentSummaryRepository;
+        this.tradeSummaryRepository = tradeSummaryRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -148,7 +142,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                 openApiTradeInfo.setArea2(String.valueOf(areaBuildingArea.getPublicArea()));
             }
         }).sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
-                     .map(this::transform).collect(Collectors.toList());
+                     .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1)).collect(Collectors.toList());
     }
 
     @Override
@@ -164,10 +158,9 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
         }
         GuavaBuilding guavaBuilding = optionalGuavaBuilding.get();
         List<String> tradeTypeCode = Lists.newArrayList();
-        if("trade".equals(tradeType)) {
+        if ("trade".equals(tradeType)) {
             tradeTypeCode.add("A1");
-        }
-        else {
+        } else {
             tradeTypeCode.add("B1");
             tradeTypeCode.add("B2");
         }
@@ -207,7 +200,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
             tradeArticle.setArea2(String.valueOf(areaBuildingArea.getPublicArea()));
         }).filter(x -> !StringUtils.isNotEmpty(areaId) || x.getAreaName().equals(areaId))
                      .sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
-                     .map(this::transform).collect(Collectors.toList());
+                     .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1)).collect(Collectors.toList());
     }
 
     private Specification<TradeSummary> getParams(String regionCode, String buildingCode, String areaCode, String date) {
@@ -254,7 +247,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
         return first.orElse(GuavaBuildingArea.builder().privateArea(0d).publicArea(0d).build());
     }
 
-    private GuavaTradeResponse transform(TradeArticle tradeArticle) {
+    private GuavaTradeResponse transform(String tradeType, TradeArticle tradeArticle) {
         Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(tradeArticle.getBuildingCode());
         GuavaBuildingArea areaByPrivateArea = GuavaUtils.getAreaByPrivateArea(optionalGuavaBuilding.get().getAreaList(),
                                                                               String.valueOf(tradeArticle.getArea1()));
@@ -265,19 +258,14 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
 //        String beforeHighPrice = openApiTradeInfoRepository.getMaxPrice(yyyyMMdd.format(DATE_TIME_FORMATTER_YYYYMMDD),
 //                                                                        openApiTradeInfo.getBuildingId(),
 //                                                                        openApiTradeInfo.getArea());
-        String beforeMaxPrice = openApiTradeInfoRepository.getMaxPrice(LocalDate.now().format(DATE_TIME_FORMATTER_YYYYMMDD),
-                                                                       tradeArticle.getBuildingCode(),
-                                                                       areaByPrivateArea.getPrivateArea());
-        if (StringUtils.isEmpty(beforeMaxPrice)) {
-            beforeMaxPrice = openApiTradeInfoRepository.getMaxPriceByAreahundredthsDecimal(LocalDate.now()
-                                                                                                    .format(DATE_TIME_FORMATTER_YYYYMMDD),
-                                                                                           tradeArticle.getBuildingCode(),
-                                                                                           Math.round(areaByPrivateArea.getPrivateArea() * 100) / 100.0);
-        }
-        if (StringUtils.isEmpty(beforeMaxPrice)) {
-            beforeMaxPrice = openApiTradeInfoRepository.getMaxPriceByAreaTenthsDecimal(LocalDate.now().format(DATE_TIME_FORMATTER_YYYYMMDD),
-                                                                                       tradeArticle.getBuildingCode(),
-                                                                                       Math.round(areaByPrivateArea.getPrivateArea() * 100) / 100.0);
+
+        String beforeMaxPrice = "";
+        if ("trade".equals(tradeType)) {
+            beforeMaxPrice = String.valueOf(tradeSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(tradeArticle.getBuildingCode(),
+                                                                                                                    areaByPrivateArea.getAreaType()).getPrice());
+        } else {
+            beforeMaxPrice = String.valueOf(rentSummaryRepository.findTop1ByBuildingCodeAndAreaTypeOrderByPriceDesc(tradeArticle.getBuildingCode(),
+                                                                                                                    areaByPrivateArea.getAreaType()).getPrice());
         }
 
         String articleFeatureDesc = tradeArticle.getArticleFeatureDesc();
@@ -306,7 +294,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                                                                         .split("/")[0] :
                                             tradeArticle.getFloorInfo())
                                  .price(String.valueOf(tradeArticle.getPrice()))
-                                 .priceName(tradeArticle.getTradePrice())
+                                 .priceName(tradeArticle.getSameAddrMinPrc())
                                  .beforeMaxPrice(beforeMaxPrice)
                                  .beforeMaxPriceName(GuavaUtils.getTradePrice(beforeMaxPrice))
                                  .minusPrice(StringUtils.isNotEmpty(beforeMaxPrice) ?

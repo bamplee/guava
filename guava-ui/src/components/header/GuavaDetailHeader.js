@@ -49,7 +49,7 @@ const GuavaDetailHeader = ({tabId}) => {
                             <ArrowLeftOutlined/>
                         </div>
                     </WingBlank>
-                    <div className={cx('center')} onClick={() => history.push('/search')}>
+                    <div className={cx('logo')} onClick={() => history.push('/search')}>
                         <span className={cx('title')}>{region?.name}</span>
                     </div>
                     <WingBlank>

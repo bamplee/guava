@@ -37,7 +37,6 @@ const options = {
                     }
                     if (data.datasets[tooltipItem.datasetIndex].list && data.datasets[tooltipItem.datasetIndex].list.length > 0) {
                         let item = data.datasets[tooltipItem.datasetIndex].list[tooltipItem.index];
-                        console.log(item);
                         // console.log(value);
                         let minusPrice = item.minusPrice;
                         minusPrice = (minusPrice / 10000).toFixed(2) + '억';
@@ -124,7 +123,7 @@ const GuavaMarketChart = () => {
 
     useEffect(() => {
         fetch();
-    }, [region]);
+    }, [region, tradeType]);
 
     const initChartEvent = () => {
         Chart.pluginService.register({afterDraw: chartPlugin});
@@ -182,7 +181,7 @@ const GuavaMarketChart = () => {
 
             let result = [];
             if (region.type === 'BUILDING') {
-                result = await getTradeMarket(tradeType, region.buildingId, page, areaType.areaId, date);
+                result = await getTradeMarket(tradeType, region.buildingId, 0, areaType.areaId, date);
             }
 
             // if (result.length < 100) {

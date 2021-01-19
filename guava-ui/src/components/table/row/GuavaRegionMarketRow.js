@@ -31,12 +31,7 @@ const GuavaRegionMarketRow = ({page, idx, trade}) => {
             </div>
             <div className={cx('row')}>{trade.floor}층</div>
             <div className={cx('row', 'price')}>{trade.beforeMaxPrice == 0 ? '-' : trade.beforeMaxPriceName}</div>
-            <div className={cx('row', 'price')}>
-                    <span
-                        className={cx(trade.isHighPrice ? 'high_price' : trade.minusPrice < 0 ? 'row_price' : '')}>{trade.priceName}</span>
-                {/*<br/>*/}
-                {/*<span className={cx('minus_price')}>({trade.minusPrice})</span>*/}
-            </div>
+            <div className={cx('row', 'price', trade.isHighPrice ? 'high_price' : '', trade.minusPrice < 0 && 'row_price')}>{trade.priceName}{trade.subPrice > 0 && '/' + trade.subPrice}</div>
         </div>
     )
 };
