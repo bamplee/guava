@@ -56,12 +56,12 @@ const GuavaTradeOption = () => {
                                 <span>평형</span>
                         }
                     </Button> :
-                    <Button className={cx('filter_btn')}
+                    <Button className={cx('filter_btn', filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'active')}
                             type={filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'primary'}
                             inline
                             onClick={() => setShowAreaFilter(true)}>
                         {
-                            filterArea[0] === 0 && filterArea[1] === 5 ? '면적' : `${getStartArea(filterArea[0])}&#13217;~${getEndArea(filterArea[1])}&#13217;`
+                            filterArea[0] === 0 && filterArea[1] === 5 ? '면적' : `${getStartArea(filterArea[0])}㎡~${getEndArea(filterArea[1])}㎡`
                         }
                         <CaretDownOutlined/>
                     </Button>
