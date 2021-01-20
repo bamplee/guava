@@ -152,6 +152,27 @@
 .query_container {
   padding-top: 50px;
 
+  .search_list_title {
+    color: #8c8c8c;
+  }
+
+  .search_list {
+    display: flex;
+    justify-content: space-between;
+
+    .left {
+      width: 100%;
+    }
+
+    .right {
+      color: #888888;
+      width: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
   .highlight {
     color: #1B69D9;
     background-color: transparent !important;

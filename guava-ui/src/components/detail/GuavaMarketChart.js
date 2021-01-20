@@ -270,7 +270,7 @@ const GuavaMarketChart = () => {
                     :
                     <div className={cx('empty_container')}>
                         <Result
-                            img={<img src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'} style={{width: 50, height: 50}}/>}
+                            img={<img src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'} style={{width: 40, height: 40}}/>}
                             // title="지역 호가 차트 준비중"
                             message="지역 호가 차트는 개발중"
                         />

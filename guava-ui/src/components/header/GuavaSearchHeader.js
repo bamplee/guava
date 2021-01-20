@@ -8,12 +8,13 @@ import styles from './guavaHeader.module.scss';
 import {useRecoilState} from 'recoil';
 import {levelState, regionState} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
-import {List, WingBlank} from 'antd-mobile';
+import {Icon, List, Result, WingBlank} from 'antd-mobile';
 import {fetchSearch} from '../datatool/api';
 import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';
 import ReconciliationOutlined from '@ant-design/icons/es/icons/ReconciliationOutlined';
 import EnvironmentOutlined from '@ant-design/icons/es/icons/EnvironmentOutlined';
 import Highlighter from 'react-highlight-words';
+import {useLocalStorage} from '../common/useLocalStorage';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,7 @@ const GuavaSearchHeader = () => {
     const [loading, setLoading] = useState(false);
     const [level, setLevel] = useRecoilState(levelState);
     const [region, setRegion] = useRecoilState(regionState);
+    const [searchList, setSearchList] = useLocalStorage('searchList', []);
 
     useEffect(() => {
         if (queryInput && queryInput.current) {
@@ -65,6 +67,12 @@ const GuavaSearchHeader = () => {
 
     const handleResultItem = async (item) => {
         setRegion(item);
+        let temp = searchList.filter(x => !(x.type === 'BUILDING' ? x.buildingId === item.buildingId : x.id === item.id));
+        temp.unshift(item);
+        if (temp.length > 10) {
+            temp = temp.subList(0, 10);
+        }
+        setSearchList(temp);
         if (item.type === 'BUILDING') {
             setLevel(3);
             history.push('/b/' + item.buildingId);
@@ -76,6 +84,11 @@ const GuavaSearchHeader = () => {
             }
             history.push('/r/' + item.id);
         }
+    };
+
+    const removeSearchList = (item) => {
+        let temp = searchList.filter(x => !(x.type === 'BUILDING' ? x.buildingId === item.buildingId : x.id === item.id));
+        setSearchList(temp);
     };
 
     return (
@@ -111,10 +124,65 @@ const GuavaSearchHeader = () => {
                 </div>
             </div>
             <div className={cx('query_container')}>
+                {
+                    (!loading && query.length === 0) &&
+                    <>
+                        {
+                            searchList.length > 0 &&
+                                <List.Item>
+                                    <span className={cx('search_list_title')}>최근검색어</span><span
+                                    style={{marginLeft: 2, fontSize: 9, color: '#8C8C8C'}}>(최대 10개)</span>
+                                </List.Item>
+                        }
+                        {
+                            searchList.map(x =>
+                                <List.Item>
+                                    <div className={cx('search_list')}>
+                                        <div className={cx('left')} onClick={() => handleResultItem(x)}>
+                                            {
+                                                x.type === 'BUILDING' ?
+                                                    <ReconciliationOutlined/> :
+                                                    <EnvironmentOutlined/>
+                                            }
+                                            <Highlighter
+                                                style={{marginLeft: 4}}
+                                                highlightClassName={cx('highlight')}
+                                                searchWords={query.split('')}
+                                                autoEscape={true}
+                                                textToHighlight={x.name}
+                                            />
+                                            <List.Item.Brief style={{
+                                                fontSize: '0.7rem',
+                                                marginTop: 2,
+                                                marginBottom: 4
+                                            }}>
+                                                <Highlighter
+                                                    highlightClassName={cx('highlight')}
+                                                    searchWords={query.split('')}
+                                                    autoEscape={true}
+                                                    textToHighlight={x.address}
+                                                />
+                                            </List.Item.Brief>
+                                        </div>
+                                        <div className={cx('right')} onClick={() => removeSearchList(x)}>
+                                            <CloseOutlined style={{fontSize: 12}}/>
+                                        </div>
+                                    </div>
+                                </List.Item>
+                            )
+                        }
+                    </>
+                }
                 <List>
                     {
-                        (!loading && queryList.length <= 0) &&
-                        <List.Item>결과없음</List.Item>
+                        query.length > 0 && queryList.length === 0 &&
+                        <Result
+                            img={<img
+                                src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
+                                style={{width: 40, height: 40}}
+                                alt=""/>}
+                            message="검색 결과가 없습니다"
+                        />
                     }
                     {
                         queryList.map(x => {

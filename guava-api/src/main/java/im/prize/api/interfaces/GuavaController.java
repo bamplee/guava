@@ -31,6 +31,8 @@ public class GuavaController {
         return guavaService.getSummary(level, northEastLng, northEastLat, southWestLng, southWestLat, startArea, endArea);
     }
 
+    @GetMapping("/regions")
+
 //    @GetMapping("/regions/{regionId}/trade")
 //    List<GuavaTradeResponse> getRegionTrade(@PathVariable("regionId") String regionId,
 //                                            @RequestParam("page") Integer page,
