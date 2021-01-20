@@ -26,19 +26,19 @@ const GuavaBuildingInfo = () => {
         };
         if (region.type === 'BUILDING') {
             init();
-            let staticMapContainer = document.getElementById('image-map'), // 이미지 지도를 표시할 div
-                staticMapOption = {
-                    center: new kakao.maps.LatLng(region.lat, region.lng), // 이미지 지도의 중심좌표
-                    level: 4 // 이미지 지도의 확대 레벨
-                };
+        }
+        let staticMapContainer = document.getElementById('image-map'), // 이미지 지도를 표시할 div
+            staticMapOption = {
+                center: new kakao.maps.LatLng(region.lat, region.lng), // 이미지 지도의 중심좌표
+                level: 4 // 이미지 지도의 확대 레벨
+            };
 
 // 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
-            let staticMap = new kakao.maps.Map(staticMapContainer, staticMapOption);
-            let marker = new kakao.maps.Marker({
-                map: staticMap,
-                position: new kakao.maps.LatLng(region.lat, region.lng)
-            });
-        }
+        let staticMap = new kakao.maps.Map(staticMapContainer, staticMapOption);
+        let marker = new kakao.maps.Marker({
+            map: staticMap,
+            position: new kakao.maps.LatLng(region.lat, region.lng)
+        });
     }, [region]);
 
     return (
