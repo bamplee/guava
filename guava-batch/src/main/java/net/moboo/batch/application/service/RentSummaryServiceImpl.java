@@ -27,16 +27,13 @@ import java.util.stream.Collectors;
 public class RentSummaryServiceImpl implements RentSummaryService {
     private final OpenApiRentInfoRepository openApiRentInfoRepository;
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
-    private final BuildingMappingRepository buildingMappingRepository;
     private final RentSummaryRepository rentSummaryRepository;
 
     public RentSummaryServiceImpl(OpenApiRentInfoRepository openApiRentInfoRepository,
                                   GuavaBuildingAreaRepository guavaBuildingAreaRepository,
-                                  BuildingMappingRepository buildingMappingRepository,
                                   RentSummaryRepository rentSummaryRepository) {
         this.openApiRentInfoRepository = openApiRentInfoRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
-        this.buildingMappingRepository = buildingMappingRepository;
         this.rentSummaryRepository = rentSummaryRepository;
     }
 
