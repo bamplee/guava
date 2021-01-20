@@ -18,25 +18,31 @@ const DetailHeaderPage = ({match, location}) => {
             <GuavaDetailHeader tabId={!match.params.tabId ? '0' : match.params.tabId}/>
             {
                 region &&
-                <>
-                    <GuavaAreaTypeFilter/>
-                    <GuavaBuildingInfo/>
-                    <GuavaTradeOption/>
-                    {
-                        (!match.params.tabId || match.params.tabId === '0') &&
+                (match.params.tabId === 'info' ?
+                        <div>
+                            <GuavaBuildingInfo/>
+                        </div>
+                        :
                         <>
-                            <GuavaChart/>
-                            <GuavaTable/>
+                            <GuavaAreaTypeFilter/>
+                            {
+                                (!match.params.tabId || match.params.tabId === '0') &&
+                                <>
+                                    <GuavaTradeOption/>
+                                    <GuavaChart/>
+                                    <GuavaTable/>
+                                </>
+                            }
+                            {
+                                match.params.tabId === '1' &&
+                                <>
+                                    <GuavaTradeOption/>
+                                    <GuavaMarketChart/>
+                                    <GuavaMarketTable/>
+                                </>
+                            }
                         </>
-                    }
-                    {
-                        match.params.tabId === '1' &&
-                        <>
-                            <GuavaMarketChart/>
-                            <GuavaMarketTable/>
-                        </>
-                    }
-                </>
+                )
             }
         </>
     );

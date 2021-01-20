@@ -9,7 +9,7 @@ import {useRecoilState} from 'recoil';
 import {buildingState, regionState,} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
-import {Button, WingBlank} from 'antd-mobile';
+import {Button, Tabs, WingBlank} from 'antd-mobile';
 import {getBuilding, getDetail, getRegion} from '../datatool/api';
 
 const cx = classNames.bind(styles);
@@ -23,7 +23,6 @@ const GuavaDetailHeader = ({tabId}) => {
     // const [tab, setTab] = useState(tabId);
 
     useEffect(() => {
-        console.log(regionId);
         if (regionType === 'b') {
             const init = async () => {
                 setRegion(await getBuilding(regionId));
@@ -51,7 +50,8 @@ const GuavaDetailHeader = ({tabId}) => {
                         </div>
                     </WingBlank>
                     <div className={cx('logo')} onClick={() => history.push('/search')}>
-                        <span className={cx('title')}>{region?.name}</span>
+                        <span
+                            className={cx('title')}>{region?.type === 'BUILDING' ? region?.name : region?.address}</span>
                     </div>
                     <WingBlank>
                         <div className={cx('right')}>
@@ -70,31 +70,51 @@ const GuavaDetailHeader = ({tabId}) => {
                 <div className={cx('filter_container')}>
                     <div className={cx('filter_select')}>
                         <Button
-                            className={cx('filter_btn', tabId === '0' && 'filter_btn_active')}
+                            className={cx('filter_btn', tabId === 'info' && 'filter_btn_active')}
+                            type={'primary'}
+                            onClick={() => {
+                                history.replace('/' + regionType + '/' + regionId + '/info')
+                            }}
+                            size={'small'}>정보</Button>
+                    </div>
+                    <div className={cx('filter_select')}>
+                        <Button
+                            className={cx('filter_btn', (tabId * 1 <= 2) && 'filter_btn_active')}
                             type={'primary'}
                             onClick={() => {
                                 history.replace('/' + regionType + '/' + regionId + '/0')
                             }}
                             size={'small'}>시세</Button>
                     </div>
-                    <div className={cx('filter_select')}>
-                        <Button className={cx('filter_btn', tabId === '1' && 'filter_btn_active')}
-                                type={'primary'} size={'small'}
-                                onClick={() => {
-                                    history.replace('/' + regionType + '/' + regionId + '/1')
-                                }}
-                        >호가</Button>
-                    </div>
-                    <div className={cx('filter_select')}>
-                        <Button className={cx('filter_btn')}
-                                type={'primary'} size={'small'}
-                                inline
-                                onClick={() => alert('비교')}>
-                            <span>비교</span>
-                        </Button>
-                    </div>
+                    {/*<div className={cx('filter_select')}>*/}
+                    {/*    <Button className={cx('filter_btn', tabId === '1' && 'filter_btn_active')}*/}
+                    {/*            type={'primary'} size={'small'}*/}
+                    {/*            onClick={() => {*/}
+                    {/*                history.replace('/' + regionType + '/' + regionId + '/1')*/}
+                    {/*            }}*/}
+                    {/*    >호가</Button>*/}
+                    {/*</div>*/}
+                    {/*<div className={cx('filter_select')}>*/}
+                    {/*    <Button className={cx('filter_btn')}*/}
+                    {/*            type={'primary'} size={'small'}*/}
+                    {/*            inline*/}
+                    {/*            onClick={() => alert('비교')}>*/}
+                    {/*        <span>비교</span>*/}
+                    {/*    </Button>*/}
+                    {/*</div>*/}
                 </div>
             </div>
+            {
+                tabId !== 'info' &&
+                <div style={{borderBottom: '1px solid #f2f2f2'}}>
+                    <Tabs onChange={(e) => {
+                        history.replace('/' + regionType + '/' + regionId + '/' + e.value)
+                    }} tabs={[{title: '실거래가', value: 0}, {title: '호가', value: 1}, {title: '비교', value: 2}]}
+                          page={tabId * 1}
+                          animated={false}
+                          useOnPan={false}/>
+                </div>
+            }
         </>
     )
 };
