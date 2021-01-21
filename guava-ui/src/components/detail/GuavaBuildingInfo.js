@@ -22,11 +22,11 @@ const GuavaBuildingInfo = () => {
 
     useEffect(() => {
         const init = async () => {
-            setBuilding(await getDetail(region.buildingId));
+            if(region && region.buildingId) {
+                setBuilding(await getDetail(region.buildingId));
+            }
         };
-        if (region.type === 'BUILDING') {
-            init();
-        }
+        init();
         let staticMapContainer = document.getElementById('image-map'), // 이미지 지도를 표시할 div
             staticMapOption = {
                 center: new kakao.maps.LatLng(region.lat, region.lng), // 이미지 지도의 중심좌표

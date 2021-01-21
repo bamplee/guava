@@ -20,7 +20,9 @@ const GuavaAreaTypeFilter = () => {
 
     useEffect(() => {
         const init = async () => {
-            setBuilding(await getDetail(region.buildingId));
+            if(region && region.buildingId) {
+                setBuilding(await getDetail(region.buildingId));
+            }
         };
         init();
     }, [region]);

@@ -35,7 +35,7 @@ const GuavaRegionTradeRow = ({page, idx, trade}) => {
             {
                 region.type !== 'DONG' &&
                 <div className={cx('row', 'link')}
-                     onClick={() => history.push('/r/' + trade.regionId)}>{trade.address}</div>
+                     onClick={() => history.push('/r/' + trade.regionId)}>{trade.dongName}</div>
             }
             <div className={cx('row', 'link', 'apt_name')}
                  onClick={() => {

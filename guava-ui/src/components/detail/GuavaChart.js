@@ -147,16 +147,19 @@ const GuavaChart = () => {
             return x;
         }), 'yearMonth');
 
-        let sDate = moment(Object.keys(groupList)[0] + '01', 'YYYYMMDD');
-        let eDate = moment(Object.keys(groupList)[Object.keys(groupList).length - 1] + '01', 'YYYYMMDD');
+        let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
+        let eDate = moment(endDate.format('YYYYMM') + '01', 'YYYYMMDD');
 
-        while (sDate.isBefore(eDate)) {
+        while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
             let key = sDate.format('YYYYMM');
             sDate = sDate.add(1, 'months');
             let total = groupList[key];
             let beforeTotal = groupList[beforeKey];
             if (!total) {
+                if (!beforeTotal) {
+                    beforeTotal = groupList[Object.keys(groupList)[0]];
+                }
                 groupList[key] = beforeTotal.map(x => {
                     return {date: key, price: x.price, area: x.area, yearMonth: key}
                 });
@@ -199,7 +202,10 @@ const GuavaChart = () => {
         // }
         data = [total];
 
-        return {labels: result.map(x => moment(x.date)), datasets: data}
+        result = result.map(x => moment(x.date)).sort((a, b) => a - b);
+        // result.push(moment().add(5, 'months'));
+
+        return {labels: result, datasets: data}
     };
 
     const getRentChart = async () => {
@@ -218,16 +224,19 @@ const GuavaChart = () => {
             return x;
         }), 'yearMonth');
 
-        let sDate = moment(Object.keys(groupList)[0] + '01', 'YYYYMMDD');
-        let eDate = moment(Object.keys(groupList)[Object.keys(groupList).length - 1] + '01', 'YYYYMMDD');
+        let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
+        let eDate = moment(endDate.format('YYYYMM') + '01', 'YYYYMMDD');
 
-        while (sDate.isBefore(eDate)) {
+        while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
             let key = sDate.format('YYYYMM');
             sDate = sDate.add(1, 'months');
             let total = groupList[key];
             let beforeTotal = groupList[beforeKey];
             if (!total) {
+                if (!beforeTotal) {
+                    beforeTotal = groupList[Object.keys(groupList)[0]];
+                }
                 groupList[key] = beforeTotal.map(x => {
                     return {date: key, price: x.price, area: x.area, yearMonth: key}
                 });
@@ -373,6 +382,9 @@ const GuavaChart = () => {
                                                       // gridLines: {
                                                       //     lineWidth: 2
                                                       // },
+                                                      ticks: {
+                                                          autoSkip: false
+                                                      },
                                                       time: {
                                                           unit: 'month',
                                                           unitStepSize: 6,

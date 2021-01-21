@@ -27,6 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -88,11 +89,14 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                              .peek(this::fillArea)
                                              .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
-                                             .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
-                                                                                                                .stream()
-                                                                                                                .findFirst()
-                                                                                                                .map(BuildingMapping::getId)
-                                                                                                                .orElse(0l))))
+                                             .peek(x -> {
+                                                 x.setDongName(guavaRegionRepository.findByRegionCode(x.getRegionId()).map(GuavaRegion::getDisplayName).orElse(""));
+                                                 x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
+                                                                                                         .stream()
+                                                                                                         .findFirst()
+                                                                                                         .map(BuildingMapping::getId)
+                                                                                                         .orElse(0l)));
+                                             })
                                              .collect(Collectors.toList());
             } else {
                 return rentSummaryRepository.findAll(this.getParamsByRent(guavaRegion.getValidRegionCode(),
@@ -104,11 +108,14 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                             .peek(this::fillArea)
                                             .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
-                                            .peek(x -> x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
-                                                                                                               .stream()
-                                                                                                               .findFirst()
-                                                                                                               .map(BuildingMapping::getId)
-                                                                                                               .orElse(0l))))
+                                            .peek(x -> {
+                                                x.setDongName(guavaRegionRepository.findByRegionCode(x.getRegionId()).map(GuavaRegion::getDisplayName).orElse(""));
+                                                x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
+                                                                                                        .stream()
+                                                                                                        .findFirst()
+                                                                                                        .map(BuildingMapping::getId)
+                                                                                                        .orElse(0l)));
+                                            })
                                             .collect(Collectors.toList());
             }
         }

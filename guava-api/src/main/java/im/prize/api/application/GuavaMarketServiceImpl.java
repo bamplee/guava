@@ -144,7 +144,10 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                 openApiTradeInfo.setArea2(String.valueOf(areaBuildingArea.getPublicArea()));
             }
         })*/.sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
-                     .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1)).collect(Collectors.toList());
+                     .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1))
+                     .filter(Optional::isPresent)
+                     .map(Optional::get)
+                     .collect(Collectors.toList());
     }
 
     @Override
@@ -202,7 +205,10 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
             tradeArticle.setArea2(String.valueOf(areaBuildingArea.getPublicArea()));
         }).filter(x -> !StringUtils.isNotEmpty(areaId) || x.getAreaName().equals(areaId))*/
                      .sorted(Comparator.comparing(TradeArticle::getArticleConfirmYmd).reversed())
-                     .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1)).collect(Collectors.toList());
+                     .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1))
+                     .filter(Optional::isPresent)
+                     .map(Optional::get)
+                     .collect(Collectors.toList());
     }
 
     private Specification<TradeSummary> getParams(String regionCode, String buildingCode, String areaCode, String date) {
@@ -249,12 +255,15 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
         return first.orElse(GuavaBuildingArea.builder().privateArea(0d).publicArea(0d).build());
     }
 
-    private GuavaTradeResponse transform(String tradeType, TradeArticle tradeArticle) {
+    private Optional<GuavaTradeResponse> transform(String tradeType, TradeArticle tradeArticle) {
         Optional<BuildingMapping> optionalGuavaMappingInfo = buildingMappingRepository.findByBuildingCode(tradeArticle.getBuildingCode())
                                                                                       .stream()
                                                                                       .findFirst();
 //        Optional<GuavaBuilding> optionalGuavaBuilding = guavaBuildingRepository.findByBuildingCode(tradeArticle.getBuildingCode());
 
+        if(!optionalGuavaMappingInfo.isPresent()) {
+            return Optional.empty();
+        }
         List<GuavaBuildingArea> areaList = guavaBuildingAreaRepository.findByBuildingCode(tradeArticle.getBuildingCode());
         Optional<GuavaBuildingArea> first = areaList.stream()
                                                     .filter(x -> x.getAreaType()
@@ -312,7 +321,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
             String str = articleFeatureDesc.replaceAll(" ", "");
             isRent = str.contains("세안고");
         }
-        return GuavaTradeResponse.builder()
+        return Optional.of(GuavaTradeResponse.builder()
                                  .isRent(isRent)
                                  .name(optionalGuavaMappingInfo.get().getBuildingName())
                                  .dongName(tradeArticle.getBuildingName())
@@ -351,6 +360,6 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                  .isNew(LocalDate.parse(tradeArticle.getArticleConfirmYmd(),
                                                         DATE_TIME_FORMATTER_YYYYMMDD).equals(LocalDate.now()))
                                  .isHighPrice(StringUtils.isNotEmpty(beforeMaxPrice) && Integer.valueOf(beforeMaxPrice) < tradeArticle.getPrice())
-                                 .build();
+                                 .build());
     }
 }
