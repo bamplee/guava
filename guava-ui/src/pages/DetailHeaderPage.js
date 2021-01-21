@@ -17,30 +17,35 @@ const DetailHeaderPage = ({match, location}) => {
         <>
             <GuavaDetailHeader tabId={!match.params.tabId ? 't' : match.params.tabId}/>
             {
-                region && match.params.tabId === 'i' &&
-                <GuavaBuildingInfo/>
-            }
-            {
-                region && (!match.params.tabId || match.params.tabId === 't') &&
+                (region && (region.type === 'BUILDING' ? region.buildingId === match.params.regionId : region.id === match.params.regionId)) &&
                 <>
-                    <GuavaAreaTypeFilter/>
-                    <GuavaTradeOption/>
-                    <GuavaChart/>
-                    <GuavaTable/>
+                    {
+                        match.params.tabId === 'i' &&
+                        <GuavaBuildingInfo/>
+                    }
+                    {
+                        (!match.params.tabId || match.params.tabId === 't') &&
+                        <>
+                            <GuavaAreaTypeFilter/>
+                            <GuavaTradeOption/>
+                            <GuavaChart/>
+                            <GuavaTable/>
+                        </>
+                    }
+                    {
+                        match.params.tabId === 'm' &&
+                        <>
+                            <GuavaAreaTypeFilter/>
+                            <GuavaTradeOption/>
+                            <GuavaMarketChart/>
+                            <GuavaMarketTable/>
+                        </>
+                    }
+                    {
+                        match.params.tabId === 'c' &&
+                        <GuavaBuildingInfo/>
+                    }
                 </>
-            }
-            {
-                region && match.params.tabId === 'm' &&
-                <>
-                    <GuavaAreaTypeFilter/>
-                    <GuavaTradeOption/>
-                    <GuavaMarketChart/>
-                    <GuavaMarketTable/>
-                </>
-            }
-            {
-                region && match.params.tabId === 'c' &&
-                <GuavaBuildingInfo/>
             }
         </>
     );

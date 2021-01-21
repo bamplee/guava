@@ -136,11 +136,11 @@ const GuavaChart = () => {
         let result = [];
         let data = [];
         if (region.type === 'BUILDING') {
-            result = await getChart('trade', region.buildingId, areaType.areaId, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
+            result = await getChart('trade', region.buildingId, areaType.areaId, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         } else {
             let startArea = getStartArea(filterArea[0]);
             let endArea = getEndArea(filterArea[1]);
-            result = await getRegionChart('trade', region.id, startArea, endArea, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
+            result = await getRegionChart('trade', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
 
         let groupList = groupBy(result.map(x => {
@@ -149,7 +149,7 @@ const GuavaChart = () => {
         }), 'yearMonth');
 
         let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
-        let eDate = moment(endDate.format('YYYYMM') + '01', 'YYYYMMDD');
+        let eDate = moment(endDate.format('YYYYMM') + '31', 'YYYYMMDD');
 
         while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
@@ -213,11 +213,11 @@ const GuavaChart = () => {
         let result = [];
         let data = [];
         if (region.type === 'BUILDING') {
-            result = await getChart('rent', region.buildingId, areaType.areaId, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
+            result = await getChart('rent', region.buildingId, areaType.areaId, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         } else {
             let startArea = getStartArea(filterArea[0]);
             let endArea = getEndArea(filterArea[1]);
-            result = await getRegionChart('rent', region.id, startArea, endArea, startDate.format('YYYYMM'), endDate.format('YYYYMM'));
+            result = await getRegionChart('rent', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
 
         let groupList = groupBy(result.map(x => {
@@ -226,7 +226,7 @@ const GuavaChart = () => {
         }), 'yearMonth');
 
         let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
-        let eDate = moment(endDate.format('YYYYMM') + '01', 'YYYYMMDD');
+        let eDate = moment(endDate.format('YYYYMM') + '31', 'YYYYMMDD');
 
         while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
