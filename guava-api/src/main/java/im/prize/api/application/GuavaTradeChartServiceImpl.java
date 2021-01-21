@@ -63,6 +63,8 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
                 return tradeSummaryRepository.findAll(this.getParams(guavaRegion.getValidRegionCode(),
                                                                      null,
                                                                      null,
+                                                                     String.valueOf(startArea),
+                                                                     String.valueOf(endArea),
                                                                      startDate, endDate))
                                              .stream()
                                              .map(GuavaChartResponse::transform)
@@ -73,6 +75,8 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
                 return rentSummaryRepository.findAll(this.getParamsByRent(guavaRegion.getValidRegionCode(),
                                                                           null,
                                                                           null,
+                                                                          String.valueOf(startArea),
+                                                                          String.valueOf(endArea),
                                                                           startDate, endDate))
                                             .stream()
                                             .map(GuavaChartResponse::transform)
@@ -93,6 +97,7 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
                 return tradeSummaryRepository.findAll(this.getParams(null,
                                                                      buildingMapping.getBuildingCode(),
                                                                      areaId,
+                                                                     null, null,
                                                                      startDate, endDate))
                                              .stream()
                                              .map(GuavaChartResponse::transform)
@@ -103,6 +108,7 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
                 return rentSummaryRepository.findAll(this.getParamsByRent(null,
                                                                           buildingMapping.getBuildingCode(),
                                                                           areaId,
+                                                                          null, null,
                                                                           startDate, endDate))
                                             .stream()
                                             .map(GuavaChartResponse::transform)
@@ -117,12 +123,16 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
     private Specification<TradeSummary> getParams(String regionCode,
                                                   String buildingCode,
                                                   String areaCode,
+                                                  String startArea,
+                                                  String endArea,
                                                   String startDate,
                                                   String endDate) {
         Map<String, Object> paramsMap = objectMapper.convertValue(GuavaTradeSearch.builder()
                                                                                   .regionCode(regionCode)
                                                                                   .buildingCode(buildingCode)
                                                                                   .areaCode(areaCode)
+                                                                                  .startArea(startArea)
+                                                                                  .endArea(endArea)
                                                                                   .startDate(startDate)
                                                                                   .endDate(endDate)
                                                                                   .build(), Map.class);
@@ -138,12 +148,16 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
     private Specification<RentSummary> getParamsByRent(String regionCode,
                                                        String buildingCode,
                                                        String areaCode,
+                                                       String startArea,
+                                                       String endArea,
                                                        String startDate,
                                                        String endDate) {
         Map<String, Object> paramsMap = objectMapper.convertValue(GuavaTradeSearch.builder()
                                                                                   .regionCode(regionCode)
                                                                                   .buildingCode(buildingCode)
                                                                                   .areaCode(areaCode)
+                                                                                  .startArea(startArea)
+                                                                                  .endArea(endArea)
                                                                                   .startDate(startDate)
                                                                                   .endDate(endDate)
                                                                                   .build(), Map.class);

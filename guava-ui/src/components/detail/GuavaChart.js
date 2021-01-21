@@ -293,140 +293,136 @@ const GuavaChart = () => {
     };
 
     return (
-        <>
+        <div className={cx('chart_container')}>
             {
-                <div className={cx('chart_container')}>
-                    {
-                        (chartList) ?
-                            <>
-                                <div className={cx('chart')}>
-                                    <Line data={chartList}
-                                          options={{
-                                              onAnimationComplete: function () {
-                                                  this.showTooltip(this.datasets[0].points, true);
+                (chartList) ?
+                    <>
+                        <div className={cx('chart')}>
+                            <Line data={chartList}
+                                  options={{
+                                      onAnimationComplete: function () {
+                                          // this.showTooltip(this.datasets[0].points, true);
+                                      },
+                                      animation: {
+                                          duration: 0 // general animation time
+                                      },
+                                      hover: {
+                                          animationDuration: 0 // duration of animations when hovering an item
+                                      },
+                                      responsiveAnimationDuration: 0, // animation duration after a resize
+                                      events: ['mousemove', 'click', 'touchstart', 'touchmove'],
+                                      layout: {
+                                          padding: {
+                                              top: 28,  //set that fits the best
+                                              right: 15
+                                          }
+                                      },
+                                      tooltips: {
+                                          filter: function (tooltipItem) {
+                                              return tooltipItem.datasetIndex === 0;
+                                          },
+                                          mode: 'index',
+                                          caretSize: 0,
+                                          position: 'custom',
+                                          intersect: false,
+                                          displayColors: false,
+                                          callbacks: {
+                                              title: function () {
+                                                  return '';
                                               },
-                                              animation: {
-                                                  duration: 0 // general animation time
-                                              },
-                                              hover: {
-                                                  animationDuration: 0 // duration of animations when hovering an item
-                                              },
-                                              responsiveAnimationDuration: 0, // animation duration after a resize
-                                              events: ['mousemove', 'click', 'touchstart', 'touchmove'],
-                                              layout: {
-                                                  padding: {
-                                                      top: 28,  //set that fits the best
-                                                      right: 15
+                                              label: function (tooltipItem, data) {
+                                                  let value = data.datasets.filter(x => x.label === tradeType)[0].data[tooltipItem.index];
+                                                  let text = '';
+                                                  let date = moment(value.x).format('YYYY년 M월');
+                                                  let price = value.y * 1;
+                                                  let count = value.z * 1;
+                                                  if (count === 0) {
+                                                      return `${date} 거래없음`;
                                                   }
-                                              },
-                                              tooltips: {
-                                                  filter: function (tooltipItem) {
-                                                      return tooltipItem.datasetIndex === 0;
-                                                  },
-                                                  mode: 'index',
-                                                  caretSize: 0,
-                                                  position: 'custom',
-                                                  intersect: false,
-                                                  displayColors: false,
-                                                  callbacks: {
-                                                      title: function () {
-                                                          return '';
-                                                      },
-                                                      label: function (tooltipItem, data) {
-                                                          let value = data.datasets.filter(x => x.label === tradeType)[0].data[tooltipItem.index];
-                                                          let text = '';
-                                                          let date = moment(value.x).format('YYYY년 M월');
-                                                          let price = value.y * 1;
-                                                          let count = value.z * 1;
-                                                          if (count === 0) {
-                                                              return `${date} 거래없음`;
-                                                          }
-                                                          if (price > 10) {
-                                                              text = (price / 10000).toFixed(2) + '억';
-                                                          } else {
-                                                              text = (price / 100).toFixed(2) + '천';
-                                                          }
-                                                          return `${date} 평균 ${text} (${count}건)`;
-                                                      }
+                                                  if (price > 10) {
+                                                      text = (price / 10000).toFixed(2) + '억';
+                                                  } else {
+                                                      text = (price / 100).toFixed(2) + '천';
                                                   }
-                                              },
-                                              legend: {
-                                                  display: false
-                                              },
-                                              scales: {
-                                                  yAxes: [{
-                                                      // position: 'right',
-                                                      ticks: {
-                                                          // beginAtZero: true,
-                                                          stepSize: 10000,
-
-                                                          // Return an empty string to draw the tick line but hide the tick label
-                                                          // Return `null` or `undefined` to hide the tick line entirely
-                                                          userCallback: function (value, index, values) {
-                                                              // Convert the number to a string and splite the string every 3 charaters from the end
-                                                              value = value.toString();
-                                                              value = value.split(/(?=(?:...)*$)/);
-
-                                                              // Convert the array to a string and format the output
-                                                              value = value.join('.');
-                                                              if (value > 10) {
-                                                                  return value / 10 + '억';
-                                                              } else {
-                                                                  return value / 100 + '천';
-                                                              }
-                                                          }
-                                                      }
-                                                  }],
-                                                  xAxes: [{
-                                                      type: 'time',
-                                                      // gridLines: {
-                                                      //     lineWidth: 2
-                                                      // },
-                                                      ticks: {
-                                                          autoSkip: false
-                                                      },
-                                                      time: {
-                                                          unit: 'month',
-                                                          unitStepSize: 6,
-                                                          displayFormats: {
-                                                              month: 'YY.MM',
-                                                          }
-                                                      }
-                                                  }]
+                                                  return `${date} 평균 ${text} (${count}건)`;
                                               }
-                                          }}/>
-                                </div>
-                                <div className={cx('slider')}>
-                                    <Range
-                                        // marks={beforeYear}
-                                        defaultValue={period}
-                                        value={period}
-                                        min={moment('20060101', 'YYYYMMDD')}
-                                        max={moment()}
-                                        onChange={(e) => setPeriod([moment(e[0]), moment(e[1])])}
-                                        onAfterChange={(e) => {
-                                            setStartDate(period[0]);
-                                            setEndDate(period[1]);
-                                        }}
-                                        trackStyle={{
-                                            backgroundColor: '#DDDDDD',
-                                        }}
-                                        railStyle={{
-                                            // backgroundColor: '#2E92FC',
-                                        }}
-                                    />
-                                </div>
-                                <div className={cx('title')}>
-                                    {period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}
-                                </div>
-                            </> :
-                            <div className={cx('loading')}>
-                                <GuavaLoading isLoading={true}/>
-                            </div>
-                    }
-                </div>
+                                          }
+                                      },
+                                      legend: {
+                                          display: false
+                                      },
+                                      scales: {
+                                          yAxes: [{
+                                              // position: 'right',
+                                              ticks: {
+                                                  // beginAtZero: true,
+                                                  stepSize: 20000,
+
+                                                  // Return an empty string to draw the tick line but hide the tick label
+                                                  // Return `null` or `undefined` to hide the tick line entirely
+                                                  userCallback: function (value, index, values) {
+                                                      // Convert the number to a string and splite the string every 3 charaters from the end
+                                                      value = value.toString();
+                                                      value = value.split(/(?=(?:...)*$)/);
+
+                                                      // Convert the array to a string and format the output
+                                                      value = value.join('.');
+                                                      if (value > 10) {
+                                                          return value / 10 + '억';
+                                                      } else {
+                                                          return value / 100 + '천';
+                                                      }
+                                                  }
+                                              }
+                                          }],
+                                          xAxes: [{
+                                              type: 'time',
+                                              // gridLines: {
+                                              //     lineWidth: 2
+                                              // },
+                                              ticks: {
+                                                  autoSkip: false
+                                              },
+                                              time: {
+                                                  unit: 'month',
+                                                  unitStepSize: 6,
+                                                  displayFormats: {
+                                                      month: 'YY.MM',
+                                                  }
+                                              }
+                                          }]
+                                      }
+                                  }}/>
+                        </div>
+                        <div className={cx('slider')}>
+                            <Range
+                                // marks={beforeYear}
+                                defaultValue={period}
+                                value={period}
+                                min={moment('20060101', 'YYYYMMDD')}
+                                max={moment()}
+                                onChange={(e) => setPeriod([moment(e[0]), moment(e[1])])}
+                                onAfterChange={(e) => {
+                                    setStartDate(period[0]);
+                                    setEndDate(period[1]);
+                                }}
+                                trackStyle={{
+                                    backgroundColor: '#DDDDDD',
+                                }}
+                                railStyle={{
+                                    // backgroundColor: '#2E92FC',
+                                }}
+                            />
+                        </div>
+                        <div className={cx('title')}>
+                            {period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}
+                        </div>
+                    </> :
+                    <div className={cx('loading')}>
+                        <GuavaLoading isLoading={true}/>
+                    </div>
             }
-        </>
+        </div>
     );
 };
 

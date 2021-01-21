@@ -14,6 +14,8 @@ public class RentSummarySpecs {
         REGION_CODE("regionCode"),
         BUILDING_CODE("buildingCode"),
         AREA_CODE("areaCode"),
+        START_AREA("startArea"),
+        END_AREA("endArea"),
         START_DATE("startDate"),
         END_DATE("endDate"),
         DATE("date");
@@ -71,6 +73,16 @@ public class RentSummarySpecs {
 //                        root.get(key.value), Integer.valueOf(searchKeyword.get(key).toString())
 //                    ));
 //                    break;
+                case START_AREA:
+                    predicate.add(builder.greaterThanOrEqualTo(
+                        root.get("privateArea"), searchKeyword.get(key) + ""
+                    ));
+                    break;
+                case END_AREA:
+                    predicate.add(builder.lessThanOrEqualTo(
+                        root.get("privateArea"), searchKeyword.get(key) + ""
+                    ));
+                    break;
                 case START_DATE:
                     predicate.add(builder.greaterThanOrEqualTo(
                         root.get("date"), searchKeyword.get(key) + ""

@@ -25,12 +25,12 @@ const GuavaTable = () => {
     const [isCompleted, setIsCompleted] = useState(false);
     const [tradeList, setTradeList] = useState([]);
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
-    const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
+    const [baseDate, setBaseDate] = useRecoilState(tradeDateState);
+    const [tradeDate, setTradeDate] = useState(baseDate);
     // const [region, setRegion] = useRecoilState(regionState);
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const region = useRecoilValue(regionState);
     const [count, setCount] = useState(0);
-    const [chartList, setChartList] = useState([]);
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
     useEffect(() => {
@@ -38,6 +38,10 @@ const GuavaTable = () => {
             fetch();
         }
     }, [tradeList]);
+
+    useEffect(() => {
+        setTradeDate(baseDate);
+    }, [baseDate]);
 
     useEffect(() => {
         setPage(0);
@@ -134,7 +138,6 @@ const GuavaTable = () => {
                 tradeDate &&
                 <div className={cx('date')}>
                     <div className={cx('back_btn')} onClick={() => {
-                        setChartList([]);
                         setTradeDate(null);
                         setCount(0);
                         // fetchChart();
