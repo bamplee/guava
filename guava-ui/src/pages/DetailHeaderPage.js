@@ -9,6 +9,7 @@ import GuavaTable from '../components/table/GuavaTable';
 import {useRecoilValue} from 'recoil';
 import {regionState} from '../components/datatool/state';
 import GuavaAreaTypeFilter from '../components/common/GuavaAreaTypeFilter';
+import GuavaVersus from '../components/versus/GuavaVersus';
 
 const DetailHeaderPage = ({match, location}) => {
     const region = useRecoilValue(regionState);
@@ -43,7 +44,7 @@ const DetailHeaderPage = ({match, location}) => {
                     }
                     {
                         match.params.tabId === 'c' &&
-                        <GuavaBuildingInfo/>
+                        <GuavaVersus/>
                     }
                 </>
             }

@@ -45,6 +45,11 @@ export const regionState = atom({
     default: null
 });
 
+export const versusRegionListState = atom({
+    key: 'versusRegionListState',
+    default: []
+});
+
 export const showAreaFilterState = atom({
     key: 'showAreaFilterState',
     default: false
@@ -52,6 +57,11 @@ export const showAreaFilterState = atom({
 
 export const showAreaTypeFilterState = atom({
     key: 'showAreaTypeFilterState',
+    default: false
+});
+
+export const showVersusSearchState = atom({
+    key: 'showVersusSearchState',
     default: false
 });
 
