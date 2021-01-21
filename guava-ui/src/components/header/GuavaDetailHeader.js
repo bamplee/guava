@@ -9,8 +9,9 @@ import {useRecoilState} from 'recoil';
 import {buildingState, regionState,} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
-import {Button, Tabs, WingBlank} from 'antd-mobile';
+import {ActivityIndicator, Button, Tabs, WingBlank} from 'antd-mobile';
 import {getBuilding, getDetail, getRegion} from '../datatool/api';
+import GuavaLoading from '../detail/GuavaLoading';
 
 const cx = classNames.bind(styles);
 
@@ -50,8 +51,11 @@ const GuavaDetailHeader = ({tabId}) => {
                         </div>
                     </WingBlank>
                     <div className={cx('logo')} onClick={() => history.push('/search')}>
-                        <span
-                            className={cx('title')}>{region?.type === 'BUILDING' ? region?.name : region?.address}</span>
+                        {
+                            (region?.type === 'BUILDING' ? region?.buildingId === regionId : region?.id === regionId) ?
+                            <span className={cx('title')}>{region?.type === 'BUILDING' ? region?.name : region?.address}</span> :
+                                <ActivityIndicator size="small" className={cx('title')}/>
+                        }
                     </div>
                     <WingBlank>
                         <div className={cx('right')}>
@@ -70,21 +74,39 @@ const GuavaDetailHeader = ({tabId}) => {
                 <div className={cx('filter_container')}>
                     <div className={cx('filter_select')}>
                         <Button
-                            className={cx('filter_btn', tabId === 'info' && 'filter_btn_active')}
+                            className={cx('filter_btn', tabId === 'i' && 'filter_btn_active')}
                             type={'primary'}
                             onClick={() => {
-                                history.replace('/' + regionType + '/' + regionId + '/info')
+                                history.replace('/' + regionType + '/' + regionId + '/i')
                             }}
                             size={'small'}>정보</Button>
                     </div>
                     <div className={cx('filter_select')}>
                         <Button
-                            className={cx('filter_btn', (tabId * 1 <= 2) && 'filter_btn_active')}
+                            className={cx('filter_btn', (tabId === 't') && 'filter_btn_active')}
                             type={'primary'}
                             onClick={() => {
-                                history.replace('/' + regionType + '/' + regionId + '/0')
+                                history.replace('/' + regionType + '/' + regionId + '/t')
                             }}
-                            size={'small'}>시세</Button>
+                            size={'small'}>실거래</Button>
+                    </div>
+                    <div className={cx('filter_select')}>
+                        <Button
+                            className={cx('filter_btn', tabId === 'm' && 'filter_btn_active')}
+                            type={'primary'}
+                            onClick={() => {
+                                history.replace('/' + regionType + '/' + regionId + '/m')
+                            }}
+                            size={'small'}>호가</Button>
+                    </div>
+                    <div className={cx('filter_select')}>
+                        <Button
+                            className={cx('filter_btn', tabId === 'c' && 'filter_btn_active')}
+                            type={'primary'}
+                            onClick={() => {
+                                history.replace('/' + regionType + '/' + regionId + '/c')
+                            }}
+                            size={'small'}>비교</Button>
                     </div>
                     {/*<div className={cx('filter_select')}>*/}
                     {/*    <Button className={cx('filter_btn', tabId === '1' && 'filter_btn_active')}*/}
@@ -104,17 +126,17 @@ const GuavaDetailHeader = ({tabId}) => {
                     {/*</div>*/}
                 </div>
             </div>
-            {
-                tabId !== 'info' &&
-                <div style={{borderBottom: '1px solid #f2f2f2'}}>
-                    <Tabs onChange={(e) => {
-                        history.replace('/' + regionType + '/' + regionId + '/' + e.value)
-                    }} tabs={[{title: '실거래가', value: 0}, {title: '호가', value: 1}, {title: '비교', value: 2}]}
-                          page={tabId * 1}
-                          animated={false}
-                          useOnPan={false}/>
-                </div>
-            }
+            {/*{*/}
+            {/*    tabId !== 'info' &&*/}
+            {/*    <div style={{borderBottom: '1px solid #f2f2f2'}}>*/}
+            {/*        <Tabs onChange={(e) => {*/}
+            {/*            history.replace('/' + regionType + '/' + regionId + '/' + e.value)*/}
+            {/*        }} tabs={[{title: '실거래가', value: 0}, {title: '호가', value: 1}]}*/}
+            {/*              page={tabId * 1}*/}
+            {/*              animated={false}*/}
+            {/*              useOnPan={false}/>*/}
+            {/*    </div>*/}
+            {/*}*/}
         </>
     )
 };

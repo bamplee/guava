@@ -24,12 +24,12 @@ const GuavaMainHeader = () => {
                         <NumberOutlined/>
                     </div>
                 </WingBlank>
-                <div className={cx('logo')} onClick={() => history.push('/search')}>
+                <div className={cx('logo')} onClick={() => history.push('/search?type=map')}>
                     <span className={cx('search_title')}>지역 / 아파트 검색하기</span>
                     {/*<span className={cx('sub')}>SUBTITLE</span>*/}
                 </div>
                 <WingBlank>
-                    <div className={cx('right')} onClick={() => history.push('/search')}>
+                    <div className={cx('right')} onClick={() => history.push('/search?type=map')}>
                         <SearchOutlined/>
                     </div>
                 </WingBlank>

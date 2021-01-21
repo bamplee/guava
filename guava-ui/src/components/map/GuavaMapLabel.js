@@ -24,7 +24,7 @@ const GuavaMapLabel = () => {
 
     useEffect(() => {
         if (region) {
-            searchAddrFromCoords(region.lng, region.lat, setCurrentName);
+            setCenter({lat: region.lat, lng: region.lng});
         }
     }, [region]);
 
@@ -32,13 +32,14 @@ const GuavaMapLabel = () => {
         if (regionList.length > 0) {
             let region = regionList[0];
             let name = '';
-            if (level > 8) {
-                name += region.region_1depth_name;
-            } else if (level > 6) {
-                name += `${region.region_1depth_name} ${region.region_2depth_name}`;
-            } else {
-                name += `${region.region_1depth_name} ${region.region_2depth_name} ${region.region_3depth_name}`;
-            }
+            // if (level > 8) {
+            //     name += region.region_1depth_name;
+            // } else if (level > 6) {
+            //     name += `${region.region_1depth_name} ${region.region_2depth_name}`;
+            // } else {
+            //     name += `${region.region_1depth_name} ${region.region_2depth_name} ${region.region_3depth_name}`;
+            // }
+            name += `${region.region_1depth_name} ${region.region_2depth_name} ${region.region_3depth_name}`;
             region.name = name;
             setCurrentRegion(region);
         }

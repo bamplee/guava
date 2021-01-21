@@ -15,34 +15,32 @@ const DetailHeaderPage = ({match, location}) => {
 
     return (
         <>
-            <GuavaDetailHeader tabId={!match.params.tabId ? '0' : match.params.tabId}/>
+            <GuavaDetailHeader tabId={!match.params.tabId ? 't' : match.params.tabId}/>
             {
-                region &&
-                (match.params.tabId === 'info' ?
-                        <div>
-                            <GuavaBuildingInfo/>
-                        </div>
-                        :
-                        <>
-                            <GuavaAreaTypeFilter/>
-                            {
-                                (!match.params.tabId || match.params.tabId === '0') &&
-                                <>
-                                    <GuavaTradeOption/>
-                                    <GuavaChart/>
-                                    <GuavaTable/>
-                                </>
-                            }
-                            {
-                                match.params.tabId === '1' &&
-                                <>
-                                    <GuavaTradeOption/>
-                                    <GuavaMarketChart/>
-                                    <GuavaMarketTable/>
-                                </>
-                            }
-                        </>
-                )
+                region && match.params.tabId === 'i' &&
+                <GuavaBuildingInfo/>
+            }
+            {
+                region && (!match.params.tabId || match.params.tabId === 't') &&
+                <>
+                    <GuavaAreaTypeFilter/>
+                    <GuavaTradeOption/>
+                    <GuavaChart/>
+                    <GuavaTable/>
+                </>
+            }
+            {
+                region && match.params.tabId === 'm' &&
+                <>
+                    <GuavaAreaTypeFilter/>
+                    <GuavaTradeOption/>
+                    <GuavaMarketChart/>
+                    <GuavaMarketTable/>
+                </>
+            }
+            {
+                region && match.params.tabId === 'c' &&
+                <GuavaBuildingInfo/>
             }
         </>
     );

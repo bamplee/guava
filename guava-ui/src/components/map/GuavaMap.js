@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
 import classNames from 'classnames/bind';
 import {useHistory} from 'react-router-dom';
-import { Badge } from 'antd-mobile';
+import {Badge} from 'antd-mobile';
 
 import {fetchSummary} from '../datatool/api';
 
@@ -57,35 +57,45 @@ const GuavaMap = () => {
     }, []);
 
     useEffect(() => {
-        initLatLng();
+        if (region) {
+            let locPosition = new kakao.maps.LatLng(region.lat, region.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+            map.setCenter(locPosition);
+            setCenter({lat: region.lat, lng: region.lng});
+            initLatLng();
+            if (region.type === 'BUILDING') {
+                setLevel(3);
+                map.setLevel(3);
+            } else {
+                if (region.type === 'DONG') {
+                    setLevel(5);
+                    map.setLevel(5);
+                } else {
+                    setLevel(8);
+                    map.setLevel(8);
+                }
+            }
+        }
     }, [region]);
+
+    // useEffect(() => {
+    //     // initLatLng();
+    //     if (region) {
+    //         setCenter({lat: region.lat, lng: region.lng});
+    //     }
+    // }, [region]);
 
     useEffect(() => {
         draw();
     }, [summary]);
 
     useEffect(() => {
-        // initMarker();
         getSummary();
-    }, [center, bounds]);
+    }, [center.lat, center.lng, bounds]);
 
     useEffect(() => {
         initMarker();
         getSummary();
     }, [level, filterArea]);
-
-    // useEffect(() => {
-    //     getSummary();
-    // }, [center]);
-
-    // useEffect(() => {
-    //     draw();
-    // }, [summary]);
-
-    // useEffect(() => {
-    //     initMarker();
-    //     getSummary();
-    // }, [filterArea]);
 
     const initLatLng = () => {
         setCenter({lat: map.getCenter().getLat(), lng: map.getCenter().getLng()});
@@ -100,22 +110,6 @@ const GuavaMap = () => {
             southWestLat: southWestLat
         });
     };
-    //
-    // useEffect(() => {
-    //     getSummary();
-    // }, [center, level]);
-    //
-    // // useEffect(() => {
-    // //     // drawMap();
-    // // }, [summary]);
-    //
-    // useEffect(() => {
-    //     // initCenter(lat, lng);
-    //     if (map) {
-    //         initMarker();
-    //         // getSummary();
-    //     }
-    // }, [filterArea]);
 
     const initMarker = () => {
         for (let i = 0; i < infos.length; i++) {
@@ -168,14 +162,8 @@ const GuavaMap = () => {
             if (elem) {
                 elem.addEventListener('click', async () => {
                     if (x.type === 'BUILDING') {
-                        // setPlaceType(PLACE_TYPE.BUILDING);
-                        // setBuildingId(x.id);
-                        // setRegionId(x.id);
                         history.push('/b/' + x.id);
                     } else {
-                        // setPlaceType(PLACE_TYPE.REGION);
-                        // setBuildingId(null);
-                        // setRegionId(x.id);
                         history.push('/r/' + x.id);
                     }
                 });
@@ -185,48 +173,12 @@ const GuavaMap = () => {
         });
     };
 
-//     const draw = () => {
-//         summary.forEach(x => {
-//             let position = new kakao.maps.LatLng(x.lat, x.lng);
-//             let content = '';
-//             if (x.type === 'BUILDING') {
-//                 content = buildingMarker(x);
-//             } else {
-//                 content = regionMarker(x);
-//             }
-//
-// // 커스텀 오버레이를 생성합니다
-//             let customOverlay = new kakao.maps.CustomOverlay({
-//                 clickable: true,
-//                 map: map,
-//                 position: position,
-//                 content: content,
-//                 yAnchor: 1
-//             });
-//             customOverlay.id = x.id;
-//             customOverlay.type = x.type;
-//             // customOverlay.setMap(map);
-//             const elem = document.getElementById(x.id);
-//             if (elem) {
-//                 elem.addEventListener('click', async () => {
-//                     if (x.type === 'BUILDING') {
-//                         // setPlaceType(PLACE_TYPE.BUILDING);
-//                         history.push('/b/' + x.id);
-//                     } else {
-//                         // setPlaceType(PLACE_TYPE.REGION);
-//                         history.push('/r/' + x.id);
-//                     }
-//                 });
-//             }
-//             infos.push(customOverlay);
-//         });
-//     };
-
     const initMap = () => {
         let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 
+        let initCenter = new kakao.maps.LatLng(center.lat, center.lng);
         let options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng(center.lat, center.lng), //지도의 중심좌표.
+            center: initCenter, //지도의 중심좌표.
             level: level //지도의 레벨(확대, 축소 정도)
         };
         map = new kakao.maps.Map(container, options);

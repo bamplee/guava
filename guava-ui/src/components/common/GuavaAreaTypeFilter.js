@@ -23,7 +23,7 @@ const GuavaAreaTypeFilter = () => {
             setBuilding(await getDetail(region.buildingId));
         };
         init();
-    }, []);
+    }, [region]);
 
     return (
         <div className={cx('modal-container')}>

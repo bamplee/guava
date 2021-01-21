@@ -72,13 +72,13 @@ const GuavaBuildingInfo = () => {
                             <Flex.Item>
                                 <div className={cx('item')}>
                                     <div className={cx('key')}>용적률</div>
-                                    <div className={cx('value')}>{building.floorAreaRatio}%</div>
+                                    <div className={cx('value')}>{building.floorAreaRatio > 0 ? building.floorAreaRatio + '%' : '-'}</div>
                                 </div>
                             </Flex.Item>
                             <Flex.Item>
                                 <div className={cx('item')}>
                                     <div className={cx('key')}>건폐율</div>
-                                    <div className={cx('value')}>{building.buildingCoverageRatio}%</div>
+                                    <div className={cx('value')}>{building.buildingCoverageRatio > 0 ? building.buildingCoverageRatio + '%' : '-'}</div>
                                 </div>
                             </Flex.Item>
                         </Flex>
@@ -92,9 +92,13 @@ const GuavaBuildingInfo = () => {
                             <Flex.Item>
                                 <div className={cx('item')}>
                                     <div className={cx('key')}>주차</div>
-                                    <div className={cx('value')}>{building.parkingTotal}대
-                                        (세대당 {(building.parkingTotal / building.hoCount).toFixed(2)}대)
-                                    </div>
+                                    {
+                                        building.parkingTotal.length > 0 ?
+                                            <div className={cx('value')}>{building.parkingTotal}대
+                                                (세대당 {(building.parkingTotal / building.hoCount).toFixed(2)}대)
+                                            </div> :
+                                            '-'
+                                    }
                                 </div>
                             </Flex.Item>
                         </Flex>

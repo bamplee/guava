@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 
 import styles from './guavaHeader.module.scss';
 import {useRecoilState} from 'recoil';
-import {levelState, regionState} from '../datatool/state';
+import {centerState, levelState, regionState} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import {Icon, List, Result, WingBlank} from 'antd-mobile';
 import {fetchSearch} from '../datatool/api';
@@ -15,31 +15,33 @@ import ReconciliationOutlined from '@ant-design/icons/es/icons/ReconciliationOut
 import EnvironmentOutlined from '@ant-design/icons/es/icons/EnvironmentOutlined';
 import Highlighter from 'react-highlight-words';
 import {useLocalStorage} from '../common/useLocalStorage';
+import queryString from 'query-string';
 
 const cx = classNames.bind(styles);
 
 const GuavaSearchHeader = () => {
     const location = useLocation();
     const history = useHistory();
-    const queryInput = useRef(null);
+    // const queryInput = useRef(null);
     const [query, setQuery] = useState('');
     const [queryList, setQueryList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [level, setLevel] = useRecoilState(levelState);
     const [region, setRegion] = useRecoilState(regionState);
     const [searchList, setSearchList] = useLocalStorage('searchList', []);
+    const [center, setCenter] = useRecoilState(centerState);
 
-    useEffect(() => {
-        if (queryInput && queryInput.current) {
-            queryInput.current.focus();
-        }
-    }, []);
-
-    useEffect(() => {
-        if (queryInput && queryInput.current) {
-            queryInput.current.focus();
-        }
-    }, [queryInput]);
+    // useEffect(() => {
+    //     if (queryInput && queryInput.current) {
+    //         queryInput.current.focus();
+    //     }
+    // }, []);
+    //
+    // useEffect(() => {
+    //     if (queryInput && queryInput.current) {
+    //         queryInput.current.focus();
+    //     }
+    // }, [queryInput]);
 
     useEffect(() => {
         fetchRegion();
@@ -73,16 +75,16 @@ const GuavaSearchHeader = () => {
             temp = temp.subList(0, 10);
         }
         setSearchList(temp);
-        if (item.type === 'BUILDING') {
-            setLevel(3);
-            history.push('/b/' + item.buildingId);
+        const query = queryString.parse(location.search);
+        if (query.type === 'map') {
+            history.push('/');
+            setCenter({lat: item.lat, lng: item.lng});
         } else {
-            if (item.type === 'DONG') {
-                setLevel(5);
+            if (item.type === 'BUILDING') {
+                history.push('/b/' + item.buildingId);
             } else {
-                setLevel(8);
+                history.push('/r/' + item.id);
             }
-            history.push('/r/' + item.id);
         }
     };
 
@@ -104,7 +106,11 @@ const GuavaSearchHeader = () => {
                     </WingBlank>
                     <div className={cx('center')}>
                         {/*<span className={cx('title')}>{region.address}</span>*/}
-                        <input ref={queryInput}
+                        <input autoFocus={true} ref={(ref) => {
+                            if (ref !== null) {
+                                ref.focus();
+                            }
+                        }}
                                value={query}
                                onKeyPress={(e) => {
                                    if (e.key === 'Enter') {
@@ -129,10 +135,10 @@ const GuavaSearchHeader = () => {
                     <>
                         {
                             searchList.length > 0 &&
-                                <List.Item>
-                                    <span className={cx('search_list_title')}>최근검색어</span><span
-                                    style={{marginLeft: 2, fontSize: 9, color: '#8C8C8C'}}>(최대 10개)</span>
-                                </List.Item>
+                            <List.Item>
+                                <span className={cx('search_list_title')}>최근검색어</span><span
+                                style={{marginLeft: 2, fontSize: 9, color: '#8C8C8C'}}>(최대 10개)</span>
+                            </List.Item>
                         }
                         {
                             searchList.map(x =>
