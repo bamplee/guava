@@ -30,6 +30,7 @@ const GuavaChart = () => {
     const [period, setPeriod] = useState([moment().subtract(36, 'months'), moment()]);
     const [startDate, setStartDate] = useState(period[0]);
     const [endDate, setEndDate] = useState(period[1]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         // fetchChart();
@@ -283,6 +284,7 @@ const GuavaChart = () => {
     };
 
     const fetchChart = async () => {
+        setIsLoading(true);
         let tradeList = await getTradeChart();
         let rentList = await getRentChart();
 
@@ -290,12 +292,13 @@ const GuavaChart = () => {
             labels: tradeList.labels,
             datasets: tradeList.datasets.concat(rentList.datasets),
         });
+        setIsLoading(false);
     };
 
     return (
         <div className={cx('chart_container')}>
             {
-                (chartList) ?
+                (chartList && !isLoading) ?
                     <>
                         <div className={cx('chart')}>
                             <Line data={chartList}
@@ -419,7 +422,7 @@ const GuavaChart = () => {
                         </div>
                     </> :
                     <div className={cx('loading')}>
-                        <GuavaLoading isLoading={true}/>
+                        <GuavaLoading isLoading={isLoading}/>
                     </div>
             }
         </div>
