@@ -42,7 +42,7 @@ const GuavaVersus = () => {
                         <span className={cx('message')}>비교할 지역/아파트를 선택하세요</span>
                     </div>
             }
-            <Button className={cx('tag_add')} type="default" size="small"
+            <Button className={cx('tag_add')} inline type="default" size="small"
                     onClick={() => setShowVersusSearch(true)}><PlusOutlined/> 추가하기</Button>
         </div>
     )

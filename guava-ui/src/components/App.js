@@ -7,6 +7,7 @@ import GuavaAreaFilter from './common/GuavaAreaFilter';
 import ReactGA from 'react-ga';
 import {DetailHeaderPage, IntroPage, MapPage} from '../pages';
 import SearchPage from '../pages/SearchPage';
+import GuavaMatch from './map/GuavaMatch';
 
 function App() {
     useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
                         animating={false}
                     />}>
                         <GuavaAreaFilter/>
+                        <Route exact path={['/match']} component={GuavaMatch}/>
                         <Route exact path={['/']} component={MapPage}/>
                         <Route exact path={['/intro']} component={IntroPage}/>
                         <Route exact path={['/search']} component={SearchPage}/>

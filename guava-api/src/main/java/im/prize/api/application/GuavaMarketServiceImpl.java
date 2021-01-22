@@ -208,6 +208,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                      .map((TradeArticle tradeType1) -> transform(tradeType, tradeType1))
                      .filter(Optional::isPresent)
                      .map(Optional::get)
+                     .filter(x -> !StringUtils.isNotEmpty(areaId) || areaId.equals(x.getArea().getAreaId()))
                      .collect(Collectors.toList());
     }
 
