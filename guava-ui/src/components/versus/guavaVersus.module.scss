@@ -3,7 +3,19 @@
   padding: 20px;
 
   .tag_add {
-    margin-top: 10px;
+    //margin-top: 10px;
+  }
+
+  .empty_tag_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 40px;
+
+    .message {
+      color: #9a9a9a;
+    }
   }
 
   .tag_list {
@@ -14,6 +26,7 @@
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch; /* 끝에서 바운스 되도록*/
     scroll-snap-type: x mandatory;
+    margin-bottom: 10px;
 
     .tag {
       display: flex;
