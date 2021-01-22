@@ -43,7 +43,7 @@ const GuavaBuildingInfo = () => {
 
     return (
         <>
-            <div id='image-map' style={{height: 200}}/>
+            <div id='image-map' style={{height: 300}}/>
             <div className={cx('info_container')}>
                 <div className={cx('title')}>
                     {region?.name}
