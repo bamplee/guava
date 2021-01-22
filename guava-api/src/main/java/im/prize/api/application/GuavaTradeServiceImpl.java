@@ -8,6 +8,7 @@ import im.prize.api.domain.oboo.OpenApiTradeInfo;
 import im.prize.api.hgnn.repository.BuildingMapping;
 import im.prize.api.hgnn.repository.BuildingMappingRepository;
 import im.prize.api.hgnn.repository.GuavaBuildingAreaRepository;
+import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingArea;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegion;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegionRepository;
@@ -18,6 +19,7 @@ import im.prize.api.interfaces.response.GuavaTradeResponse;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -87,10 +89,14 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                              .getContent()
                                              .stream()
                                              .peek(this::fillArea)
-                                             .map(GuavaTradeResponse::transform)
+                                             .map(tradeSummary -> GuavaTradeResponse.transform(tradeSummary,
+                                                                                               this.getMaxPrice(tradeSummary.getBuildingCode(),
+                                                                                                                tradeSummary.getAreaCode())))
 //                                   // fixme building id값 조회 안하도록
                                              .peek(x -> {
-                                                 x.setDongName(guavaRegionRepository.findByRegionCode(x.getRegionId()).map(GuavaRegion::getDisplayName).orElse(""));
+                                                 x.setDongName(guavaRegionRepository.findByRegionCode(x.getRegionId())
+                                                                                    .map(GuavaRegion::getDisplayName)
+                                                                                    .orElse(""));
                                                  x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
                                                                                                          .stream()
                                                                                                          .findFirst()
@@ -109,7 +115,9 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                             .map(GuavaTradeResponse::transform)
 //                                   // fixme building id값 조회 안하도록
                                             .peek(x -> {
-                                                x.setDongName(guavaRegionRepository.findByRegionCode(x.getRegionId()).map(GuavaRegion::getDisplayName).orElse(""));
+                                                x.setDongName(guavaRegionRepository.findByRegionCode(x.getRegionId())
+                                                                                   .map(GuavaRegion::getDisplayName)
+                                                                                   .orElse(""));
                                                 x.setBuildingId(String.valueOf(buildingMappingRepository.findByBuildingCode(x.getBuildingId())
                                                                                                         .stream()
                                                                                                         .findFirst()
@@ -122,11 +130,39 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
         return Lists.newArrayList();
     }
 
+    private Integer getMaxPrice(String buildingCode) {
+        Optional<TradeSummary> optionalTradeSummary = tradeSummaryRepository.findTop1ByBuildingCodeOrderByPriceDesc(
+            buildingCode);
+        if (optionalTradeSummary.isPresent()) {
+            return optionalTradeSummary.get().getPrice();
+        }
+        return 0;
+    }
+
+    @Cacheable("getMaxPrice")
+    public Integer getMaxPrice(String buildingCode, String areaId) {
+        if (StringUtils.isEmpty(areaId)) {
+            return getMaxPrice(buildingCode);
+        }
+        Optional<GuavaBuildingArea> optionalGuavaBuildingArea = guavaBuildingAreaRepository.findById(Long.valueOf(areaId));
+        if (optionalGuavaBuildingArea.isPresent()) {
+            Optional<TradeSummary> optionalTradeSummary =
+                tradeSummaryRepository.findTop1ByBuildingCodeAndAreaCodeOrderByPriceDesc(
+                    buildingCode,
+                    areaId);
+            if (optionalTradeSummary.isPresent()) {
+                return optionalTradeSummary.get().getPrice();
+            }
+        }
+        return 0;
+    }
+
     @Override
     public List<GuavaTradeResponse> getBuildingTradeList(String tradeType, String buildingId, Integer page, String areaId, String date) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
         if (optionalBuildingMapping.isPresent()) {
             BuildingMapping buildingMapping = optionalBuildingMapping.get();
+
             if ("trade".equals(tradeType)) {
                 return tradeSummaryRepository.findAll(this.getParamsByTrade(null,
                                                                             buildingMapping.getBuildingCode(),
@@ -135,9 +171,12 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                                       this.getPage(page)).getContent()
                                              .stream()
                                              .peek(this::fillArea)
-                                             .map(GuavaTradeResponse::transform)
+                                             .map(tradeSummary -> GuavaTradeResponse.transform(tradeSummary,
+                                                                                               this.getMaxPrice(tradeSummary.getBuildingCode(),
+                                                                                                                tradeSummary.getAreaCode())))
 //                                   // fixme building id값 조회 안하도록
                                              .peek(x -> x.setBuildingId(buildingId))
+//                                             .peek(x -> x.setBeforeMaxPrice(String.valueOf(beforeMaxPrice)))
                                              .collect(Collectors.toList());
             } else {
                 return rentSummaryRepository.findAll(this.getParamsByRent(null,

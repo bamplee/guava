@@ -35,7 +35,7 @@ public class GuavaTradeResponse {
     private Boolean isNew;
     private Boolean isHighPrice;
 
-    public static GuavaTradeResponse transform(TradeSummary tradeSummary) {
+    public static GuavaTradeResponse transform(TradeSummary tradeSummary, Integer beforeMaxPrice) {
         LocalDate yyyyMMdd = LocalDate.parse(tradeSummary.getDate(), DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         return GuavaTradeResponse.builder()
@@ -57,9 +57,8 @@ public class GuavaTradeResponse {
                                                    .publicArea(String.valueOf(tradeSummary.getPublicArea()))
                                                    .privateArea(String.valueOf(tradeSummary.getPrivateArea()))
                                                    .build())
-//                                 .beforeMaxPrice(b
-// eforeHighPrice)
-//                                 .isHighPrice(isHighPrice)
+                                 .beforeMaxPrice(String.valueOf(beforeMaxPrice))
+                                 .isHighPrice(tradeSummary.getPrice() >= beforeMaxPrice)
                                  .isNew(tradeSummary.getCreatedDateTime().toLocalDate().equals(LocalDate.now()))
                                  .build();
     }
