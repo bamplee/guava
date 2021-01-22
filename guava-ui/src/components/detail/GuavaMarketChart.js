@@ -109,7 +109,7 @@ const GuavaMarketChart = () => {
     const [page, setPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
-    const [chartList, setChartList] = useState(null);
+    const [chartList, setChartList] = useState([]);
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
     const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
     // const [region, setRegion] = useRecoilState(regionState);
@@ -262,7 +262,7 @@ const GuavaMarketChart = () => {
         <div className={cx('chart_container')}>
             {
                 (region.type === 'BUILDING') ?
-                    (chartList && chartList.length > 0) ?
+                    chartList ?
                         <Bar data={chartList} options={options}/> :
                         isLoading ?
                             <div className={cx(isLoading && 'loading')}>
