@@ -19,13 +19,10 @@
       <split-first>
         <leaf>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersus.js">
+            <entry file="file://$PROJECT_DIR$/public/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="321">
-                  <caret line="35" column="61" lean-forward="true" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
-                  <folding>
-                    <element signature="e#0#38#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="142">
+                  <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
                 </state>
               </provider>
             </entry>
@@ -35,10 +32,10 @@
       <split-second>
         <leaf>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/components/App.less">
+            <entry file="file://$PROJECT_DIR$/src/components/map/guavaMap.module.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="383">
-                  <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+                <state relative-caret-position="236">
+                  <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
                 </state>
               </provider>
             </entry>
@@ -49,7 +46,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>un</find>
       <find>.push</find>
       <find>isLoading</find>
       <find>chartList</find>
@@ -79,6 +75,7 @@
       <find>versus_container</find>
       <find>backgrou</find>
       <find>background-color: #fff;</find>
+      <find>viewport</find>
     </findStrings>
     <replaceStrings>
       <replace>startArea</replace>
@@ -145,7 +142,6 @@
         <option value="$PROJECT_DIR$/src/components/detail/GuavaLoading.js" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaLoading.module.scss" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaMarketRow.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaRegionMarketRow.js" />
         <option value="$PROJECT_DIR$/src/components/common/useLocalStorage.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaMainHeader.js" />
@@ -173,12 +169,13 @@
         <option value="$PROJECT_DIR$/src/components/versus/GuavaVersus.js" />
         <option value="$PROJECT_DIR$/src/components/detail/guavaTradeOption.module.scss" />
         <option value="$PROJECT_DIR$/src/components/table/guavaTable.module.scss" />
-        <option value="$PROJECT_DIR$/src/components/map/guavaMap.module.scss" />
         <option value="$PROJECT_DIR$/src/components/detail/guavaRegionInfo.module.scss" />
         <option value="$PROJECT_DIR$/src/components/detail/guavaChart.module.scss" />
         <option value="$PROJECT_DIR$/src/components/versus/guavaVersusSearch.module.scss" />
         <option value="$PROJECT_DIR$/src/components/versus/guavaVersus.module.scss" />
         <option value="$PROJECT_DIR$/src/components/App.less" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/components/map/guavaMap.module.scss" />
       </list>
     </option>
   </component>
@@ -387,12 +384,12 @@
       <workItem from="1610676716038" duration="1562000" />
       <workItem from="1610846626859" duration="36487000" />
       <workItem from="1611018849799" duration="47555000" />
-      <workItem from="1611282170090" duration="6790000" />
+      <workItem from="1611282170090" duration="7079000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="966931000" />
+    <option name="totallyTimeSpent" value="967220000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -449,13 +446,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/favicon.ico">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/logo192.png">
       <provider selected="true" editor-type-id="images" />
@@ -801,13 +791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/map/guavaMap.module.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaTradeOption.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
@@ -837,18 +820,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersus.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="35" column="61" lean-forward="true" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
+        <state relative-caret-position="69">
+          <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+        <state relative-caret-position="285">
+          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/map/guavaMap.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
         </state>
       </provider>
     </entry>
