@@ -83,6 +83,7 @@
   //height: 100%;
   min-height: -webkit-fill-available;
   height: calc(100vh - 51px);
+  height: calc(var(--vh, 1vh) * 100 - 51px);
   //height: calc(100vh - 51px);
   //min-height: 100vh;
   /* mobile viewport bug fix */
