@@ -9,6 +9,7 @@ import PlusOutlined from '@ant-design/icons/es/icons/PlusOutlined';
 import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';
 import MinusCircleOutlined from '@ant-design/icons/es/icons/MinusCircleOutlined';
 import GuavaVersusSearch from './GuavaVersusSearch';
+import GuavaVersusTable from './GuavaVersusTable';
 
 const cx = classNames.bind(styles);
 
@@ -49,6 +50,7 @@ const GuavaVersus = () => {
                             onClick={() => setShowVersusSearch(true)}><PlusOutlined style={{marginRight: 5}}/>추가하기</Button>
                 </div>
             </div>
+            <GuavaVersusTable/>
         </>
     )
 };

@@ -23,6 +23,7 @@ public class GuavaBuildingDetailResponse {
     private Integer maxFloor;
     private Integer minFloor;
     private String since;
+    private String sinceYear;
     private Integer parkingInside;
     private Integer parkingOutside;
     private Integer parkingTotal;

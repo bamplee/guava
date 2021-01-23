@@ -52,8 +52,9 @@
     }
 
     .apt_name {
-      min-width: 95px;
-      width: 95px;
+      min-width: 90px;
+      width: 90px;
+      padding-left: 5px;
     }
   }
 
@@ -114,14 +115,16 @@
 
       .apt_name {
         text-align: left;
-        min-width: 95px;
-        width: 95px;
+        min-width: 90px;
+        width: 90px;
+        padding-left: 5px;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
       }
 
       .link {
+        text-align: center;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

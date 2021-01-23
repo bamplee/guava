@@ -1,5 +1,5 @@
 .fixed {
-  position: fixed;
+  position: fixed !important;
 }
 
 .header_container {
@@ -7,7 +7,7 @@
   top: 0;
   z-index: 9999999;
   color: #fff;
-  //position: fixed;
+  position: sticky;
   border-bottom: 1px solid #1451A6;
 
   .title_container {
@@ -153,8 +153,6 @@
 }
 
 .query_container {
-  padding-top: 50px;
-
   .search_list_title {
     color: #8c8c8c;
   }

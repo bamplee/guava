@@ -108,7 +108,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                 guavaBuilding.getParkingTotal() : guavaBuilding
                 .getParkingInside() + guavaBuilding.getParkingOutside();
             return GuavaBuildingDetailResponse.builder()
-                                              .id(guavaBuilding.getId())
+                                              .id(optionalBuildingMapping.get().getId())
                                               .regionId(String.valueOf(guavaRegionRepository.findByRegionCode(guavaBuilding.getRegionCode())
                                                                                             .get()
                                                                                             .getId()))
@@ -127,6 +127,11 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                                                              .map(LocalDate::parse)
                                                              .map(x -> x.format(DateTimeFormatter.ofPattern("yyyy년 M월")))
                                                              .orElse(""))
+                                              .sinceYear(String.valueOf(LocalDate.now().compareTo(Optional.ofNullable(guavaBuilding.getStartMonth())
+                                                                                                          .map(x -> LocalDate.parse(x.split("T")[0],
+                                                                                                                                    DateTimeFormatter.ofPattern(
+                                                                                                                                        "yyyy-MM-dd")))
+                                                                                                          .orElse(LocalDate.now()))))
                                               .parkingInside(parkingInside)
                                               .parkingOutside(parkingOutSide)
                                               .parkingTotal(parkingTotal)

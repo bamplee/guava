@@ -9,7 +9,7 @@ import {useRecoilState} from 'recoil';
 import {centerState, levelState, regionState, showVersusSearchState, versusRegionListState} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import {Icon, List, Modal, Result, WingBlank} from 'antd-mobile/lib/index';
-import {fetchSearch} from '../datatool/api';
+import {fetchSearch, getBuilding, getDetail} from '../datatool/api';
 import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';
 import ReconciliationOutlined from '@ant-design/icons/es/icons/ReconciliationOutlined';
 import EnvironmentOutlined from '@ant-design/icons/es/icons/EnvironmentOutlined';
@@ -53,6 +53,19 @@ const GuavaVersusSearch = () => {
                 setLoading(true);
                 let regionList = await fetchSearch(query);
                 regionList = regionList.filter(x => x.type === region.type);
+                if (region.type === 'BUILDING') {
+                    regionList = regionList.filter(x => x.buildingId !== region.buildingId);
+                    if (versusRegionList.length > 0) {
+                        console.log(versusRegionList);
+                        console.log(regionList);
+                        regionList = regionList.filter(x => !versusRegionList.map(y => y.id + '').includes(x.buildingId + ''));
+                    }
+                } else {
+                    regionList = regionList.filter(x => x.id !== region.id);
+                    if (versusRegionList.length > 0) {
+                        regionList = regionList.filter(x => !versusRegionList.map(y => y.regionId).includes(x.regionId));
+                    }
+                }
                 setQueryList(regionList);
                 setLoading(false);
             }
@@ -60,6 +73,9 @@ const GuavaVersusSearch = () => {
     };
 
     const handleResultItem = async (item) => {
+        if (item.type === 'BUILDING') {
+            item = await getDetail(item.buildingId);
+        }
         let vsList = [...versusRegionList];
         vsList.unshift(item);
         setVersusRegionList([...vsList]);
