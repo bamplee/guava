@@ -38,7 +38,7 @@ const GuavaTradeOption = () => {
                         setTradeType('rent');
                     }
                 }}
-                values={[<Badge>매매</Badge>, <Badge>전/월세</Badge>]}
+                values={[<Badge>매매</Badge>, <Badge>전세</Badge>, <Badge>월세</Badge>]}
                 tintColor={'#2E92FC'}
                 style={{height: 30, width: 140}}
             />

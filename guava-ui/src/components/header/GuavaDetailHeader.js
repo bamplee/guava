@@ -41,8 +41,6 @@ const GuavaDetailHeader = ({tabId}) => {
 
     return (
         <>
-            <div className={cx('empty_container')}>
-            </div>
             <div className={cx('header_container')}>
                 <div className={cx('title_container')}>
                     <WingBlank>
@@ -53,7 +51,8 @@ const GuavaDetailHeader = ({tabId}) => {
                     <div className={cx('logo')} onClick={() => history.push('/search')}>
                         {
                             (region?.type === 'BUILDING' ? region?.buildingId === regionId : region?.id === regionId) ?
-                            <span className={cx('title')}>{region?.type === 'BUILDING' ? region?.name : region?.address}</span> :
+                                <span
+                                    className={cx('title')}>{region?.type === 'BUILDING' ? region?.name : region?.address}</span> :
                                 <ActivityIndicator size="small" className={cx('title')}/>
                         }
                     </div>
@@ -83,22 +82,22 @@ const GuavaDetailHeader = ({tabId}) => {
                     </div>
                     <div className={cx('filter_select')}>
                         <Button
-                            className={cx('filter_btn', (tabId === 't' || tabId === 'm') && 'filter_btn_active')}
+                            className={cx('filter_btn', (tabId === 't') && 'filter_btn_active')}
                             type={'primary'}
                             onClick={() => {
                                 history.replace('/' + regionType + '/' + regionId + '/t')
                             }}
                             size={'small'}>시세</Button>
                     </div>
-                    {/*<div className={cx('filter_select')}>*/}
-                    {/*    <Button*/}
-                    {/*        className={cx('filter_btn', tabId === 'm' && 'filter_btn_active')}*/}
-                    {/*        type={'primary'}*/}
-                    {/*        onClick={() => {*/}
-                    {/*            history.replace('/' + regionType + '/' + regionId + '/m')*/}
-                    {/*        }}*/}
-                    {/*        size={'small'}>호가</Button>*/}
-                    {/*</div>*/}
+                    <div className={cx('filter_select')}>
+                        <Button
+                            className={cx('filter_btn', tabId === 'm' && 'filter_btn_active')}
+                            type={'primary'}
+                            onClick={() => {
+                                history.replace('/' + regionType + '/' + regionId + '/m')
+                            }}
+                            size={'small'}>호가</Button>
+                    </div>
                     <div className={cx('filter_select')}>
                         <Button
                             className={cx('filter_btn', tabId === 'c' && 'filter_btn_active')}
@@ -126,17 +125,18 @@ const GuavaDetailHeader = ({tabId}) => {
                     {/*</div>*/}
                 </div>
             </div>
-            {
-                (tabId === 't' || tabId === 'm') &&
-                <div style={{borderBottom: '1px solid #f2f2f2'}}>
-                    <Tabs onChange={(e) => {
-                        history.replace('/' + regionType + '/' + regionId + '/' + e.value)
-                    }} tabs={[{title: '실거래가', value: 't'}, {title: '호가', value: 'm'}]}
-                          page={tabId === 't' ? 0 : 1}
-                          animated={false}
-                          useOnPan={false}/>
-                </div>
-            }
+            {/*{*/}
+            {/*    (tabId === 't' || tabId === 'm') &&*/}
+            {/*    <div style={{borderBottom: '1px solid #f2f2f2'}}>*/}
+            {/*        <Tabs onChange={(e) => {*/}
+            {/*            history.replace('/' + regionType + '/' + regionId + '/' + e.value)*/}
+            {/*        }} tabs={[{title: '실거래가', value: 't'}, {title: '호가', value: 'm'}]}*/}
+            {/*              page={tabId === 't' ? 0 : 1}*/}
+            {/*              tabBarUnderlineStyle={{border: '2px solid #2E92FC'}}*/}
+            {/*              animated={false}*/}
+            {/*              useOnPan={false}/>*/}
+            {/*    </div>*/}
+            {/*}*/}
         </>
     )
 };
