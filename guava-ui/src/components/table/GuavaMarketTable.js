@@ -98,11 +98,15 @@ const GuavaMarketTable = () => {
                     next={fetch}
                     hasMore={!isCompleted}
                     loader={<GuavaLoading isLoading={isLoading}/>}
-                    endMessage={tradeList.length > 0 &&
-                    <div className={cx('empty_result')}>총 검색결과 {tradeList.length}개</div>}
+                    /*endMessage={tradeList.length > 0 &&
+                    <div className={cx('empty_result')}>총 검색결과 {tradeList.length}개</div>}*/
                 >
                     {tradeList}
                 </InfiniteScroll>
+                {
+                    tradeList.length > 0 &&
+                    <div className={cx('empty_result')}>총 검색결과 {tradeList.length}개</div>
+                }
             </div>
         )
     };

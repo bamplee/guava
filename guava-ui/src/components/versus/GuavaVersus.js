@@ -1,56 +1,58 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import classNames from 'classnames/bind';
 
 import styles from './guavaVersus.module.scss';
 import {Button, Tag} from 'antd-mobile';
 import {useRecoilValue, useRecoilState} from 'recoil';
-import {regionState, showVersusSearchState, versusRegionListState} from '../datatool/state';
+import {buildingState, regionState, showVersusSearchState, versusRegionListState} from '../datatool/state';
 import PlusOutlined from '@ant-design/icons/es/icons/PlusOutlined';
 import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';
 import MinusCircleOutlined from '@ant-design/icons/es/icons/MinusCircleOutlined';
 import GuavaVersusSearch from './GuavaVersusSearch';
 import GuavaVersusTable from './GuavaVersusTable';
+import GuavaVersusChart from './GuavaVersusChart';
+import {getDetail} from '../datatool/api';
+import GuavaTradeOption from '../detail/GuavaTradeOption';
+import GuavaAreaTypeFilter from '../common/GuavaAreaTypeFilter';
+import GuavaVersusTradeOption from './GuavaVersusTradeOption';
 
 const cx = classNames.bind(styles);
 
 const GuavaVersus = () => {
     const region = useRecoilValue(regionState);
-    const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
+    const [building, setBuilding] = useRecoilState(buildingState);
+    const [versusRegionList, setVersusRegionList] = useState([]);
     const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
 
-    const removeVersusRegion = (region) => {
-        let temp = [...versusRegionList];
-        temp = temp.filter(x => !(x.type === 'BUILDING' ? x.buildingId === region.buildingId : x.id === region.id));
-        setVersusRegionList([...temp]);
-    };
+    useEffect(() => {
+        const init = async () => {
+            if (region) {
+                if (region.type === 'BUILDING') {
+                    let building = await getDetail(region.buildingId);
+                    setBuilding(building);
+                    setVersusRegionList([building]);
+                } else {
+                    setVersusRegionList([region]);
+                }
+            }
+        };
+        init();
+    }, []);
 
     return (
         <>
-            <GuavaVersusSearch/>
+            <GuavaAreaTypeFilter/>
+            <GuavaVersusSearch versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
             <div className={cx('versus_container')}>
-                {
-                    versusRegionList.length > 0 ?
-                        <div className={cx('tag_list')}>
-                            {/*<Button className={cx('tag')} inline ghost size="small">{region.name}</Button>*/}
-                            {
-                                versusRegionList.map(x => (
-                                    <Button type={'primary'} className={cx('tag')} inline ghost
-                                            size="small">{x.name}<CloseOutlined
-                                        style={{marginLeft: 5, fontSize: 12}}
-                                        onClick={() => removeVersusRegion(x)}/></Button>
-                                ))
-                            }
-                        </div> :
-                        <div className={cx('empty_tag_list')}>
-                            <span className={cx('message')}>비교할 지역/아파트를 선택하세요</span>
-                        </div>
-                }
-                <div>
-                    <Button className={cx('tag_add')} inline type="default"
-                            onClick={() => setShowVersusSearch(true)}><PlusOutlined style={{marginRight: 5}}/>추가하기</Button>
+                <div className={cx('add_container')}>
+                    <Button className={cx('tag_add')} inline type="ghost"
+                            onClick={() => setShowVersusSearch(true)}><PlusOutlined
+                        style={{marginRight: 5}}/>비교할 지역 / 아파트 추가하기</Button>
                 </div>
+                <GuavaVersusTradeOption/>
+                <GuavaVersusChart versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
+                <GuavaVersusTable versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
             </div>
-            <GuavaVersusTable/>
         </>
     )
 };

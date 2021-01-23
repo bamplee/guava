@@ -54,6 +54,17 @@ export const getChart = async (tradeType, buildingId, areaId, startDate, endDate
     return await response.json();
 };
 
+export const getVersusChart = async (tradeType, buildingId, startArea, endArea, startDate, endDate) => {
+    const response = await fetch(`/api/v1/guava/chart/buildings/${buildingId}/area?` + new URLSearchParams({
+        tradeType: tradeType,
+        startArea: startArea,
+        endArea: endArea,
+        startDate: startDate,
+        endDate: endDate
+    }));
+    return await response.json();
+};
+
 export const getMatch = async (page) => {
     const response = await fetch(`/api/v1/guava/match?` + new URLSearchParams({
         page: page

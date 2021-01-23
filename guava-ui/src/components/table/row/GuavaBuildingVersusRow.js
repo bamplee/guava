@@ -1,4 +1,5 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom';
 import {useRecoilState} from 'recoil';
 import {Badge} from 'antd-mobile/lib/index';
 
@@ -6,19 +7,24 @@ import {areaTypeState,} from '../../datatool/state';
 
 import classNames from 'classnames/bind';
 import styles from '../guavaTable.module.scss';
+import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';
+import {CHART_COLOR_LIST} from '../../constant';
 
 const cx = classNames.bind(styles);
 
-const GuavaBuildingVersusRow = ({page, idx, building}) => {
+const GuavaBuildingVersusRow = ({page, idx, building, handleClick}) => {
+    const history = useHistory();
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
 
     const getAreaList = (areaList) => {
         let area = areaList.map(x => x.name.replace('평', '') * 1).map(n => Math.floor(n / 10) * 10).sort();
         let startArea = area[0];
         let endArea = area[area.length - 1];
-        let name = '';
+        let name = '-';
         if (startArea === endArea) {
-            name = `${startArea}평대`;
+            if (startArea) {
+                name = `${startArea}평대`;
+            }
         } else {
             name = `${startArea}~${endArea}평`;
         }
@@ -35,7 +41,21 @@ const GuavaBuildingVersusRow = ({page, idx, building}) => {
         building &&
         <div groupKey={page} key={page + '-' + idx}
              className={cx('column')}>
-            <div className={cx('row', 'link', 'apt_name')}>
+            <div className={cx('row', 'apt_name')}
+                 style={{
+                     backgroundColor: `${CHART_COLOR_LIST[idx]}`,
+                     color: '#fff',
+                     marginRight: 5,
+                     marginLeft: 5,
+                     paddingRight: 2,
+                     paddingLeft: 2,
+                     textAlign: 'center'
+                 }}
+                 onClick={() => {
+                     building.type === 'BUILDING' ?
+                     history.push('/b/' + building.buildingId) :
+                     history.push('/r/' + building.id)
+                 }}>
                 {building.name}
             </div>
             <div className={cx('row')}>
@@ -48,6 +68,12 @@ const GuavaBuildingVersusRow = ({page, idx, building}) => {
                 <div>{building.hoCount ? building.hoCount + '세대' : '-'}</div>
             </div>
             <div className={cx('row')}>{building.areaList && getAreaList(building.areaList)}</div>
+            {
+                idx !== 0 ?
+                    <div className={cx('row', 'cancel')}
+                         onClick={() => handleClick(building)}><CloseOutlined/></div> :
+                    <div className={cx('row', 'cancel')}></div>
+            }
         </div>
     )
 };

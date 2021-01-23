@@ -1,3 +1,8 @@
+export const CHART_COLOR_LIST = ['#2E92FC', '#C50A3D', '#FD583C', '#FD8D2F',
+                                '#FEC22D', '#EDDC5F', '#AED364', '#5CC687',
+                                '#1DBAAD', '#2F7C9A', '#2F7C9A', '#3D3E6A',
+                                '#501A48', '#501A48', '#8F1140'];
+
 export const TABLE_OPTION = {
     TRADE: 'trade',
     MARKET: 'market'

@@ -23,6 +23,9 @@ const GuavaVersusCol = () => {
             <div className={cx('row')}>
                 <div>평형</div>
             </div>
+            <div className={cx('row', 'cancel')}>
+                <div></div>
+            </div>
             {/*<div className={cx('row')}>*/}
             {/*    <div>가격</div>*/}
             {/*</div>*/}

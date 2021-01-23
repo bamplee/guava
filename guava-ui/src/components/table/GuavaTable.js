@@ -105,8 +105,8 @@ const GuavaTable = () => {
                         next={fetch}
                         hasMore={!isCompleted}
                         loader={<GuavaLoading isLoading={isLoading}/>}
-                        endMessage={tradeList.length > 0 &&
-                        <div className={cx('empty_result')}>총 검색결과 {tradeList.length}개</div>}
+                        /*endMessage={tradeList.length > 0 &&
+                        <div className={cx('empty_result')}>총 검색결과 {tradeList.length}개</div>}*/
                         // below props only if you need pull down functionality
                         // // refreshFunction={fetch}
                         // // pullDownToRefresh
@@ -120,6 +120,10 @@ const GuavaTable = () => {
                     >
                         {tradeList}
                     </InfiniteScroll>
+                    {
+                        tradeList.length > 0 &&
+                        <div className={cx('empty_result')}>총 검색결과 {tradeList.length}개</div>
+                    }
                 </div>
             </>
         )

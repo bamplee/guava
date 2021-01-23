@@ -89,6 +89,45 @@ public class GuavaTradeChartServiceImpl implements GuavaTradeChartService {
     }
 
     @Override
+    public List<GuavaChartResponse> getBuildingChartList(String tradeType,
+                                                         String buildingId,
+                                                         Integer startArea,
+                                                         Integer endArea,
+                                                         String startDate,
+                                                         String endDate) {
+        Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
+        if (optionalBuildingMapping.isPresent()) {
+            BuildingMapping buildingMapping = optionalBuildingMapping.get();
+            if ("trade".equals(tradeType)) {
+                return tradeSummaryRepository.findAll(this.getParams(null,
+                                                                     buildingMapping.getBuildingCode(),
+                                                                     null,
+                                                                     String.valueOf(startArea),
+                                                                     String.valueOf(endArea),
+                                                                     startDate, endDate))
+                                             .stream()
+                                             .map(GuavaChartResponse::transform)
+//                                   // fixme building id값 조회 안하도록
+//                                   .peek(x -> x.setBuildingId(buildingId))
+                                             .collect(Collectors.toList());
+            } else {
+                return rentSummaryRepository.findAll(this.getParamsByRent(null,
+                                                                          buildingMapping.getBuildingCode(),
+                                                                          null,
+                                                                          String.valueOf(startArea),
+                                                                          String.valueOf(endArea),
+                                                                          startDate, endDate))
+                                            .stream()
+                                            .map(GuavaChartResponse::transform)
+//                                   // fixme building id값 조회 안하도록
+//                                   .peek(x -> x.setBuildingId(buildingId))
+                                            .collect(Collectors.toList());
+            }
+        }
+        return Lists.newArrayList();
+    }
+
+    @Override
     public List<GuavaChartResponse> getChartList(String tradeType, String buildingCode, String areaId, String startDate, String endDate) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingCode));
         if (optionalBuildingMapping.isPresent()) {

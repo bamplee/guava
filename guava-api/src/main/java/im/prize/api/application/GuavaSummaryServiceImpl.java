@@ -108,7 +108,9 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                 guavaBuilding.getParkingTotal() : guavaBuilding
                 .getParkingInside() + guavaBuilding.getParkingOutside();
             return GuavaBuildingDetailResponse.builder()
-                                              .id(optionalBuildingMapping.get().getId())
+                                              .type(RegionType.BUILDING)
+//                                              .id(optionalBuildingMapping.get().getId())
+                                              .buildingId(String.valueOf(optionalBuildingMapping.get().getId()))
                                               .regionId(String.valueOf(guavaRegionRepository.findByRegionCode(guavaBuilding.getRegionCode())
                                                                                             .get()
                                                                                             .getId()))

@@ -20,7 +20,7 @@ import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
 
 const cx = classNames.bind(styles);
 
-const GuavaVersusSearch = () => {
+const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
     // const location = useLocation();
     // const history = useHistory();
     // const queryInput = useRef(null);
@@ -32,7 +32,7 @@ const GuavaVersusSearch = () => {
     // const [searchList, setSearchList] = useLocalStorage('searchList', []);
     // const [center, setCenter] = useRecoilState(centerState);
     const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
-    const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
+    // const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
 
     useEffect(() => {
         fetchRegion();
@@ -54,16 +54,14 @@ const GuavaVersusSearch = () => {
                 let regionList = await fetchSearch(query);
                 regionList = regionList.filter(x => x.type === region.type);
                 if (region.type === 'BUILDING') {
-                    regionList = regionList.filter(x => x.buildingId !== region.buildingId);
+                    // regionList = regionList.filter(x => x.buildingId !== region.buildingId);
                     if (versusRegionList.length > 0) {
-                        console.log(versusRegionList);
-                        console.log(regionList);
-                        regionList = regionList.filter(x => !versusRegionList.map(y => y.id + '').includes(x.buildingId + ''));
+                        regionList = regionList.filter(x => !versusRegionList.map(y => y.buildingId).includes(x.buildingId));
                     }
                 } else {
-                    regionList = regionList.filter(x => x.id !== region.id);
+                    // regionList = regionList.filter(x => x.id !== region.id);
                     if (versusRegionList.length > 0) {
-                        regionList = regionList.filter(x => !versusRegionList.map(y => y.regionId).includes(x.regionId));
+                        regionList = regionList.filter(x => !versusRegionList.map(y => y.id).includes(x.regionId));
                     }
                 }
                 setQueryList(regionList);
@@ -77,7 +75,7 @@ const GuavaVersusSearch = () => {
             item = await getDetail(item.buildingId);
         }
         let vsList = [...versusRegionList];
-        vsList.unshift(item);
+        vsList.push(item);
         setVersusRegionList([...vsList]);
         setShowVersusSearch(false);
         setQuery('');

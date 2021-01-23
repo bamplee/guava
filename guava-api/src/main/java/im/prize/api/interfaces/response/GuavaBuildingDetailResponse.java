@@ -1,5 +1,6 @@
 package im.prize.api.interfaces.response;
 
+import im.prize.api.application.RegionType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,6 +10,8 @@ import java.util.List;
 @Builder
 public class GuavaBuildingDetailResponse {
     private Long id;
+    private String buildingId;
+    private RegionType type;
     private String regionId;
     private String name;
     private Double lat;

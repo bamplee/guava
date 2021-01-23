@@ -2,22 +2,29 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {Range} from 'antd-mobile';
 
-import {areaTypeState, filterAreaState, regionState, tradeDateState, tradeTypeState} from '../datatool/state';
-import {getChart, getRegionChart} from '../datatool/api';
+import {
+    areaTypeState,
+    filterAreaState,
+    regionState,
+    tradeDateState,
+    tradeTypeState,
+    versusRegionListState
+} from '../datatool/state';
+import {getChart, getRegionChart, getVersusChart} from '../datatool/api';
 
 import classNames from 'classnames/bind';
-import styles from './guavaChart.module.scss';
+import styles from '../detail/guavaChart.module.scss';
 import {Line} from 'react-chartjs-2';
 import Chart from 'chart.js';
 import moment from 'moment';
-import {getEndArea, getStartArea} from '../constant';
-import GuavaLoading from './GuavaLoading';
+import {CHART_COLOR_LIST, getEndArea, getStartArea} from '../constant';
+import GuavaLoading from '../detail/GuavaLoading';
 
 const cx = classNames.bind(styles);
 
-const GuavaChart = () => {
-    const [areaType, setAreaType] = useRecoilState(areaTypeState);
-    const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
+const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
+    // const [areaType, setAreaType] = useRecoilState(areaTypeState);
+    // const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
     const [count, setCount] = useState(0);
     const [chartList, setChartList] = useState(null);
     // const [beforeYear, setBeforeYear] = useState(3);
@@ -31,6 +38,7 @@ const GuavaChart = () => {
     const [startDate, setStartDate] = useState(period[0]);
     const [endDate, setEndDate] = useState(period[1]);
     const [isLoading, setIsLoading] = useState(false);
+    // const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
 
     useEffect(() => {
         // fetchChart();
@@ -42,31 +50,31 @@ const GuavaChart = () => {
         if (region !== null) {
             fetchChart();
         }
-    }, [region, startDate, endDate, filterArea, areaType]);
+    }, [region, startDate, endDate, filterArea, tradeType, versusRegionList]);
 
-    useEffect(() => {
-        if (chartList) {
-            for (const chart of [...chartList.datasets]) {
-                if (chart.label === tradeType) {
-                    chart.borderColor = '#313131';
-                } else {
-                    chart.borderColor = '#DDDDDD';
-                }
-            }
+    // useEffect(() => {
+    //     if (chartList) {
+    //         for (const chart of [...chartList.datasets]) {
+    //             if (chart.label === tradeType) {
+    //                 chart.borderColor = '#2E92FC';
+    //             } else {
+    //                 chart.borderColor = '#DDDDDD';
+    //             }
+    //         }
+    //
+    //         setChartList({
+    //             labels: [...chartList.labels],
+    //             datasets: [...chartList.datasets],
+    //         });
+    //     }
+    // }, [tradeType]);
 
-            setChartList({
-                labels: [...chartList.labels],
-                datasets: [...chartList.datasets],
-            });
-        }
-    }, [tradeType]);
-
-    useEffect(() => {
-        if (chartList && chartList.datasets[0].data.length > 0 && activeChartIndex && activeChartIndex !== -1) {
-            setTradeDate(moment(chartList.datasets[0].data[activeChartIndex].x));
-            setCount(chartList.datasets[0].data[activeChartIndex].z);
-        }
-    }, [activeChartIndex]);
+    // useEffect(() => {
+    //     if (chartList && chartList.datasets[0].data.length > 0 && activeChartIndex && activeChartIndex !== -1) {
+    //         // setTradeDate(moment(chartList.datasets[0].data[activeChartIndex].x));
+    //         setCount(chartList.datasets[0].data[activeChartIndex].z);
+    //     }
+    // }, [activeChartIndex]);
 
     const chartPlugin = (chart, callback) => {
         if (chart.config.type !== 'line') {
@@ -132,15 +140,23 @@ const GuavaChart = () => {
         {},
     );
 
-    const getTradeChart = async () => {
+    const getTradeChart = async (regionParams, label, color) => {
         let result = [];
         let data = [];
-        if (region.type === 'BUILDING') {
-            result = await getChart('trade', region.buildingId, areaType.areaId, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
+        let startArea = getStartArea(filterArea[0]);
+        let endArea = getEndArea(filterArea[1]);
+
+        if (regionParams.type === 'BUILDING') {
+            result = await getVersusChart(tradeType, regionParams.buildingId,  startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         } else {
-            let startArea = getStartArea(filterArea[0]);
-            let endArea = getEndArea(filterArea[1]);
-            result = await getRegionChart('trade', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
+            result = await getRegionChart(tradeType, regionParams.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
+        }
+
+        if(result.length == 0) {
+            return {
+                labels: [],
+                datasets: []
+            };
         }
 
         let groupList = groupBy(result.map(x => {
@@ -172,35 +188,20 @@ const GuavaChart = () => {
             return ({
                 x: key,
                 y: (groupList[key].map(x => x.price * 1).reduce((a, b) => a + b) / groupList[key].length).toFixed(0),
-                z: groupList[key].isEmpty ? 0 : groupList[key].length
+                z: groupList[key].length
             })
         });
 
         let total = {
             pointRadius: 0,
             // spanGaps: true,
-            borderColor: tradeType === 'trade' ? '#2E92FC' : '#DDDDDD',
+            borderColor: color,
+            backgroundColor: color,
             fill: false,
-            label: 'trade',
+            label: label,
             data: groupList
         };
 
-        // if (region.type === 'BUILDING' && beforeMonth < 37) {
-        //     data = groupBy(result, 'area');
-        //     data = Object.keys(data).map(key => {
-        //         return {
-        //             type: 'scatter',
-        //             label: key,
-        //             data: data[key].map(x => ({
-        //                 x: moment(x.date).format('YYYYMM'),
-        //                 y: x.price
-        //             }))
-        //         }
-        //     });
-        //     data.unshift(total);
-        // } else {
-        //     data = [total];
-        // }
         data = [total];
 
         result = result.map(x => moment(x.date)).sort((a, b) => a - b);
@@ -213,7 +214,7 @@ const GuavaChart = () => {
         let result = [];
         let data = [];
         if (region.type === 'BUILDING') {
-            result = await getChart('rent', region.buildingId, areaType.areaId, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
+            result = await getChart('rent', region.buildingId, '', startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         } else {
             let startArea = getStartArea(filterArea[0]);
             let endArea = getEndArea(filterArea[1]);
@@ -285,12 +286,25 @@ const GuavaChart = () => {
 
     const fetchChart = async () => {
         setIsLoading(true);
-        let tradeList = await getTradeChart();
-        let rentList = await getRentChart();
+        // let tradeList = await getTradeChart(region, region.name, CHART_COLOR_LIST[0]);
+
+        let index = 0;
+        let tradeList;
+        let labels = [];
+        let datasets = [];
+        for (const versusRegion of versusRegionList) {
+            let versusChart = await getTradeChart(versusRegion, versusRegion.name, CHART_COLOR_LIST[index]);
+            labels = labels ? labels : versusChart.labels;
+            datasets = datasets.concat(versusChart.datasets);
+            index++;
+        }
+
+        // let rentList = await getRentChart();
 
         setChartList({
-            labels: tradeList.labels,
-            datasets: tradeList.datasets.concat(rentList.datasets),
+            labels: labels,
+            datasets: datasets,
+            // datasets: tradeList.datasets.concat(rentList.datasets),
         });
         setIsLoading(false);
     };
@@ -316,38 +330,42 @@ const GuavaChart = () => {
                                       events: ['mousemove', 'click', 'touchstart', 'touchmove'],
                                       layout: {
                                           padding: {
-                                              top: 28,  //set that fits the best
+                                              top: 50,  //set that fits the best
                                               right: 15
                                           }
                                       },
                                       tooltips: {
-                                          filter: function (tooltipItem) {
-                                              return tooltipItem.datasetIndex === 0;
-                                          },
+                                          // filter: function (tooltipItem) {
+                                          //     return tooltipItem.datasetIndex === 0;
+                                          // },
                                           mode: 'index',
                                           caretSize: 0,
                                           position: 'custom',
                                           intersect: false,
-                                          displayColors: false,
+                                          displayColors: true,
                                           callbacks: {
-                                              title: function () {
-                                                  return '';
+                                              title: function (data) {
+                                                  return moment(data[0].label).format('YYYY년 M월');
                                               },
                                               label: function (tooltipItem, data) {
-                                                  let value = data.datasets.filter(x => x.label === tradeType)[0].data[tooltipItem.index];
+                                                  let result = [];
+                                                  let dataset = data.datasets[tooltipItem.datasetIndex];
+                                                  // console.log(dataset.data[tooltipItem.index]);
+                                                  let value = dataset.data[tooltipItem.index];
                                                   let text = '';
-                                                  let date = moment(value.x).format('YYYY년 M월');
+                                                  // let date = moment(value.x).format('YYYY년 M월');
                                                   let price = value.y * 1;
                                                   let count = value.z * 1;
                                                   if (count === 0) {
-                                                      return `${date} 거래없음`;
+                                                      // return `${dataset.label} ${date} 거래없음`;
+                                                      result.push(`${dataset.label} : 거래없음`);
                                                   }
                                                   if (price > 10) {
                                                       text = (price / 10000).toFixed(2) + '억';
                                                   } else {
                                                       text = (price / 100).toFixed(2) + '천';
                                                   }
-                                                  return `${date} 평균 ${text} (${count}건)`;
+                                                  return `${dataset.label} : 평균 ${text} (${count}건)`;
                                               }
                                           }
                                       },
@@ -429,4 +447,4 @@ const GuavaChart = () => {
     );
 };
 
-export default GuavaChart;
+export default GuavaVersusChart;
