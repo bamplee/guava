@@ -1,9 +1,12 @@
 .versus_container {
-  background-color: #fff;
   padding: 20px;
 
   .tag_add {
-    //margin-top: 10px;
+    height: 40px;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .empty_tag_list {

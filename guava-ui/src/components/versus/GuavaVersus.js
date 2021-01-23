@@ -24,27 +24,32 @@ const GuavaVersus = () => {
     };
 
     return (
-        <div className={cx('versus_container')}>
+        <>
             <GuavaVersusSearch/>
-            {
-                versusRegionList.length > 0 ?
-                    <div className={cx('tag_list')}>
-                        {/*<Button className={cx('tag')} inline ghost size="small">{region.name}</Button>*/}
-                        {
-                            versusRegionList.map(x => (
-                                <Button type={'primary'} className={cx('tag')} inline ghost
-                                        size="small">{x.name}<CloseOutlined style={{marginLeft: 5, fontSize: 12}}
-                                                                            onClick={() => removeVersusRegion(x)}/></Button>
-                            ))
-                        }
-                    </div> :
-                    <div className={cx('empty_tag_list')}>
-                        <span className={cx('message')}>비교할 지역/아파트를 선택하세요</span>
-                    </div>
-            }
-            <Button className={cx('tag_add')} inline type="default" size="small"
-                    onClick={() => setShowVersusSearch(true)}><PlusOutlined/> 추가하기</Button>
-        </div>
+            <div className={cx('versus_container')}>
+                {
+                    versusRegionList.length > 0 ?
+                        <div className={cx('tag_list')}>
+                            {/*<Button className={cx('tag')} inline ghost size="small">{region.name}</Button>*/}
+                            {
+                                versusRegionList.map(x => (
+                                    <Button type={'primary'} className={cx('tag')} inline ghost
+                                            size="small">{x.name}<CloseOutlined
+                                        style={{marginLeft: 5, fontSize: 12}}
+                                        onClick={() => removeVersusRegion(x)}/></Button>
+                                ))
+                            }
+                        </div> :
+                        <div className={cx('empty_tag_list')}>
+                            <span className={cx('message')}>비교할 지역/아파트를 선택하세요</span>
+                        </div>
+                }
+                <div>
+                    <Button className={cx('tag_add')} inline type="default"
+                            onClick={() => setShowVersusSearch(true)}><PlusOutlined style={{marginRight: 5}}/>추가하기</Button>
+                </div>
+            </div>
+        </>
     )
 };
 
