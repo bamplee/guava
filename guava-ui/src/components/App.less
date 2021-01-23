@@ -7,11 +7,18 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
+  //height: 100vh;
   margin: 0 auto;
   //height: 100%;
   //max-width: 500px;
   background-color: #fff;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 .match-custom {
