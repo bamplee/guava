@@ -1,13 +1,9 @@
-.fixed {
-  position: fixed !important;
-}
-
 .header_container {
   width: 100%;
   top: 0;
   z-index: 9999999;
   color: #fff;
-  position: sticky;
+  position: fixed;
   border-bottom: 1px solid #1451A6;
 
   .title_container {

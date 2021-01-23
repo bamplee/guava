@@ -17,13 +17,14 @@ import Highlighter from 'react-highlight-words';
 // import {useLocalStorage} from '../common/useLocalStorage';
 import queryString from 'query-string/index';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
+import {useLocalStorage} from '../common/useLocalStorage';
 
 const cx = classNames.bind(styles);
 
 const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
     // const location = useLocation();
     // const history = useHistory();
-    // const queryInput = useRef(null);
+    const queryInput = useRef(null);
     const [query, setQuery] = useState('');
     const [queryList, setQueryList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -33,6 +34,7 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
     // const [center, setCenter] = useRecoilState(centerState);
     const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
     // const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
+    const [versusSearchList, setVersusSearchList] = useLocalStorage('versusSearchList', []);
 
     useEffect(() => {
         fetchRegion();
@@ -74,6 +76,14 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
         if (item.type === 'BUILDING') {
             item = await getDetail(item.buildingId);
         }
+
+        let temp = versusSearchList.filter(x => !(x.type === 'BUILDING' ? x.buildingId === item.buildingId : x.id === item.id));
+        temp.unshift(item);
+        if (temp.length > 10) {
+            temp = temp.subList(0, 10);
+        }
+        setVersusSearchList(temp);
+
         let vsList = [...versusRegionList];
         vsList.push(item);
         setVersusRegionList([...vsList]);
@@ -89,8 +99,8 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
     };
 
     const removeSearchList = (item) => {
-        // let temp = searchList.filter(x => !(x.type === 'BUILDING' ? x.buildingId === item.buildingId : x.id === item.id));
-        // setSearchList(temp);
+        let temp = versusSearchList.filter(x => !(x.type === 'BUILDING' ? x.buildingId === item.buildingId : x.id === item.id));
+        setVersusSearchList(temp);
     };
 
     return (
@@ -142,12 +152,13 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
                     (!loading && query.length === 0) &&
                     <>
                         {
+                            versusSearchList.filter(x => x.type === region.type).length > 0 &&
                             <List.Item>
-                                <span className={cx('search_list_title')}>주변 지역/아파트</span>
+                                <span className={cx('search_list_title')}>최근 비교 지역/아파트</span>
                             </List.Item>
                         }
                         {
-                            [].map(x =>
+                            versusSearchList.filter(x => x.type === region.type).map(x =>
                                 <List.Item>
                                     <div className={cx('search_list')}>
                                         <div className={cx('left')} onClick={() => handleResultItem(x)}>

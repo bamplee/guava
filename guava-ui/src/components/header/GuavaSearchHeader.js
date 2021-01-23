@@ -95,6 +95,7 @@ const GuavaSearchHeader = () => {
 
     return (
         <>
+            <div style={{height: 51}}/>
             <div className={cx('header_container')}>
                 <div className={cx('title_container')}>
                     <WingBlank>

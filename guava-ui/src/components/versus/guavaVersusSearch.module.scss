@@ -2,7 +2,8 @@
   //width: 100%;
   //top: 0;
   //z-index: 9999999;
-  color: #2E92FC;
+  color: #fff;
+  background-color: #2E92FC;
   //position: fixed;
   //border-bottom: 1px solid #1451A6;
 
@@ -77,7 +78,8 @@
 
       input {
         width: 100%;
-        color: #2E92FC;
+        color: #fff;
+        background-color: #2E92FC;
         border: none;
         font-size: 16px;
         font-weight: 400;
@@ -147,8 +149,8 @@
 }
 
 .query_container {
-  max-height: 400px;
-  min-height: 400px;
+  max-height: 350px;
+  min-height: 350px;
 
   .search_list_title {
     color: #8c8c8c;

@@ -45,8 +45,8 @@ const GuavaBuildingVersusRow = ({page, idx, building, handleClick}) => {
                  style={{
                      backgroundColor: `${CHART_COLOR_LIST[idx]}`,
                      color: '#fff',
-                     marginRight: 5,
-                     marginLeft: 5,
+                     marginRight: 3,
+                     marginLeft: 3,
                      paddingRight: 2,
                      paddingLeft: 2,
                      textAlign: 'center'

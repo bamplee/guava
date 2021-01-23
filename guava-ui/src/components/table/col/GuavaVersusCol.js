@@ -8,7 +8,14 @@ const cx = classNames.bind(styles);
 const GuavaVersusCol = () => {
     return (
         <div className={cx('header')}>
-            <div className={cx('row', 'apt_name')}>
+            <div className={cx('row', 'apt_name')}
+                 style={{
+                     marginRight: 3,
+                     marginLeft: 3,
+                     paddingRight: 2,
+                     paddingLeft: 2,
+                 }}
+            >
                 <div>이름</div>
             </div>
             <div className={cx('row')}>
