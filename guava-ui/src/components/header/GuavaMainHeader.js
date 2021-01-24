@@ -20,7 +20,8 @@ const GuavaMainHeader = () => {
         <div className={cx('header_container')}>
             <div className={cx('title_container')}>
                 <WingBlank>
-                    <div className={cx('left')} onClick={() => history.push('/intro')}>
+                    {/*<div className={cx('left')} onClick={() => history.push('/intro')}>*/}
+                    <div className={cx('left')}>
                         <NumberOutlined/>
                     </div>
                 </WingBlank>

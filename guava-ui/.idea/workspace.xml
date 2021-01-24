@@ -15,13 +15,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
+        <entry file="file://$PROJECT_DIR$/src/components/header/GuavaMainHeader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#48#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="252">
+              <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -158,9 +155,9 @@
         <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js" />
         <option value="$PROJECT_DIR$/src/components/App.less" />
         <option value="$PROJECT_DIR$/src/components/map/GuavaMap.js" />
-        <option value="$PROJECT_DIR$/src/components/header/GuavaMainHeader.js" />
         <option value="$PROJECT_DIR$/src/components/map/guavaMap.module.scss" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaChart.js" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaMainHeader.js" />
       </list>
     </option>
   </component>
@@ -375,12 +372,12 @@
       <workItem from="1610846626859" duration="36487000" />
       <workItem from="1611018849799" duration="47555000" />
       <workItem from="1611282170090" duration="7970000" />
-      <workItem from="1611456510937" duration="1957000" />
+      <workItem from="1611456510937" duration="2088000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="990244000" />
+    <option name="totallyTimeSpent" value="990375000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -759,16 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="137" column="52" lean-forward="true" selection-start-line="137" selection-start-column="28" selection-end-line="137" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/header/guavaHeader.module.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -839,13 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaMainHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/map/guavaMap.module.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
@@ -855,11 +835,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+        <state relative-caret-position="210">
+          <caret line="52" column="50" lean-forward="true" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="236" column="21" lean-forward="true" selection-start-line="236" selection-start-column="21" selection-end-line="236" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaMainHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
         </state>
       </provider>
     </entry>
