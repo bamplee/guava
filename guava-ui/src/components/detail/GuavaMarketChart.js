@@ -261,28 +261,28 @@ const GuavaMarketChart = () => {
     return (
         <div className={cx('chart_container')}>
             {
-                (region.type === 'BUILDING') ?
-                    chartList ?
-                        <Bar data={chartList} options={options}/> :
-                        isLoading ?
-                            <div className={cx(isLoading && 'loading')}>
-                                <GuavaLoading isLoading={isLoading}/>
-                            </div> :
+                isLoading ?
+                    <div className={cx('loading')}>
+                        <GuavaLoading isLoading={isLoading}/>
+                    </div> :
+                    (region.type === 'BUILDING') ?
+                        chartList ?
+                            <Bar data={chartList} options={options}/> :
                             <Result
                                 img={<img src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
                                           style={{width: 40, height: 40}}/>}
                                 // title="지역 호가 차트 준비중"
                                 message="데이터가 없습니다"
                             />
-                    :
-                    <div className={cx('empty_container')}>
-                        <Result
-                            img={<img src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
-                                      style={{width: 40, height: 40}}/>}
-                            // title="지역 호가 차트 준비중"
-                            message="지역 호가 차트는 개발중"
-                        />
-                    </div>
+                        :
+                        <div className={cx('empty_container')}>
+                            <Result
+                                img={<img src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
+                                          style={{width: 40, height: 40}}/>}
+                                // title="지역 호가 차트 준비중"
+                                message="지역 호가 차트는 개발중"
+                            />
+                        </div>
             }
         </div>
     );
