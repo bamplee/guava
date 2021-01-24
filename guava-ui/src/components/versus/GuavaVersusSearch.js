@@ -188,7 +188,7 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
                 }
                 <List>
                     {
-                        queryList.length === 0 &&
+                        versusSearchList.filter(x => region.type === 'BUILDING' ? !versusRegionList.map(y => y.buildingId).includes(x.buildingId) : !versusRegionList.map(y => y.id).includes(x.regionId)).filter(x => x.type === region.type).length === 0 && queryList.length === 0 &&
                         <Result
                             img={<img
                                 src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
