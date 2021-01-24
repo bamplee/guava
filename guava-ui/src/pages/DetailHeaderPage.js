@@ -17,7 +17,7 @@ const DetailHeaderPage = ({match, location}) => {
     return (
         <>
             <GuavaDetailHeader tabId={!match.params.tabId ? 't' : match.params.tabId}/>
-            <div>
+            <div style={{maxWidth: 500, margin: '0 auto'}}>
                 {
                     (region && (region.type === 'BUILDING' ? region.buildingId === match.params.regionId : region.id === match.params.regionId)) &&
                     <>
