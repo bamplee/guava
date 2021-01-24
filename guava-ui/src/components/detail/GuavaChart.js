@@ -48,7 +48,7 @@ const GuavaChart = () => {
         if (chartList) {
             for (const chart of [...chartList.datasets]) {
                 if (chart.label === tradeType) {
-                    chart.borderColor = '#313131';
+                    chart.borderColor = '#2E92FC';
                 } else {
                     chart.borderColor = '#DDDDDD';
                 }
