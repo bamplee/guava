@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Range} from 'antd-mobile';
+import {Range, Result} from 'antd-mobile';
 
 import {
     areaTypeState,
@@ -47,9 +47,7 @@ const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
     }, []);
 
     useEffect(() => {
-        if (region !== null) {
-            fetchChart();
-        }
+        fetchChart();
     }, [region, startDate, endDate, filterArea, tradeType, versusRegionList]);
 
     // useEffect(() => {
@@ -147,12 +145,12 @@ const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
         let endArea = getEndArea(filterArea[1]);
 
         if (regionParams.type === 'BUILDING') {
-            result = await getVersusChart(tradeType, regionParams.buildingId,  startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
+            result = await getVersusChart(tradeType, regionParams.buildingId, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         } else {
             result = await getRegionChart(tradeType, regionParams.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
 
-        if(result.length == 0) {
+        if (result.length == 0) {
             return {
                 labels: [],
                 datasets: []
@@ -362,7 +360,7 @@ const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
                                                       let count = value.z * 1;
                                                       if (count === 0) {
                                                           // return `${dataset.label} ${date} 거래없음`;
-                                                          result.push(`${dataset.label} : 거래없음`);
+                                                          return `${dataset.label} : 거래없음`;
                                                       }
                                                       if (price > 10) {
                                                           text = (price / 10000).toFixed(2) + '억';
@@ -443,8 +441,13 @@ const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
                                 {period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}
                             </div>
                         </> :
-                        <div className={cx('loading')}>
-                            <GuavaLoading isLoading={isLoading}/>
+                        <div className={cx('empty_container')}>
+                            <Result
+                                img={<img src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
+                                          style={{width: 40, height: 40}}/>}
+                                // title="지역 호가 차트 준비중"
+                                message="데이터가 없습니다"
+                            />
                         </div>
             }
         </div>

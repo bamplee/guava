@@ -268,12 +268,15 @@ const GuavaMarketChart = () => {
                     (region.type === 'BUILDING') ?
                         chartList ?
                             <Bar data={chartList} options={options}/> :
-                            <Result
-                                img={<img src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
-                                          style={{width: 40, height: 40}}/>}
-                                // title="지역 호가 차트 준비중"
-                                message="데이터가 없습니다"
-                            />
+                            <div className={cx('empty_container')}>
+                                <Result
+                                    img={<img
+                                        src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
+                                        style={{width: 40, height: 40}}/>}
+                                    // title="지역 호가 차트 준비중"
+                                    message="데이터가 없습니다"
+                                />
+                            </div>
                         :
                         <div className={cx('empty_container')}>
                             <Result

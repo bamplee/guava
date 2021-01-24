@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaTradeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaTradeResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,12 +17,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="448" column="13" selection-start-line="448" selection-start-column="13" selection-end-line="448" selection-end-column="13" />
+            <state relative-caret-position="385">
+              <caret line="56" column="53" lean-forward="true" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
-                <element signature="e#11263#17898#0" />
-                <element signature="e#17923#18914#0" />
+                <element signature="e#11361#18285#0" />
+                <element signature="e#18349#19416#0" />
               </folding>
             </state>
           </provider>
@@ -35,9 +32,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>areaType</find>
-      <find>versusRegionListState</find>
-      <find>versusRegionList</find>
       <find>padding-right</find>
       <find>추가하기</find>
       <find>2px</find>
@@ -65,6 +59,9 @@
       <find>marker</find>
       <find>isLoading</find>
       <find>chart_container</find>
+      <find>거래</find>
+      <find>chartList</find>
+      <find>setIsLoading</find>
     </findStrings>
     <replaceStrings>
       <replace>startArea</replace>
@@ -380,12 +377,12 @@
       <workItem from="1610846626859" duration="36487000" />
       <workItem from="1611018849799" duration="47555000" />
       <workItem from="1611282170090" duration="7970000" />
-      <workItem from="1611456510937" duration="3596000" />
+      <workItem from="1611456510937" duration="4233000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="991883000" />
+    <option name="totallyTimeSpent" value="992520000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -398,7 +395,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3270202" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3270202" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.32070708" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.32070708" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -850,8 +847,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="265" column="48" lean-forward="true" selection-start-line="265" selection-start-column="48" selection-end-line="265" selection-end-column="48" />
+        <state relative-caret-position="-2342">
+          <caret lean-forward="true" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>
@@ -860,12 +857,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="448" column="13" selection-start-line="448" selection-start-column="13" selection-end-line="448" selection-end-column="13" />
+        <state relative-caret-position="385">
+          <caret line="56" column="53" lean-forward="true" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
-            <element signature="e#11263#17898#0" />
-            <element signature="e#17923#18914#0" />
+            <element signature="e#11361#18285#0" />
+            <element signature="e#18349#19416#0" />
           </folding>
         </state>
       </provider>
