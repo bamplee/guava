@@ -182,7 +182,7 @@ const GuavaSearchHeader = () => {
                 }
                 <List>
                     {
-                        query.length > 0 && queryList.length === 0 &&
+                        queryList.length === 0 &&
                         <Result
                             img={<img
                                 src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
