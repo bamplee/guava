@@ -33,10 +33,6 @@ const GuavaVersusTable = ({versusRegionList, setVersusRegionList}) => {
                                                                                         building={building}
                                                                                         handleClick={removeVersusRegion}/>)
                     }
-                    {
-                        versusRegionList.length > 0 &&
-                        <div className={cx('empty_result')}>총 검색결과 {versusRegionList.length}개</div>
-                    }
                 </div>
             </div>
         </div>

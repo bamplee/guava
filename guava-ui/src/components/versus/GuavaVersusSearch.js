@@ -55,17 +55,7 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
                 setLoading(true);
                 let regionList = await fetchSearch(query);
                 regionList = regionList.filter(x => x.type === region.type);
-                if (region.type === 'BUILDING') {
-                    // regionList = regionList.filter(x => x.buildingId !== region.buildingId);
-                    if (versusRegionList.length > 0) {
-                        regionList = regionList.filter(x => !versusRegionList.map(y => y.buildingId).includes(x.buildingId));
-                    }
-                } else {
-                    // regionList = regionList.filter(x => x.id !== region.id);
-                    if (versusRegionList.length > 0) {
-                        regionList = regionList.filter(x => !versusRegionList.map(y => y.id).includes(x.regionId));
-                    }
-                }
+                regionList = regionList.filter(x => region.type === 'BUILDING' ? !versusRegionList.map(y => y.buildingId).includes(x.buildingId) : !versusRegionList.map(y => y.id).includes(x.regionId));
                 setQueryList(regionList);
                 setLoading(false);
             }
@@ -152,13 +142,13 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
                     (!loading && query.length === 0) &&
                     <>
                         {
-                            versusSearchList.filter(x => x.type === region.type).length > 0 &&
+                            versusSearchList.filter(x => region.type === 'BUILDING' ? !versusRegionList.map(y => y.buildingId).includes(x.buildingId) : !versusRegionList.map(y => y.id).includes(x.regionId)).filter(x => x.type === region.type).length > 0 &&
                             <List.Item>
                                 <span className={cx('search_list_title')}>최근 비교 지역/아파트</span>
                             </List.Item>
                         }
                         {
-                            versusSearchList.filter(x => x.type === region.type).map(x =>
+                            versusSearchList.filter(x => region.type === 'BUILDING' ? !versusRegionList.map(y => y.buildingId).includes(x.buildingId) : !versusRegionList.map(y => y.id).includes(x.regionId)).filter(x => x.type === region.type).map(x =>
                                 <List.Item>
                                     <div className={cx('search_list')}>
                                         <div className={cx('left')} onClick={() => handleResultItem(x)}>

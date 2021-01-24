@@ -44,14 +44,14 @@ const GuavaVersus = () => {
             <GuavaAreaTypeFilter/>
             <GuavaVersusSearch versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
             <div className={cx('versus_container')}>
+                <GuavaVersusTradeOption/>
+                <GuavaVersusChart versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
+                <GuavaVersusTable versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
                 <div className={cx('add_container')}>
                     <Button className={cx('tag_add')} inline type="ghost"
                             onClick={() => setShowVersusSearch(true)}><PlusOutlined
                         style={{marginRight: 5}}/>비교할 지역 / 아파트 추가하기</Button>
                 </div>
-                <GuavaVersusTradeOption/>
-                <GuavaVersusChart versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
-                <GuavaVersusTable versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
             </div>
         </>
     )

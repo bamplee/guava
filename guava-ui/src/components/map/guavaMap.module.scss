@@ -88,7 +88,7 @@
   //height: -webkit-calc(100vh - 51px); /* google, safari */
   //height: -moz-calc(100vh - 51px); /* firefox */
   //height: calc(100vh - 51px);
-  //min-height: 100vh;
+  min-height: 100vh;
   /* mobile viewport bug fix */
-  //min-height: -webkit-fill-available;
+  min-height: -webkit-fill-available;
 }
