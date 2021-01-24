@@ -24,8 +24,8 @@ public interface TradeArticleRepository extends JpaRepository<TradeArticle, Long
 
     List<TradeArticle> findByBuildingCodeAndArea2(String buildingCode, String area2);
 
-    List<TradeArticle> findByBuildingCodeAndTradeTypeCodeAndEndDateIsNullOrderByArticleConfirmYmdDesc(String buildingCode,
-                                                                                                      String tradeTypeCode);
+    List<TradeArticle> findByBuildingCodeAndTradeTypeCodeAndEndDateIsNull(String buildingCode,
+                                                                          String tradeTypeCode);
 
     List<TradeArticle> findByBuildingCodeAndArea1AndArea2(String buildingCode, String publicArea, String privateArea);
 }

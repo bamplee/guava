@@ -588,12 +588,20 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         }
 
         List<TradeArticle> optionalTradeArticle =
-            tradeArticleRepository.findByBuildingCodeAndTradeTypeCodeAndEndDateIsNullOrderByArticleConfirmYmdDesc(buildingMapping.getBuildingCode(),
-                                                                                                                  "A1");
+            tradeArticleRepository.findByBuildingCodeAndTradeTypeCodeAndEndDateIsNull(buildingMapping.getBuildingCode(),
+                                                                                      "A1");
 
         optionalTradeArticle = optionalTradeArticle.stream()
-                            .filter(x -> x.getAreaName().replace("타입", "").toLowerCase().equals(tradeSummary.getAreaType().replace("타입", "").toLowerCase()))
-                            .collect(Collectors.toList());
+                                                   .filter(x -> x.getAreaName()
+                                                                 .replace("타입", "")
+                                                                 .toLowerCase()
+                                                                 .equals(tradeSummary.getAreaType().replace("타입", "").toLowerCase()))
+                                                   .sorted((a, b) -> LocalDate.parse(b.getArticleConfirmYmd(),
+                                                                                     DateTimeFormatter.ofPattern("yyyyMMdd"))
+                                                                              .compareTo(LocalDate.parse(a.getArticleConfirmYmd(),
+                                                                                                         DateTimeFormatter.ofPattern(
+                                                                                                             "yyyyMMdd"))))
+                                                   .collect(Collectors.toList());
 
 //        GuavaUtils.getAreaByPrivateArea(guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode()),
 //                                        String.valueOf(tradeArticle.getArea2()))
@@ -605,7 +613,10 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                                                .lat(buildingMapping.getPoint().getY())
                                                .lng(buildingMapping.getPoint().getX())
                                                .price(tradeSummary.getSummaryPrice())
-                                               .marketPrice(optionalTradeArticle.stream().findFirst().map(TradeArticle::getSummaryPrice).orElse("0"))
+                                               .marketPrice(optionalTradeArticle.stream()
+                                                                                .findFirst()
+                                                                                .map(TradeArticle::getSummaryPrice)
+                                                                                .orElse("0"))
                                                .name(name)
                                                .build());
     }
