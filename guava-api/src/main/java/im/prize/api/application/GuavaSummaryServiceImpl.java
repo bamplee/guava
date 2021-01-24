@@ -129,11 +129,13 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                                                              .map(LocalDate::parse)
                                                              .map(x -> x.format(DateTimeFormatter.ofPattern("yyyy년 M월")))
                                                              .orElse(""))
-                                              .sinceYear(String.valueOf(LocalDate.now().compareTo(Optional.ofNullable(guavaBuilding.getStartMonth())
-                                                                                                          .map(x -> LocalDate.parse(x.split("T")[0],
-                                                                                                                                    DateTimeFormatter.ofPattern(
-                                                                                                                                        "yyyy-MM-dd")))
-                                                                                                          .orElse(LocalDate.now()))))
+                                              .sinceYear(String.valueOf(LocalDate.now()
+                                                                                 .compareTo(Optional.ofNullable(guavaBuilding.getStartMonth())
+                                                                                                    .map(x -> LocalDate.parse(x.split("T")[0],
+                                                                                                                              DateTimeFormatter
+                                                                                                                                  .ofPattern(
+                                                                                                                                      "yyyy-MM-dd")))
+                                                                                                    .orElse(LocalDate.now()))))
                                               .parkingInside(parkingInside)
                                               .parkingOutside(parkingOutSide)
                                               .parkingTotal(parkingTotal)
@@ -584,13 +586,26 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
         if (tradeSummary.getPublicArea() != null) {
             name = (int) (tradeSummary.getPublicArea() * 0.3025) + "평";
         }
+
+        List<TradeArticle> optionalTradeArticle =
+            tradeArticleRepository.findByBuildingCodeAndTradeTypeCodeAndEndDateIsNullOrderByArticleConfirmYmdDesc(buildingMapping.getBuildingCode(),
+                                                                                                                  "A1");
+
+        optionalTradeArticle = optionalTradeArticle.stream()
+                            .filter(x -> x.getAreaName().replace("타입", "").toLowerCase().equals(tradeSummary.getAreaType().replace("타입", "").toLowerCase()))
+                            .collect(Collectors.toList());
+
+//        GuavaUtils.getAreaByPrivateArea(guavaBuildingAreaRepository.findByBuildingCode(buildingMapping.getBuildingCode()),
+//                                        String.valueOf(tradeArticle.getArea2()))
+//
+//
         return Optional.of(GuavaSummaryResponse.builder()
                                                .type(RegionType.BUILDING)
                                                .id(String.valueOf(buildingMapping.getId()))
                                                .lat(buildingMapping.getPoint().getY())
                                                .lng(buildingMapping.getPoint().getX())
                                                .price(tradeSummary.getSummaryPrice())
-//                                               .marketPrice(marketPrice)
+                                               .marketPrice(optionalTradeArticle.stream().findFirst().map(TradeArticle::getSummaryPrice).orElse("0"))
                                                .name(name)
                                                .build());
     }

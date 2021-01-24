@@ -247,6 +247,7 @@ const GuavaMap = () => {
         return `<div class="customoverlay" id="${x.id}">
                                 <div class="name">${x.name}</div>
                                 <div class="price" style="display: ${x.price !== '0' ? '' : 'none;'}">${x.price}</div>
+                                <div class="market_price" style="display: ${x.marketPrice !== '0' ? '' : 'none;'}">${x.marketPrice}</div>
 <!--                                <div class="market_price" style="display: ${x.marketPrice ? '' : 'none;'}">${x.marketPrice}</div>-->
                            </div>`;
     };
