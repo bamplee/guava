@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 
 import styles from './guavaHeader.module.scss';
 import {useRecoilState} from 'recoil';
-import {buildingState, regionState,} from '../datatool/state';
+import {areaTypeState, buildingState, regionState,} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
 import {ActivityIndicator, Button, Tabs, WingBlank} from 'antd-mobile';
@@ -18,12 +18,14 @@ const cx = classNames.bind(styles);
 const GuavaDetailHeader = ({tabId}) => {
     const history = useHistory();
     // const [region, setRegion] = useRecoilState(regionState);
+    const [areaType, setAreaType] = useRecoilState(areaTypeState);
     const {regionType, buildingId, regionId} = useParams();
     const [region, setRegion] = useRecoilState(regionState);
     const [building, setBuilding] = useRecoilState(buildingState);
     // const [tab, setTab] = useState(tabId);
 
     useEffect(() => {
+        setAreaType({areaId: ''});
         if (regionType === 'b') {
             const init = async () => {
                 setRegion(await getBuilding(regionId));

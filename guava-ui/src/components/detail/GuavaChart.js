@@ -142,6 +142,10 @@ const GuavaChart = () => {
             let endArea = getEndArea(filterArea[1]);
             result = await getRegionChart('trade', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
+        if (result.length === 0) {
+            alert('차트 데이터 불러오기 오류');
+            return;
+        }
 
         let groupList = groupBy(result.map(x => {
             x.yearMonth = x.date.substring(0, 6);
@@ -219,6 +223,10 @@ const GuavaChart = () => {
             let endArea = getEndArea(filterArea[1]);
             result = await getRegionChart('rent', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
+        if (result.length === 0) {
+            alert('차트 데이터 불러오기 오류');
+            return;
+        }
 
         let groupList = groupBy(result.map(x => {
             x.yearMonth = x.date.substring(0, 6);
@@ -286,7 +294,18 @@ const GuavaChart = () => {
     const fetchChart = async () => {
         setIsLoading(true);
         let tradeList = await getTradeChart();
+        if (!tradeList) {
+            tradeList = [];
+        }
         let rentList = await getRentChart();
+        if (!rentList) {
+            rentList = [];
+        }
+
+        if (tradeList.length + rentList.length === 0) {
+            alert('차트 데이터 불러오기 오류');
+            return;
+        }
 
         setChartList({
             labels: tradeList.labels,
