@@ -53,7 +53,12 @@ const GuavaMap = () => {
         });
 
         kakao.maps.event.addListener(map, 'dragend', () => {
+            history.replace('/');
             initLatLng();
+        });
+
+        kakao.maps.event.addListener(map, 'click', () => {
+            history.replace('/');
         });
 
         kakao.maps.event.addListener(map, 'tilesloaded', function () {

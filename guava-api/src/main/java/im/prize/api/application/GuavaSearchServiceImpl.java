@@ -24,6 +24,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -64,16 +68,23 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
 
     @Override
     public List<GuavaSearchResponse> getBuildings(String query) {
-        Pageable limit = PageRequest.of(PAGE_START_NO, 10);
-        String likeQuery = "%" + StringUtils.join(query.replaceAll(" ", "").split(""), "%") + "%";
-        List<BuildingMapping> buildingsByAddress = buildingMappingRepository.search(likeQuery);
+        Pageable limit = PageRequest.of(PAGE_START_NO, 20);
+        String nameQuery = "%" + StringUtils.join(query.replaceAll(" ", "").split(""), "%") + "%";
+        String addressQuery = "%" + StringUtils.join(query.replaceAll(" ", "").split(""), "%") + "%";
+        List<BuildingMapping> buildingsByName = buildingMappingRepository.searchByName(nameQuery);
+        List<BuildingMapping> buildingsByAddress = buildingMappingRepository.search(addressQuery);
 //        Page<GuavaBuilding> buildingsByAddress = guavaBuildingRepository.findAll(this.getParams(query, query), limit);
 
-        return buildingsByAddress.stream()
-                                 .filter(x -> x.getType().equals(PAGE_START_NO))
-                                 .map(x -> GuavaSearchResponse.transform(guavaRegionRepository.findByRegionCode(x.getRegionCode()).get(),
-                                                                         x))
-                                 .collect(Collectors.toList());
+        return Stream.concat(buildingsByName.stream(),
+                             buildingsByAddress.stream()
+                                               .filter(x -> buildingsByName.stream()
+                                                                           .map(BuildingMapping::getId)
+                                                                           .collect(Collectors.toList())
+                                                                           .contains(x.getId())))
+                     .filter(x -> x.getType() != null)
+                     .filter(x -> x.getType().equals(0))
+                     .map(x -> GuavaSearchResponse.transform(guavaRegionRepository.findByRegionCode(x.getRegionCode()).get(), x))
+                     .collect(Collectors.toList());
     }
 
     @Override
@@ -141,5 +152,10 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
             }
         }
         return GuavaBuildingSpecs.searchWith(params);
+    }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
     }
 }

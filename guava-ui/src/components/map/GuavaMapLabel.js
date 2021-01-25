@@ -22,12 +22,6 @@ const GuavaMapLabel = () => {
         }
     }, [center.lat, center.lng, level]);
 
-    useEffect(() => {
-        if (region) {
-            setCenter({lat: region.lat, lng: region.lng});
-        }
-    }, [region]);
-
     const setCurrentName = (regionList) => {
         if (regionList.length > 0) {
             let region = regionList[0];

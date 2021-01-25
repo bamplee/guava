@@ -6,8 +6,7 @@ import classNames from 'classnames/bind';
 
 import styles from './guavaVersusSearch.module.scss';
 import {useRecoilState} from 'recoil';
-import {centerState, levelState, regionState, showVersusSearchState, versusRegionListState} from '../datatool/state';
-import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
+import {regionState, showVersusSearchState} from '../datatool/state';
 import {Icon, List, Modal, Result, WingBlank} from 'antd-mobile/lib/index';
 import {fetchSearch, getBuilding, getDetail} from '../datatool/api';
 import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';

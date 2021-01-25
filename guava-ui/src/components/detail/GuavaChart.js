@@ -143,7 +143,7 @@ const GuavaChart = () => {
             result = await getRegionChart('trade', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
         if (result.length === 0) {
-            alert('차트 데이터 불러오기 오류');
+            console.error('차트 데이터 불러오기 오류');
             return;
         }
 
@@ -224,7 +224,7 @@ const GuavaChart = () => {
             result = await getRegionChart('rent', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
         if (result.length === 0) {
-            alert('차트 데이터 불러오기 오류');
+            console.error('차트 데이터 불러오기 오류');
             return;
         }
 
@@ -303,7 +303,7 @@ const GuavaChart = () => {
         }
 
         if (tradeList.length + rentList.length === 0) {
-            alert('차트 데이터 불러오기 오류');
+            console.error('차트 데이터 불러오기 오류');
             return;
         }
 

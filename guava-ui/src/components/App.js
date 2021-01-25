@@ -24,10 +24,10 @@ function App() {
                         animating={false}
                     />}>
                         <GuavaAreaFilter/>
-                        <Route exact path={['/match']} component={GuavaMatch}/>
-                        <Route exact path={['/']} component={MapPage}/>
-                        <Route exact path={['/intro']} component={IntroPage}/>
+                        <Route exact path={['/', '/search']} component={MapPage}/>
                         <Route exact path={['/search']} component={SearchPage}/>
+                        <Route exact path={['/intro']} component={IntroPage}/>
+                        <Route exact path={['/match']} component={GuavaMatch}/>
                         <Route path="/:regionType/:regionId/:tabId?" component={DetailHeaderPage}/>
                     </Suspense>
                 </Switch>
