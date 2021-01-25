@@ -77,10 +77,10 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
 
         return Stream.concat(buildingsByName.stream(),
                              buildingsByAddress.stream()
-                                               .filter(x -> buildingsByName.stream()
-                                                                           .map(BuildingMapping::getId)
-                                                                           .collect(Collectors.toList())
-                                                                           .contains(x.getId())))
+                                               .filter(x -> !buildingsByName.stream()
+                                                                            .map(BuildingMapping::getId)
+                                                                            .collect(Collectors.toList())
+                                                                            .contains(x.getId())))
                      .filter(x -> x.getType() != null)
                      .filter(x -> x.getType().equals(0))
                      .map(x -> GuavaSearchResponse.transform(guavaRegionRepository.findByRegionCode(x.getRegionCode()).get(), x))
