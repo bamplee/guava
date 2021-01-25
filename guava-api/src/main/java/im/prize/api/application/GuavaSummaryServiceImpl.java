@@ -595,7 +595,7 @@ public class GuavaSummaryServiceImpl implements GuavaSummaryService {
                                                    .filter(x -> x.getAreaName()
                                                                  .replace("타입", "")
                                                                  .toLowerCase()
-                                                                 .equals(tradeSummary.getAreaType().replace("타입", "").toLowerCase()))
+                                                                 .equals(Optional.ofNullable(tradeSummary.getAreaType()).orElse("").replace("타입", "").toLowerCase()))
                                                    .sorted((a, b) -> LocalDate.parse(b.getArticleConfirmYmd(),
                                                                                      DateTimeFormatter.ofPattern("yyyyMMdd"))
                                                                               .compareTo(LocalDate.parse(a.getArticleConfirmYmd(),
