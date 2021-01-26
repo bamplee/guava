@@ -98,6 +98,8 @@ public class TradeArticle extends BaseEntity {
                 }
             } else if (price.contains("천")) {
                 price = String.valueOf(NumberUtils.toDouble(price.replace("천", "")) * 1000);
+            } else {
+                price = price.replaceAll("[^\\d]", "");
             }
             int intPrice = NumberUtils.toInt(price);
             return intPrice;

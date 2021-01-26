@@ -15,14 +15,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMap.js">
+        <entry file="file://$PROJECT_DIR$/src/setupProxy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="123" column="17" lean-forward="true" selection-start-line="123" selection-start-column="17" selection-end-line="123" selection-end-column="17" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#17#65#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="84">
+              <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -387,12 +383,12 @@
       <workItem from="1611456510937" duration="5881000" />
       <workItem from="1611538908064" duration="2234000" />
       <workItem from="1611583468549" duration="154000" />
-      <workItem from="1611624928627" duration="5146000" />
+      <workItem from="1611624928627" duration="6659000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1005614000" />
+    <option name="totallyTimeSpent" value="1007127000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -694,13 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/setupProxy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -852,12 +841,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="123" column="17" lean-forward="true" selection-start-line="123" selection-start-column="17" selection-end-line="123" selection-end-column="17" />
+        <state relative-caret-position="197">
+          <caret line="111" column="19" lean-forward="true" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#17#65#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/setupProxy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
         </state>
       </provider>
     </entry>
