@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 
 import styles from './guavaHeader.module.scss';
 import {useRecoilState} from 'recoil';
-import {areaTypeState, buildingState, regionState,} from '../datatool/state';
+import {areaTypeState, buildingState, regionState, showVersusSearchState,} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
 import {ActivityIndicator, Button, Tabs, WingBlank} from 'antd-mobile';
@@ -23,6 +23,7 @@ const GuavaDetailHeader = ({tabId}) => {
     const [region, setRegion] = useRecoilState(regionState);
     const [building, setBuilding] = useRecoilState(buildingState);
     // const [tab, setTab] = useState(tabId);
+    const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
 
     useEffect(() => {
         setAreaType({areaId: ''});

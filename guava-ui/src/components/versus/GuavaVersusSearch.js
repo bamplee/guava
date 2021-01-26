@@ -94,6 +94,7 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
 
     return (
         <Modal
+            className={cx('versus_search_container')}
             popup
             visible={showVersusSearch}
             onCancel={() => setShowVersusSearch(false)}
