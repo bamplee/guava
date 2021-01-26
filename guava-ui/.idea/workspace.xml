@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="" />
+    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,10 +17,13 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
+        <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
+            <state relative-caret-position="168">
+              <caret line="116" column="31" selection-start-line="116" selection-start-column="31" selection-end-line="116" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#56#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -27,7 +32,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>max-height</find>
       <find>map</find>
       <find>kakao</find>
       <find>.address</find>
@@ -57,6 +61,7 @@
       <find>.lat</find>
       <find>showVersusSearch</find>
       <find>filterArea</find>
+      <find>input</find>
     </findStrings>
     <replaceStrings>
       <replace>region.type</replace>
@@ -155,9 +160,9 @@
         <option value="$PROJECT_DIR$/src/components/map/GuavaMap.js" />
         <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
         <option value="$PROJECT_DIR$/src/components/versus/guavaVersusSearch.module.scss" />
-        <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js" />
       </list>
     </option>
   </component>
@@ -320,12 +325,12 @@
       <workItem from="1611538908064" duration="2234000" />
       <workItem from="1611583468549" duration="154000" />
       <workItem from="1611624928627" duration="8871000" />
-      <workItem from="1611666595267" duration="4441000" />
+      <workItem from="1611666595267" duration="4653000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1013780000" />
+    <option name="totallyTimeSpent" value="1013992000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -747,16 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="105" column="31" lean-forward="true" selection-start-line="105" selection-start-column="31" selection-end-line="105" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
@@ -789,8 +784,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
+        <state relative-caret-position="231">
+          <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="116" column="31" selection-start-line="116" selection-start-column="31" selection-end-line="116" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

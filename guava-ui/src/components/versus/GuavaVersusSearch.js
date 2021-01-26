@@ -114,12 +114,7 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
                     </WingBlank>
                     <div className={cx('center')}>
                         {/*<span className={cx('title')}>{region.address}</span>*/}
-                        <input autoFocus={true} ref={(ref) => {
-                            if (ref !== null) {
-                                ref.focus();
-                            }
-                        }}
-                               value={query}
+                        <input value={query}
                                onKeyPress={(e) => {
                                    if (e.key === 'Enter') {
                                        fetchRegion();
