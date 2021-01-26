@@ -24,7 +24,6 @@ const GuavaMarketRow = ({page, idx, trade}) => {
             </div>
             <div className={cx('row')}>{trade.dongName}</div>
             <div className={cx('row', 'link')} onClick={() => {
-                console.log(trade.area);
                 setAreaType(trade.area);
             }}>
                     <span>
