@@ -8,11 +8,9 @@ import CaretDownOutlined from '@ant-design/icons/es/icons/CaretDownOutlined';
 import {getEndArea, getStartArea} from '../constant';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
-    areaTypeState,
     filterAreaState,
     regionState,
     showAreaFilterState,
-    showAreaTypeFilterState,
     tradeTypeState
 } from '../datatool/state';
 

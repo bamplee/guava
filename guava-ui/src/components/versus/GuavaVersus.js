@@ -44,7 +44,6 @@ const GuavaVersus = () => {
             {/*<GuavaAreaTypeFilter/>*/}
             <GuavaVersusSearch versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
             <div className={cx('versus_container')}>
-                {/*<GuavaVersusTradeOption/>*/}
                 <GuavaVersusChart versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
                 <GuavaVersusTable versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
                 <div className={cx('add_container')}>

@@ -15,10 +15,11 @@ import {
     showAreaTypeFilterState,
     tradeTypeState
 } from '../datatool/state';
+import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';
 
 const cx = classNames.bind(styles);
 
-const GuavaTradeOption = () => {
+const GuavaTradeOption = ({type}) => {
     const [areaType, setAreaType] = useRecoilState(areaTypeState);
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
     const [showAreaTypeFilter, setShowAreaTypeFilter] = useRecoilState(showAreaTypeFilterState);
@@ -43,15 +44,15 @@ const GuavaTradeOption = () => {
                 style={{height: 30, width: 140}}
             />
             {
-                region && region.type === 'BUILDING' ?
+                type === 'BUILDING' ?
                     <Button className={cx('filter_btn', areaType.areaId !== '' ? 'active' : '')}
                             type={areaType.areaId !== '' ? 'primary' : ''}
                             inline
-                            onClick={() => setShowAreaTypeFilter(true)}>
+                            onClick={() => areaType.areaId === '' ? setShowAreaTypeFilter(true) : setAreaType({areaId: ''})}>
                         {
                             areaType.areaId !== '' ?
-                                <span>
-                                    {areaType.name}
+                                <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                    {areaType.name}<CloseOutlined style={{fontSize: 8, marginLeft: 4}}/>
                                 </span> :
                                 <span>평형</span>
                         }

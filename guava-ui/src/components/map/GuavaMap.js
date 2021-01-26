@@ -70,26 +70,26 @@ const GuavaMap = () => {
         // getSummary();
     }, []);
 
-    useEffect(() => {
-        if (region) {
-            let locPosition = new kakao.maps.LatLng(region.lat, region.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-            map.setCenter(locPosition);
-            setCenter({lat: region.lat, lng: region.lng});
-            initLatLng();
-            if (region.type === 'BUILDING') {
-                setLevel(3);
-                map.setLevel(3);
-            } else {
-                if (region.type === 'DONG') {
-                    setLevel(5);
-                    map.setLevel(5);
-                } else {
-                    setLevel(8);
-                    map.setLevel(8);
-                }
-            }
-        }
-    }, [region]);
+    // useEffect(() => {
+    //     if (region) {
+    //         let locPosition = new kakao.maps.LatLng(region.lat, region.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+    //         map.setCenter(locPosition);
+    //         setCenter({lat: region.lat, lng: region.lng});
+    //         initLatLng();
+    //         if (region.type === 'BUILDING') {
+    //             setLevel(3);
+    //             map.setLevel(3);
+    //         } else {
+    //             if (region.type === 'DONG') {
+    //                 setLevel(5);
+    //                 map.setLevel(5);
+    //             } else {
+    //                 setLevel(8);
+    //                 map.setLevel(8);
+    //             }
+    //         }
+    //     }
+    // }, [region]);
 
     // useEffect(() => {
     //     // initLatLng();
@@ -103,12 +103,29 @@ const GuavaMap = () => {
     }, [summary]);
 
     useEffect(() => {
+        let locPosition = new kakao.maps.LatLng(center.lat, center.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+        map.setCenter(locPosition);
+        const northEastLng = map.getBounds().getNorthEast().getLng();
+        const northEastLat = map.getBounds().getNorthEast().getLat();
+        const southWestLng = map.getBounds().getSouthWest().getLng();
+        const southWestLat = map.getBounds().getSouthWest().getLat();
+        setBounds({
+            northEastLng: northEastLng,
+            northEastLat: northEastLat,
+            southWestLng: southWestLng,
+            southWestLat: southWestLat
+        });
+        // initLatLng();
+        // getSummary();
+    }, [center]);
+
+    useEffect(() => {
         getSummary();
-    }, [center.lat, center.lng, bounds]);
+    }, [bounds]);
 
     useEffect(() => {
         initMarker();
-        getSummary();
+        // getSummary();
     }, [level, filterArea]);
 
     const initLatLng = () => {
