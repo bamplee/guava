@@ -15,13 +15,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusTradeOption.js">
+        <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="40" column="58" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="58" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="364">
+              <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -152,7 +149,6 @@
         <option value="$PROJECT_DIR$/src/pages/DetailHeaderPage.js" />
         <option value="$PROJECT_DIR$/src/components/detail/guavaChart.module.scss" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaMarketRow.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
         <option value="$PROJECT_DIR$/src/components/map/GuavaMapLabel.js" />
         <option value="$PROJECT_DIR$/src/components/datatool/state.js" />
@@ -161,6 +157,7 @@
         <option value="$PROJECT_DIR$/src/components/versus/guavaVersusSearch.module.scss" />
         <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
       </list>
     </option>
   </component>
@@ -323,12 +320,12 @@
       <workItem from="1611538908064" duration="2234000" />
       <workItem from="1611583468549" duration="154000" />
       <workItem from="1611624928627" duration="8871000" />
-      <workItem from="1611666595267" duration="4383000" />
+      <workItem from="1611666595267" duration="4441000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1013722000" />
+    <option name="totallyTimeSpent" value="1013780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -348,7 +345,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.37373737" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.37373737" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.32954547" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -683,13 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/map/guavaMap.module.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -794,6 +784,13 @@
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
         </state>
       </provider>
     </entry>
