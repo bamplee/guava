@@ -74,15 +74,15 @@ const GuavaDetailHeader = ({tabId}) => {
                     </WingBlank>
                 </div>
                 <div className={cx('filter_container')}>
-                    <div className={cx('filter_select')}>
-                        <Button
-                            className={cx('filter_btn', tabId === 'i' && 'filter_btn_active')}
-                            type={'primary'}
-                            onClick={() => {
-                                history.replace('/' + regionType + '/' + regionId + '/i')
-                            }}
-                            size={'small'}>정보</Button>
-                    </div>
+                    {/*<div className={cx('filter_select')}>*/}
+                    {/*    <Button*/}
+                    {/*        className={cx('filter_btn', tabId === 'i' && 'filter_btn_active')}*/}
+                    {/*        type={'primary'}*/}
+                    {/*        onClick={() => {*/}
+                    {/*            history.replace('/' + regionType + '/' + regionId + '/i')*/}
+                    {/*        }}*/}
+                    {/*        size={'small'}>정보</Button>*/}
+                    {/*</div>*/}
                     <div className={cx('filter_select')}>
                         <Button
                             className={cx('filter_btn', (tabId === 't') && 'filter_btn_active')}
@@ -90,7 +90,7 @@ const GuavaDetailHeader = ({tabId}) => {
                             onClick={() => {
                                 history.replace('/' + regionType + '/' + regionId + '/t')
                             }}
-                            size={'small'}>시세</Button>
+                            size={'small'}>실거래</Button>
                     </div>
                     <div className={cx('filter_select')}>
                         <Button
@@ -128,18 +128,18 @@ const GuavaDetailHeader = ({tabId}) => {
                     {/*</div>*/}
                 </div>
             </div>
-            {/*{*/}
-            {/*    (tabId === 't' || tabId === 'm') &&*/}
-            {/*    <div style={{borderBottom: '1px solid #f2f2f2'}}>*/}
-            {/*        <Tabs onChange={(e) => {*/}
-            {/*            history.replace('/' + regionType + '/' + regionId + '/' + e.value)*/}
-            {/*        }} tabs={[{title: '실거래가', value: 't'}, {title: '호가', value: 'm'}]}*/}
-            {/*              page={tabId === 't' ? 0 : 1}*/}
-            {/*              tabBarUnderlineStyle={{border: '2px solid #2E92FC'}}*/}
-            {/*              animated={false}*/}
-            {/*              useOnPan={false}/>*/}
-            {/*    </div>*/}
-            {/*}*/}
+            {/*{
+                (tabId === 't' || tabId === 'm') &&
+                <div style={{borderBottom: '1px solid #f2f2f2'}}>
+                    <Tabs onChange={(e) => {
+                        history.replace('/' + regionType + '/' + regionId + '/' + e.value)
+                    }} tabs={[{title: '실거래', value: 't'}, {title: '호가', value: 'm'}]}
+                          page={tabId === 't' ? 0 : 1}
+                          // tabBarUnderlineStyle={{border: '1px solid #2E92FC'}}
+                          animated={false}
+                          useOnPan={false}/>
+                </div>
+            }*/}
         </>
     )
 };

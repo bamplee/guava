@@ -1,10 +1,9 @@
 .filter_container {
-  padding-top: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
+  padding: 10px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #f1f1f1;
 
   .filter_btn {
     display: flex;

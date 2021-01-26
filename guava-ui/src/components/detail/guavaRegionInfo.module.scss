@@ -1,53 +1,10 @@
-.info_container {
-  padding: 20px;
-
-  .title {
-    font-size: 16px;
-    font-weight: 500;
-    //padding-top: 20px;
-    //padding-right: 20px;
-    //padding-left: 20px;
-  }
-
-  .address {
-    color: #999;
-    font-size: 14px;
-    font-weight: 400;
-    //padding-right: 20px;
-    //padding-left: 20px;
-    //padding-bottom: 10px;
-  }
-
-  .area_list {
-
-  }
-
-  .table {
-    //padding-right: 20px;
-    //padding-left: 20px;
-    //padding-bottom: 20px;
-    margin-top: 10px;
-
-    .item {
-      display: flex;
-
-      .key {
-        color: #777;
-        margin-right: 8px;
-        font-size: 12px;
-      }
-
-      .value {
-        color: #222;
-        font-size: 12px;
-      }
-    }
-  }
-}
-
 .title_container {
+  background-color: #fff;
   border-bottom: 1px solid #EEEEEE;
-  padding: 20px;
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 10px;
 
   .title {
     text-align: left;
@@ -68,11 +25,11 @@
     .address {
       color: #333;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .info {
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 300;
     }
 

@@ -10,26 +10,30 @@ import {useRecoilValue} from 'recoil';
 import {regionState} from '../components/datatool/state';
 import GuavaAreaTypeFilter from '../components/common/GuavaAreaTypeFilter';
 import GuavaVersus from '../components/versus/GuavaVersus';
+import GuavaDetailTabs from '../components/header/GuavaDetailTabs';
 
 const DetailHeaderPage = ({match, location}) => {
     const region = useRecoilValue(regionState);
 
     return (
         <>
+            <GuavaAreaTypeFilter/>
             <GuavaDetailHeader tabId={!match.params.tabId ? 't' : match.params.tabId}/>
+            <GuavaBuildingInfo/>
+            <GuavaTradeOption/>
+            {/*<GuavaDetailTabs tabId={!match.params.tabId ? 't' : match.params.tabId}/>*/}
             <div style={{maxWidth: 500, margin: '0 auto'}}>
                 {
                     (region && (region.type === 'BUILDING' ? region.buildingId === match.params.regionId : region.id === match.params.regionId)) &&
                     <>
-                        {
-                            match.params.tabId === 'i' &&
-                            <GuavaBuildingInfo/>
-                        }
+                        {/*{*/}
+                        {/*    match.params.tabId === 'i' &&*/}
+                        {/*    <GuavaBuildingInfo/>*/}
+                        {/*}*/}
                         {
                             (!match.params.tabId || match.params.tabId === 't') &&
                             <>
-                                <GuavaAreaTypeFilter/>
-                                <GuavaTradeOption/>
+                                {/*<GuavaTradeOption/>*/}
                                 <GuavaChart/>
                                 <GuavaTable/>
                             </>
@@ -37,8 +41,6 @@ const DetailHeaderPage = ({match, location}) => {
                         {
                             match.params.tabId === 'm' &&
                             <>
-                                <GuavaAreaTypeFilter/>
-                                <GuavaTradeOption/>
                                 <GuavaMarketChart/>
                                 <GuavaMarketTable/>
                             </>

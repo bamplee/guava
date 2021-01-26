@@ -332,7 +332,7 @@ const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
                                           events: ['mousemove', 'click', 'touchstart', 'touchmove'],
                                           layout: {
                                               padding: {
-                                                  top: 50,  //set that fits the best
+                                                  top: 28,  //set that fits the best
                                                   right: 15
                                               }
                                           },
