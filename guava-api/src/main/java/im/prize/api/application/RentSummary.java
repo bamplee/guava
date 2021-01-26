@@ -50,6 +50,8 @@ public class RentSummary extends BaseEntity {
             } else if (intPrice >= 1000) {
                 result = intPrice / 1000.0;
                 priceVal = "천";
+            } else {
+                result = intPrice;
             }
             result = Math.round(result * 10) / 10.0;
             DecimalFormat df = new DecimalFormat("#.##");
@@ -71,6 +73,8 @@ public class RentSummary extends BaseEntity {
             } else if (intPrice >= 1000) {
                 result = intPrice / 1000.0;
                 priceVal = "천";
+            } else {
+                result = intPrice;
             }
             result = Math.round(result * 100) / 100.0;
             DecimalFormat df = new DecimalFormat("#.##");
