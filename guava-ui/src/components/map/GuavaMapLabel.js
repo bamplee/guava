@@ -17,10 +17,10 @@ const GuavaMapLabel = () => {
     const region = useRecoilValue(regionState);
 
     useEffect(() => {
-        if (center.lat && center.lng) {
+        if (center) {
             searchAddrFromCoords(center.lng, center.lat, setCurrentName);
         }
-    }, [center.lat, center.lng, level]);
+    }, [center, level]);
 
     const setCurrentName = (regionList) => {
         if (regionList.length > 0) {

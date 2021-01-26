@@ -6,8 +6,9 @@ import {useHistory} from 'react-router-dom';
 import {Badge} from 'antd-mobile';
 
 import {fetchSummary} from '../datatool/api';
+import {useLocalStorage} from '../common/useLocalStorage';
 
-import {boundsState, centerState, filterAreaState, levelState, regionState, summaryState,} from '../datatool/state';
+import {centerState, filterAreaState, levelState, regionState, summaryState,} from '../datatool/state';
 
 import styles from './guavaMap.module.scss';
 import {getEndArea, getStartArea} from '../constant';
@@ -22,12 +23,13 @@ let map;
 let infos = [];
 let marker = null;
 const GuavaMap = () => {
+    const [storageCenter, setStorageCenter] = useLocalStorage('storageCenter', {lat: 37.3614463, lng: 127.1114893});
     const [showGeoLoading, setShowGeoLoading] = useState(false);
     const [summary, setSummary] = useState([]);
     const [level, setLevel] = useRecoilState(levelState);
     const filterArea = useRecoilValue(filterAreaState);
     const [center, setCenter] = useRecoilState(centerState);
-    const [bounds, setBounds] = useRecoilState(boundsState);
+    const [bounds, setBounds] = useState(null);
     // const summary = useRecoilValue(summaryQuery);
     const region = useRecoilValue(regionState);
 
@@ -40,6 +42,7 @@ const GuavaMap = () => {
     });
 
     useEffect(() => {
+        setCenter(storageCenter);
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
 
@@ -103,24 +106,29 @@ const GuavaMap = () => {
     }, [summary]);
 
     useEffect(() => {
-        let locPosition = new kakao.maps.LatLng(center.lat, center.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-        map.setCenter(locPosition);
-        const northEastLng = map.getBounds().getNorthEast().getLng();
-        const northEastLat = map.getBounds().getNorthEast().getLat();
-        const southWestLng = map.getBounds().getSouthWest().getLng();
-        const southWestLat = map.getBounds().getSouthWest().getLat();
-        setBounds({
-            northEastLng: northEastLng,
-            northEastLat: northEastLat,
-            southWestLng: southWestLng,
-            southWestLat: southWestLat
-        });
-        // initLatLng();
-        // getSummary();
+        if (center) {
+            setStorageCenter({lat: center.lat, lng: center.lng});
+            let locPosition = new kakao.maps.LatLng(center.lat, center.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+            map.setCenter(locPosition);
+            const northEastLng = map.getBounds().getNorthEast().getLng();
+            const northEastLat = map.getBounds().getNorthEast().getLat();
+            const southWestLng = map.getBounds().getSouthWest().getLng();
+            const southWestLat = map.getBounds().getSouthWest().getLat();
+            setBounds({
+                northEastLng: northEastLng,
+                northEastLat: northEastLat,
+                southWestLng: southWestLng,
+                southWestLat: southWestLat
+            });
+            // initLatLng();
+            // getSummary();
+        }
     }, [center]);
 
     useEffect(() => {
-        getSummary();
+        if (bounds) {
+            getSummary();
+        }
     }, [bounds]);
 
     useEffect(() => {
@@ -129,6 +137,7 @@ const GuavaMap = () => {
     }, [level, filterArea]);
 
     const initLatLng = () => {
+        setStorageCenter({lat: map.getCenter().getLat(), lng: map.getCenter().getLng()});
         setCenter({lat: map.getCenter().getLat(), lng: map.getCenter().getLng()});
         const northEastLng = map.getBounds().getNorthEast().getLng();
         const northEastLat = map.getBounds().getNorthEast().getLat();
@@ -207,7 +216,13 @@ const GuavaMap = () => {
     const initMap = () => {
         let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 
-        let initCenter = new kakao.maps.LatLng(center.lat, center.lng);
+        let lat = 37.3614463;
+        let lng = 127.1114893;
+        if (storageCenter) {
+            lat = storageCenter.lat;
+            lng = storageCenter.lng;
+        }
+        let initCenter = new kakao.maps.LatLng(lat, lng);
         let options = { //지도를 생성할 때 필요한 기본 옵션
             center: initCenter, //지도의 중심좌표.
             level: level //지도의 레벨(확대, 축소 정도)
