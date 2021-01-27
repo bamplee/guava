@@ -44,7 +44,6 @@ const GuavaDetailHeader = ({tabId}) => {
 
     return (
         <>
-            <div style={{height: 91}}/>
             <div className={cx('header_container')}>
                 <div className={cx('title_container')}>
                     <WingBlank>
