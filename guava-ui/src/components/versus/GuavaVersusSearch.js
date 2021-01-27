@@ -123,118 +123,119 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
                     <>
                         {
                             versusSearchList.filter(x => x.type === region.type).length > 0 &&
-                            <List.Item>
-                                <span className={cx('search_list_title')}>최근 비교 지역/아파트</span>
-                            </List.Item>
+                            <>
+                                <List.Item>
+                                    <span className={cx('search_list_title')}>최근 비교 지역/아파트</span>
+                                </List.Item>
+                                {
+                                    versusSearchList.filter(x => x.type === region.type)
+                                        .map(x => {
+                                            if (region.type === 'BUILDING') {
+                                                x.isValid = !versusRegionList.map(y => y.buildingId).includes(x.buildingId);
+                                            } else {
+                                                x.isValid = !versusRegionList.map(y => y.id).includes(x.regionId);
+                                            }
+                                            return x;
+                                        })
+                                        .map(x =>
+                                            <List.Item style={{backgroundColor: !x.isValid && '#f1f1f1'}}>
+                                                <div className={cx('search_list')}>
+                                                    <div className={cx('left')} onClick={() => {
+                                                        if (x.isValid) {
+                                                            handleResultItem(x)
+                                                        } else {
+                                                            alert('이미 선택되어 있습니다')
+                                                        }
+                                                    }}>
+                                                        {
+                                                            x.type === 'BUILDING' ?
+                                                                <ReconciliationOutlined/> :
+                                                                <EnvironmentOutlined/>
+                                                        }
+                                                        <Highlighter
+                                                            style={{marginLeft: 4}}
+                                                            highlightClassName={cx('highlight')}
+                                                            searchWords={query.split('')}
+                                                            autoEscape={true}
+                                                            textToHighlight={x.name}
+                                                        />
+                                                        <List.Item.Brief style={{
+                                                            fontSize: '0.7rem',
+                                                            marginTop: 2,
+                                                            marginBottom: 4
+                                                        }}>
+                                                            <Highlighter
+                                                                highlightClassName={cx('highlight')}
+                                                                searchWords={query.split('')}
+                                                                autoEscape={true}
+                                                                textToHighlight={x.address}
+                                                            />
+                                                        </List.Item.Brief>
+                                                    </div>
+                                                    <div className={cx('right')} onClick={() => removeSearchList(x)}>
+                                                        <CloseOutlined style={{fontSize: 12}}/>
+                                                    </div>
+                                                </div>
+                                            </List.Item>
+                                        )
+                                }
+                            </>
                         }
-                        {
-                            versusSearchList.filter(x => x.type === region.type)
-                                .map(x => {
-                                    if (region.type === 'BUILDING') {
-                                        x.isValid = !versusRegionList.map(y => y.buildingId).includes(x.buildingId);
-                                    } else {
-                                        x.isValid = !versusRegionList.map(y => y.id).includes(x.regionId);
-                                    }
-                                    return x;
-                                })
-                                .map(x =>
-                                    <List.Item style={{backgroundColor: !x.isValid && '#f1f1f1'}}>
-                                        <div className={cx('search_list')}>
-                                            <div className={cx('left')} onClick={() => {
-                                                if (x.isValid) {
-                                                    handleResultItem(x)
-                                                } else {
-                                                    alert('이미 선택되어 있습니다')
-                                                }
-                                            }}>
-                                                {
-                                                    x.type === 'BUILDING' ?
-                                                        <ReconciliationOutlined/> :
-                                                        <EnvironmentOutlined/>
-                                                }
-                                                <Highlighter
-                                                    style={{marginLeft: 4}}
-                                                    highlightClassName={cx('highlight')}
-                                                    searchWords={query.split('')}
-                                                    autoEscape={true}
-                                                    textToHighlight={x.name}
-                                                />
-                                                <List.Item.Brief style={{
-                                                    fontSize: '0.7rem',
-                                                    marginTop: 2,
-                                                    marginBottom: 4
-                                                }}>
+                    </>
+                }
+                <List>
+                    {
+                        queryList.filter(x => x.type === region.type).length > 0 &&
+                        <>
+                            <List.Item>
+                                <span
+                                    className={cx('search_list_title')}>검색 결과 ({queryList.filter(x => x.type === region.type).length}건)</span>
+                            </List.Item>
+                            {
+                                queryList.filter(x => x.type === region.type).map(x => {
+                                        if (x.type === 'BUILDING') {
+                                            return (
+                                                <List.Item
+                                                    onClick={() => handleResultItem(x)}>
+                                                    <ReconciliationOutlined/>
+                                                    <Highlighter
+                                                        style={{marginLeft: 4}}
+                                                        highlightClassName={cx('highlight')}
+                                                        searchWords={query.split('')}
+                                                        autoEscape={true}
+                                                        textToHighlight={x.name}
+                                                    /><List.Item.Brief
+                                                    style={{
+                                                        fontSize: '0.7rem',
+                                                        marginTop: 2,
+                                                        marginBottom: 4
+                                                    }}>
                                                     <Highlighter
                                                         highlightClassName={cx('highlight')}
                                                         searchWords={query.split('')}
                                                         autoEscape={true}
                                                         textToHighlight={x.address}
                                                     />
-                                                </List.Item.Brief>
-                                            </div>
-                                            <div className={cx('right')} onClick={() => removeSearchList(x)}>
-                                                <CloseOutlined style={{fontSize: 12}}/>
-                                            </div>
-                                        </div>
-                                    </List.Item>
+                                                </List.Item.Brief></List.Item>
+                                            )
+                                        } else {
+                                            return (
+                                                <List.Item onClick={() => handleResultItem(x)}>
+                                                    <EnvironmentOutlined/>
+                                                    <Highlighter
+                                                        style={{marginLeft: 4}}
+                                                        highlightClassName={cx('highlight')}
+                                                        searchWords={query.split('')}
+                                                        autoEscape={true}
+                                                        textToHighlight={x.address}
+                                                    />
+                                                </List.Item>
+                                            )
+                                        }
+                                    }
                                 )
-                        }
-                    </>
-                }
-                <List>
-                    {
-                        versusSearchList.filter(x => x.type === region.type).length === 0 && queryList.length === 0 &&
-                        <Result
-                            img={<img
-                                src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
-                                style={{width: 40, height: 40}}
-                                alt=""/>}
-                            message="검색 결과가 없습니다"
-                        />
-                    }
-                    {
-                        queryList.map(x => {
-                                if (x.type === 'BUILDING') {
-                                    return (
-                                        <List.Item
-                                            onClick={() => handleResultItem(x)}>
-                                            <ReconciliationOutlined/>
-                                            <Highlighter
-                                                style={{marginLeft: 4}}
-                                                highlightClassName={cx('highlight')}
-                                                searchWords={query.split('')}
-                                                autoEscape={true}
-                                                textToHighlight={x.name}
-                                            /><List.Item.Brief
-                                            style={{
-                                                fontSize: '0.7rem',
-                                                marginTop: 2,
-                                                marginBottom: 4
-                                            }}>
-                                            <Highlighter
-                                                highlightClassName={cx('highlight')}
-                                                searchWords={query.split('')}
-                                                autoEscape={true}
-                                                textToHighlight={x.address}
-                                            />
-                                        </List.Item.Brief></List.Item>
-                                    )
-                                } else {
-                                    return (
-                                        <List.Item onClick={() => handleResultItem(x)}>
-                                            <EnvironmentOutlined/>
-                                            <Highlighter
-                                                style={{marginLeft: 4}}
-                                                highlightClassName={cx('highlight')}
-                                                searchWords={query.split('')}
-                                                autoEscape={true}
-                                                textToHighlight={x.address}
-                                            />
-                                        </List.Item>
-                                    )
-                                }
                             }
-                        )
+                        </>
                     }
                 </List>
             </div>
