@@ -5,16 +5,6 @@ export const centerState = atom({
     default: {lat: 37.3614463, lng: 127.1114893}
 });
 
-export const boundsState = atom({
-    key: 'boundsState',
-    default: {
-        northEastLng: 127.11994426605064,
-        northEastLat: 37.37345347043685,
-        southWestLng: 127.10297653864265,
-        southWestLat: 37.34943006297289
-    }
-});
-
 export const areaTypeState = atom({
     key: 'areaTypeState',
     default: {areaId: ''}

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="" />
+    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -13,26 +16,43 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/detail/guavaRegionInfo.module.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusChart.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="168">
+                  <caret line="26" column="37" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="37" />
+                  <folding>
+                    <element signature="e#0#48#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="163">
+                  <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+                  <folding>
+                    <element signature="e#0#48#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pointRadius: 0,</find>
-      <find>pointRadius: 0,</find>
-      <find>font-size</find>
-      <find>.header</find>
-      <find>versus_search_container</find>
-      <find>queryList</find>
       <find>.am-modal-header</find>
       <find>최근 비교</find>
       <find>search_list_title</find>
@@ -57,6 +77,12 @@
       <find>검색하기</find>
       <find>placeholder=</find>
       <find>300</find>
+      <find>b</find>
+      <find>tradeDateState</find>
+      <find>table</find>
+      <find>Table</find>
+      <find>tradeDate</find>
+      <find>setTradeDate</find>
     </findStrings>
     <replaceStrings>
       <replace>region.type</replace>
@@ -124,14 +150,12 @@
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaVersusRow.js" />
         <option value="$PROJECT_DIR$/src/components/constant/index.js" />
         <option value="$PROJECT_DIR$/src/components/table/guavaTable.module.scss" />
-        <option value="$PROJECT_DIR$/src/components/table/GuavaTable.js" />
         <option value="$PROJECT_DIR$/src/components/table/GuavaMarketTable.js" />
         <option value="$PROJECT_DIR$/src/components/datatool/api.js" />
         <option value="$PROJECT_DIR$/src/components/table/col/GuavaVersusCol.js" />
         <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusTable.js" />
         <option value="$PROJECT_DIR$/src/components/versus/guavaVersus.module.scss" />
         <option value="$PROJECT_DIR$/src/components/map/guavaMap.module.scss" />
-        <option value="$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaBuildingInfo.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaDetailTabs.js" />
@@ -143,21 +167,23 @@
         <option value="$PROJECT_DIR$/src/pages/DetailHeaderPage.js" />
         <option value="$PROJECT_DIR$/src/components/detail/guavaChart.module.scss" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaMarketRow.js" />
-        <option value="$PROJECT_DIR$/src/components/datatool/state.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/map/GuavaMapLabel.js" />
         <option value="$PROJECT_DIR$/src/components/map/GuavaMap.js" />
         <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusChart.js" />
-        <option value="$PROJECT_DIR$/src/components/detail/GuavaChart.js" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaBuildingVersusRow.js" />
         <option value="$PROJECT_DIR$/src/components/App.less" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js" />
         <option value="$PROJECT_DIR$/src/components/versus/guavaVersusSearch.module.scss" />
-        <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaMainHeader.js" />
         <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js" />
         <option value="$PROJECT_DIR$/src/components/detail/guavaRegionInfo.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/datatool/state.js" />
+        <option value="$PROJECT_DIR$/src/components/table/GuavaTable.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaChart.js" />
+        <option value="$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js" />
       </list>
     </option>
   </component>
@@ -329,7 +355,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1021146000" />
+    <option name="totallyTimeSpent" value="1021567000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -340,9 +366,9 @@
       <window_info id="npm" order="2" sideWeight="0.34758365" side_tool="true" weight="0.23255815" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3270202" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3270202" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3270202" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.32070708" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32070708" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -483,16 +509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/table/GuavaTable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="123" column="38" lean-forward="true" selection-start-line="123" selection-start-column="38" selection-end-line="123" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/table/guavaTable.module.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -530,16 +546,6 @@
           <caret line="23" column="35" lean-forward="true" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="65" selection-start-line="65" selection-end-line="68" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -637,13 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/datatool/state.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="47" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusTradeOption.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="344">
@@ -682,26 +681,6 @@
             <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="261" column="26" lean-forward="true" selection-start-line="261" selection-start-column="26" selection-end-line="261" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="180" column="11" lean-forward="true" selection-start-line="180" selection-start-column="11" selection-end-line="180" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -767,13 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/guavaHeader.module.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -784,20 +756,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/guavaRegionInfo.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="123" column="26" lean-forward="true" selection-start-line="123" selection-start-column="26" selection-end-line="123" selection-end-column="26" />
+        <state relative-caret-position="320">
+          <caret line="110" column="47" lean-forward="true" selection-start-line="110" selection-start-column="47" selection-end-line="110" selection-end-column="47" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/detail/guavaRegionInfo.module.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/datatool/state.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        <state relative-caret-position="224">
+          <caret line="12" column="27" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/guavaHeader.module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/GuavaTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="174" column="31" lean-forward="true" selection-start-line="174" selection-start-column="31" selection-end-line="174" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

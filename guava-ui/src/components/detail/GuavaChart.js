@@ -36,6 +36,7 @@ const GuavaChart = () => {
         // fetchChart();
         // initChartEvent();
         initChartEvent();
+        setTradeDate(null);
     }, []);
 
     useEffect(() => {
