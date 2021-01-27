@@ -192,6 +192,7 @@ const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
 
         let total = {
             pointRadius: 0,
+            borderWidth: 2,
             // spanGaps: true,
             borderColor: color,
             backgroundColor: color,
@@ -254,6 +255,7 @@ const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
 
         let total = {
             pointRadius: 0,
+            borderWidth: 2,
             // spanGaps: true,
             borderColor: tradeType === 'rent' ? '#2E92FC' : '#DDDDDD',
             fill: false,

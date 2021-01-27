@@ -182,6 +182,7 @@ const GuavaChart = () => {
 
         let total = {
             pointRadius: 0,
+            borderWidth: 2,
             // spanGaps: true,
             borderColor: tradeType === 'trade' ? '#2E92FC' : '#DDDDDD',
             fill: false,
@@ -263,6 +264,7 @@ const GuavaChart = () => {
 
         let total = {
             pointRadius: 0,
+            borderWidth: 2,
             // spanGaps: true,
             borderColor: tradeType === 'rent' ? '#2E92FC' : '#DDDDDD',
             fill: false,
