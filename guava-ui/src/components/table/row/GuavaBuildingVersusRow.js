@@ -44,6 +44,7 @@ const GuavaBuildingVersusRow = ({page, idx, building, handleClick}) => {
             <div className={cx('row', 'apt_name')}
                  style={{
                      backgroundColor: `${CHART_COLOR_LIST[idx]}`,
+                     borderRadius: 2,
                      color: '#fff',
                      marginRight: 3,
                      marginLeft: 3,
