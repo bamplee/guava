@@ -26,6 +26,7 @@ const DetailHeaderPage = ({match, location}) => {
             <>
                 <GuavaAreaTypeFilter/>
                 <GuavaDetailHeader tabId={!match.params.tabId ? 't' : match.params.tabId}/>
+                <GuavaBuildingInfo/>
                 {/*<GuavaDetailTabs tabId={!match.params.tabId ? 't' : match.params.tabId}/>*/}
                 <div style={{maxWidth: 500, margin: '0 auto'}}>
                     {
@@ -39,7 +40,6 @@ const DetailHeaderPage = ({match, location}) => {
                                 (!match.params.tabId || match.params.tabId === 't') &&
                                 <>
                                     {/*<GuavaTradeOption/>*/}
-                                    <GuavaBuildingInfo/>
                                     <GuavaTradeOption type={'BUILDING'}/>
                                     <GuavaChart/>
                                     <GuavaTable/>
@@ -48,7 +48,6 @@ const DetailHeaderPage = ({match, location}) => {
                             {
                                 match.params.tabId === 'm' &&
                                 <>
-                                    <GuavaBuildingInfo/>
                                     <GuavaTradeOption type={'BUILDING'}/>
                                     <GuavaMarketChart/>
                                     <GuavaMarketTable/>
@@ -57,9 +56,9 @@ const DetailHeaderPage = ({match, location}) => {
                             {
                                 match.params.tabId === 'c' &&
                                 <>
-                                    <GuavaVersusButton/>
                                     <GuavaTradeOption type={'REGION'}/>
                                     <GuavaVersus/>
+                                    <GuavaVersusButton/>
                                 </>
                             }
                         </>

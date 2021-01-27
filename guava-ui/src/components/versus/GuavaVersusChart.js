@@ -163,7 +163,7 @@ const GuavaVersusChart = () => {
         }), 'yearMonth');
 
         let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
-        let eDate = moment(endDate.format('YYYYMM') + '31', 'YYYYMMDD');
+        let eDate = moment(endDate.add(1, 'months').format('YYYYMM') + '01', 'YYYYMMDD');
 
         while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
@@ -226,7 +226,7 @@ const GuavaVersusChart = () => {
         }), 'yearMonth');
 
         let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
-        let eDate = moment(endDate.format('YYYYMM') + '31', 'YYYYMMDD');
+        let eDate = moment(endDate.add(1, 'months').format('YYYYMM') + '01', 'YYYYMMDD');
 
         while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');

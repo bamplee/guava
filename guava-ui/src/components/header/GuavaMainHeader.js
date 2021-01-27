@@ -17,7 +17,7 @@ const GuavaMainHeader = () => {
     const history = useHistory();
 
     return (
-        <div className={cx('header_container')}>
+        <div className={cx('header_container')} style={{position: 'fixed'}}>
             <div className={cx('title_container')}>
                 <WingBlank>
                     {/*<div className={cx('left')} onClick={() => history.push('/intro')}>*/}

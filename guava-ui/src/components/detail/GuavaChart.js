@@ -144,8 +144,7 @@ const GuavaChart = () => {
             result = await getRegionChart('trade', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
         if (result.length === 0) {
-            console.error('차트 데이터 불러오기 오류');
-            return;
+            return {datasets: []};
         }
 
         let groupList = groupBy(result.map(x => {
@@ -153,8 +152,8 @@ const GuavaChart = () => {
             return x;
         }), 'yearMonth');
 
-        let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
-        let eDate = moment(endDate.format('YYYYMM') + '31', 'YYYYMMDD');
+        let sDate = moment(startDate.format('YYYYMM'), 'YYYYMM');
+        let eDate = moment(endDate.add(1, 'months').format('YYYYMM') + '01', 'YYYYMMDD');
 
         while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
@@ -226,8 +225,7 @@ const GuavaChart = () => {
             result = await getRegionChart('rent', region.id, startArea, endArea, startDate.format('YYYYMM') + '01', endDate.format('YYYYMM') + '31');
         }
         if (result.length === 0) {
-            console.error('차트 데이터 불러오기 오류');
-            return;
+            return {datasets: []};
         }
 
         let groupList = groupBy(result.map(x => {
@@ -236,7 +234,7 @@ const GuavaChart = () => {
         }), 'yearMonth');
 
         let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
-        let eDate = moment(endDate.format('YYYYMM') + '31', 'YYYYMMDD');
+        let eDate = moment(endDate.add(1, 'months').format('YYYYMM') + '01', 'YYYYMMDD');
 
         while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
@@ -297,17 +295,35 @@ const GuavaChart = () => {
     const fetchChart = async () => {
         setIsLoading(true);
         let tradeList = await getTradeChart();
-        if (!tradeList) {
-            tradeList = [];
-        }
         let rentList = await getRentChart();
-        if (!rentList) {
-            rentList = [];
+
+        console.log(tradeList);
+        console.log(rentList);
+
+        let labels = [];
+        let datasets = [];
+        if (tradeList) {
+            if (tradeList.labels.length > 0) {
+                labels = labels.concat(tradeList.labels);
+            }
+            if (tradeList.datasets && tradeList.datasets.length > 0) {
+                datasets = datasets.concat(tradeList.datasets);
+            }
+        }
+        if (rentList) {
+            if (rentList.labels && rentList.labels.length > 0) {
+                labels = labels.concat(rentList.labels);
+            }
+            if (rentList.datasets && rentList.datasets.length > 0) {
+                datasets = datasets.concat(rentList.datasets);
+            }
         }
 
-        if (tradeList.length + rentList.length === 0) {
-            console.error('차트 데이터 불러오기 오류');
-            return;
+        if (datasets.length > 0) {
+            setChartList({
+                labels: labels,
+                datasets: datasets,
+            });
         }
 
         setChartList({
@@ -419,34 +435,34 @@ const GuavaChart = () => {
                                       }
                                   }}/>
                         </div>
-                        <div className={cx('slider')}>
-                            <Range
-                                // marks={beforeYear}
-                                defaultValue={period}
-                                value={period}
-                                min={moment('20060101', 'YYYYMMDD')}
-                                max={moment()}
-                                onChange={(e) => setPeriod([moment(e[0]), moment(e[1])])}
-                                onAfterChange={(e) => {
-                                    setStartDate(period[0]);
-                                    setEndDate(period[1]);
-                                }}
-                                trackStyle={{
-                                    backgroundColor: '#DDDDDD',
-                                }}
-                                railStyle={{
-                                    // backgroundColor: '#2E92FC',
-                                }}
-                            />
-                        </div>
-                        <div className={cx('title')}>
-                            {period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}
-                        </div>
                     </> :
                     <div className={cx('loading')}>
                         <GuavaLoading isLoading={isLoading}/>
                     </div>
             }
+            <div className={cx('slider')}>
+                <Range
+                    // marks={beforeYear}
+                    defaultValue={period}
+                    value={period}
+                    min={moment('20060101', 'YYYYMMDD')}
+                    max={moment()}
+                    onChange={(e) => setPeriod([moment(e[0]), moment(e[1])])}
+                    onAfterChange={(e) => {
+                        setStartDate(period[0]);
+                        setEndDate(period[1]);
+                    }}
+                    trackStyle={{
+                        backgroundColor: '#DDDDDD',
+                    }}
+                    railStyle={{
+                        // backgroundColor: '#2E92FC',
+                    }}
+                />
+            </div>
+            <div className={cx('title')}>
+                {period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}
+            </div>
         </div>
     );
 };
