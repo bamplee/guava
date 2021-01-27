@@ -137,7 +137,6 @@ const GuavaMap = () => {
     }, [level, filterArea]);
 
     const initLatLng = () => {
-        setStorageCenter({lat: map.getCenter().getLat(), lng: map.getCenter().getLng()});
         setCenter({lat: map.getCenter().getLat(), lng: map.getCenter().getLng()});
         const northEastLng = map.getBounds().getNorthEast().getLng();
         const northEastLat = map.getBounds().getNorthEast().getLat();
@@ -241,6 +240,7 @@ const GuavaMap = () => {
 
                 // setLat(latitude);
                 // setLng(longitude);
+                setCenter({lat: latitude, lng: longitude});
 
                 let locPosition = new kakao.maps.LatLng(latitude, longitude); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
                 map.setCenter(locPosition);
