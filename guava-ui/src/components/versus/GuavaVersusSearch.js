@@ -112,7 +112,7 @@ const GuavaVersusSearch = () => {
                     </WingBlank>
                     <div className={cx('center')}>
                         {/*<span className={cx('title')}>{region.address}</span>*/}
-                        <input ref={(ref) => {
+                        <input autoFocus={true} ref={(ref) => {
                             if (ref !== null) {
                                 ref.focus();
                             }
