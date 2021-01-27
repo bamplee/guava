@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 
 import styles from './guavaVersusSearch.module.scss';
 import {useRecoilState} from 'recoil';
-import {regionState, showVersusSearchState} from '../datatool/state';
+import {regionState, showVersusSearchState, versusRegionListState} from '../datatool/state';
 import {Icon, List, Modal, Result, WingBlank} from 'antd-mobile/lib/index';
 import {fetchSearch, getBuilding, getDetail} from '../datatool/api';
 import CloseOutlined from '@ant-design/icons/es/icons/CloseOutlined';
@@ -14,13 +14,13 @@ import ReconciliationOutlined from '@ant-design/icons/es/icons/ReconciliationOut
 import EnvironmentOutlined from '@ant-design/icons/es/icons/EnvironmentOutlined';
 import Highlighter from 'react-highlight-words';
 // import {useLocalStorage} from '../common/useLocalStorage';
-import queryString from 'query-string/index';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
 import {useLocalStorage} from '../common/useLocalStorage';
+import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 
 const cx = classNames.bind(styles);
 
-const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
+const GuavaVersusSearch = () => {
     // const location = useLocation();
     // const history = useHistory();
     const queryInput = useRef(null);
@@ -32,30 +32,28 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
     // const [searchList, setSearchList] = useLocalStorage('searchList', []);
     // const [center, setCenter] = useRecoilState(centerState);
     const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
-    // const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
+    const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
     const [versusSearchList, setVersusSearchList] = useLocalStorage('versusSearchList', []);
 
     useEffect(() => {
-        if (query.length === 0) {
-            setQueryList([]);
-        } else {
-            fetchRegion();
-        }
+        fetchRegion();
     }, [query]);
 
     const onChangeQuery = (e) => {
         let query = e.target.value;
         setQuery(query);
+        if (query.length === 0) {
+            setQueryList([]);
+        }
     };
 
     const fetchRegion = async () => {
-        if (query.length !== 0) {
+        if (query.length > 0) {
             const pattern = /([^가-힣a-z\x20])/i;
             if (!pattern.test(query)) {
                 setLoading(true);
                 let regionList = await fetchSearch(query);
                 regionList = regionList.filter(x => x.type === region.type);
-                regionList = regionList;
                 setQueryList(regionList);
                 setLoading(false);
             }
@@ -75,6 +73,7 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
         setVersusSearchList(temp);
 
         let vsList = [...versusRegionList];
+
         vsList.push(item);
         setVersusRegionList([...vsList]);
         setShowVersusSearch(false);
@@ -94,152 +93,170 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
     };
 
     return (
-        <Modal
-            transparent
-            title={
-                <div className={cx('vs_search_title')}>
-                    <input value={query}
-                           onKeyPress={(e) => {
-                               if (e.key === 'Enter') {
-                                   fetchRegion();
-                               }
-                           }}
-                           onChange={onChangeQuery}
-                           placeholder="지역/아파트 검색하기">
-                    </input>
-                    <SearchOutlined/>
-                </div>}
+        showVersusSearch &&
+        <div
             className={cx('versus_search_container')}
-            // popup
-            visible={showVersusSearch}
             onCancel={() => setShowVersusSearch(false)}
             onClose={() => setShowVersusSearch(false)}
-            animationType="slide-up"
-            footer={[{text: '닫기', onPress: () => setShowVersusSearch(false)}]}
         >
+            <div className={cx('header_container')}>
+                <div className={cx('title_container')}>
+                    <WingBlank>
+                        <div className={cx('left')} onClick={() => {
+                            setShowVersusSearch(false)
+                        }}>
+                            {/*<SearchOutlined/>*/}
+                            {/*<ArrowLeftOutlined style={{visibility: 'hidden'}}/>*/}
+                            <ArrowLeftOutlined/>
+                        </div>
+                    </WingBlank>
+                    <div className={cx('center')}>
+                        {/*<span className={cx('title')}>{region.address}</span>*/}
+                        <input ref={(ref) => {
+                            if (ref !== null) {
+                                ref.focus();
+                            }
+                        }}
+                               value={query}
+                               onKeyPress={(e) => {
+                                   if (e.key === 'Enter') {
+                                       fetchRegion();
+                                   }
+                               }}
+                               onChange={onChangeQuery}
+                               placeholder="지역 / 아파트 명을 입력하세요">
+                        </input>
+                    </div>
+                    <WingBlank>
+                        {/*<div className={cx('right')} onClick={() => history.push(location.pathname.replace('/search', ''))}>*/}
+                        <div className={cx('right')}>
+                            <SearchOutlined/>
+                        </div>
+                    </WingBlank>
+                </div>
+            </div>
             <div className={cx('query_container')}>
                 {
                     (!loading && query.length === 0) &&
                     <>
                         {
                             versusSearchList.filter(x => x.type === region.type).length > 0 &&
-                            <>
-                                <List.Item>
-                                    <span className={cx('search_list_title')}>최근 비교 지역/아파트</span>
-                                </List.Item>
-                                {
-                                    versusSearchList.filter(x => x.type === region.type)
-                                        .map(x => {
-                                            if (region.type === 'BUILDING') {
-                                                x.isValid = !versusRegionList.map(y => y.buildingId).includes(x.buildingId);
-                                            } else {
-                                                x.isValid = !versusRegionList.map(y => y.id).includes(x.regionId);
-                                            }
-                                            return x;
-                                        })
-                                        .map(x =>
-                                            <List.Item style={{backgroundColor: !x.isValid && '#f1f1f1'}}>
-                                                <div className={cx('search_list')}>
-                                                    <div className={cx('left')} onClick={() => {
-                                                        if (x.isValid) {
-                                                            handleResultItem(x)
-                                                        } else {
-                                                            alert('이미 선택되어 있습니다')
-                                                        }
-                                                    }}>
-                                                        {
-                                                            x.type === 'BUILDING' ?
-                                                                <ReconciliationOutlined/> :
-                                                                <EnvironmentOutlined/>
-                                                        }
-                                                        <Highlighter
-                                                            style={{marginLeft: 4}}
-                                                            highlightClassName={cx('highlight')}
-                                                            searchWords={query.split('')}
-                                                            autoEscape={true}
-                                                            textToHighlight={x.name}
-                                                        />
-                                                        <List.Item.Brief style={{
-                                                            fontSize: '0.7rem',
-                                                            marginTop: 2,
-                                                            marginBottom: 4
-                                                        }}>
-                                                            <Highlighter
-                                                                highlightClassName={cx('highlight')}
-                                                                searchWords={query.split('')}
-                                                                autoEscape={true}
-                                                                textToHighlight={x.address}
-                                                            />
-                                                        </List.Item.Brief>
-                                                    </div>
-                                                    <div className={cx('right')} onClick={() => removeSearchList(x)}>
-                                                        <CloseOutlined style={{fontSize: 12}}/>
-                                                    </div>
-                                                </div>
-                                            </List.Item>
-                                        )
-                                }
-                            </>
+                            <List.Item>
+                                <span className={cx('search_list_title')}>최근 비교 지역/아파트</span>
+                            </List.Item>
+                        }
+                        {
+                            versusSearchList.filter(x => x.type === region.type)
+                                .map(x => {
+                                    if (region.type === 'BUILDING') {
+                                        x.isValid = !versusRegionList.map(y => y.buildingId).includes(x.buildingId);
+                                    } else {
+                                        x.isValid = !versusRegionList.map(y => y.id).includes(x.regionId);
+                                    }
+                                    return x;
+                                })
+                                .map(x =>
+                                    <List.Item style={{backgroundColor: !x.isValid && '#d5d5d5'}}>
+                                        <div className={cx('search_list')}>
+                                            <div className={cx('left')} onClick={() => {
+                                                if (x.isValid) {
+                                                    handleResultItem(x)
+                                                } else {
+                                                    alert('이미 선택되어 있습니다')
+                                                }
+                                            }}>
+                                                {
+                                                    x.type === 'BUILDING' ?
+                                                        <ReconciliationOutlined/> :
+                                                        <EnvironmentOutlined/>
+                                                }
+                                                <Highlighter
+                                                    style={{marginLeft: 4}}
+                                                    highlightClassName={cx('highlight')}
+                                                    searchWords={query.split('')}
+                                                    autoEscape={true}
+                                                    textToHighlight={x.name}
+                                                />
+                                                <List.Item.Brief style={{
+                                                    fontSize: '0.7rem',
+                                                    marginTop: 2,
+                                                    marginBottom: 4
+                                                }}>
+                                                    <Highlighter
+                                                        highlightClassName={cx('highlight')}
+                                                        searchWords={query.split('')}
+                                                        autoEscape={true}
+                                                        textToHighlight={x.address}
+                                                    />
+                                                </List.Item.Brief>
+                                            </div>
+                                            <div className={cx('right')} onClick={() => removeSearchList(x)}>
+                                                <CloseOutlined style={{fontSize: 12}}/>
+                                            </div>
+                                        </div>
+                                    </List.Item>
+                                )
                         }
                     </>
                 }
                 <List>
                     {
-                        queryList.filter(x => x.type === region.type).length > 0 &&
-                        <>
-                            <List.Item>
-                                <span
-                                    className={cx('search_list_title')}>검색 결과 ({queryList.filter(x => x.type === region.type).length}건)</span>
-                            </List.Item>
-                            {
-                                queryList.filter(x => x.type === region.type).map(x => {
-                                        if (x.type === 'BUILDING') {
-                                            return (
-                                                <List.Item
-                                                    onClick={() => handleResultItem(x)}>
-                                                    <ReconciliationOutlined/>
-                                                    <Highlighter
-                                                        style={{marginLeft: 4}}
-                                                        highlightClassName={cx('highlight')}
-                                                        searchWords={query.split('')}
-                                                        autoEscape={true}
-                                                        textToHighlight={x.name}
-                                                    /><List.Item.Brief
-                                                    style={{
-                                                        fontSize: '0.7rem',
-                                                        marginTop: 2,
-                                                        marginBottom: 4
-                                                    }}>
-                                                    <Highlighter
-                                                        highlightClassName={cx('highlight')}
-                                                        searchWords={query.split('')}
-                                                        autoEscape={true}
-                                                        textToHighlight={x.address}
-                                                    />
-                                                </List.Item.Brief></List.Item>
-                                            )
-                                        } else {
-                                            return (
-                                                <List.Item onClick={() => handleResultItem(x)}>
-                                                    <EnvironmentOutlined/>
-                                                    <Highlighter
-                                                        style={{marginLeft: 4}}
-                                                        highlightClassName={cx('highlight')}
-                                                        searchWords={query.split('')}
-                                                        autoEscape={true}
-                                                        textToHighlight={x.address}
-                                                    />
-                                                </List.Item>
-                                            )
-                                        }
-                                    }
-                                )
+                        versusSearchList.filter(x => x.type === region.type).length === 0 && queryList.length === 0 &&
+                        <Result
+                            img={<img
+                                src={'https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg'}
+                                style={{width: 40, height: 40}}
+                                alt=""/>}
+                            message="검색 결과가 없습니다"
+                        />
+                    }
+                    {
+                        queryList.map(x => {
+                                if (x.type === 'BUILDING') {
+                                    return (
+                                        <List.Item
+                                            onClick={() => handleResultItem(x)}>
+                                            <ReconciliationOutlined/>
+                                            <Highlighter
+                                                style={{marginLeft: 4}}
+                                                highlightClassName={cx('highlight')}
+                                                searchWords={query.split('')}
+                                                autoEscape={true}
+                                                textToHighlight={x.name}
+                                            /><List.Item.Brief
+                                            style={{
+                                                fontSize: '0.7rem',
+                                                marginTop: 2,
+                                                marginBottom: 4
+                                            }}>
+                                            <Highlighter
+                                                highlightClassName={cx('highlight')}
+                                                searchWords={query.split('')}
+                                                autoEscape={true}
+                                                textToHighlight={x.address}
+                                            />
+                                        </List.Item.Brief></List.Item>
+                                    )
+                                } else {
+                                    return (
+                                        <List.Item onClick={() => handleResultItem(x)}>
+                                            <EnvironmentOutlined/>
+                                            <Highlighter
+                                                style={{marginLeft: 4}}
+                                                highlightClassName={cx('highlight')}
+                                                searchWords={query.split('')}
+                                                autoEscape={true}
+                                                textToHighlight={x.address}
+                                            />
+                                        </List.Item>
+                                    )
+                                }
                             }
-                        </>
+                        )
                     }
                 </List>
             </div>
-        </Modal>
+        </div>
     )
 };
 

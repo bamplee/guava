@@ -12,9 +12,9 @@ import {getDetail} from '../datatool/api';
 
 const cx = classNames.bind(styles);
 
-const GuavaVersusTable = ({versusRegionList, setVersusRegionList}) => {
+const GuavaVersusTable = () => {
     const [region, setRegion] = useRecoilState(regionState);
-    // const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
+    const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
 
     const removeVersusRegion = (region) => {
         let temp = [...versusRegionList];

@@ -21,7 +21,7 @@ const cx = classNames.bind(styles);
 const GuavaVersus = () => {
     const region = useRecoilValue(regionState);
     const [building, setBuilding] = useRecoilState(buildingState);
-    const [versusRegionList, setVersusRegionList] = useState([]);
+    const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
     const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
 
     useEffect(() => {
@@ -30,9 +30,13 @@ const GuavaVersus = () => {
                 if (region.type === 'BUILDING') {
                     let building = await getDetail(region.buildingId);
                     setBuilding(building);
-                    setVersusRegionList([building]);
+                    if (versusRegionList.length === 0) {
+                        setVersusRegionList([building]);
+                    }
                 } else {
-                    setVersusRegionList([region]);
+                    if (versusRegionList.length === 0) {
+                        setVersusRegionList([region]);
+                    }
                 }
             }
         };
@@ -42,15 +46,9 @@ const GuavaVersus = () => {
     return (
         <>
             {/*<GuavaAreaTypeFilter/>*/}
-            <GuavaVersusSearch versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
             <div className={cx('versus_container')}>
-                <GuavaVersusChart versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
-                <GuavaVersusTable versusRegionList={versusRegionList} setVersusRegionList={setVersusRegionList}/>
-                <div className={cx('add_container')}>
-                    <Button className={cx('tag_add')} inline type="ghost"
-                            onClick={() => setShowVersusSearch(true)}><PlusOutlined
-                        style={{marginRight: 5}}/>비교할 지역 / 아파트 추가하기</Button>
-                </div>
+                <GuavaVersusChart/>
+                <GuavaVersusTable/>
             </div>
         </>
     )

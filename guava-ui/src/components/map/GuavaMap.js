@@ -8,7 +8,14 @@ import {Badge} from 'antd-mobile';
 import {fetchSummary} from '../datatool/api';
 import {useLocalStorage} from '../common/useLocalStorage';
 
-import {centerState, filterAreaState, levelState, regionState, summaryState,} from '../datatool/state';
+import {
+    centerState,
+    filterAreaState,
+    levelState,
+    regionState,
+    showVersusSearchState,
+    summaryState,
+} from '../datatool/state';
 
 import styles from './guavaMap.module.scss';
 import {getEndArea, getStartArea} from '../constant';
@@ -32,6 +39,7 @@ const GuavaMap = () => {
     const [bounds, setBounds] = useState(null);
     // const summary = useRecoilValue(summaryQuery);
     const region = useRecoilValue(regionState);
+    const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
 
     const history = useHistory();
 
@@ -42,6 +50,7 @@ const GuavaMap = () => {
     });
 
     useEffect(() => {
+        setShowVersusSearch(false);
         setCenter(storageCenter);
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);

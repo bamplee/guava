@@ -22,7 +22,7 @@ import GuavaLoading from '../detail/GuavaLoading';
 
 const cx = classNames.bind(styles);
 
-const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
+const GuavaVersusChart = () => {
     // const [areaType, setAreaType] = useRecoilState(areaTypeState);
     // const [tradeDate, setTradeDate] = useRecoilState(tradeDateState);
     const [count, setCount] = useState(0);
@@ -38,7 +38,7 @@ const GuavaVersusChart = ({versusRegionList, setVersusRegionList}) => {
     const [startDate, setStartDate] = useState(period[0]);
     const [endDate, setEndDate] = useState(period[1]);
     const [isLoading, setIsLoading] = useState(false);
-    // const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
+    const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
 
     useEffect(() => {
         // fetchChart();

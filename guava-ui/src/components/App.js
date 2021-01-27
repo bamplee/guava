@@ -8,6 +8,7 @@ import ReactGA from 'react-ga';
 import {DetailHeaderPage, IntroPage, MapPage} from '../pages';
 import SearchPage from '../pages/SearchPage';
 import GuavaMatch from './map/GuavaMatch';
+import GuavaVersusSearch from './versus/GuavaVersusSearch';
 
 function App() {
     useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
                         <Route exact path={['/intro']} component={IntroPage}/>
                         <Route exact path={['/match']} component={GuavaMatch}/>
                         <Route path="/:regionType/:regionId/:tabId?" component={DetailHeaderPage}/>
+                        {/*<Route exact path="/:regionType/:regionId/:tabId/search" component={GuavaVersusSearch}/>*/}
                     </Suspense>
                 </Switch>
             </Router>
