@@ -36,19 +36,20 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
     const [versusSearchList, setVersusSearchList] = useLocalStorage('versusSearchList', []);
 
     useEffect(() => {
-        fetchRegion();
+        if (query.length === 0) {
+            setQueryList([]);
+        } else {
+            fetchRegion();
+        }
     }, [query]);
 
     const onChangeQuery = (e) => {
         let query = e.target.value;
         setQuery(query);
-        if (query.length === 0) {
-            setQueryList([]);
-        }
     };
 
     const fetchRegion = async () => {
-        if (query !== '') {
+        if (query.length !== 0) {
             const pattern = /([^가-힣a-z\x20])/i;
             if (!pattern.test(query)) {
                 setLoading(true);
@@ -94,44 +95,28 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
 
     return (
         <Modal
+            transparent
+            title={
+                <div className={cx('vs_search_title')}>
+                    <input value={query}
+                           onKeyPress={(e) => {
+                               if (e.key === 'Enter') {
+                                   fetchRegion();
+                               }
+                           }}
+                           onChange={onChangeQuery}
+                           placeholder="지역 / 아파트 명을 입력하세요">
+                    </input>
+                    <SearchOutlined/>
+                </div>}
             className={cx('versus_search_container')}
-            popup
+            // popup
             visible={showVersusSearch}
             onCancel={() => setShowVersusSearch(false)}
             onClose={() => setShowVersusSearch(false)}
             animationType="slide-up"
+            footer={[{text: '닫기', onPress: () => setShowVersusSearch(false)}]}
         >
-            <div className={cx('header_container')}>
-                <div className={cx('title_container')}>
-                    <WingBlank>
-                        <div className={cx('left')} onClick={() => {
-                            setShowVersusSearch(false)
-                        }}>
-                            {/*<SearchOutlined/>*/}
-                            {/*<ArrowLeftOutlined style={{visibility: 'hidden'}}/>*/}
-                            <CloseOutlined/>
-                        </div>
-                    </WingBlank>
-                    <div className={cx('center')}>
-                        {/*<span className={cx('title')}>{region.address}</span>*/}
-                        <input value={query}
-                               onKeyPress={(e) => {
-                                   if (e.key === 'Enter') {
-                                       fetchRegion();
-                                   }
-                               }}
-                               onChange={onChangeQuery}
-                               placeholder="지역 / 아파트 명을 입력하세요">
-                        </input>
-                    </div>
-                    <WingBlank>
-                        {/*<div className={cx('right')} onClick={() => history.push(location.pathname.replace('/search', ''))}>*/}
-                        <div className={cx('right')}>
-                            <SearchOutlined/>
-                        </div>
-                    </WingBlank>
-                </div>
-            </div>
             <div className={cx('query_container')}>
                 {
                     (!loading && query.length === 0) &&
@@ -153,7 +138,7 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
                                     return x;
                                 })
                                 .map(x =>
-                                    <List.Item style={{backgroundColor: !x.isValid && '#d5d5d5'}} >
+                                    <List.Item style={{backgroundColor: !x.isValid && '#f1f1f1'}}>
                                         <div className={cx('search_list')}>
                                             <div className={cx('left')} onClick={() => {
                                                 if (x.isValid) {
