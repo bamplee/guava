@@ -36,10 +36,10 @@
       cursor: default;
 
       .search_title {
-        font-weight: 400;
+        font-weight: 300;
         font-size: 16px;
         margin-right: 2px;
-        color: #79B9FD;
+        color: #F6F6F6;
       }
 
       .title {
@@ -71,7 +71,7 @@
       cursor: default;
 
       .title {
-        font-weight: 400;
+        font-weight: 300;
         font-size: 17px;
         color: #fff;
       }
@@ -82,14 +82,14 @@
         color: #fff;
         border: none;
         font-size: 16px;
-        font-weight: 400;
+        font-weight: 300;
         caret-color: #fff;
       }
 
       input::placeholder {
         font-size: 16px;
-        font-weight: 400;
-        color: #79B9FD;
+        font-weight: 300;
+        color: #F6F6F6;
       }
     }
 

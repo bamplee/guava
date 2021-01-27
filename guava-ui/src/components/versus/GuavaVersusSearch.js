@@ -105,7 +105,7 @@ const GuavaVersusSearch = ({versusRegionList, setVersusRegionList}) => {
                                }
                            }}
                            onChange={onChangeQuery}
-                           placeholder="지역 / 아파트 명을 입력하세요">
+                           placeholder="지역/아파트 검색하기">
                     </input>
                     <SearchOutlined/>
                 </div>}

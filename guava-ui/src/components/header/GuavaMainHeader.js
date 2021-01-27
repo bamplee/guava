@@ -26,11 +26,11 @@ const GuavaMainHeader = () => {
                     </div>
                 </WingBlank>
                 <div className={cx('logo')} onClick={() => history.push('/search')}>
-                    <span className={cx('search_title')}>지역 / 아파트 검색하기</span>
+                    <span className={cx('search_title')}>지역/아파트 검색하기</span>
                     {/*<span className={cx('sub')}>SUBTITLE</span>*/}
                 </div>
                 <WingBlank>
-                    <div className={cx('right')} onClick={() => history.push('/search?type=map')}>
+                    <div className={cx('right')} onClick={() => history.push('/search')}>
                         <SearchOutlined/>
                     </div>
                 </WingBlank>

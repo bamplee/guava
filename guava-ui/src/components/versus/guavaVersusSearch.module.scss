@@ -3,14 +3,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #79B9FD;
+    color: #F6F6F6;
     background-color: #2E92FC;
 
     input {
       width: 100%;
       border: none;
       font-size: 16px;
-      font-weight: 400;
+      font-weight: 300;
       caret-color: #2E92FC;
       color: #fff;
       background-color: #2E92FC;
@@ -18,8 +18,8 @@
 
     input::placeholder {
       font-size: 16px;
-      font-weight: 400;
-      color: #79B9FD;
+      font-weight: 300;
+      color: #F6F6F6;
     }
   }
 

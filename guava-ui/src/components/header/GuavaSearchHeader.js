@@ -100,7 +100,7 @@ const GuavaSearchHeader = () => {
             <div className={cx('header_container')}>
                 <div className={cx('title_container')}>
                     <WingBlank>
-                        <div className={cx('left')} style={{color: '#79B9FD'}}>
+                        <div className={cx('left')}>
                             <SearchOutlined/>
                             {/*<ArrowLeftOutlined/>*/}
                         </div>
@@ -119,7 +119,7 @@ const GuavaSearchHeader = () => {
                                    }
                                }}
                                onChange={onChangeQuery}
-                               placeholder="지역 / 아파트 명을 입력하세요">
+                               placeholder="지역/아파트 검색하기">
                         </input>
                     </div>
                     <WingBlank>

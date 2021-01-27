@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,12 +15,12 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js">
+        <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="46" column="31" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="31" />
+            <state relative-caret-position="436">
+              <caret line="131" column="59" lean-forward="true" selection-start-line="131" selection-start-column="59" selection-end-line="131" selection-end-column="59" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="e#0#56#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -32,23 +30,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>filterArea</find>
-      <find>center</find>
-      <find>setCenter</find>
-      <find>setCen</find>
-      <find>setStorageCenter</find>
-      <find>current</find>
-      <find>=== 0</find>
-      <find>.filter</find>
-      <find>.filter(x =&gt; region.type === 'BUILDING' ? !versusRegionList.map(y =&gt; y.buildingId).includes(x.buildingId) : !versusRegionList.map(y =&gt; y.id).includes(x.regionId)).filter(x =&gt; x.type === region.type)</find>
-      <find>.list</find>
-      <find>.filter(x =&gt; region.type === 'BUILDING' ? !versusRegionList.map(y =&gt; y.buildingId).includes(x.buildingId) : !versusRegionList.map(y =&gt; y.id).includes(x.regionId))</find>
-      <find>unshift</find>
       <find>2px</find>
       <find>pointRadius: 0,</find>
       <find>pointRadius: 0,</find>
       <find>font-size</find>
-      <find>input</find>
       <find>.header</find>
       <find>versus_search_container</find>
       <find>queryList</find>
@@ -62,6 +47,19 @@
       <find>radius</find>
       <find>height</find>
       <find>.filter(x =&gt; x.type === region.type)</find>
+      <find>type=map</find>
+      <find>2371C4</find>
+      <find>2E92FC</find>
+      <find>1B69D9</find>
+      <find>input</find>
+      <find>#79B9FD</find>
+      <find>font-weight: 400</find>
+      <find>style={{color:</find>
+      <find>search_title</find>
+      <find>입력하세요</find>
+      <find>&lt;input</find>
+      <find>검색하기</find>
+      <find>placeholder=</find>
     </findStrings>
     <replaceStrings>
       <replace>region.type</replace>
@@ -102,8 +100,8 @@
       <dir>$PROJECT_DIR$/src/components</dir>
       <dir>$PROJECT_DIR$/src/components/table</dir>
       <dir>$PROJECT_DIR$/src/components/versus</dir>
-      <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -137,7 +135,6 @@
         <option value="$PROJECT_DIR$/src/components/versus/guavaVersus.module.scss" />
         <option value="$PROJECT_DIR$/src/components/map/guavaMap.module.scss" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaMarketChart.js" />
-        <option value="$PROJECT_DIR$/src/components/header/GuavaMainHeader.js" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
         <option value="$PROJECT_DIR$/src/components/detail/GuavaBuildingInfo.js" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaDetailTabs.js" />
@@ -149,7 +146,6 @@
         <option value="$PROJECT_DIR$/src/pages/DetailHeaderPage.js" />
         <option value="$PROJECT_DIR$/src/components/detail/guavaChart.module.scss" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaMarketRow.js" />
-        <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
         <option value="$PROJECT_DIR$/src/components/datatool/state.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/map/GuavaMapLabel.js" />
@@ -158,11 +154,13 @@
         <option value="$PROJECT_DIR$/src/components/detail/GuavaChart.js" />
         <option value="$PROJECT_DIR$/src/components/table/row/GuavaBuildingVersusRow.js" />
         <option value="$PROJECT_DIR$/src/components/detail/guavaRegionInfo.module.scss" />
-        <option value="$PROJECT_DIR$/src/components/versus/guavaVersusSearch.module.scss" />
         <option value="$PROJECT_DIR$/src/components/App.less" />
-        <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js" />
-        <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
         <option value="$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js" />
+        <option value="$PROJECT_DIR$/src/components/versus/guavaVersusSearch.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/header/guavaHeader.module.scss" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js" />
+        <option value="$PROJECT_DIR$/src/components/header/GuavaMainHeader.js" />
+        <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js" />
       </list>
     </option>
   </component>
@@ -186,7 +184,10 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -326,25 +327,25 @@
       <workItem from="1611583468549" duration="154000" />
       <workItem from="1611624928627" duration="8871000" />
       <workItem from="1611666595267" duration="4653000" />
-      <workItem from="1577838802097" duration="6064000" />
+      <workItem from="1577838802097" duration="7047000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1020056000" />
+    <option name="totallyTimeSpent" value="1021039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.65241635" weight="0.23255815" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.65241635" visible="true" weight="0.23255815" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.34758365" side_tool="true" weight="0.23255815" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3270202" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3270202" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.32070708" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.32070708" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -502,16 +503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaMainHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="27" column="80" selection-start-line="27" selection-start-column="80" selection-end-line="27" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/MapPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
@@ -642,16 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
@@ -762,46 +743,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/versus/guavaVersusSearch.module.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        <state relative-caret-position="231">
+          <caret line="49" column="31" lean-forward="true" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaMainHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="152" column="6" selection-start-line="152" selection-start-column="6" selection-end-line="152" selection-end-column="6" />
+        <state relative-caret-position="313">
+          <caret line="54" column="21" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js">
+    <entry file="file://$PROJECT_DIR$/src/components/versus/guavaVersusSearch.module.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="60" column="13" lean-forward="true" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-            <element signature="e#5014#5160#0" />
-            <element signature="e#5361#5819#0" />
-            <element signature="e#5899#8589#0" />
-          </folding>
+        <state relative-caret-position="456">
+          <caret line="27" column="15" lean-forward="true" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/header/guavaHeader.module.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="11" lean-forward="true" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+        <state relative-caret-position="434">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaDetailHeader.js">
+    <entry file="file://$PROJECT_DIR$/src/components/versus/GuavaVersusSearch.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="46" column="31" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="31" />
+        <state relative-caret-position="323">
+          <caret line="107" column="27" selection-start-line="107" selection-start-column="27" selection-end-line="107" selection-end-column="50" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header/GuavaSearchHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="131" column="59" lean-forward="true" selection-start-line="131" selection-start-column="59" selection-end-line="131" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
