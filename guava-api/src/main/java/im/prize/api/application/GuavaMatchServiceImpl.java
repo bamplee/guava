@@ -1,5 +1,6 @@
 package im.prize.api.application;
 
+import im.prize.api.application.dto.Location;
 import im.prize.api.datatool.AvokadoKakaoClient;
 import im.prize.api.datatool.response.AvokadoKakaoAddressResponse;
 import im.prize.api.hgnn.repository.BuildingMapping;
@@ -9,14 +10,13 @@ import im.prize.api.infrastructure.persistence.jpa.repository.GuavaBuildingRepos
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaMatchTemp;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegion;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegionRepository;
-import im.prize.api.infrastructure.persistence.jpa.repository.oboo.UnmappingTradeList;
 import im.prize.api.infrastructure.persistence.jpa.repository.oboo.UnmappingTradeListRepository;
 import im.prize.api.interfaces.response.GuavaMatchResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -33,6 +33,7 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
     private final UnmappingTradeListRepository unmappingTradeListRepository;
     private final AvokadoKakaoClient avokadoKakaoClient;
     private final GuavaBuildingRepository guavaBuildingRepository;
+    private final EntityManager entityManager;
 
     private final BuildingMappingRepository buildingMappingRepository;
 
@@ -40,11 +41,12 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
                                  UnmappingTradeListRepository unmappingTradeListRepository,
                                  AvokadoKakaoClient avokadoKakaoClient,
                                  GuavaBuildingRepository guavaBuildingRepository,
-                                 BuildingMappingRepository buildingMappingRepository) {
+                                 EntityManager entityManager, BuildingMappingRepository buildingMappingRepository) {
         this.guavaRegionRepository = guavaRegionRepository;
         this.unmappingTradeListRepository = unmappingTradeListRepository;
         this.avokadoKakaoClient = avokadoKakaoClient;
         this.guavaBuildingRepository = guavaBuildingRepository;
+        this.entityManager = entityManager;
         this.buildingMappingRepository = buildingMappingRepository;
     }
 
@@ -81,7 +83,9 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
                                                           .lat(lat)
                                                           .lng(lng)
                                                           .build())
-                                     .compareBuildingList(guavaBuildingRepository.findByRegionCode(x.getRegionCode())
+                                     .compareBuildingList(searchGuavaRegion(lng, lat, 1d)
+//                                     .compareBuildingList(guavaBuildingRepository.findByRegionCodeLike(x.getRegionCode()
+//                                                                                                        .substring(0, 5) + "%")
                                                                                  .stream()
                                                                                  .map(y -> GuavaMatchResponse.BuildingInfo
                                                                                      .builder()
@@ -118,4 +122,30 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
         return GuavaMatchTemp.builder().build();
     }
 
+    private List<GuavaBuilding> searchGuavaRegion(Double lng, Double lat, Double distance) {
+        // 북동쪽 좌표 구하기
+        Location northEast = GeometryUtils.calculateByDirection(lat, lng, distance, CardinalDirection.NORTHEAST.getBearing());
+
+        // 남서쪽 좌표 구하기
+        Location southWest = GeometryUtils.calculateByDirection(lat, lng, distance, CardinalDirection.SOUTHWEST.getBearing());
+
+        double lng1 = northEast.getLongitude();
+        double lat1 = northEast.getLatitude();
+        double lng2 = southWest.getLongitude();
+        double lat2 = southWest.getLatitude();
+
+        return searchGuavaRegion(lng1, lat1, lng2, lat2);
+    }
+
+    private List<GuavaBuilding> searchGuavaRegion(Double lng1, Double lat1, Double lng2, Double lat2) {
+        return entityManager.createNativeQuery("SELECT * \n" +
+                                                   "FROM guava_building AS r \n" +
+                                                   "WHERE MBRContains(ST_LINESTRINGFROMTEXT(" + String.format(
+            "'LINESTRING(%f %f, %f %f)')",
+            lng1,
+            lat1,
+            lng2,
+            lat2) + ", r.point)"
+            , GuavaBuilding.class).getResultList();
+    }
 }

@@ -50,7 +50,7 @@ const GuavaMatch = () => {
             if (result.originalBuilding) {
                 let locPosition = new kakao.maps.LatLng(result.originalBuilding.lat, result.originalBuilding.lng);
                 map.setCenter(locPosition);
-                map.setLevel(4);
+                map.setLevel(3);
                 setSummary(result);
             } else {
                 alert('결과없음');
@@ -128,7 +128,7 @@ const GuavaMatch = () => {
             let container = document.getElementById('matchmap'); //지도를 담을 영역의 DOM 레퍼런스
             let options = { //지도를 생성할 때 필요한 기본 옵션
                 center: new kakao.maps.LatLng(37.359456, 127.105314), //지도의 중심좌표.
-                level: 6 //지도의 레벨(확대, 축소 정도)
+                level: 3 //지도의 레벨(확대, 축소 정도)
             };
             map = new kakao.maps.Map(container, options);
         };
