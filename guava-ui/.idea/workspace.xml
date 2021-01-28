@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaMatchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaMatchServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaMatchResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaMatchResponse.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMatch.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="52" column="28" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="28" />
+            <state relative-caret-position="179">
+              <caret line="133" column="14" lean-forward="true" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
               <folding>
                 <element signature="e#17#65#0" expanded="true" />
               </folding>
@@ -162,8 +162,8 @@
         <option value="$PROJECT_DIR$/src/components/detail/GuavaChart.js" />
         <option value="$PROJECT_DIR$/src/components/versus/GuavaVersusChart.js" />
         <option value="$PROJECT_DIR$/src/components/datatool/api.js" />
-        <option value="$PROJECT_DIR$/src/components/map/GuavaMatch.js" />
         <option value="$PROJECT_DIR$/src/components/App.less" />
+        <option value="$PROJECT_DIR$/src/components/map/GuavaMatch.js" />
       </list>
     </option>
   </component>
@@ -357,7 +357,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1032404000" />
+    <option name="totallyTimeSpent" value="1032575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -818,8 +818,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/map/GuavaMatch.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="52" column="28" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="28" />
+        <state relative-caret-position="179">
+          <caret line="133" column="14" lean-forward="true" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
           <folding>
             <element signature="e#17#65#0" expanded="true" />
           </folding>

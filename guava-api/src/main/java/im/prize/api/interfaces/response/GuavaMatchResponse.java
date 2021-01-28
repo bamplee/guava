@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class GuavaMatchResponse {
+    private Integer count;
     private BuildingInfo originalBuilding;
     private List<BuildingInfo> compareBuildingList;
 

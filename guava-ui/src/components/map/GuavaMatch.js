@@ -16,6 +16,7 @@ const GuavaMatch = () => {
         const [loading, setLoading] = useState(false);
         const [summary, setSummary] = useState(null);
         const [page, setPage] = useState(0);
+        const [count, setCount] = useState(0);
 
         useEffect(() => {
             initMap();
@@ -48,6 +49,7 @@ const GuavaMatch = () => {
             setLoading(true);
             let result = await getMatch();
             if (result.originalBuilding) {
+                setCount(result.count);
                 let locPosition = new kakao.maps.LatLng(result.originalBuilding.lat, result.originalBuilding.lng);
                 map.setCenter(locPosition);
                 map.setLevel(3);
@@ -144,7 +146,7 @@ const GuavaMatch = () => {
                     width: '100%',
                     backgroundColor: loading ? 'black' : 'blue',
                     color: 'white'
-                }}>{loading ? 'LOADING...' : '패스'}</Button>
+                }}>{loading ? 'LOADING...' : '패스 (' + count +')'}</Button>
                 <div id="matchmap" className={cx('map')}/>
             </>
         )

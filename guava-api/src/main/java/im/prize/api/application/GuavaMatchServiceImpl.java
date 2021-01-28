@@ -74,6 +74,7 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
                 lng = search.getDocuments().get(0).getX();
             }
             return GuavaMatchResponse.builder()
+                                     .count(list.size())
                                      .originalBuilding(
                                          GuavaMatchResponse
                                              .BuildingInfo.builder()
