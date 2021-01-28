@@ -84,19 +84,18 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
                                                           .lng(lng)
                                                           .build())
                                      .compareBuildingList(searchGuavaRegion(lng, lat, 1d)
-//                                     .compareBuildingList(guavaBuildingRepository.findByRegionCodeLike(x.getRegionCode()
-//                                                                                                        .substring(0, 5) + "%")
-                                                                                 .stream()
-                                                                                 .map(y -> GuavaMatchResponse.BuildingInfo
-                                                                                     .builder()
-                                                                                     .id(y.getId())
-                                                                                     .buildingCode(y.getBuildingCode())
-                                                                                     .address(y.getAddress())
-                                                                                     .name(y.getName())
-                                                                                     .lat(y.getLat())
-                                                                                     .lng(y.getLng())
-                                                                                     .build())
-                                                                                 .collect(Collectors.toList()))
+                                                              .stream()
+                                                              .filter(y -> y.getType() == 0)
+                                                              .map(y -> GuavaMatchResponse.BuildingInfo
+                                                                  .builder()
+                                                                  .id(y.getId())
+                                                                  .buildingCode(y.getBuildingCode())
+                                                                  .address(y.getAddress())
+                                                                  .name(y.getName())
+                                                                  .lat(y.getLat())
+                                                                  .lng(y.getLng())
+                                                                  .build())
+                                                              .collect(Collectors.toList()))
                                      .build();
         });
         return guavaMatchResponse.orElse(null);
