@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {useHistory} from 'react-router-dom';
 
@@ -7,14 +7,21 @@ import classNames from 'classnames/bind';
 import styles from './guavaHeader.module.scss';
 import SearchOutlined from '@ant-design/icons/es/icons/SearchOutlined';
 import {WingBlank} from 'antd-mobile';
-import YuqueOutlined from '@ant-design/icons/es/icons/YuqueOutlined';
-import HomeOutlined from '@ant-design/icons/es/icons/HomeOutlined';
 import NumberOutlined from '@ant-design/icons/es/icons/NumberOutlined';
+import {useRecoilState} from 'recoil';
+import {showVersusSearchState, versusRegionListState} from '../datatool/state';
 
 const cx = classNames.bind(styles);
 
 const GuavaMainHeader = () => {
     const history = useHistory();
+    const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
+    const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
+
+    useEffect(() => {
+        setShowVersusSearch(false);
+        setVersusRegionList([]);
+    }, []);
 
     return (
         <div className={cx('header_container')} style={{position: 'fixed'}}>

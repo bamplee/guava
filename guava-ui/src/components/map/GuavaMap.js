@@ -39,8 +39,6 @@ const GuavaMap = () => {
     const [bounds, setBounds] = useState(null);
     // const summary = useRecoilValue(summaryQuery);
     const region = useRecoilValue(regionState);
-    const [showVersusSearch, setShowVersusSearch] = useRecoilState(showVersusSearchState);
-    const [versusRegionList, setVersusRegionList] = useRecoilState(versusRegionListState);
 
     const history = useHistory();
 
@@ -51,8 +49,6 @@ const GuavaMap = () => {
     });
 
     useEffect(() => {
-        setShowVersusSearch(false);
-        setVersusRegionList([]);
         setCenter(storageCenter);
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);

@@ -26,9 +26,9 @@ const DetailHeaderPage = ({match, location}) => {
             <>
                 <GuavaAreaTypeFilter/>
                 <GuavaDetailHeader tabId={!match.params.tabId ? 't' : match.params.tabId}/>
-                <GuavaBuildingInfo/>
                 {/*<GuavaDetailTabs tabId={!match.params.tabId ? 't' : match.params.tabId}/>*/}
-                <div style={{maxWidth: 500, margin: '0 auto'}}>
+                <div style={{paddingTop: 90, maxWidth: 500, margin: '0 auto'}}>
+                    <GuavaBuildingInfo/>
                     {
                         (region && (region.type === 'BUILDING' ? region.buildingId === match.params.regionId : region.id === match.params.regionId)) &&
                         <>
