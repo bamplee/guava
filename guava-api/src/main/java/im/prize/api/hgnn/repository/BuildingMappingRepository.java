@@ -20,4 +20,6 @@ public interface BuildingMappingRepository extends JpaRepository<BuildingMapping
     @Query(value = "SELECT * FROM building_mapping_tb t WHERE replace(concat(address , building_name), ' ', '') like ?1 limit 10",
            nativeQuery = true)
     List<BuildingMapping> search(String query);
+
+    List<BuildingMapping> findByBuildingCodeIsNull();
 }

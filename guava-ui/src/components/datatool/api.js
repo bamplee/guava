@@ -65,10 +65,8 @@ export const getVersusChart = async (tradeType, buildingId, startArea, endArea, 
     return await response.json();
 };
 
-export const getMatch = async (page) => {
-    const response = await fetch(`/api/v1/guava/match?` + new URLSearchParams({
-        page: page
-    }));
+export const getMatch = async () => {
+    const response = await fetch(`/api/v1/guava/match?`);
     return await response.json();
 };
 

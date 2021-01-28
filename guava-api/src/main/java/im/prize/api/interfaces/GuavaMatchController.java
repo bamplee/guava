@@ -18,8 +18,8 @@ public class GuavaMatchController {
     public GuavaMatchController(GuavaMatchService guavaMatchService) {this.guavaMatchService = guavaMatchService;}
 
     @GetMapping
-    GuavaMatchResponse match(@RequestParam("page") Integer page) {
-        return guavaMatchService.match(page);
+    GuavaMatchResponse match() {
+        return guavaMatchService.match();
     }
 
     @GetMapping("/check")

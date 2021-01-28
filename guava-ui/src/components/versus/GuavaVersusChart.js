@@ -34,7 +34,7 @@ const GuavaVersusChart = () => {
     const region = useRecoilValue(regionState);
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
-    const [period, setPeriod] = useState([moment('20060101', 'YYYYMMDD'), moment()]);
+    const [period, setPeriod] = useState([moment('20160101', 'YYYYMMDD'), moment()]);
     const [startDate, setStartDate] = useState(period[0]);
     const [endDate, setEndDate] = useState(period[1]);
     const [isLoading, setIsLoading] = useState(false);

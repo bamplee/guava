@@ -27,7 +27,7 @@ const GuavaChart = () => {
     const region = useRecoilValue(regionState);
     const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
 
-    const [period, setPeriod] = useState([moment('20060101', 'YYYYMMDD'), moment()]);
+    const [period, setPeriod] = useState([moment('20160101', 'YYYYMMDD'), moment()]);
     const [startDate, setStartDate] = useState(period[0]);
     const [endDate, setEndDate] = useState(period[1]);
     const [isLoading, setIsLoading] = useState(false);
@@ -153,7 +153,7 @@ const GuavaChart = () => {
         }), 'yearMonth');
 
         let sDate = moment(startDate.format('YYYYMM'), 'YYYYMM');
-        let eDate = moment(endDate.add(1, 'months').format('YYYYMM') + '01', 'YYYYMMDD');
+        let eDate = moment(endDate.format('YYYYMM') + '01', 'YYYYMMDD');
 
         while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
@@ -234,7 +234,7 @@ const GuavaChart = () => {
         }), 'yearMonth');
 
         let sDate = moment(startDate.format('YYYYMM') + '01', 'YYYYMMDD');
-        let eDate = moment(endDate.add(1, 'months').format('YYYYMM') + '01', 'YYYYMMDD');
+        let eDate = moment(endDate.format('YYYYMM') + '01', 'YYYYMMDD');
 
         while (!sDate.isAfter(eDate)) {
             let beforeKey = moment(sDate).subtract(1, 'months').format('YYYYMM');
@@ -355,7 +355,7 @@ const GuavaChart = () => {
                                       layout: {
                                           padding: {
                                               top: 28,  //set that fits the best
-                                              right: 15
+                                              // right: 15
                                           }
                                       },
                                       tooltips: {

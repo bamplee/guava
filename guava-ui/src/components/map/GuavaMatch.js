@@ -46,7 +46,7 @@ const GuavaMatch = () => {
                 return;
             }
             setLoading(true);
-            let result = await getMatch(page);
+            let result = await getMatch();
             if (result.originalBuilding) {
                 let locPosition = new kakao.maps.LatLng(result.originalBuilding.lat, result.originalBuilding.lng);
                 map.setCenter(locPosition);
@@ -59,8 +59,8 @@ const GuavaMatch = () => {
         };
 
         const setData = async (tradeId, buildingId) => {
-            let result = await setMatch(tradeId, buildingId);
-            setPage(page + 1);
+            setPage(page+1);
+            setMatch(tradeId, buildingId);
         };
 
         const initMarker = () => {
@@ -79,7 +79,7 @@ const GuavaMatch = () => {
 
         const drawOriginal = (x) => {
             let position = new kakao.maps.LatLng(x.lat, x.lng);
-            let content = `<div class="match-custom" style="background-color: red;">
+            let content = `<div class="match-custom-mapping">
                                 <div class="price">${x.name}</div>
                            </div>`;
 
@@ -119,7 +119,7 @@ const GuavaMatch = () => {
             const elem = document.getElementById(x.id);
             if (elem) {
                 elem.addEventListener('click', async () => {
-                    setData(summary.originalBuilding.id, x.id);
+                    setData(summary.originalBuilding.id, x.buildingCode);
                 });
             }
         };
@@ -136,7 +136,7 @@ const GuavaMatch = () => {
         return (
             <>
                 <Button onClick={() => {
-                    setData(summary.originalBuilding.id, '-1');
+                    setData(summary.originalBuilding.id, "-1");
                 }} style={{
                     position: 'fixed',
                     bottom: 0,

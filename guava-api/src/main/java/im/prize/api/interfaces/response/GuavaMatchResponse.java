@@ -18,6 +18,7 @@ public class GuavaMatchResponse {
     @Data
     public static class BuildingInfo {
         private Long id;
+        private String buildingCode;
         private String address;
         private String name;
         private Double lat;
