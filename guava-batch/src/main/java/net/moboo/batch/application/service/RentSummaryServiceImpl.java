@@ -3,16 +3,17 @@ package net.moboo.batch.application.service;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import net.moboo.batch.domain.OpenApiRentInfo;
-import net.moboo.batch.domain.OpenApiTradeInfo;
 import net.moboo.batch.domain.TradeType;
 import net.moboo.batch.hgnn.repository.GuavaBuildingArea;
 import net.moboo.batch.hgnn.repository.GuavaBuildingAreaRepository;
+import net.moboo.batch.hgnn.repository.GuavaRegion;
+import net.moboo.batch.hgnn.repository.GuavaRegionRepository;
 import net.moboo.batch.infrastructure.jpa.OpenApiRentInfoRepository;
 import net.moboo.batch.wooa.repository.BuildingMapping;
-import net.moboo.batch.wooa.repository.BuildingMappingRepository;
+import net.moboo.batch.wooa.repository.Region;
+import net.moboo.batch.wooa.repository.RegionRepository;
 import net.moboo.batch.wooa.repository.RentSummary;
 import net.moboo.batch.wooa.repository.RentSummaryRepository;
-import net.moboo.batch.wooa.repository.TradeSummary;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,16 @@ public class RentSummaryServiceImpl implements RentSummaryService {
     private final OpenApiRentInfoRepository openApiRentInfoRepository;
     private final GuavaBuildingAreaRepository guavaBuildingAreaRepository;
     private final RentSummaryRepository rentSummaryRepository;
+    private final GuavaRegionRepository guavaRegionRepository;
 
     public RentSummaryServiceImpl(OpenApiRentInfoRepository openApiRentInfoRepository,
                                   GuavaBuildingAreaRepository guavaBuildingAreaRepository,
-                                  RentSummaryRepository rentSummaryRepository) {
+                                  RentSummaryRepository rentSummaryRepository,
+                                  GuavaRegionRepository guavaRegionRepository) {
         this.openApiRentInfoRepository = openApiRentInfoRepository;
         this.guavaBuildingAreaRepository = guavaBuildingAreaRepository;
         this.rentSummaryRepository = rentSummaryRepository;
+        this.guavaRegionRepository = guavaRegionRepository;
     }
 
     @Override
@@ -58,10 +62,14 @@ public class RentSummaryServiceImpl implements RentSummaryService {
         String regionCode = buildingMapping.getRegionCode();
         String sigunguCode = regionCode.substring(0, 5);
         String dongCode = regionCode.substring(5);
-        List<OpenApiRentInfo> openApiRentInfos = openApiRentInfoRepository.findByRegionCodeAndLotNumberAndAptName(
-            sigunguCode,
-            buildingMapping.getLotNumber(),
-            buildingMapping.getBuildingName());
+        List<OpenApiRentInfo> openApiRentInfos = Lists.newArrayList();
+        Optional<GuavaRegion> region = guavaRegionRepository.findByRegionCode(buildingMapping.getRegionCode());
+        if(region.isPresent()) {
+            openApiRentInfos = openApiRentInfoRepository.findByRegionCodeAndDongAndLotNumber(
+                sigunguCode,
+                region.get().getDongName(),
+                buildingMapping.getLotNumber());
+        }
 
         List<Long> existIds = rentSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode())
                                                    .stream()

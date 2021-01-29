@@ -10,6 +10,10 @@ public interface OpenApiRentInfoRepository extends JpaRepository<OpenApiRentInfo
     List<OpenApiRentInfo> findByYearAndMonth(String year, String month);
 
     List<OpenApiRentInfo> findByRegionCodeAndLotNumberAndAptName(String regionCode,
-                                                                  String lotNumber,
-                                                                  String aptName);
+                                                                 String lotNumber,
+                                                                 String aptName);
+
+    List<OpenApiRentInfo> findByRegionCodeAndDongAndLotNumber(String regionCode,
+                                                              String dong,
+                                                              String lotNumber);
 }

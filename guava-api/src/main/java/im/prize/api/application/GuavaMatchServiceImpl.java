@@ -1,5 +1,6 @@
 package im.prize.api.application;
 
+import com.google.common.collect.Lists;
 import im.prize.api.application.dto.Location;
 import im.prize.api.datatool.AvokadoKakaoClient;
 import im.prize.api.datatool.response.AvokadoKakaoAddressResponse;
@@ -12,6 +13,7 @@ import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegion;
 import im.prize.api.infrastructure.persistence.jpa.repository.GuavaRegionRepository;
 import im.prize.api.infrastructure.persistence.jpa.repository.oboo.UnmappingTradeListRepository;
 import im.prize.api.interfaces.response.GuavaMatchResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class GuavaMatchServiceImpl implements GuavaMatchService {
     private static final Integer PAGE_SIZE = 30;
@@ -48,6 +51,46 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
         this.guavaBuildingRepository = guavaBuildingRepository;
         this.entityManager = entityManager;
         this.buildingMappingRepository = buildingMappingRepository;
+    }
+
+    @Override
+    public void sync() {
+        List<BuildingMapping> result = Lists.newArrayList();
+        List<BuildingMapping> list = buildingMappingRepository.findByBuildingCodeIsNull();
+        for (int i = 0; i < list.size(); i++) {
+            BuildingMapping buildingMapping = list.get(i);
+            String address = guavaRegionRepository.findByRegionCode(buildingMapping.getRegionCode())
+                                                  .map(GuavaRegion::getName)
+                                                  .orElse("") + " " + buildingMapping.getLotNumber();
+            AvokadoKakaoAddressResponse search = avokadoKakaoClient.search(kakaoMapApiKey, address, 0, 10);
+            double lat = 0d;
+            double lng = 0d;
+            if (search.getMeta().getTotalCount() > 0) {
+                lat = search.getDocuments().get(0).getY();
+                lng = search.getDocuments().get(0).getX();
+            }
+
+            List<GuavaBuilding> guavaBuildings = searchGuavaRegion(lng, lat, 1d);
+            for (GuavaBuilding guavaBuilding : guavaBuildings) {
+                String originalName = this.strReplace(buildingMapping.getBuildingName().replaceAll(" ", ""));
+                String compareName = this.strReplace(guavaBuilding.getName()).replaceAll(" ", "");
+                boolean isMatched = originalName.contains(compareName);
+                if (!isMatched) {
+                    isMatched = compareName.contains(originalName);
+                }
+                if (isMatched) {
+                    log.info("index : {}/{}, result : {}, {} / {}", i, list.size(), result.size(), originalName, compareName);
+                    buildingMapping.setBuildingCode(guavaBuilding.getBuildingCode());
+                    buildingMapping.setAddress(guavaBuilding.getAddress());
+                    buildingMapping.setPoint(guavaBuilding.getPoint());
+                    buildingMapping.setPortalId(String.valueOf(guavaBuilding.getPortalId()));
+                    buildingMapping.setType(guavaBuilding.getType());
+                    result.add(buildingMapping);
+                    break;
+                }
+            }
+        }
+        List<BuildingMapping> buildingMappings = buildingMappingRepository.saveAll(result);
     }
 
     @Override
@@ -147,5 +190,11 @@ public class GuavaMatchServiceImpl implements GuavaMatchService {
             lng2,
             lat2) + ", r.point)"
             , GuavaBuilding.class).getResultList();
+    }
+
+    public static String strReplace(String str) {
+        String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+        str = str.replaceAll(match, "");
+        return str;
     }
 }

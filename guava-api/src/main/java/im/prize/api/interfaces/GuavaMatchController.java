@@ -22,6 +22,11 @@ public class GuavaMatchController {
         return guavaMatchService.match();
     }
 
+    @GetMapping("/sync")
+    void sync() {
+        guavaMatchService.sync();
+    }
+
     @GetMapping("/check")
     GuavaMatchTemp check(@RequestParam("tradeId") String tradeId,
                          @RequestParam("buildingId") String buildingId) {

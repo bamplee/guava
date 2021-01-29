@@ -12,6 +12,10 @@ public interface OpenApiTradeInfoRepository extends JpaRepository<OpenApiTradeIn
                                                                                   String lotNumber,
                                                                                   String aptName);
 
+    List<OpenApiTradeInfo> findByDongSigunguCodeAndDongCodeAndLotNumber(String dongSigunguCode,
+                                                                        String dongCode,
+                                                                        String lotNumber);
+
     List<OpenApiTradeInfo> findByYearAndMonth(String year, String month);
 
 //    List<OpenApiTradeInfo> findByYearAndDongSigunguCodeOrderByDateDesc(String year, String dongSigunguCode);
@@ -20,7 +24,9 @@ public interface OpenApiTradeInfoRepository extends JpaRepository<OpenApiTradeIn
 
 //    List<OpenApiTradeInfo> findTop100ByDongSigunguCodeAndDongCodeOrderByDateDesc(String dongSigunguCode, String dongCode);
 
-    @Query(value = "SELECT * FROM openapi_trade_info t WHERE t.year = ?1 and t.dong_sigungu_code = ?2 and t.dong_code = ?3 order by date desc limit 30", nativeQuery = true)
+    @Query(value = "SELECT * FROM openapi_trade_info t WHERE t.year = ?1 and t.dong_sigungu_code = ?2 and t.dong_code = ?3 order by date " +
+        "desc limit 30",
+           nativeQuery = true)
     List<OpenApiTradeInfo> getTrade(String year, String dongSigunguCode, String dongCode);
 
 //    List<OpenApiTradeInfo> findTop50ByDongSigunguCodeOrderByDateDesc(String dongSigunguCode);

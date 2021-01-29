@@ -59,11 +59,10 @@ public class TradeSummaryServiceImpl implements TradeSummaryService {
         String regionCode = buildingMapping.getRegionCode();
         String sigunguCode = regionCode.substring(0, 5);
         String dongCode = regionCode.substring(5);
-        List<OpenApiTradeInfo> openApiTradeInfos = openApiTradeInfoRepository.findByDongSigunguCodeAndDongCodeAndLotNumberAndAptName(
+        List<OpenApiTradeInfo> openApiTradeInfos = openApiTradeInfoRepository.findByDongSigunguCodeAndDongCodeAndLotNumber(
             sigunguCode,
             dongCode,
-            buildingMapping.getLotNumber(),
-            buildingMapping.getBuildingName());
+            buildingMapping.getLotNumber());
         List<Long> existIds = tradeSummaryRepository.findByBuildingCode(buildingMapping.getBuildingCode())
                                                     .stream()
                                                     .map(TradeSummary::getId)
