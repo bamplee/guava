@@ -53,21 +53,19 @@ const GuavaTradeOption = ({type}) => {
                     }
                     <CaretDownOutlined/>
                 </Button>
-                {
-                    type === 'BUILDING' &&
-                    <Button className={cx('filter_btn', areaType.areaId !== '' ? 'active' : '')}
-                            type={areaType.areaId !== '' ? 'primary' : ''}
-                            inline
-                            onClick={() => areaType.areaId === '' ? setShowAreaTypeFilter(true) : setAreaType({areaId: ''})}>
-                        {
-                            areaType.areaId !== '' ?
-                                <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <Button className={cx('filter_btn', areaType.areaId !== '' ? 'active' : '')}
+                        disabled={type !== 'BUILDING'}
+                        type={areaType.areaId !== '' ? 'primary' : ''}
+                        inline
+                        onClick={() => areaType.areaId === '' ? setShowAreaTypeFilter(true) : setAreaType({areaId: ''})}>
+                    {
+                        areaType.areaId !== '' ?
+                            <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                                     {areaType.type}<CloseOutlined style={{fontSize: 8, marginLeft: 4}}/>
                                 </span> :
-                                <span>평형<CaretDownOutlined/></span>
-                        }
-                    </Button>
-                }
+                            (type !== 'BUILDING' ? '-' : <span>평형<CaretDownOutlined/></span>)
+                    }
+                </Button>
             </div>
         </div>
     );
