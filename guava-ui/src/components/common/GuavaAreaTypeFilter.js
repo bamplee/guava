@@ -55,7 +55,7 @@ const GuavaAreaTypeFilter = () => {
                                      }} className={cx('area_list')}>
                                     <div className={cx('area_info')}>
                                         <div>
-                                            {x.name}
+                                            {x.type}
                                         </div>
                                         <div>
                                             {x.hoCount}세대

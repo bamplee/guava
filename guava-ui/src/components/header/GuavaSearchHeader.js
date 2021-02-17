@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 
 import styles from './guavaHeader.module.scss';
 import {useRecoilState} from 'recoil';
-import {centerState, levelState, regionState} from '../datatool/state';
+import {levelState, regionState} from '../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
 import {Icon, List, Result, WingBlank} from 'antd-mobile';
 import {fetchSearch} from '../datatool/api';
@@ -30,7 +30,7 @@ const GuavaSearchHeader = () => {
     const [level, setLevel] = useRecoilState(levelState);
     const [region, setRegion] = useRecoilState(regionState);
     const [searchList, setSearchList] = useLocalStorage('searchList', []);
-    const [center, setCenter] = useRecoilState(centerState);
+    const [center, setCenter] = useLocalStorage('storageCenter', {lat: 37.3614463, lng: 127.1114893});
 
     // useEffect(() => {
     //     if (queryInput && queryInput.current) {

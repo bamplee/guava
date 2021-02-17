@@ -3,9 +3,10 @@ import React, {useEffect} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil';
 import classNames from 'classnames/bind';
 
-import {centerState, currentRegionState, levelState, regionState} from '../datatool/state';
+import {currentRegionState, levelState, regionState} from '../datatool/state';
 
 import styles from './guavaMapLabel.module.scss';
+import {useLocalStorage} from "../common/useLocalStorage";
 
 const cx = classNames.bind(styles);
 
@@ -13,7 +14,7 @@ const GuavaMapLabel = () => {
     const [level, setLevel] = useRecoilState(levelState);
     const [currentRegion, setCurrentRegion] = useRecoilState(currentRegionState);
     // const [region, setRegion] = useRecoilState(regionState);
-    const [center, setCenter] = useRecoilState(centerState);
+    const [center, setCenter] = useLocalStorage('storageCenter', {lat: 37.3614463, lng: 127.1114893});
     const region = useRecoilValue(regionState);
 
     useEffect(() => {

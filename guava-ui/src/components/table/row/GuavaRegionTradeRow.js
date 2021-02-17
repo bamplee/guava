@@ -44,7 +44,7 @@ const GuavaRegionTradeRow = ({page, idx, trade}) => {
                 {trade.name}
             </div>
             <div className={cx('row')}>
-                <div>{trade.area.name}</div>
+                <div>{trade.area.type}</div>
             </div>
             <div className={cx('row')}>{trade.floor}층</div>
             <div className={cx('row', 'price', trade.isHighPrice ? 'high_price' : '')}>{trade.price}</div>

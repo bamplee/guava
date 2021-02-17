@@ -43,8 +43,18 @@ const GuavaTradeOption = ({type}) => {
                 tintColor={'#00802E'}
                 style={{height: 30, width: 140}}
             />
-            {
-                type === 'BUILDING' ?
+            <div className={cx('filter_area')}>
+                <Button className={cx('filter_btn', filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'active')}
+                        type={filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'primary'}
+                        inline
+                        onClick={() => setShowAreaFilter(true)}>
+                    {
+                        filterArea[0] === 0 && filterArea[1] === 5 ? '면적' : `${getStartArea(filterArea[0])}㎡~${getEndArea(filterArea[1])}㎡`
+                    }
+                    <CaretDownOutlined/>
+                </Button>
+                {
+                    type === 'BUILDING' &&
                     <Button className={cx('filter_btn', areaType.areaId !== '' ? 'active' : '')}
                             type={areaType.areaId !== '' ? 'primary' : ''}
                             inline
@@ -52,21 +62,13 @@ const GuavaTradeOption = ({type}) => {
                         {
                             areaType.areaId !== '' ?
                                 <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                    {areaType.name}<CloseOutlined style={{fontSize: 8, marginLeft: 4}}/>
+                                    {areaType.type}<CloseOutlined style={{fontSize: 8, marginLeft: 4}}/>
                                 </span> :
-                                <span>평형</span>
+                                <span>평형<CaretDownOutlined/></span>
                         }
-                    </Button> :
-                    <Button className={cx('filter_btn', filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'active')}
-                            type={filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'primary'}
-                            inline
-                            onClick={() => setShowAreaFilter(true)}>
-                        {
-                            filterArea[0] === 0 && filterArea[1] === 5 ? '면적' : `${getStartArea(filterArea[0])}㎡~${getEndArea(filterArea[1])}㎡`
-                        }
-                        <CaretDownOutlined/>
                     </Button>
-            }
+                }
+            </div>
         </div>
     );
 };

@@ -27,7 +27,7 @@ const GuavaMarketRow = ({page, idx, trade}) => {
                 setAreaType(trade.area);
             }}>
                     <span>
-                        {trade.area.name}
+                        {trade.area.type}
                     </span>
             </div>
             <div className={cx('row')}>{trade.floor}층</div>

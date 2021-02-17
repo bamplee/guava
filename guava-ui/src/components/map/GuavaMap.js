@@ -9,7 +9,6 @@ import {fetchSummary} from '../datatool/api';
 import {useLocalStorage} from '../common/useLocalStorage';
 
 import {
-    centerState,
     filterAreaState,
     levelState,
     regionState,
@@ -31,12 +30,18 @@ let infos = [];
 let marker = null;
 const GuavaMap = () => {
     const [storageCenter, setStorageCenter] = useLocalStorage('storageCenter', {lat: 37.3614463, lng: 127.1114893});
+    const [storageBounds, setStorageBounds] = useLocalStorage('storageBounds', {
+        northEastLng: 127.11962734724047,
+        northEastLat: 37.372949217422516,
+        southWestLng: 127.1033383430648,
+        southWestLat: 37.34989828240438
+    });
     const [showGeoLoading, setShowGeoLoading] = useState(false);
     const [summary, setSummary] = useState([]);
     const [level, setLevel] = useRecoilState(levelState);
     const filterArea = useRecoilValue(filterAreaState);
-    const [center, setCenter] = useRecoilState(centerState);
-    const [bounds, setBounds] = useState(null);
+    // const [center, setCenter] = useRecoilState(centerState);
+    // const [bounds, setBounds] = useState(null);
     // const summary = useRecoilValue(summaryQuery);
     const region = useRecoilValue(regionState);
 
@@ -49,7 +54,7 @@ const GuavaMap = () => {
     });
 
     useEffect(() => {
-        setCenter(storageCenter);
+        // setCenter(storageCenter);
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
 
@@ -112,31 +117,31 @@ const GuavaMap = () => {
         draw();
     }, [summary]);
 
-    useEffect(() => {
-        if (center) {
-            setStorageCenter({lat: center.lat, lng: center.lng});
-            let locPosition = new kakao.maps.LatLng(center.lat, center.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-            map.setCenter(locPosition);
-            const northEastLng = map.getBounds().getNorthEast().getLng();
-            const northEastLat = map.getBounds().getNorthEast().getLat();
-            const southWestLng = map.getBounds().getSouthWest().getLng();
-            const southWestLat = map.getBounds().getSouthWest().getLat();
-            setBounds({
-                northEastLng: northEastLng,
-                northEastLat: northEastLat,
-                southWestLng: southWestLng,
-                southWestLat: southWestLat
-            });
-            // initLatLng();
-            // getSummary();
-        }
-    }, [center]);
+    // useEffect(() => {
+    //     if (center) {
+    //         setStorageCenter({lat: center.lat, lng: center.lng});
+    //         let locPosition = new kakao.maps.LatLng(center.lat, center.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+    //         // map.setCenter(locPosition);
+    //         const northEastLng = map.getBounds().getNorthEast().getLng();
+    //         const northEastLat = map.getBounds().getNorthEast().getLat();
+    //         const southWestLng = map.getBounds().getSouthWest().getLng();
+    //         const southWestLat = map.getBounds().getSouthWest().getLat();
+    //         setBounds({
+    //             northEastLng: northEastLng,
+    //             northEastLat: northEastLat,
+    //             southWestLng: southWestLng,
+    //             southWestLat: southWestLat
+    //         });
+    //         // initLatLng();
+    //         // getSummary();
+    //     }
+    // }, [center]);
 
     useEffect(() => {
-        if (bounds) {
+        if (storageBounds) {
             getSummary();
         }
-    }, [bounds]);
+    }, [storageBounds]);
 
     useEffect(() => {
         initMarker();
@@ -144,12 +149,14 @@ const GuavaMap = () => {
     }, [level, filterArea]);
 
     const initLatLng = () => {
-        setCenter({lat: map.getCenter().getLat(), lng: map.getCenter().getLng()});
+        const lat = map.getCenter().getLat();
+        const lng = map.getCenter().getLng();
         const northEastLng = map.getBounds().getNorthEast().getLng();
         const northEastLat = map.getBounds().getNorthEast().getLat();
         const southWestLng = map.getBounds().getSouthWest().getLng();
         const southWestLat = map.getBounds().getSouthWest().getLat();
-        setBounds({
+        setStorageCenter({lat: lat, lng: lng});
+        setStorageBounds({
             northEastLng: northEastLng,
             northEastLat: northEastLat,
             southWestLng: southWestLng,
@@ -178,7 +185,7 @@ const GuavaMap = () => {
     };
 
     const getSummary = async () => {
-        let result = await fetchSummary(level, bounds.northEastLng, bounds.northEastLat, bounds.southWestLng, bounds.southWestLat, getStartArea(filterArea[0]), getEndArea(filterArea[1]));
+        let result = await fetchSummary(level, storageBounds.northEastLng, storageBounds.northEastLat, storageBounds.southWestLng, storageBounds.southWestLat, getStartArea(filterArea[0]), getEndArea(filterArea[1]));
         // console.log(result);
         setSummary(result);
     };
@@ -247,7 +254,7 @@ const GuavaMap = () => {
 
                 // setLat(latitude);
                 // setLng(longitude);
-                setCenter({lat: latitude, lng: longitude});
+                // setCenter({lat: latitude, lng: longitude});
 
                 let locPosition = new kakao.maps.LatLng(latitude, longitude); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
                 map.setCenter(locPosition);

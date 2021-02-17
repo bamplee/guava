@@ -26,7 +26,7 @@ const GuavaRegionMarketRow = ({page, idx, trade}) => {
             {/*<div className={cx('row')}>{trade.dongName}</div>*/}
             <div className={cx('row')}>
                 <div>
-                    {trade.area.name}
+                    {trade.area.type}
                 </div>
             </div>
             <div className={cx('row')}>{trade.floor}층</div>

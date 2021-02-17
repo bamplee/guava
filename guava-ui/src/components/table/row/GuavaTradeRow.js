@@ -24,7 +24,7 @@ const GuavaTradeRow = ({page, idx, trade}) => {
             <div className={cx('row', 'link')} onClick={() => {
                 setAreaType(trade.area);
             }}>
-                <span>{trade.area.name}</span>
+                <span>{trade.area.type}</span>
                 {/*<span*/}
                 {/*    className={cx('area_detail')}>({Math.ceil(trade.area.privateArea)}&#13217;/{Math.ceil(trade.area.publicArea)}&#13217;)</span>*/}
             </div>
