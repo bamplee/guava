@@ -145,7 +145,7 @@ const GuavaMarketChart = () => {
                 ctx.lineTo(x, bottomY);
                 ctx.lineWidth = 2;
                 ctx.pointRadius = 2;
-                ctx.strokeStyle = '#2E92FC';
+                ctx.strokeStyle = '#00802E';
                 ctx.stroke();
                 ctx.restore();
 
@@ -218,7 +218,7 @@ const GuavaMarketChart = () => {
                     label: idx,
                     list: x,
                     data: x.map(y => y.price * 1),
-                    backgroundColor: '#2E92FC',
+                    backgroundColor: '#00802E',
                 }
             });
 

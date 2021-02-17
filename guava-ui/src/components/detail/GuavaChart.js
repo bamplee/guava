@@ -49,7 +49,7 @@ const GuavaChart = () => {
         if (chartList) {
             for (const chart of [...chartList.datasets]) {
                 if (chart.label === tradeType) {
-                    chart.borderColor = '#2E92FC';
+                    chart.borderColor = '#00802E';
                 } else {
                     chart.borderColor = '#DDDDDD';
                 }
@@ -184,7 +184,7 @@ const GuavaChart = () => {
             pointRadius: 0,
             borderWidth: 2,
             // spanGaps: true,
-            borderColor: tradeType === 'trade' ? '#2E92FC' : '#DDDDDD',
+            borderColor: tradeType === 'trade' ? '#00802E' : '#DDDDDD',
             fill: false,
             label: 'trade',
             data: groupList
@@ -265,7 +265,7 @@ const GuavaChart = () => {
             pointRadius: 0,
             borderWidth: 2,
             // spanGaps: true,
-            borderColor: tradeType === 'rent' ? '#2E92FC' : '#DDDDDD',
+            borderColor: tradeType === 'rent' ? '#00802E' : '#DDDDDD',
             fill: false,
             label: 'rent',
             data: groupList
@@ -456,7 +456,7 @@ const GuavaChart = () => {
                         backgroundColor: '#DDDDDD',
                     }}
                     railStyle={{
-                        // backgroundColor: '#2E92FC',
+                        // backgroundColor: '#00802E',
                     }}
                 />
             </div>

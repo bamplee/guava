@@ -135,7 +135,7 @@ const GuavaDetailHeader = ({tabId}) => {
                         history.replace('/' + regionType + '/' + regionId + '/' + e.value)
                     }} tabs={[{title: '실거래', value: 't'}, {title: '호가', value: 'm'}]}
                           page={tabId === 't' ? 0 : 1}
-                          // tabBarUnderlineStyle={{border: '1px solid #2E92FC'}}
+                          // tabBarUnderlineStyle={{border: '1px solid #00802E'}}
                           animated={false}
                           useOnPan={false}/>
                 </div>

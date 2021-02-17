@@ -35,7 +35,7 @@ const GuavaVersusTradeOption = () => {
                     }
                 }}
                 values={[<Badge>매매</Badge>, <Badge>전/월세</Badge>]}
-                tintColor={'#2E92FC'}
+                tintColor={'#00802E'}
                 style={{height: 30, width: 140}}
             />
             <Button className={cx('filter_btn', filterArea[0] === 0 && filterArea[1] === 5 ? '' : 'active')}

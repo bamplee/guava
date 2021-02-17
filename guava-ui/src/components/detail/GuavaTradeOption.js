@@ -40,7 +40,7 @@ const GuavaTradeOption = ({type}) => {
                     }
                 }}
                 values={[<Badge>매매</Badge>, <Badge>전/월세</Badge>]}
-                tintColor={'#2E92FC'}
+                tintColor={'#00802E'}
                 style={{height: 30, width: 140}}
             />
             {

@@ -2,11 +2,11 @@
   width: 100%;
   top: 0;
   z-index: 9999999;
-  color: #fff;
+  color: #00802E;
   position: fixed;
 
   .title_container {
-    background-color: #00802E;
+    background-color: #fff;
     height: 50px;
     display: flex;
     justify-content: center;
@@ -38,7 +38,7 @@
         font-weight: 300;
         font-size: 16px;
         margin-right: 2px;
-        color: #FFF;
+        color: #C5E0FD;
       }
 
       .title {
@@ -88,7 +88,7 @@
       input::placeholder {
         font-size: 16px;
         font-weight: 300;
-        color: #FFF;
+        color: #C5E0FD;
       }
     }
 
@@ -122,7 +122,7 @@
       //justify-content: center;
       //align-items: center;
       font-weight: 400;
-      width: 80px;
+      width: 90px;
 
       .filter_btn {
         font-size: 13px;
@@ -135,7 +135,7 @@
       }
 
       .filter_btn_active {
-        background-color: #006526;
+        background-color: #1B69D9;
       }
 
       //a {

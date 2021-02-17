@@ -26,7 +26,7 @@ const GuavaDetailTabs = ({tabId}) => {
                     {title: '호가', index: 1},
                     {title: '비교', index: 2}]}
                       page={tab.index}
-                    // tabBarUnderlineStyle={{border: '1px solid #2E92FC'}}
+                    // tabBarUnderlineStyle={{border: '1px solid #00802E'}}
                       animated={false}
                       useOnPan={false}/>
             </div>
