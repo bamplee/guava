@@ -131,7 +131,7 @@ const GuavaDetailHeader = ({tabId}) => {
             {/*{
                 (tabId === 't' || tabId === 'm') &&
                 <div style={{borderBottom: '1px solid #f2f2f2'}}>
-                    <Tabs onChange={(e) => {
+                    <TradeTabs onChange={(e) => {
                         history.replace('/' + regionType + '/' + regionId + '/' + e.value)
                     }} tabs={[{title: '실거래', value: 't'}, {title: '호가', value: 'm'}]}
                           page={tabId === 't' ? 0 : 1}

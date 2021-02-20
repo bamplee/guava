@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class GuavaTradeServiceImpl implements GuavaTradeService {
-    private static final Integer PAGE_SIZE = 30;
+//    private static final Integer PAGE_SIZE = 30;
     @Value("${app.kakao.apiKey}")
     private String kakaoMapApiKey;
     private final GuavaRegionRepository guavaRegionRepository;
@@ -73,6 +73,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     public List<GuavaTradeResponse> getRegionTrade(String tradeType,
                                                    String regionId,
                                                    Integer page,
+                                                   Integer size,
                                                    Integer startArea,
                                                    Integer endArea,
                                                    String date) {
@@ -85,7 +86,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                                                             null,
                                                                             null,
                                                                             date),
-                                                      this.getPage(page))
+                                                      this.getPage(page, size))
                                              .getContent()
                                              .stream()
                                              .peek(this::fillArea)
@@ -109,7 +110,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                                                           null,
                                                                           null,
                                                                           date),
-                                                     this.getPage(page)).getContent()
+                                                     this.getPage(page, size)).getContent()
                                             .stream()
                                             .peek(this::fillArea)
                                             .map(GuavaTradeResponse::transform)
@@ -158,7 +159,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
     }
 
     @Override
-    public List<GuavaTradeResponse> getBuildingTradeList(String tradeType, String buildingId, Integer page, String areaId, String date) {
+    public List<GuavaTradeResponse> getBuildingTradeList(String tradeType, String buildingId, Integer page, Integer size, String areaId, String date) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
         if (optionalBuildingMapping.isPresent()) {
             BuildingMapping buildingMapping = optionalBuildingMapping.get();
@@ -168,7 +169,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                                                             buildingMapping.getBuildingCode(),
                                                                             areaId,
                                                                             date),
-                                                      this.getPage(page)).getContent()
+                                                      this.getPage(page, size)).getContent()
                                              .stream()
                                              .peek(this::fillArea)
                                              .map(tradeSummary -> GuavaTradeResponse.transform(tradeSummary,
@@ -183,7 +184,7 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
                                                                           buildingMapping.getBuildingCode(),
                                                                           areaId,
                                                                           date),
-                                                     this.getPage(page)).getContent()
+                                                     this.getPage(page, size)).getContent()
                                             .stream()
                                             .peek(this::fillArea)
                                             .map(GuavaTradeResponse::transform)
@@ -196,8 +197,8 @@ public class GuavaTradeServiceImpl implements GuavaTradeService {
         return Lists.newArrayList();
     }
 
-    private PageRequest getPage(Integer page) {
-        return PageRequest.of(page, PAGE_SIZE, Sort.by(Sort.Direction.DESC, "date"));
+    private PageRequest getPage(Integer page, Integer size) {
+        return PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "date"));
     }
 
     private Specification<TradeSummary> getParamsByTrade(String regionCode, String buildingCode, String areaCode, String date) {

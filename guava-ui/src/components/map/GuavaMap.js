@@ -9,6 +9,7 @@ import {fetchSummary} from '../datatool/api';
 import {useLocalStorage} from '../common/useLocalStorage';
 
 import {
+    currentRegionState,
     filterAreaState,
     levelState,
     regionState,
@@ -77,65 +78,13 @@ const GuavaMap = () => {
         });
 
         kakao.maps.event.addListener(map, 'tilesloaded', function () {
-            // do something
             // console.log('loaded');
         });
-        // initMarker();
-        // getSummary();
-        // getSummary();
     }, []);
-
-    // useEffect(() => {
-    //     if (region) {
-    //         let locPosition = new kakao.maps.LatLng(region.lat, region.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-    //         map.setCenter(locPosition);
-    //         setCenter({lat: region.lat, lng: region.lng});
-    //         initLatLng();
-    //         if (region.type === 'BUILDING') {
-    //             setLevel(3);
-    //             map.setLevel(3);
-    //         } else {
-    //             if (region.type === 'DONG') {
-    //                 setLevel(5);
-    //                 map.setLevel(5);
-    //             } else {
-    //                 setLevel(8);
-    //                 map.setLevel(8);
-    //             }
-    //         }
-    //     }
-    // }, [region]);
-
-    // useEffect(() => {
-    //     // initLatLng();
-    //     if (region) {
-    //         setCenter({lat: region.lat, lng: region.lng});
-    //     }
-    // }, [region]);
 
     useEffect(() => {
         draw();
     }, [summary]);
-
-    // useEffect(() => {
-    //     if (center) {
-    //         setStorageCenter({lat: center.lat, lng: center.lng});
-    //         let locPosition = new kakao.maps.LatLng(center.lat, center.lng); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-    //         // map.setCenter(locPosition);
-    //         const northEastLng = map.getBounds().getNorthEast().getLng();
-    //         const northEastLat = map.getBounds().getNorthEast().getLat();
-    //         const southWestLng = map.getBounds().getSouthWest().getLng();
-    //         const southWestLat = map.getBounds().getSouthWest().getLat();
-    //         setBounds({
-    //             northEastLng: northEastLng,
-    //             northEastLat: northEastLat,
-    //             southWestLng: southWestLng,
-    //             southWestLat: southWestLat
-    //         });
-    //         // initLatLng();
-    //         // getSummary();
-    //     }
-    // }, [center]);
 
     useEffect(() => {
         if (storageBounds) {
@@ -193,12 +142,18 @@ const GuavaMap = () => {
     const draw = () => {
         summary.filter(x => x.type === getRegionType()).filter(x => !infos.map(y => y.id).includes(x.id)).forEach(x => {
             let position = new kakao.maps.LatLng(x.lat, x.lng);
-            let content = '';
-            if (x.type === 'BUILDING') {
-                content = buildingMarker(x);
-            } else {
-                content = regionMarker(x);
-            }
+            let content = `
+                <div class="bg-guava ring-guava-dark rounded-md w-11 border border-guava-dark text-center cursor-pointer p-1 pb-1 customoverlay" id="${x.id}">
+                    <div style="font-size: 8px" class="text-white font-medium">${x.name}</div>
+                    <div class="text-white text-xs font-medium">${x.price}</div>
+                    <div class="text-yellow-300 text-xs font-medium">${x.marketPrice == 0 || x.marketPrice == null ? '-' : x.marketPrice}</div>
+                </div>
+            `;
+            // if (x.type === 'BUILDING') {
+            //     content = buildingMarker(x);
+            // } else {
+            //     content = regionMarker(x);
+            // }
 
 // 커스텀 오버레이를 생성합니다
             let customOverlay = new kakao.maps.CustomOverlay({
@@ -241,6 +196,7 @@ const GuavaMap = () => {
             level: level //지도의 레벨(확대, 축소 정도)
         };
         map = new kakao.maps.Map(container, options);
+        initLatLng();
     };
 
     const currentPosition = () => {

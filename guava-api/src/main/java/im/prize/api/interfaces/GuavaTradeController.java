@@ -23,19 +23,21 @@ public class GuavaTradeController {
     List<GuavaTradeResponse> getRegionTrade(@PathVariable("regionId") String regionId,
                                             @RequestParam("tradeType") String tradeType,
                                             @RequestParam("page") Integer page,
+                                            @RequestParam(value = "size", required = false, defaultValue = "30") Integer size,
                                             @RequestParam(value = "startArea", required = false, defaultValue = "0") Integer startArea,
                                             @RequestParam(value = "endArea", required = false, defaultValue = "0") Integer endArea,
                                             @RequestParam(value = "date", required = false) String date) {
-        return guavaTradeService.getRegionTrade(tradeType, regionId, page, startArea, endArea, date);
+        return guavaTradeService.getRegionTrade(tradeType, regionId, page, size, startArea, endArea, date);
     }
 
     @GetMapping("/buildings/{buildingId}")
     List<GuavaTradeResponse> getBuildingTradeList(@PathVariable("buildingId") String buildingId,
                                                   @RequestParam("tradeType") String tradeType,
                                                   @RequestParam("page") Integer page,
+                                                  @RequestParam(value = "size", required = false, defaultValue = "30") Integer size,
                                                   @RequestParam(value = "areaId", required = false) String areaId,
                                                   @RequestParam(value = "date", required = false) String date) {
-        return guavaTradeService.getBuildingTradeList(tradeType, buildingId, page, areaId, date);
+        return guavaTradeService.getBuildingTradeList(tradeType, buildingId, page, size, areaId, date);
 //        return guavaTradeService.getBuildingTradeList(buildingId, page, areaId, date);
     }
 }

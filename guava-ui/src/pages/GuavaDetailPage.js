@@ -59,8 +59,7 @@ const GuavaDetailPage = ({match, location}) => {
                                         <GuavaChart/>
                                         <GuavaTable/>
                                         <div className={cx('line')}/>
-                                        <div className={cx('t' +
-                                            'itle')}>
+                                        <div className={cx('title')}>
                                             비교
                                         </div>
                                         <GuavaVersus/>

@@ -36,60 +36,61 @@ const GuavaAreaFilter = () => {
     };
 
     return (
-        <Modal
-            popup
-            maskClosable={true}
-            visible={showAreaFilter}
-            onCancel={() => setShowAreaFilter(false)}
-            onClose={() => setShowAreaFilter(false)}
-            animationType="slide-up"
-        >
-            <div className={cx('area_container')}>
-                <div className={cx('area_range')}>
-                    <Range
-                        style={{marginLeft: 30, marginRight: 30}}
-                        step={1}
-                        min={0}
-                        max={5}
-                        marks={{1: '50㎡', 2: '60㎡', 3: '85㎡', 4: '95㎡', 5: '105㎡'}}
-                        value={filterArea}
-                        onChange={(e) => {
-                            if (e[0] + e[1] > 0 && !(e[0] === e[1])) {
-                                setFilterArea(e)
-                            }
-                        }}
-                        onAfterChange={(e) => {
-                        }}
-                    />
-                </div>
-                <div className={cx('area_radio')}>
-                    <Button type={filterArea[0] === 0 && filterArea[1] === 5 ? 'primary' : 'ghost'} inline
-                            size="small"
-                            onClick={(e) => onClickAreaRange(0, 5)}
-                    >전체</Button>
-                    <Button type={filterArea[0] === 0 && filterArea[1] >= 1 ? 'primary' : 'ghost'} inline
-                            size="small"
-                            onClick={(e) => onClickAreaRange(0, 1)}
-                    >0&#13217;~50&#13217;</Button>
-                    <Button type={filterArea[0] <= 1 && filterArea[1] >= 2 ? 'primary' : 'ghost'} inline
-                            size="small"
-                            onClick={(e) => onClickAreaRange(1, 2)}
-                    >50&#13217;~60&#13217;</Button>
-                    <Button type={filterArea[0] <= 2 && filterArea[1] >= 3 ? 'primary' : 'ghost'} inline
-                            size="small"
-                            onClick={(e) => onClickAreaRange(2, 3)}
-                    >60&#13217;~85&#13217;</Button>
-                    <Button type={filterArea[0] <= 3 && filterArea[1] >= 4 ? 'primary' : 'ghost'} inline
-                            size="small"
-                            onClick={(e) => onClickAreaRange(3, 4)}
-                    >85&#13217;~105&#13217;</Button>
-                    <Button type={filterArea[0] <= 4 && filterArea[1] >= 5 ? 'primary' : 'ghost'} inline
-                            size="small"
-                            onClick={(e) => onClickAreaRange(4, 5)}
-                    >105&#13217;~</Button>
-                </div>
-            </div>
-        </Modal>
+        // <Modal
+        //     popup
+        //     maskClosable={true}
+        //     visible={showAreaFilter}
+        //     onCancel={() => setShowAreaFilter(false)}
+        //     onClose={() => setShowAreaFilter(false)}
+        //     animationType="slide-up"
+        // >
+        //     <div className={cx('area_container')}>
+        //         <div className={cx('area_range')}>
+        //             <Range
+        //                 style={{marginLeft: 30, marginRight: 30}}
+        //                 step={1}
+        //                 min={0}
+        //                 max={5}
+        //                 marks={{1: '50㎡', 2: '60㎡', 3: '85㎡', 4: '95㎡', 5: '105㎡'}}
+        //                 value={filterArea}
+        //                 onChange={(e) => {
+        //                     if (e[0] + e[1] > 0 && !(e[0] === e[1])) {
+        //                         setFilterArea(e)
+        //                     }
+        //                 }}
+        //                 onAfterChange={(e) => {
+        //                 }}
+        //             />
+        //         </div>
+        //         <div className={cx('area_radio')}>
+        //             <Button type={filterArea[0] === 0 && filterArea[1] === 5 ? 'primary' : 'ghost'} inline
+        //                     size="small"
+        //                     onClick={(e) => onClickAreaRange(0, 5)}
+        //             >전체</Button>
+        //             <Button type={filterArea[0] === 0 && filterArea[1] >= 1 ? 'primary' : 'ghost'} inline
+        //                     size="small"
+        //                     onClick={(e) => onClickAreaRange(0, 1)}
+        //             >0&#13217;~50&#13217;</Button>
+        //             <Button type={filterArea[0] <= 1 && filterArea[1] >= 2 ? 'primary' : 'ghost'} inline
+        //                     size="small"
+        //                     onClick={(e) => onClickAreaRange(1, 2)}
+        //             >50&#13217;~60&#13217;</Button>
+        //             <Button type={filterArea[0] <= 2 && filterArea[1] >= 3 ? 'primary' : 'ghost'} inline
+        //                     size="small"
+        //                     onClick={(e) => onClickAreaRange(2, 3)}
+        //             >60&#13217;~85&#13217;</Button>
+        //             <Button type={filterArea[0] <= 3 && filterArea[1] >= 4 ? 'primary' : 'ghost'} inline
+        //                     size="small"
+        //                     onClick={(e) => onClickAreaRange(3, 4)}
+        //             >85&#13217;~105&#13217;</Button>
+        //             <Button type={filterArea[0] <= 4 && filterArea[1] >= 5 ? 'primary' : 'ghost'} inline
+        //                     size="small"
+        //                     onClick={(e) => onClickAreaRange(4, 5)}
+        //             >105&#13217;~</Button>
+        //         </div>
+        //     </div>
+        // </Modal>
+        <></>
     )
 };
 

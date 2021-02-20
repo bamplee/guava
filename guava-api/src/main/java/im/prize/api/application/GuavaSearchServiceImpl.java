@@ -76,15 +76,16 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
 //        Page<GuavaBuilding> buildingsByAddress = guavaBuildingRepository.findAll(this.getParams(query, query), limit);
 
         return Stream.concat(buildingsByName.stream(),
-                             buildingsByAddress.stream()
-                                               .filter(x -> !buildingsByName.stream()
-                                                                            .map(BuildingMapping::getId)
-                                                                            .collect(Collectors.toList())
-                                                                            .contains(x.getId())))
-                     .filter(x -> x.getType() != null)
-                     .filter(x -> x.getType().equals(0))
-                     .map(x -> GuavaSearchResponse.transform(guavaRegionRepository.findByRegionCode(x.getRegionCode()).get(), x))
-                     .collect(Collectors.toList());
+                buildingsByAddress.stream()
+                        .filter(x -> !buildingsByName.stream()
+                                .map(BuildingMapping::getId)
+                                .collect(Collectors.toList())
+                                .contains(x.getId())))
+                .filter(x -> x.getType() != null)
+                .filter(x -> x.getType().equals(0))
+                .filter(x -> x.getPoint() != null)
+                .map(x -> GuavaSearchResponse.transform(guavaRegionRepository.findByRegionCode(x.getRegionCode()).get(), x))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -121,9 +122,9 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
             guavaRegionList = guavaRegionRepository.findByRegionCodeLike(regionCode + "%");
         }
         return guavaRegionList.stream()
-                              .filter(x -> x.getRegionType() == regionType)
-                              .map(GuavaSearchResponse::transform)
-                              .collect(Collectors.toList());
+                .filter(x -> x.getRegionType() == regionType)
+                .map(GuavaSearchResponse::transform)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -132,9 +133,9 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
         if (optionalGuavaRegion.isPresent()) {
             GuavaRegion guavaRegion = optionalGuavaRegion.get();
             return guavaBuildingRepository.findByRegionCode(guavaRegion.getRegionCode()).stream()
-                                          .filter(x -> x.getType() == 0)
-                                          .map(x -> GuavaSearchResponse.transform(guavaRegion, x))
-                                          .collect(Collectors.toList());
+                    .filter(x -> x.getType() == 0)
+                    .map(x -> GuavaSearchResponse.transform(guavaRegion, x))
+                    .collect(Collectors.toList());
         }
         return Lists.newArrayList();
     }
@@ -142,9 +143,9 @@ public class GuavaSearchServiceImpl implements GuavaSearchService {
     private Specification<GuavaBuilding> getParams(String name,
                                                    String address) {
         Map<String, Object> paramsMap = objectMapper.convertValue(GuavaBuildingSearch.builder()
-                                                                                     .name(name)
-                                                                                     .address(address)
-                                                                                     .build(), Map.class);
+                .name(name)
+                .address(address)
+                .build(), Map.class);
         Map<GuavaBuildingSpecs.SearchKey, Object> params = Maps.newHashMap();
         for (Map.Entry<String, Object> entry : paramsMap.entrySet()) {
             if (ObjectUtils.isNotEmpty(entry.getValue()) && StringUtils.isNotEmpty(String.valueOf(entry.getValue()))) {

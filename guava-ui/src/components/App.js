@@ -9,6 +9,7 @@ import {DetailHeaderPage, IntroPage, MapPage} from '../pages';
 import SearchPage from '../pages/SearchPage';
 import GuavaMatch from './map/GuavaMatch';
 import GuavaVersusSearch from './versus/GuavaVersusSearch';
+import Detail from "./v2/detail/Detail";
 
 function App() {
     useEffect(() => {
@@ -24,12 +25,12 @@ function App() {
                         text="Loading..."
                         animating={false}
                     />}>
-                        <GuavaAreaFilter/>
-                        <Route exact path={['/', '/search']} component={MapPage}/>
+                        {/*<GuavaAreaFilter/>*/}
                         <Route exact path={['/search']} component={SearchPage}/>
+                        <Route exact path={['/', '/search']} component={MapPage}/>
                         <Route exact path={['/intro']} component={IntroPage}/>
                         <Route exact path={['/match']} component={GuavaMatch}/>
-                        <Route path="/:regionType/:regionId/:tabId?" component={DetailHeaderPage}/>
+                        <Route path="/:regionType/:regionId/:tabId?" component={Detail}/>
                         {/*<Route exact path="/:regionType/:regionId/:tabId/search" component={GuavaVersusSearch}/>*/}
                     </Suspense>
                 </Switch>

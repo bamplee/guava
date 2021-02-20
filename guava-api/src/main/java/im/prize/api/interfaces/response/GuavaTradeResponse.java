@@ -52,7 +52,7 @@ public class GuavaTradeResponse {
                                  .price(tradeSummary.getTradePrice())
                                  .area(AreaResponse.builder()
                                                    .areaId(tradeSummary.getAreaCode())
-                                                   .type(tradeSummary.getAreaType())
+                                                   .type(tradeSummary.getAreaType().replace("타입", "") + "㎡")
                                                    .name((int) ((tradeSummary.getPublicArea() != null ? tradeSummary.getPublicArea() : tradeSummary.getPrivateArea()) * 0.3025) + "평")
                                                    .publicArea(String.valueOf((tradeSummary.getPublicArea() != null ? tradeSummary.getPublicArea() : tradeSummary.getPrivateArea())))
                                                    .privateArea(String.valueOf(tradeSummary.getPrivateArea()))

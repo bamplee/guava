@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="" />
+    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaTradeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaTradeResponse.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,6 +171,7 @@
     <option name="width" value="720" />
     <option name="height" value="900" />
   </component>
+  <component name="ProjectId" id="1odSpZLcBRcK3UC7C9FHuKuliw0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -197,12 +203,18 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editorconfig.notification" value="View&#10;" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/versus" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/v2/detail" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -211,21 +223,22 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/v2/detail" />
+      <recent name="$PROJECT_DIR$/src/components/v2" />
       <recent name="$PROJECT_DIR$/src/components/versus" />
       <recent name="$PROJECT_DIR$/src/components/header" />
       <recent name="$PROJECT_DIR$/src/components/table/row" />
-      <recent name="$PROJECT_DIR$/src/pages" />
-      <recent name="$PROJECT_DIR$/src/components/table" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/src/components/versus" />
-      <recent name="$PROJECT_DIR$/src/components/table/row" />
-      <recent name="$PROJECT_DIR$/src/components/table/col" />
-      <recent name="$PROJECT_DIR$/src/components/table" />
+      <recent name="$PROJECT_DIR$/src/components/v2/detail" />
+      <recent name="$PROJECT_DIR$/src/components/v2" />
+      <recent name="$PROJECT_DIR$/src/components/v2/summary" />
+      <recent name="$PROJECT_DIR$/src/components/v2/header" />
+      <recent name="$PROJECT_DIR$/src/components/v2/option" />
     </key>
   </component>
   <component name="RunManager">
@@ -245,6 +258,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -325,6 +339,7 @@
       <workItem from="1611666595267" duration="4653000" />
       <workItem from="1577838802097" duration="7154000" />
       <workItem from="1611795582580" duration="1239000" />
+      <workItem from="1613615162346" duration="35994000" />
     </task>
     <servers />
   </component>
@@ -357,7 +372,7 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

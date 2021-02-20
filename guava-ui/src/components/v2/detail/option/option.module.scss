@@ -1,0 +1,30 @@
+.filter_container {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f1f1;
+
+  .filter_area {
+    //width: 145px;
+    display: flex;
+    justify-content: space-between;
+
+    .filter_btn {
+      width: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30px;
+      font-size: 14px;
+      border: 1px solid #00802E !important;
+      color: #00802E;
+    }
+
+    .active {
+      //border: 1px solid #fff !important;
+      //background-color: #00802E;
+      color: #FFF;
+    }
+  }
+}
