@@ -9,6 +9,7 @@ import {fetchSummary} from '../datatool/api';
 import {useLocalStorage} from '../common/useLocalStorage';
 
 import {
+    centerState,
     currentRegionState,
     filterAreaState,
     levelState,
@@ -30,6 +31,7 @@ let map;
 let infos = [];
 let marker = null;
 const GuavaMap = () => {
+    const [center, setCenter] = useRecoilState(centerState);
     const [storageCenter, setStorageCenter] = useLocalStorage('storageCenter', {lat: 37.3614463, lng: 127.1114893});
     const [storageBounds, setStorageBounds] = useLocalStorage('storageBounds', {
         northEastLng: 127.11962734724047,
@@ -105,6 +107,7 @@ const GuavaMap = () => {
         const southWestLng = map.getBounds().getSouthWest().getLng();
         const southWestLat = map.getBounds().getSouthWest().getLat();
         setStorageCenter({lat: lat, lng: lng});
+        setCenter({lat: lat, lng: lng});
         setStorageBounds({
             northEastLng: northEastLng,
             northEastLat: northEastLat,
