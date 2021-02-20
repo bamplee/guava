@@ -10,6 +10,8 @@ import SearchPage from '../pages/SearchPage';
 import GuavaMatch from './map/GuavaMatch';
 import GuavaVersusSearch from './versus/GuavaVersusSearch';
 import Detail from "./v2/detail/Detail";
+import AreaRangeModal from "./v2/detail/option/AreaRangeModal";
+import AreaTypeModal from "./v2/detail/option/AreaTypeModal";
 
 function App() {
     useEffect(() => {
@@ -26,6 +28,8 @@ function App() {
                         animating={false}
                     />}>
                         {/*<GuavaAreaFilter/>*/}
+                        <AreaRangeModal/>
+                        <AreaTypeModal/>
                         <Route exact path={['/search']} component={SearchPage}/>
                         <Route exact path={['/', '/search']} component={MapPage}/>
                         <Route exact path={['/intro']} component={IntroPage}/>

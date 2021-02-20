@@ -431,9 +431,9 @@ const VersusChart = () => {
                                       }}/>
                             </div>
                             {
-                                <div className={cx('flex justify-end items-center font-bold pr-3 pt-3')}>
+                                <div className={cx('flex justify-end items-center font-normal pr-3 pt-3')}>
                                     <span
-                                        className={cx('text-guava-dark text-sm')}>{period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}</span>
+                                        className={cx('text-black text-sm')}>{period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}</span>
                                     {/*{period[0].format('YYYY년 M월')} ~ {period[1].format('YYYY년 M월')}*/}
                                 </div>
                             }

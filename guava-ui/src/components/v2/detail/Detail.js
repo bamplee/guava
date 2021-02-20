@@ -74,7 +74,7 @@ const Detail = () => {
             {
                 region &&
                 <>
-                    <div className={cx('p-3 pl-5 bg-guava-light text-white text-sm font-bold')}>
+                    <div className={cx('p-3 pl-5 text-black text-lg font-bold')}>
                         실거래가
                     </div>
                     <TradeTabs/>
@@ -90,7 +90,7 @@ const Detail = () => {
                             </>
                     }
                     <Line/>
-                    <div className={cx('p-3 pl-5 bg-guava-light text-white text-sm font-bold')}>
+                    <div className={cx('p-3 pl-5 text-black text-lg font-bold')}>
                         호가
                     </div>
                     <MarketChart/>

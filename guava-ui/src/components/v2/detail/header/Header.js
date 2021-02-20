@@ -39,8 +39,6 @@ const Header = () => {
 
     return (
         <>
-            <AreaRangeModal/>
-            <AreaTypeModal/>
             <div className={cx('w-full fixed z-99999')}>
                 <div className={cx('flex justify-between h-12 p-3 bg-guava')}>
                     {/*<div className={cx('left')} onClick={() => history.push('/')}>*/}

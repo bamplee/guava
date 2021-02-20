@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/application/GuavaTradeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/GuavaTradeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaTradeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../guava-api/src/main/java/im/prize/api/interfaces/response/GuavaTradeResponse.java" afterDir="false" />
-    </list>
+    <list default="true" id="7c5b10ac-2b64-4301-8f0f-d39c09b8711e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -339,7 +337,7 @@
       <workItem from="1611666595267" duration="4653000" />
       <workItem from="1577838802097" duration="7154000" />
       <workItem from="1611795582580" duration="1239000" />
-      <workItem from="1613615162346" duration="35994000" />
+      <workItem from="1613615162346" duration="36782000" />
     </task>
     <servers />
   </component>

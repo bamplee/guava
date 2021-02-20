@@ -65,6 +65,6 @@ const TradeTabs = () => {
               }}
         />
     );
-};
+}
 
 export default TradeTabs;
