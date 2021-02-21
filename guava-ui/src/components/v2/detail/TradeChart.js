@@ -54,7 +54,7 @@ const TradeChart = () => {
                 if (chart.label === tradeType) {
                     chart.borderColor = '#00802E';
                 } else {
-                    chart.borderColor = '#DDDDDD';
+                    chart.borderColor = '#3DCC72';
                 }
             }
 
@@ -187,7 +187,7 @@ const TradeChart = () => {
             pointRadius: 0,
             borderWidth: 2,
             // spanGaps: true,
-            borderColor: tradeType === 'trade' ? '#00802E' : '#DDDDDD',
+            borderColor: tradeType === 'trade' ? '#00802E' : '#3DCC72',
             fill: false,
             label: 'trade',
             data: groupList
@@ -288,7 +288,7 @@ const TradeChart = () => {
             pointRadius: 0,
             borderWidth: 2,
             // spanGaps: true,
-            borderColor: tradeType === 'rent' ? '#00802E' : '#DDDDDD',
+            borderColor: tradeType === 'rent' ? '#00802E' : '#3DCC72',
             fill: false,
             label: 'rent',
             data: groupList
@@ -324,8 +324,6 @@ const TradeChart = () => {
         let data = [];
         if (tradeType === 'trade') {
             data = await getTradeChart();
-
-            console.log(data);
 
             if (data.labels.length > 0) {
                 labels = labels.concat(data.labels);

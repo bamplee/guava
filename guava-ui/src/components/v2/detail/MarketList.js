@@ -74,7 +74,7 @@ const MarketList = () => {
 
     const getRow = (page, index, trade) => {
         return (
-            <tr groupKey={page} key={page + '-' + index} className={cx('border-b text-gray-600 text-center text-xs')}>
+            <tr groupKey={page} key={page + '-' + index} className={cx('border-b text-gray-600 text-center text-xs', !trade.isActive && 'bg-gray-100 line-through')}>
                 <td className={cx('p-2')}>
                     <Badge dot={trade.isNew}>{trade.date}</Badge>
                     <span>{trade.isActive}</span>

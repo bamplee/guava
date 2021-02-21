@@ -29,41 +29,44 @@ const TradeTabs = () => {
     // const [showGap, setShowGap] = useState(false);
 
     return (
-        <Tabs tabs={[
-            {title: '기간별', value: ''},
-            // {title: '전체 기간', value: 'p'},
-            {title: '매매/전세', value: 'g'},
-            // {title: <Badge dot>비교</Badge>, value: 'c'}
-            ]}
-              initialPage={!tabId ? 0 : (tabId === 'g' ? 1 : 2)}
-              onChange={(tab, index) => {
-                  console.log('onChange', index, tab);
-              }}
-              onTabClick={(tab, index) => {
-                  console.log(tab);
-                  history.replace('/' + regionType + '/' + regionId + '/' + tab.value)
-                  // if (index === 0) {
-                  //     setShowGap(false);
-                  //     setStartDate(moment().subtract('years', 3));
-                  //     setEndDate(moment());
-                  // }
-                  // if (index === 1) {
-                  //     setShowGap(false);
-                  //     setStartDate(moment('20060101', 'YYYYMMDD'));
-                  //     setEndDate(moment());
-                  // }
-                  // if (index === 2) {
-                  //     history.replace('/' + regionType + '/' + regionId + '/g')
-                  //     // setShowGap(true);
-                  //     // setStartDate(moment().subtract('years', 3));
-                  //     // setEndDate(moment());
-                  // }
-                  // if (index === 3) {
-                  //     history.replace('/' + regionType + '/' + regionId + '/c')
-                  // }
-                  // console.log('onTabClick', index, tab);
-              }}
-        />
+        <div className={(cx('border-t border-gray-100'))}>
+            <Tabs
+                tabs={[
+                    {title: '기간별', value: ''},
+                    // {title: '전체 기간', value: 'p'},
+                    {title: '매매/전세', value: 'g'},
+                    // {title: <Badge dot>비교</Badge>, value: 'c'}
+                ]}
+                initialPage={!tabId ? 0 : (tabId === 'g' ? 1 : 2)}
+                onChange={(tab, index) => {
+                    console.log('onChange', index, tab);
+                }}
+                onTabClick={(tab, index) => {
+                    console.log(tab);
+                    history.replace('/' + regionType + '/' + regionId + '/' + tab.value)
+                    // if (index === 0) {
+                    //     setShowGap(false);
+                    //     setStartDate(moment().subtract('years', 3));
+                    //     setEndDate(moment());
+                    // }
+                    // if (index === 1) {
+                    //     setShowGap(false);
+                    //     setStartDate(moment('20060101', 'YYYYMMDD'));
+                    //     setEndDate(moment());
+                    // }
+                    // if (index === 2) {
+                    //     history.replace('/' + regionType + '/' + regionId + '/g')
+                    //     // setShowGap(true);
+                    //     // setStartDate(moment().subtract('years', 3));
+                    //     // setEndDate(moment());
+                    // }
+                    // if (index === 3) {
+                    //     history.replace('/' + regionType + '/' + regionId + '/c')
+                    // }
+                    // console.log('onTabClick', index, tab);
+                }}
+            />
+        </div>
     );
 }
 
