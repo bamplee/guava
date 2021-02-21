@@ -126,20 +126,22 @@ export const getRegionTrade = async (tradeType, buildingId, page, size, startAre
     return await response.json();
 };
 
-export const getTradeMarket = async (tradeType, buildingId, page, areaId, date) => {
+export const getTradeMarket = async (tradeType, buildingId, page, size, areaId, date) => {
     const response = await fetch(`/api/v1/guava/trade/market/buildings/${buildingId}?` + new URLSearchParams({
         tradeType: tradeType,
         page: page,
+        size: size,
         areaId: areaId,
         date: date
     }));
     return await response.json();
 };
 
-export const getRegionTradeMarket = async (tradeType, buildingId, page, startArea, endArea, date) => {
+export const getRegionTradeMarket = async (tradeType, buildingId, page, size, startArea, endArea, date) => {
     const response = await fetch(`/api/v1/guava/trade/market/regions/${buildingId}?` + new URLSearchParams({
         tradeType: tradeType,
         page: page,
+        size: size,
         startArea: startArea,
         endArea: endArea,
         date: date

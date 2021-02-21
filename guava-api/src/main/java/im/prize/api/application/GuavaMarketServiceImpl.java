@@ -37,7 +37,7 @@ import java.util.stream.Stream;
 
 @Service
 public class GuavaMarketServiceImpl implements GuavaMarketService {
-    private static final Integer PAGE_SIZE = 100;
+//    private static final Integer PAGE_SIZE = 100;
     @Value("${app.kakao.apiKey}")
     private String kakaoMapApiKey;
     private final GuavaRegionRepository guavaRegionRepository;
@@ -73,6 +73,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
     public List<GuavaTradeResponse> getRegionMarketList(String tradeType,
                                                         String regionId,
                                                         Integer page,
+                                                        Integer size,
                                                         Integer startArea,
                                                         Integer endArea) {
         Optional<GuavaRegion> optionalGuavaRegion = guavaRegionRepository.findById(Long.valueOf(regionId));
@@ -87,7 +88,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                                                       startArea,
                                                                                       endArea,
                                                                                       PageRequest.of(page,
-                                                                                                     PAGE_SIZE))
+                                                                                                     size))
                                                      .stream()
                                                      .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
                                                                                   DATE_TIME_FORMATTER_YYYYMMDD)
@@ -101,7 +102,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                                                           startArea,
                                                                                           endArea,
                                                                                           PageRequest.of(page,
-                                                                                                         PAGE_SIZE))
+                                                                                                         size))
                                                      .stream()
                                                      .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
                                                                                   DATE_TIME_FORMATTER_YYYYMMDD)
@@ -113,7 +114,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
                                                                                           startArea,
                                                                                           endArea,
                                                                                           PageRequest.of(page,
-                                                                                                         PAGE_SIZE))
+                                                                                                         size))
                                                      .stream()
                                                      .filter(x -> LocalDate.parse(x.getArticleConfirmYmd(),
                                                                                   DATE_TIME_FORMATTER_YYYYMMDD)
@@ -151,7 +152,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
     }
 
     @Override
-    public List<GuavaTradeResponse> getBuildingMarketList(String tradeType, String buildingId, Integer page, String areaId) {
+    public List<GuavaTradeResponse> getBuildingMarketList(String tradeType, String buildingId, Integer page, Integer size, String areaId) {
         Optional<BuildingMapping> optionalBuildingMapping = buildingMappingRepository.findById(Long.valueOf(buildingId));
         if (!optionalBuildingMapping.isPresent()) {
             return Lists.newArrayList();
@@ -173,7 +174,7 @@ public class GuavaMarketServiceImpl implements GuavaMarketService {
             tradeArticleRepository.findByPortalIdAndTradeTypeCodeIn(String.valueOf(guavaBuilding.getPortalId()),
                                                                     tradeTypeCode,
                                                                     PageRequest.of(page,
-                                                                                   PAGE_SIZE,
+                                                                                   size,
                                                                                    Sort.by(Sort.Direction.DESC,
                                                                                            "articleConfirmYmd")))
                                   .stream()

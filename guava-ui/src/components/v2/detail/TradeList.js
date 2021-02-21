@@ -73,7 +73,6 @@ const TradeList = () => {
                 }
 
                 setTradeList(result);
-                // setPage(page + 1);
                 setIsLoading(false);
                 if (result.length === 0) {
                     setIsCompleted(true);

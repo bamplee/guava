@@ -5,7 +5,7 @@ import im.prize.api.interfaces.response.GuavaTradeResponse;
 import java.util.List;
 
 public interface GuavaMarketService {
-    List<GuavaTradeResponse> getRegionMarketList(String tradeType, String regionId, Integer page, Integer startArea, Integer endArea);
+    List<GuavaTradeResponse> getRegionMarketList(String tradeType, String regionId, Integer page, Integer size, Integer startArea, Integer endArea);
 
-    List<GuavaTradeResponse> getBuildingMarketList(String tradeType, String buildingId, Integer page, String areaId);
+    List<GuavaTradeResponse> getBuildingMarketList(String tradeType, String buildingId, Integer page, Integer size, String areaId);
 }
