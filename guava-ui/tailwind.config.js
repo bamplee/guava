@@ -15,6 +15,7 @@ module.exports = {
             yellow: colors.amber,
             green: colors.green,
             guava: {
+                text: '#00CC4B',
                 light: '#288C07',
                 DEFAULT: '#00802E',
                 dark: '#006526'

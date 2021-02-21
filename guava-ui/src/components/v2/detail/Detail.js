@@ -22,6 +22,7 @@ import Line from "./Line";
 import VersusChart from "./VersusChart";
 import VersusList from "./VersusList";
 import TradeTabs from "./TradeTabs";
+import DetailMap from "../../detail/DetailMap";
 
 const cx = classNames.bind(styles);
 
@@ -69,11 +70,12 @@ const Detail = () => {
         <>
             <Header/>
             {/*<Option/>*/}
-            <Summary/>
-            <Line/>
+            {/*<Summary/>*/}
             {
                 region &&
                 <>
+                    {/*<DetailMap/>*/}
+                    {/*<Line/>*/}
                     <div className={cx('p-3 pl-5 text-black text-lg font-bold')}>
                         실거래가
                     </div>

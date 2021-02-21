@@ -22,11 +22,9 @@ function App() {
         <RecoilRoot>
             <Router>
                 <Switch>
-                    <Suspense fallback={<ActivityIndicator
-                        toast
-                        text="Loading..."
-                        animating={false}
-                    />}>
+                    <Suspense fallback={<div>
+                        SUSPENSE
+                    </div>}>
                         {/*<GuavaAreaFilter/>*/}
                         <AreaRangeModal/>
                         <AreaTypeModal/>

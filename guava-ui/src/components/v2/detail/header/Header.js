@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {useHistory} from 'react-router-dom';
 
@@ -10,7 +10,7 @@ import {
     areaTypeState,
     filterAreaState,
     regionState, showAreaFilterState,
-    showAreaTypeFilterState,
+    showAreaTypeFilterState, showDetailSummaryState,
     tradeTypeState
 } from '../../../datatool/state';
 import ArrowLeftOutlined from '@ant-design/icons/es/icons/ArrowLeftOutlined';
@@ -21,6 +21,7 @@ import AreaRangeModal from "../option/AreaRangeModal";
 import AreaTypeModal from "../option/AreaTypeModal";
 import {CloseOutlined} from "@ant-design/icons";
 import {getEndArea, getStartArea} from "../../../constant";
+import {getDetail} from "../../../datatool/api";
 
 const cx = classNames.bind(styles);
 
@@ -32,6 +33,20 @@ const Header = () => {
     const [showAreaTypeFilter, setShowAreaTypeFilter] = useRecoilState(showAreaTypeFilterState);
     const [showAreaFilter, setShowAreaFilter] = useRecoilState(showAreaFilterState);
     const [filterArea, setFilterArea] = useRecoilState(filterAreaState);
+    const [showDetailSummary, setShowDetailSummary] = useRecoilState(showDetailSummaryState);
+    const [building, setBuilding] = useState(null);
+
+    useEffect(() => {
+        if (region) {
+            initSummary();
+        }
+    }, [region]);
+
+    const initSummary = async () => {
+        if (region.type === 'BUILDING') {
+            setBuilding(await getDetail(region.buildingId));
+        }
+    }
 
     const getTradeName = () => {
         return tradeType === 'trade' ? '매매' : '전/월세'
@@ -53,17 +68,56 @@ const Header = () => {
                         </svg>
                     </div>
                     <div
-                        className={cx('flex items-center justify-center flex-grow text-white text-lg font-medium')}>
+                        className={cx('flex items-center justify-center flex-grow text-white text-base font-medium')}
+                        onClick={() => setShowDetailSummary(!showDetailSummary)}>
                         {region?.name}
                     </div>
-                    <div className={cx('flex items-center flex-none text-center text-white invisible')}>
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                        </svg>
+                    <div className={cx('flex items-center flex-none text-center text-white')}
+                         onClick={() => setShowDetailSummary(!showDetailSummary)}>
+                        {
+                            showDetailSummary ?
+                                <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M5 15l7-7 7 7"/>
+                                </svg> :
+                                <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M19 9l-7 7-7-7"/>
+                                </svg>
+                        }
                     </div>
                 </div>
+                {
+                    showDetailSummary &&
+                    <div
+                        className={cx('pt-2 pb-2 bg-guava w-full border border-guava-light border-r-0 text-white font-medium')}>
+                        <div className={cx('text-center text-white pb-1')}>{region?.address}</div>
+                        {
+                            building &&
+                            <>
+                                <div className={cx('flex justify-center text-xs')}>
+                                    <div className={cx('text-gray-200')}>{building.since}</div>
+                                    <div className={cx('text-guava-light ml-1 mr-1')}>|</div>
+                                    <div className={cx('text-gray-200')}>용적률 {building.floorAreaRatio}%</div>
+                                    <div className={cx('text-guava-light ml-1 mr-1')}>|</div>
+                                    <div className={cx('text-gray-200')}>건폐율 {building.buildingCoverageRatio}%</div>
+                                </div>
+                                <div className={cx('flex justify-center text-xs')}>
+                                    <div className={cx('text-gray-200')}>{building.buildingCount}개동</div>
+                                    <div className={cx('text-guava-light ml-1 mr-1')}>|</div>
+                                    <div className={cx('text-gray-200')}>{building.minFloor}~{building.maxFloor}층</div>
+                                    <div className={cx('text-guava-light ml-1 mr-1')}>|</div>
+                                    <div className={cx('text-gray-200')}>{building.hoCount}세대</div>
+                                    <div className={cx('text-guava-light ml-1 mr-1')}>|</div>
+                                    <div className={cx('text-gray-200')}>주차 {building.parkingTotal}대</div>
+                                </div>
+                            </>
+                        }
+                    </div>
+                }
                 <div className={cx('flex justify-between h-10 bg-guava')}>
                     <div
                         className={cx('flex justify-center items-center w-5/12 border border-guava-light border-r-0 text-white text-sm font-medium')}
@@ -135,7 +189,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <div style={{height: 88}}/>
+            <div style={{height: showDetailSummary? 163 : 88}}/>
         </>
     )
 };

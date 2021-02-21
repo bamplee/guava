@@ -64,3 +64,8 @@ export const tradeTypeState = atom({
     key: 'tradeTypeState',
     default: 'trade'
 });
+
+export const showDetailSummaryState = atom({
+    key: 'showDetailSummaryState',
+    default: false
+});
