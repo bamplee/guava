@@ -35,7 +35,7 @@ function App() {
                         <Route exact path={['/intro']} component={IntroPage}/>
                         <Route exact path={['/match']} component={GuavaMatch}/>
                         <Route path="/:regionType/:regionId/:tabId?" component={Detail}/>
-                        {/*<Route exact path="/:regionType/:regionId/:tabId/search" component={GuavaVersusSearch}/>*/}
+                        <Route exact path="/:regionType/:regionId/:tabId/search" component={GuavaVersusSearch}/>
                     </Suspense>
                 </Switch>
             </Router>

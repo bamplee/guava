@@ -126,45 +126,57 @@ const VersusList = () => {
     }
 
     return (
-        <table className={cx('w-full')}>
-            <thead>
-            <tr className={cx('bg-gray-50 border-t border-b text-gray-500')}>
-                <th className={cx('p-2 font-normal')}>
-                    이름
-                </th>
-                <th className={cx('p-2 font-normal')}>
-                    입주
-                </th>
-                <th className={cx('p-2 font-normal')}>
-                    용적율
-                </th>
-                <th className={cx('p-2 font-normal')}>
-                    세대수
-                </th>
-                <th className={cx('p-2 font-normal')}>
-                    평형
-                </th>
-                <th className={cx('p-2 font-normal')}>
+        <>
+            <table className={cx('w-full')}>
+                <thead>
+                <tr className={cx('bg-gray-50 border-t border-b text-gray-500')}>
+                    <th className={cx('p-2 font-normal')}>
+                        이름
+                    </th>
+                    <th className={cx('p-2 font-normal')}>
+                        입주
+                    </th>
+                    <th className={cx('p-2 font-normal')}>
+                        용적율
+                    </th>
+                    <th className={cx('p-2 font-normal')}>
+                        세대수
+                    </th>
+                    <th className={cx('p-2 font-normal')}>
+                        평형
+                    </th>
+                    <th className={cx('p-2 font-normal')}>
 
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-                versusRegionList.map((building, idx) => row(0, idx, building))
-            }
-            </tbody>
-            {/*<div className={cx('list')}>*/}
-            {/*    <div className={cx('body')}>*/}
-            {/*        /!*<GuavaBuildingVersusRow page={0} idx={0} building={building}/>*!/*/}
-            {/*        {*/}
-            {/*            versusRegionList.map((building, idx) => <GuavaBuildingVersusRow page={0} idx={idx}*/}
-            {/*                                                                            building={building}*/}
-            {/*                                                                            handleClick={removeVersusRegion}/>)*/}
-            {/*        }*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-        </table>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    versusRegionList.map((building, idx) => row(0, idx, building))
+                }
+                </tbody>
+                {/*<div className={cx('list')}>*/}
+                {/*    <div className={cx('body')}>*/}
+                {/*        /!*<GuavaBuildingVersusRow page={0} idx={0} building={building}/>*!/*/}
+                {/*        {*/}
+                {/*            versusRegionList.map((building, idx) => <GuavaBuildingVersusRow page={0} idx={idx}*/}
+                {/*                                                                            building={building}*/}
+                {/*                                                                            handleClick={removeVersusRegion}/>)*/}
+                {/*        }*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+            </table>
+            <div className={cx('h-16 p-3 flex justify-center border-b')} onClick={() => {
+            }}>
+                <div
+                    className={cx('flex justify-center items-center w-full p-2 rounded text-gray-500 border bg-white')}>
+                    추가하기
+                    <svg className="w-3 h-3 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                </div>
+            </div>
+        </>
     )
 };
 

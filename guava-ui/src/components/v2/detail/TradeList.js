@@ -30,7 +30,6 @@ const TradeList = () => {
         const region = useRecoilValue(regionState);
         const [count, setCount] = useState(0);
         const [tradeType, setTradeType] = useRecoilState(tradeTypeState);
-        const [isPreview, setIsPreview] = useState(true);
 
         useEffect(() => {
             initFetch();
@@ -199,9 +198,6 @@ const TradeList = () => {
                 {
                     (!isCompleted) ?
                         <div className={cx('h-16 p-3 flex justify-center border-b')} onClick={() => {
-                            if (page === 1) {
-                                setIsPreview(false)
-                            }
                             fetch();
                         }}>
                             <div
@@ -214,7 +210,9 @@ const TradeList = () => {
                                 </svg>
                             </div>
                         </div> :
-                        <div className={cx('pb-5')}/>
+                        <div className={cx('flex justify-center p-5 text-gray-400')}>
+                            <p>마지막 검색 결과입니다</p>
+                        </div>
                 }
             </>
         );
