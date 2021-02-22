@@ -115,7 +115,7 @@ const MarketList = () => {
                     onClick={() => {
                         history.push('/b/' + trade.buildingId);
                     }}>
-                    <p className={cx('w-22 whitespace-nowrap overflow-hidden overflow-ellipsis')}>
+                    <p className={cx('w-14 whitespace-nowrap overflow-hidden overflow-ellipsis')}>
                         {trade.name}
                     </p>
                 </td>
