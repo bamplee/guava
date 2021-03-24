@@ -11,7 +11,7 @@ spring:
       hibernate.use_sql_comments: true
 
   datasource:
-    url: '{cipher}cbc853a9ff54869fbb9b52cd9786cd40a307118dd02c5f833b5362ed51280f54eacd5a64a0ec1f8e251eb4dfb4240737376715ba4b6bccdc917aa4bc9b7d9411'
+    url: jdbc:mariadb://guavamap.com:3306/moboo
     username: '{cipher}5ffccf12d20dad1565a368b4cd5274353620e87d5959d8eb970f4d997484fa2c'
     password: '{cipher}e023097c9793a6a65822cb39c63f274100a6c32004a08c97362f7608640b5009'
     driverClassName: org.mariadb.jdbc.Driver
